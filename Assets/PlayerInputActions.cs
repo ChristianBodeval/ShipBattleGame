@@ -44,15 +44,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Deaccelerate_mine"",
-                    ""type"": ""Button"",
-                    ""id"": ""119c66f2-2c05-4ab3-a4f7-c6f72f8f10d5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -73,7 +64,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardLeft"",
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -84,24 +75,35 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardLeft"",
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""59e268bb-5b2e-4975-8830-7276d1ad7b01"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""name"": ""positive"",
+                    ""id"": ""49bdd6c7-4c3c-46cf-b753-73d57261e7a8"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Deaccelerate_mine"",
+                    ""groups"": ""KeyboardRight"",
+                    ""action"": ""Turn"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""negative"",
+                    ""id"": ""09efdc74-0a90-4bb1-a978-0609a73600dd"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardRight"",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D_Axis - Player 1"",
                     ""id"": ""4fcc2ab2-c59c-4469-b179-7808ae346962"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -117,7 +119,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardLeft"",
                     ""action"": ""Accelerate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -128,7 +130,29 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardLeft"",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""845ea475-01cf-40d0-8661-06dfdf734cbc"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardRight"",
+                    ""action"": ""Accelerate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""68cb6dc9-b873-4f5b-a18b-7527022164c0"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardRight"",
                     ""action"": ""Accelerate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -136,13 +160,35 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""KeyboardRight"",
+            ""bindingGroup"": ""KeyboardRight"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""KeyboardLeft"",
+            ""bindingGroup"": ""KeyboardLeft"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Turn = m_Player.FindAction("Turn", throwIfNotFound: true);
         m_Player_Accelerate = m_Player.FindAction("Accelerate", throwIfNotFound: true);
-        m_Player_Deaccelerate_mine = m_Player.FindAction("Deaccelerate_mine", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -204,14 +250,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Turn;
     private readonly InputAction m_Player_Accelerate;
-    private readonly InputAction m_Player_Deaccelerate_mine;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Turn => m_Wrapper.m_Player_Turn;
         public InputAction @Accelerate => m_Wrapper.m_Player_Accelerate;
-        public InputAction @Deaccelerate_mine => m_Wrapper.m_Player_Deaccelerate_mine;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -227,9 +271,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Accelerate.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAccelerate;
                 @Accelerate.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAccelerate;
                 @Accelerate.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAccelerate;
-                @Deaccelerate_mine.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeaccelerate_mine;
-                @Deaccelerate_mine.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeaccelerate_mine;
-                @Deaccelerate_mine.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeaccelerate_mine;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -240,17 +281,31 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Accelerate.started += instance.OnAccelerate;
                 @Accelerate.performed += instance.OnAccelerate;
                 @Accelerate.canceled += instance.OnAccelerate;
-                @Deaccelerate_mine.started += instance.OnDeaccelerate_mine;
-                @Deaccelerate_mine.performed += instance.OnDeaccelerate_mine;
-                @Deaccelerate_mine.canceled += instance.OnDeaccelerate_mine;
             }
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+    private int m_KeyboardRightSchemeIndex = -1;
+    public InputControlScheme KeyboardRightScheme
+    {
+        get
+        {
+            if (m_KeyboardRightSchemeIndex == -1) m_KeyboardRightSchemeIndex = asset.FindControlSchemeIndex("KeyboardRight");
+            return asset.controlSchemes[m_KeyboardRightSchemeIndex];
+        }
+    }
+    private int m_KeyboardLeftSchemeIndex = -1;
+    public InputControlScheme KeyboardLeftScheme
+    {
+        get
+        {
+            if (m_KeyboardLeftSchemeIndex == -1) m_KeyboardLeftSchemeIndex = asset.FindControlSchemeIndex("KeyboardLeft");
+            return asset.controlSchemes[m_KeyboardLeftSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnTurn(InputAction.CallbackContext context);
         void OnAccelerate(InputAction.CallbackContext context);
-        void OnDeaccelerate_mine(InputAction.CallbackContext context);
     }
 }

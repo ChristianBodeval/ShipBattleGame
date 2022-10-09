@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Deaccelerate_mine",
-                    "type": "Button",
-                    "id": "119c66f2-2c05-4ab3-a4f7-c6f72f8f10d5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -51,7 +42,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardLeft",
                     "action": "Turn",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -62,24 +53,35 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardLeft",
                     "action": "Turn",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "59e268bb-5b2e-4975-8830-7276d1ad7b01",
-                    "path": "<Keyboard>/s",
+                    "name": "positive",
+                    "id": "49bdd6c7-4c3c-46cf-b753-73d57261e7a8",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Deaccelerate_mine",
+                    "groups": "KeyboardRight",
+                    "action": "Turn",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "negative",
+                    "id": "09efdc74-0a90-4bb1-a978-0609a73600dd",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardRight",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D_Axis - Player 1",
                     "id": "4fcc2ab2-c59c-4469-b179-7808ae346962",
                     "path": "1DAxis",
                     "interactions": "",
@@ -95,7 +97,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardLeft",
                     "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -106,7 +108,29 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardLeft",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "845ea475-01cf-40d0-8661-06dfdf734cbc",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardRight",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "68cb6dc9-b873-4f5b-a18b-7527022164c0",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardRight",
                     "action": "Accelerate",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -114,5 +138,28 @@
             ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "KeyboardRight",
+            "bindingGroup": "KeyboardRight",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "KeyboardLeft",
+            "bindingGroup": "KeyboardLeft",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }
