@@ -266,7 +266,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.80052567, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -285,7 +285,7 @@ Transform:
   m_GameObject: {fileID: 1219518959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 10, z: 1}
+  m_LocalScale: {x: 36, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 1894485281}
   - component: {fileID: 1894485283}
   m_Layer: 0
-  m_Name: PlayerManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -380,4 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c37e7e5eb9b14e2798715fde0b8ca44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1Color: {r: 0.8867924, g: 0.12967247, b: 0.12967247, a: 1}
+  player2Color: {r: 0.118725546, g: 0.31340063, b: 0.8679245, a: 1}
   playerPrefab: {fileID: 3685263541795606615, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}

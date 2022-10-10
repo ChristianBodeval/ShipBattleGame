@@ -6,56 +6,52 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-    private float turnValue;
+    private float turnInputValue;
+    private Vector3 turnDirection;
     private Rigidbody2D rb;
     private PlayerInput playerInput;
+    public GameObject playerPrefab;
+    private PlayerInputActions playerInputActions;
 
-    //Rotation values
-    public float turnValueHolder;
-    public float maxAcceleration = 5;
+    //All the following values are public, so i makes it easier to test in the inspector
+    //Turn values
+    public float turnValue;
+    public float maxAcceleration = 5f; 
     public float startTurnAcceleration = 0.1F;
     public float currentTurnAcceleration;
     public float turnAccelerationSpeed;
+    public float smoothTurningFactor = 0.1f;
 
-
-    //Movement values
+    //Accelerate values
+    public float moveValue;
     public int gear = 0;
     public int maxGears = 2;
     public float speed = 5f;
-    //For Turn 3
-
-    public GameObject playerPrefab;
-
-    public float interpolationNumber = 1f;
-
-
-    public float movementFactor;
-    PlayerInputActions playerInputActions;
-
-    Vector3 rotationDirection;
-
+    public float smoothMovementFactor = 1;
 
    
-
     // Start is called before the first frame update
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
-
         playerInputActions = new PlayerInputActions();
     }
 
-
+    // Update is called once per frame
+    void Update()
+    {
+        calculateTurnAcceleration();
+        Turn();
+        MoveForward();
+    }
 
     //Sets a gear between 0 and maxGears. W for going up a gear, S for going down.  
-    public void AccelerateOnStarted(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
-
-
-        Debug.Log(this.name + " is calling");
         float value = context.ReadValue<float>();
 
+        //Increases or decreases gear
         if (gear < maxGears-1)
         {
             if (value > 0)
@@ -66,60 +62,42 @@ public class Movement : MonoBehaviour
             if (value < 0)
                 gear--;
         }
-        /*
-        Debug.Log("W or D: " + value);
-        Debug.Log("Context: " + context);
-        Debug.Log("Gear: " + gear);
-        */
-
     }
 
+    public void MoveForward()
+    {
+        //Smoothly change the turnValue to the inputValue
+        moveValue = Mathf.Lerp(moveValue, gear, smoothMovementFactor * Time.deltaTime);
+        transform.Translate(0f, moveValue * speed, 0f);
+    }
+
+    //Sets input value
     public void OnTurn(InputAction.CallbackContext context)
     {
-        turnValue = context.ReadValue<float>();
+        turnInputValue = context.ReadValue<float>();
     }
 
 
     
 
-    /*
-     * Another way to move forward, where you can use the weight of the rigidbody
-     * Good for drifting
-    public void forwardSpeed2()
-    {
-        rb.AddForce(transform.up * speed * gear, ForceMode2D.Force);
-    }
-    */
-
-    public void forwardSpeed()
-    {
-        movementFactor = Mathf.Lerp(movementFactor, gear, Time.deltaTime);
-        transform.Translate(0f, movementFactor*speed, 0f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Turn();
-        calculateAcceleration();
-        forwardSpeed();
-    }
-
 
     /// <summary>
-    /// Calculates increases rotationAcceleration when turning and deaccelerates when not turning
+    /// Handles the acceleration of turning.
     /// </summary>
-    void calculateAcceleration()
+    void calculateTurnAcceleration()
     {
-        if (turnValueHolder != 0)
+        //Is player turning, then accelerate turning, since input value is either 1 or -1
+        if (turnValue != 0)
         {
             if (currentTurnAcceleration < maxAcceleration)
                 currentTurnAcceleration += turnAccelerationSpeed * Time.deltaTime;
         }
+        // If not turning, then deaccelerate turning
         else if (currentTurnAcceleration > 0)
         {
             currentTurnAcceleration -= turnAccelerationSpeed * Time.deltaTime;
         }
+        //When acceleration goes negative, set i to 0
         else if (currentTurnAcceleration <= 0)
         {
             currentTurnAcceleration = 0;
@@ -127,17 +105,18 @@ public class Movement : MonoBehaviour
 
     }
 
-    
-
+    //Turns the ship smoothly
     void Turn()
     {
-        turnValueHolder = Mathf.Lerp(turnValueHolder, turnValue, interpolationNumber);
-        //turnInputValue = Mathf.SmoothStep(turnInputValue,playerInputActions.Player.Turn.ReadValue<float>(),5f);
+        //Smoothly change the turnValue to the inputValue
+        turnValue = Mathf.Lerp(turnValue, turnInputValue, smoothTurningFactor);
 
-        if (turnValueHolder != 0)
-            rotationDirection = new Vector3(0f, 0f, turnValueHolder);
+        //Update turnDirection only when turning
+        if (turnValue != 0)
+            turnDirection = new Vector3(0f, 0f, turnValue);
 
-        transform.Rotate(rotationDirection * Time.deltaTime * currentTurnAcceleration);
+        //Turn
+        transform.Rotate(turnDirection * Time.deltaTime * currentTurnAcceleration);
     }
 
 
