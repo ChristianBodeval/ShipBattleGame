@@ -214,10 +214,10 @@ GameObject:
   - component: {fileID: 3685263541795606622}
   - component: {fileID: 3685263541795606623}
   - component: {fileID: -7976377503517882532}
-  - component: {fileID: 8448314341041424209}
+  - component: {fileID: 9179054856239917684}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,10 +444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942d9e700ea224f819923b34cdfd1ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CannonBall: {fileID: 833049793, guid: 1b87212972fd5ff48ad50c613a0c9f75, type: 3}
-  FireTransform: {fileID: 1001008698}
-  cannonBallForce: 10
---- !u!114 &8448314341041424209
+  canonBall: {fileID: 833049793, guid: 1b87212972fd5ff48ad50c613a0c9f75, type: 3}
+  FireTransforms: []
+--- !u!114 &9179054856239917684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -459,6 +458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1860a52f4dfca4e4c99ebd11e3deb2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartingHealth: 100
+  CurrentHealth: 0
 --- !u!1 &6782585052536139837
 GameObject:
   m_ObjectHideFlags: 0

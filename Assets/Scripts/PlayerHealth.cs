@@ -1,17 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class TankHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     public float StartingHealth = 100f;
-    private float CurrentHealth;
+    public float CurrentHealth;
     private bool Dead;
 
-
-    private void Awake()
-    {
-       
-    }
 
 
     private void OnEnable()
@@ -19,7 +18,6 @@ public class TankHealth : MonoBehaviour
         CurrentHealth = StartingHealth;
         Dead = false;
 
-        SetHealthUI();
     }
 
 
@@ -28,18 +26,10 @@ public class TankHealth : MonoBehaviour
         // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
         CurrentHealth -= amount;
 
-        SetHealthUI();
         if (CurrentHealth <= 0f && !Dead)
         {
             OnDeath();
         }
-    }
-
-
-    private void SetHealthUI()
-    {
-        // Adjust the value and colour of the slider.
-       
     }
 
 
