@@ -37,9 +37,6 @@ public class PlayerHealth : MonoBehaviour
     {
         // Play the effects for the death of the tank and deactivate it.
         Dead = true;
-
-      
-
         gameObject.SetActive(false);
     }
 }

@@ -17,14 +17,13 @@ public class Movement : MonoBehaviour
     //Turn values
     public float turnValue;
     public float maxAcceleration = 5f; 
-    public float startTurnAcceleration = 0.1F;
-    public float currentTurnAcceleration;
+    public float turnAcceleration;
     public float turnAccelerationSpeed;
     public float smoothTurningFactor = 0.1f;
 
     //Accelerate values
     public float moveValue;
-    public int gear = 0;
+    public int gear = 0; //The current gear
     public int maxGears = 2;
     public float speed = 5f;
     public float smoothMovementFactor = 1;
@@ -39,9 +38,9 @@ public class Movement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        calculateTurnAcceleration();
+        CalculateTurnAcceleration();
         Turn();
         MoveForward();
     }
@@ -64,11 +63,14 @@ public class Movement : MonoBehaviour
         }
     }
 
+
+
     public void MoveForward()
     {
         //Smoothly change the turnValue to the inputValue
-        moveValue = Mathf.Lerp(moveValue, gear, smoothMovementFactor * Time.deltaTime);
+        moveValue = Mathf.Lerp(moveValue, gear, smoothMovementFactor);
         transform.Translate(0f, moveValue * speed, 0f);
+
     }
 
     //Sets input value
@@ -77,30 +79,26 @@ public class Movement : MonoBehaviour
         turnInputValue = context.ReadValue<float>();
     }
 
-
-    
-
-
     /// <summary>
     /// Handles the acceleration of turning.
     /// </summary>
-    void calculateTurnAcceleration()
+    void CalculateTurnAcceleration()
     {
         //Is player turning, then accelerate turning, since input value is either 1 or -1
         if (turnValue != 0)
         {
-            if (currentTurnAcceleration < maxAcceleration)
-                currentTurnAcceleration += turnAccelerationSpeed * Time.deltaTime;
+            if (turnAcceleration < maxAcceleration)
+                turnAcceleration += turnAccelerationSpeed;
         }
         // If not turning, then deaccelerate turning
-        else if (currentTurnAcceleration > 0)
+        else if (turnAcceleration > 0)
         {
-            currentTurnAcceleration -= turnAccelerationSpeed * Time.deltaTime;
+            turnAcceleration -= turnAccelerationSpeed;
         }
         //When acceleration goes negative, set i to 0
-        else if (currentTurnAcceleration <= 0)
+        else if (turnAcceleration <= 0)
         {
-            currentTurnAcceleration = 0;
+            turnAcceleration = 0;
         }
 
     }
@@ -116,9 +114,7 @@ public class Movement : MonoBehaviour
             turnDirection = new Vector3(0f, 0f, turnValue);
 
         //Turn
-        transform.Rotate(turnDirection * Time.deltaTime * currentTurnAcceleration);
+        transform.Rotate(turnDirection * turnAcceleration);
     }
-
-
 
 }

@@ -422,16 +422,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3685263541795606615}
   turnValue: 0
-  maxAcceleration: 60
-  startTurnAcceleration: 0.1
-  currentTurnAcceleration: 0.1
-  turnAccelerationSpeed: 80
-  smoothTurningFactor: 0.1
+  maxAcceleration: 1.5
+  turnAcceleration: 0
+  turnAccelerationSpeed: 0.8
+  smoothTurningFactor: 0.05
   moveValue: 0
   gear: 0
   maxGears: 2
-  speed: 0.01
-  smoothMovementFactor: 1
+  speed: 0.05
+  smoothMovementFactor: 0.05
 --- !u!114 &-7976377503517882532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,8 +443,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942d9e700ea224f819923b34cdfd1ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canonBall: {fileID: 833049793, guid: 1b87212972fd5ff48ad50c613a0c9f75, type: 3}
-  FireTransforms: []
+  CannonBall: {fileID: 833049793, guid: 1b87212972fd5ff48ad50c613a0c9f75, type: 3}
+  FireTransforms:
+  - {fileID: 1001008698}
+  - {fileID: 3022420075382537133}
+  cannonBallForce: 5
+  fireRateInSeconds: 1
 --- !u!114 &9179054856239917684
 MonoBehaviour:
   m_ObjectHideFlags: 0

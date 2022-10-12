@@ -161,7 +161,7 @@
                     "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardRight",
+                    "groups": "KeyboardLeft",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -172,7 +172,7 @@
                     "path": "<Keyboard>/h",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardRight",
+                    "groups": "KeyboardLeft",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -183,7 +183,7 @@
                     "path": "<Keyboard>/period",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardLeft",
+                    "groups": "KeyboardRight",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -194,7 +194,7 @@
                     "path": "<Keyboard>/slash",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardLeft",
+                    "groups": "KeyboardRight",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": true
