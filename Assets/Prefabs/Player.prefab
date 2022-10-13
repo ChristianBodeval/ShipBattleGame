@@ -444,8 +444,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CannonBall: {fileID: 833049793, guid: 1b87212972fd5ff48ad50c613a0c9f75, type: 3}
-  FireTransforms:
+  FireTransformsLeft:
   - {fileID: 1001008698}
+  FireTransformsRight:
   - {fileID: 3022420075382537133}
   cannonBallForce: 5
   fireRateInSeconds: 1
