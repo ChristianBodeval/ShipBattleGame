@@ -14,10 +14,8 @@ public class GameManager : MonoBehaviour
     public Transform spawn1;
     public Transform spawn2;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
-
         var p1 = PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
         var p2 = PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
 
