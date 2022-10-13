@@ -45,8 +45,6 @@ using UnityEngine.UI;
         IEnumerator ShootingCoroutine()
         {
             isShooting = false;
-
-
             while (true)
             {
                 if (isShooting)
@@ -56,12 +54,9 @@ using UnityEngine.UI;
                     //shoot and wait
                 }
 
-
                 else
                     //wait for next frame
                     yield return null;
-
-
             }
         }
 

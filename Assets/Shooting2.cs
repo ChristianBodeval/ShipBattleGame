@@ -27,7 +27,6 @@ public class Shooting2 : MonoBehaviour
             if (context.performed)
             {
                 isShooting = true;
-                Debug.Log("Ok");
             }
             else
                 isShooting = false;

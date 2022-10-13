@@ -6,7 +6,6 @@ public class canonBall : MonoBehaviour
 {
     public LayerMask m_TankMask;                        // Used to filter what the explosion affects, this should be set to "Players".
 
-    public float m_MaxDamage = 100f;                    // The amount of damage done if the explosion is centred on a tank.
     public float m_MaxLifeTime = 3f;                    // The time in seconds before the shell is removed.
     public float damage = 33.4f;
     private void Start()
@@ -18,6 +17,9 @@ public class canonBall : MonoBehaviour
   
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.name != "CanonBall(Clone)")
+        {
+
         // Collect all the colliders in a sphere from the shell's current position to a radius of the explosion radius
 
         Rigidbody2D rigidbody2D = collision.GetComponent<Rigidbody2D>();
@@ -30,7 +32,10 @@ public class canonBall : MonoBehaviour
 
         // Destroy the canonball.
         Destroy(gameObject);
+
+        }
+
     }
 
-  
+
 }
