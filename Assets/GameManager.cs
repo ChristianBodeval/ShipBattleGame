@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
         //Set colors of the players
         p1.GetComponent<SpriteRenderer>().color = player1Color;
         p2.GetComponent<SpriteRenderer>().color = player2Color;
+
+        //Make them teleportable
+        TeleportManager.instance.AddTeleportable(p1.gameObject);
+        TeleportManager.instance.AddTeleportable(p2.gameObject);
     }
 
     // Update is called once per frame

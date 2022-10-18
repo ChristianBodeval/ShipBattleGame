@@ -36,6 +36,7 @@ public class TeleportManager : MonoBehaviour
         objectsToTeleport.AddRange(GameObject.FindGameObjectsWithTag("Players"));
         Debug.Log("Items in list: " + objectsToTeleport.Capacity);
 
+
     }
 
     public void AddTeleportable(GameObject obj)
@@ -44,7 +45,8 @@ public class TeleportManager : MonoBehaviour
     }
     public void RemoveTeleportable(GameObject obj)
     {
-        objectsToTeleport.Remove(obj); //TODO Bliver ikke removed ordentlig endnu
+        objectsToTeleport.Remove(obj); //TODO Can be optimized by instead re-using objects
+        
     }
 
 
@@ -53,6 +55,9 @@ public class TeleportManager : MonoBehaviour
     {
 
         Debug.Log("Items in list: " + objectsToTeleport.Capacity);
+
+        Debug.Log("Items: " + objectsToTeleport.Count);
+
 
         //Changes position of the object, if they go out from the screen size. 
         foreach (GameObject obj in objectsToTeleport)
