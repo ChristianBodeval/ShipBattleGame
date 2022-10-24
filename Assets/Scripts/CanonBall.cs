@@ -21,14 +21,16 @@ public class CanonBall : MonoBehaviour
   
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name != "CanonBall(Clone)")
+        if(collision.gameObject.name == "CanonBall(Clone)")
         {
-
+            return;
+        }
+            
         // Collect all the colliders in a sphere from the shell's current position to a radius of the explosion radius
 
         Rigidbody2D rigidbody2D = collision.GetComponent<Rigidbody2D>();
 
-        PlayerHealth playerHealth = rigidbody2D.GetComponent<PlayerHealth>();
+        Health playerHealth = rigidbody2D.GetComponent<Health>();
 
         // Deal this damage to the tank.
         playerHealth.TakeDamage(damage);
@@ -39,7 +41,6 @@ public class CanonBall : MonoBehaviour
         TeleportManager.instance.RemoveTeleportable(this.gameObject);
         Destroy(gameObject);
 
-        }
 
     }
 

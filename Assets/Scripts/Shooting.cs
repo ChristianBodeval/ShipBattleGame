@@ -5,34 +5,54 @@ using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEditor;
 
 
     public class Shooting : MonoBehaviour
     {
-        public PlayerInputActions inputActions;
-        public Rigidbody2D CannonBall;            
-        public Transform[] FireTransforms;                                                  // Refers to the FireTransform that are attatched to the players lift and right
+        public Rigidbody2D cannonBallRGB;            
+        public Transform[] fireTransforms;                                                  // Refers to the FireTransform that are attatched to the players lift and right
+        private float cannonBallScaleMultiplier;
         private bool isShooting;                                                            // Tells if we are shooting or not
-        public float cannonBallForce = 10f;                                                 // The speed of the cannonball
-        public float fireRateInSeconds = 1f;                                                // Firerate
-   
-        private void Start()
+        private float cannonBallForce = 10f;                                                 // The speed of the cannonball
+        private float fireRateInSeconds = 1f;                                               // Firerate
+
+        private ShipManager shipManager;
+
+        public float CannonBallScaleMultiplier { get => cannonBallScaleMultiplier; set => cannonBallScaleMultiplier = value; }
+        public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
+
+
+        void UpdateValuesFromManager()
         {
+            cannonBallForce = shipManager.CannonBallForce; 
+            fireRateInSeconds = shipManager.FireRateInSeconds;
+            cannonBallScaleMultiplier = shipManager.CannonBallScaleMultiplier;
+        }
+
+    private void Start()
+        {
+            shipManager = GetComponent<ShipManager>();
+
+            UpdateValuesFromManager();            
             StartCoroutine(ShootingCoroutine());                                            // Starts a coroutine for shooting
         }
 
         //Instantiates a bullet and applies a force
         private void Shoot()
         {
+            Debug.Log("Shoot");
             isShooting = true;                                                              // If Shoot() is called, then isShooting is true. aka we shoot
-            foreach (var FireTransform in FireTransforms)
+            foreach (var FireTransform in fireTransforms)
             {
-                Rigidbody2D shellInstance = Instantiate(                                    // Makes the variable  shellInstance equal to the instantiation of the 
-                                                    CannonBall,                             // CannonBall sprite with the position and rotation of FireTransform
+                Rigidbody2D shotInstance = Instantiate(                                    // Makes the variable  shellInstance equal to the instantiation of the 
+                                                    cannonBallRGB,                             // CannonBall sprite with the position and rotation of FireTransform
                                                     FireTransform.position,                 //
                                                     FireTransform.rotation) 
                                                     as Rigidbody2D;
-                shellInstance.velocity = cannonBallForce * 1.5f *  FireTransform.up;        // Gives shellInstance a velocity and and a direction
+                shotInstance.velocity = cannonBallForce * 1.5f *  FireTransform.up;        // Gives shellInstance a velocity and and a direction
+                shotInstance.transform.localScale *= cannonBallScaleMultiplier;
+                
             }
         }
 

@@ -5,28 +5,32 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    public float StartingHealth = 100f;
-    public float CurrentHealth;
-    private bool Dead;
+    private float health;
+    private float currentHealth;
+    private bool dead;
+    private ShipManager shipManager;
 
-
+    private void Start()
+    {
+        shipManager = GetComponent<ShipManager>();
+        health = shipManager.Health;
+    }
 
     private void OnEnable()
     {
-        CurrentHealth = StartingHealth;
-        Dead = false;
+        currentHealth = health;
+        dead = false;
 
     }
-
 
     public void TakeDamage(float amount)
     {
         // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
-        CurrentHealth -= amount;
+        currentHealth -= amount;
 
-        if (CurrentHealth <= 0f && !Dead)
+        if (currentHealth <= 0f && !dead)
         {
             OnDeath();
         }
@@ -36,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
     private void OnDeath()
     {
         // Play the effects for the death of the tank and deactivate it.
-        Dead = true;
+        dead = true;
         gameObject.SetActive(false);
     }
 }

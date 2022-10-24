@@ -6,35 +6,41 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-    private float turnInputValue;
-    private Vector3 turnDirection;
-    private Rigidbody2D rb;
-    private PlayerInput playerInput;
     public GameObject playerPrefab;
-    private PlayerInputActions playerInputActions;
+    public ShipManager shipManager;
 
     //All the following values are public, so i makes it easier to test in the inspector
-    //Turn values
-    public float turnValue;
-    public float maxAcceleration = 5f; 
-    public float turnAcceleration;
-    public float turnAccelerationSpeed;
-    public float smoothTurningFactor = 0.1f;
+    //Values which have an impact on the movement
+    private float maxAcceleration; // 1.5
+    private float turnAccelerationSpeed; // 0.8
+    private float smoothTurningFactor; //0.1
+    private float smoothMovementFactor; //0.1
+    private int gears; // 2
+    private float speed; //0.11
 
-    //Accelerate values
-    public float moveValue;
-    public int gear = 0; //The current gear
-    public int maxGears = 2;
-    public float speed = 5f;
-    public float smoothMovementFactor = 1;
+    //Holder values
+    private float turnInputValue;
+    private Vector3 turnDirection;
+    private float currentTurnAcceleration;
+    private float currentTurnValue;
+    private float currentMoveValue;
+    private int currentGear; //The current gear
 
-   
-    // Start is called before the first frame update
-    private void Awake()
+
+    void UpdateValuesFromManager()
     {
-        rb = GetComponent<Rigidbody2D>();
-        playerInput = GetComponent<PlayerInput>();
-        playerInputActions = new PlayerInputActions();
+        maxAcceleration = shipManager.MaxAcceleration;
+        turnAccelerationSpeed = shipManager.TurnAccelerationSpeed;
+        smoothTurningFactor = shipManager.SmoothMovementFactor;
+        smoothMovementFactor = shipManager.SmoothTurningFactor;
+        gears = shipManager.Gears;
+        speed = shipManager.Speed;
+    }
+
+    private void Start()
+    {
+        shipManager = GetComponent<ShipManager>();
+        UpdateValuesFromManager();
     }
 
     // Update is called once per frame
@@ -51,15 +57,15 @@ public class Movement : MonoBehaviour
         float value = context.ReadValue<float>();
 
         //Increases or decreases gear
-        if (gear < maxGears-1)
+        if (currentGear < gears-1)
         {
             if (value > 0)
-                gear++;
+                currentGear++;
         }
-        if (gear > 0)
+        if (currentGear > 0)
         {
             if (value < 0)
-                gear--;
+                currentGear--;
         }
     }
 
@@ -68,8 +74,8 @@ public class Movement : MonoBehaviour
     public void MoveForward()
     {
         //Smoothly change the turnValue to the inputValue
-        moveValue = Mathf.Lerp(moveValue, gear, smoothMovementFactor);
-        transform.Translate(0f, moveValue * speed, 0f);
+        currentMoveValue = Mathf.Lerp(currentMoveValue, currentGear, smoothMovementFactor);
+        transform.Translate(0f, currentMoveValue * speed, 0f);
 
     }
 
@@ -85,20 +91,20 @@ public class Movement : MonoBehaviour
     void CalculateTurnAcceleration()
     {
         //Is player turning, then accelerate turning, since input value is either 1 or -1
-        if (turnValue != 0)
+        if (currentTurnValue != 0)
         {
-            if (turnAcceleration < maxAcceleration)
-                turnAcceleration += turnAccelerationSpeed;
+            if (currentTurnAcceleration < maxAcceleration)
+                currentTurnAcceleration += turnAccelerationSpeed;
         }
         // If not turning, then deaccelerate turning
-        else if (turnAcceleration > 0)
+        else if (currentTurnAcceleration > 0)
         {
-            turnAcceleration -= turnAccelerationSpeed;
+            currentTurnAcceleration -= turnAccelerationSpeed;
         }
         //When acceleration goes negative, set i to 0
-        else if (turnAcceleration <= 0)
+        else if (currentTurnAcceleration <= 0)
         {
-            turnAcceleration = 0;
+            currentTurnAcceleration = 0;
         }
 
     }
@@ -107,14 +113,14 @@ public class Movement : MonoBehaviour
     void Turn()
     {
         //Smoothly change the turnValue to the inputValue
-        turnValue = Mathf.Lerp(turnValue, turnInputValue, smoothTurningFactor);
+        currentTurnValue = Mathf.Lerp(currentTurnValue, turnInputValue, smoothTurningFactor);
 
         //Update turnDirection only when turning
-        if (turnValue != 0)
-            turnDirection = new Vector3(0f, 0f, turnValue);
+        if (currentTurnValue != 0)
+            turnDirection = new Vector3(0f, 0f, currentTurnValue);
 
         //Turn
-        transform.Rotate(turnDirection * turnAcceleration);
+        transform.Rotate(turnDirection * currentTurnAcceleration);
     }
 
 }
