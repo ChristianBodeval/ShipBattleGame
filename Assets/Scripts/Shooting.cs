@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class Shooting : MonoBehaviour
 {
     public PlayerInputActions inputActions;
-    public Rigidbody2D CannonBall;
+    //public Rigidbody2D CannonBall;
     public Transform[] FireTransformsLeft;                                                // Refers to the FireTransform that are attatched to the players left
     public Transform[] FireTransformsRight;                                               // Refers to the FireTransform that are attatched to the players right
     private bool isShooting;                                                              // Tells if we are shooting at all
@@ -15,11 +15,23 @@ public class Shooting : MonoBehaviour
     private bool isShootingRight;                                                         // Tells if we are shooting right or not
     public float cannonBallForce = 10f;                                                   // The speed of the cannonball
     public float fireRateInSeconds = 1f;                                                  // Firerate
+    private SpriteRenderer sr;
+    private Rigidbody2D rb2D;
 
     private void Start()
     {
         StartCoroutine(ShootingCoroutine());                                              // Starts a coroutine for shooting
                                                                                        
+    }
+    private void Update()
+    {
+        sr = gameObject.AddComponent<SpriteRenderer>();
+        rb2D = gameObject.AddComponent<Rigidbody2D>();
+
+    }
+    void KnockbackLeft()
+    {
+        rb2D.AddForce(transform.up * 1);
     }
 
     //Instantiates a bullet and applies a force
@@ -43,7 +55,7 @@ public class Shooting : MonoBehaviour
     {
         
         Rigidbody2D cannonBallInstance = Instantiate(                                       // Makes the variable  shellInstance equal to the instantiation of the 
-                                                    CannonBall,                             // CannonBall Rigidbody with the position and rotation of FireTransform
+                                                    rb2D,                             // CannonBall Rigidbody with the position and rotation of FireTransform
                                                     FireTransform.position,                 
                                                     FireTransform.rotation)
                                                     as Rigidbody2D;
@@ -59,14 +71,16 @@ public class Shooting : MonoBehaviour
         {                                                                                   // context.performed means whilst the button is pressed down
             isShootingLeft = true;                                                          // .start would be when the button is first pressed and
             Debug.Log("Shot left");                                                         // .canceled would be at the release of the button
-}                                                                                   
+            KnockbackLeft();
+            
+        }
         else if (context.performed && value > 0)
         {
             isShootingRight = true;
             Debug.Log("Shot right");
         }
         else
-        {                                                                                    
+        {
             isShootingLeft = false;
             isShootingRight = false;
         }
@@ -84,7 +98,7 @@ public class Shooting : MonoBehaviour
 
                 } else if (isShootingRight){                                                // The same but for ShootRight();
 
-                ShootRight();
+                    ShootRight();
                 yield return new WaitForSeconds(fireRateInSeconds);
 
             }
