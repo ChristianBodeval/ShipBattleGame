@@ -20,39 +20,33 @@ public class Shooting : MonoBehaviour
     private SpriteRenderer sr;
     private Rigidbody2D rb2D;
     private float cannonBallScaleMultiplier;
-
-
-    private void Start()
-    {    
-   /*
-        private ShipManager shipManager;
-
+    private ShipManager shipManager;
     public float CannonBallScaleMultiplier { get => cannonBallScaleMultiplier; set => cannonBallScaleMultiplier = value; }
     public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
+    private void Start()
+    {
+        StartCoroutine(ShootingCoroutine());                                              // Starts a coroutine for shooting
 
 
-    shipManager = GetComponent<ShipManager>();
+        shipManager = GetComponent<ShipManager>();
 
         UpdateValuesFromManager();
 
-
-    StartCoroutine(ShootingCoroutine());                                              // Starts a coroutine for shooting
-*/
+    }
 
 
 
-        /*
+        
     void UpdateValuesFromManager()
     {
         cannonBallForce = shipManager.CannonBallForce;
         fireRateInSeconds = shipManager.FireRateInSeconds;
         cannonBallScaleMultiplier = shipManager.CannonBallScaleMultiplier;
     }
-        */
+        
 
-    StartCoroutine(ShootingCoroutine());                                              // Starts a coroutine for shooting
                                                                                        
-    }
+    
     private void Update()
     {
         sr = gameObject.AddComponent<SpriteRenderer>();
@@ -138,8 +132,9 @@ public class Shooting : MonoBehaviour
                     yield return null;
             }
         }
-
 }
+
+
 
 
 
