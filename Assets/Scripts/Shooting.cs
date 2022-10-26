@@ -1,82 +1,137 @@
 using System.Collections;
-using System;
-using System.Collections.Generic;
-using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEditor;
 
 
-    public class Shooting : MonoBehaviour
-    {
-        public Rigidbody2D cannonBallRGB;            
-        public Transform[] fireTransforms;                                                  // Refers to the FireTransform that are attatched to the players lift and right
-        private float cannonBallScaleMultiplier;
-        private bool isShooting;                                                            // Tells if we are shooting or not
-        private float cannonBallForce = 10f;                                                 // The speed of the cannonball
-        private float fireRateInSeconds = 1f;                                               // Firerate
 
-        private ShipManager shipManager;
+public class Shooting : MonoBehaviour
+{
+    public PlayerInputActions inputActions;
+    //public Rigidbody2D CannonBall;
+    public Transform[] FireTransformsLeft;                                                // Refers to the FireTransform that are attatched to the players left
+    public Transform[] FireTransformsRight;                                               // Refers to the FireTransform that are attatched to the players right
+    private bool isShooting;                                                              // Tells if we are shooting at all
+    private bool isShootingLeft;                                                          // Tells if we are shooting left or not
+    private bool isShootingRight;                                                         // Tells if we are shooting right or not
+    public float cannonBallForce = 10f;                                                   // The speed of the cannonball
+    public float fireRateInSeconds = 1f;                                                  // Firerate
+    private SpriteRenderer sr;
+    private Rigidbody2D rb2D;
+    private float cannonBallScaleMultiplier;
 
-        public float CannonBallScaleMultiplier { get => cannonBallScaleMultiplier; set => cannonBallScaleMultiplier = value; }
-        public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
-
-
-        void UpdateValuesFromManager()
-        {
-            cannonBallForce = shipManager.CannonBallForce; 
-            fireRateInSeconds = shipManager.FireRateInSeconds;
-            cannonBallScaleMultiplier = shipManager.CannonBallScaleMultiplier;
-        }
 
     private void Start()
-        {
-            shipManager = GetComponent<ShipManager>();
+    {    
+   /*
+        private ShipManager shipManager;
 
-            UpdateValuesFromManager();            
-            StartCoroutine(ShootingCoroutine());                                            // Starts a coroutine for shooting
+    public float CannonBallScaleMultiplier { get => cannonBallScaleMultiplier; set => cannonBallScaleMultiplier = value; }
+    public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
+
+
+    shipManager = GetComponent<ShipManager>();
+
+        UpdateValuesFromManager();
+
+
+    StartCoroutine(ShootingCoroutine());                                              // Starts a coroutine for shooting
+*/
+
+
+
+        /*
+    void UpdateValuesFromManager()
+    {
+        cannonBallForce = shipManager.CannonBallForce;
+        fireRateInSeconds = shipManager.FireRateInSeconds;
+        cannonBallScaleMultiplier = shipManager.CannonBallScaleMultiplier;
+    }
+        */
+
+    StartCoroutine(ShootingCoroutine());                                              // Starts a coroutine for shooting
+                                                                                       
+    }
+    private void Update()
+    {
+        sr = gameObject.AddComponent<SpriteRenderer>();
+        rb2D = gameObject.AddComponent<Rigidbody2D>();
+
+    }
+    void KnockbackLeft()
+    {
+        rb2D.AddForce(transform.up * 1);
+    }
+
+    //Instantiates a bullet and applies a force
+    private void ShootLeft()
+    {
+                                                                                          // If ShootLeft() is called, then ShootCannon for all FireTransforms
+        foreach (var FireTransform in FireTransformsLeft)                                 // in FireTransformLEft
+        {
+            ShootCannon(FireTransform);                                                                  
         }
-
-        //Instantiates a bullet and applies a force
-        private void Shoot()
+    }
+    private void ShootRight()
+    {
+        // If Shoot() is called, then isShooting is true. aka we shoot
+        foreach (var FireTransform in FireTransformsRight)
         {
-            Debug.Log("Shoot");
-            isShooting = true;                                                              // If Shoot() is called, then isShooting is true. aka we shoot
-            foreach (var FireTransform in fireTransforms)
-            {
-                Rigidbody2D shotInstance = Instantiate(                                    // Makes the variable  shellInstance equal to the instantiation of the 
-                                                    cannonBallRGB,                             // CannonBall sprite with the position and rotation of FireTransform
-                                                    FireTransform.position,                 //
-                                                    FireTransform.rotation) 
+            ShootCannon(FireTransform);                                                                  
+        }
+    }
+    void ShootCannon(Transform FireTransform)
+    {
+        
+        Rigidbody2D cannonBallInstance = Instantiate(                                       // Makes the variable  shellInstance equal to the instantiation of the 
+                                                    rb2D,                             // CannonBall Rigidbody with the position and rotation of FireTransform
+                                                    FireTransform.position,                 
+                                                    FireTransform.rotation)
                                                     as Rigidbody2D;
-                shotInstance.velocity = cannonBallForce * 1.5f *  FireTransform.up;        // Gives shellInstance a velocity and and a direction
-                shotInstance.transform.localScale *= cannonBallScaleMultiplier;
-                
-            }
-        }
+        cannonBallInstance.velocity = cannonBallForce * 1.5f * FireTransform.up;            // Gives shellInstance a velocity and and a direction
+    }
 
-        //Called when fire key(s) is pressed
-        public void OnFire(InputAction.CallbackContext context)
-        {
-            if (context.performed)                                                          // context.performed means whilst the button is pressed down
-                isShooting = true;                                                          // .start would be when the button is first pressed and
-            else                                                                            // .canceled would be at the release of the button
-                isShooting = false;
+    //Called when fire key(s) is pressed
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        float value = context.ReadValue<float>();
+
+        if (context.performed && value < 0)
+        {                                                                                   // context.performed means whilst the button is pressed down
+            isShootingLeft = true;                                                          // .start would be when the button is first pressed and
+            Debug.Log("Shot left");                                                         // .canceled would be at the release of the button
+            KnockbackLeft();
+            
         }
+        else if (context.performed && value > 0)
+        {
+            isShootingRight = true;
+            Debug.Log("Shot right");
+        }
+        else
+        {
+            isShootingLeft = false;
+            isShootingRight = false;
+        }
+    }                                                                              
 
         //If holding firekey shoot every fireRate
         IEnumerator ShootingCoroutine()                                                     // Coroutine called at start
-        {                                                                                   // 
-            isShooting = false;                                                             // isShooting is false since we dont wanna shoot when player spawns
+        {                                                                                   
             while (true)                                                                    // Uses a unending while loop to check if we are shooting throughout the
             {                                                                               // game
-                if (isShooting)
-                {                                                                           // If we are shooting, then call shoot() and wait an amount equal to fireRate
-                    Shoot();
+                if (isShootingLeft)
+                {                                                                           // If we are shooting, then call ShootLeft() and wait an amount equal to fireRate
+                    ShootLeft();
                     yield return new WaitForSeconds(fireRateInSeconds);
-                    
-                }
+
+                } else if (isShootingRight){                                                // The same but for ShootRight();
+
+                    ShootRight();
+                yield return new WaitForSeconds(fireRateInSeconds);
+
+            }
                                                                                             // else return nothing
                 else
                     
@@ -85,6 +140,7 @@ using UnityEditor;
         }
 
 }
+
 
 
 
