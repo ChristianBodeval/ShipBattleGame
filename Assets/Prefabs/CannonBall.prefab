@@ -141,3 +141,5 @@ MonoBehaviour:
     m_Bits: 0
   m_MaxLifeTime: 3
   damage: 33.4
+  cannonBallForce: 10
+  rb: {fileID: 833049793}

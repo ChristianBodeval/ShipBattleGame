@@ -15,12 +15,13 @@ public class Shooting : MonoBehaviour
     private bool isShooting;                                                              // Tells if we are shooting at all
     private bool isShootingLeft;                                                          // Tells if we are shooting left or not
     private bool isShootingRight;                                                         // Tells if we are shooting right or not
-    public float cannonBallForce = 10f;                                                   // The speed of the cannonball
     public float fireRateInSeconds = 1f;                                                  // Firerate
     private SpriteRenderer sr;
-    private Rigidbody2D rb2D;
+    public GameObject cannonballPrefab;
     private float cannonBallScaleMultiplier;
     private ShipManager shipManager;
+    public float damage;
+    public float speed;
     public float CannonBallScaleMultiplier { get => cannonBallScaleMultiplier; set => cannonBallScaleMultiplier = value; }
     public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
     private void Start()
@@ -30,32 +31,29 @@ public class Shooting : MonoBehaviour
 
         shipManager = GetComponent<ShipManager>();
 
-        UpdateValuesFromManager();
-
+      //  UpdateValuesFromManager();
+        sr = gameObject.AddComponent<SpriteRenderer>();
+        // rb2D = gameObject.AddComponent<Rigidbody2D>();
     }
 
-
-
-        
-    void UpdateValuesFromManager()
+   /* void UpdateValuesFromManager()
     {
         cannonBallForce = shipManager.CannonBallForce;
         fireRateInSeconds = shipManager.FireRateInSeconds;
         cannonBallScaleMultiplier = shipManager.CannonBallScaleMultiplier;
     }
-        
+  */      
 
                                                                                        
     
     private void Update()
     {
-        sr = gameObject.AddComponent<SpriteRenderer>();
-        rb2D = gameObject.AddComponent<Rigidbody2D>();
+        
 
     }
     void KnockbackLeft()
     {
-        rb2D.AddForce(transform.up * 1);
+        // rb2D.AddForce(transform.right * Time.deltaTime);
     }
 
     //Instantiates a bullet and applies a force
@@ -78,12 +76,13 @@ public class Shooting : MonoBehaviour
     void ShootCannon(Transform FireTransform)
     {
         
-        Rigidbody2D cannonBallInstance = Instantiate(                                       // Makes the variable  shellInstance equal to the instantiation of the 
-                                                    rb2D,                             // CannonBall Rigidbody with the position and rotation of FireTransform
+        GameObject cannonBallInstance = Instantiate(                                       // Makes the variable  shellInstance equal to the instantiation of the 
+                                                    cannonballPrefab,                                   // CannonBall Rigidbody with the position and rotation of FireTransform
                                                     FireTransform.position,                 
-                                                    FireTransform.rotation)
-                                                    as Rigidbody2D;
-        cannonBallInstance.velocity = cannonBallForce * 1.5f * FireTransform.up;            // Gives shellInstance a velocity and and a direction
+                                                    FireTransform.rotation);
+
+        cannonBallInstance.GetComponent<CanonBall>().SetVariables(damage, speed);
+        
     }
 
     //Called when fire key(s) is pressed
