@@ -23,13 +23,13 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> players = new List<GameObject>();
 
-    private void Start()
-    {
+  //  private void Start()
+    //{
         
-    }
+    //}
 
     // Start is called before the first frame update
-    void Awake()
+   /* void Awake()
     {
 
         var p1 = PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
@@ -55,4 +55,6 @@ public class GameManager : MonoBehaviour
         TeleportManager.instance.AddTeleportable(p1.gameObject);
         TeleportManager.instance.AddTeleportable(p2.gameObject);
     }
+*/
 }
+  
