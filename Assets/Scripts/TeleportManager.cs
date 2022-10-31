@@ -35,7 +35,7 @@ public class TeleportManager : MonoBehaviour
 
         //Adds object who should be teleported when hitting border.
         objectsToTeleport.AddRange(GameObject.FindGameObjectsWithTag("Players"));
-        Debug.Log("Items in list: " + objectsToTeleport.Capacity);
+
 
 
     }
@@ -55,9 +55,6 @@ public class TeleportManager : MonoBehaviour
     void Update()
     {
 
-        Debug.Log("Items in list: " + objectsToTeleport.Capacity);
-
-        Debug.Log("Items: " + objectsToTeleport.Count);
 
 
         //Changes position of the object, if they go out from the screen size. 
