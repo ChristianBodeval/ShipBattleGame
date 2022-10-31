@@ -9,10 +9,7 @@ using System;
 
 public class ConeCollider : MonoBehaviour
 {
-    public bool inverted = false;
-
     GameObject[] canons;
-
 
     public GameObject canonPrefab;
 
@@ -25,6 +22,7 @@ public class ConeCollider : MonoBehaviour
     [Range(1,20)]
     public float range;
 
+    public int maxCornerRange;
     [Range(2,10)]
     public int corners;
 
@@ -34,69 +32,73 @@ public class ConeCollider : MonoBehaviour
     [Range(0,180)]
     public float maxAngle;
 
-    private float currentAngle;
-    private float currentAngle2;
-    private float currentShipSizeStep;
     private PolygonCollider2D pc;
-    // Start is called before the first frame update
+
     void Awake()
     {
-        corners = 10;
         pc = GetComponent<PolygonCollider2D>();
-
         endPoints = new Vector2[corners+2];
         relativeEndpoints = new Vector2[corners+2];
         startPoints = new Vector2[corners+2];
         canons = new GameObject[corners];
     }
 
-
-    void GetPoints()
+    void SetLinePoints(Vector2[] startPoints, Vector2[] endPoints)
     {
         float angleStep = maxAngle / (corners - 1);
         float pointDistanceStep = shipSize / (corners-1);
         float playerRotationInAngles = transform.rotation.eulerAngles.z; //The gameobjects rotation in world space
-
-        currentShipSizeStep = 0 - (shipSize / 2);
-        currentAngle = 0 - (maxAngle / 2) + playerRotationInAngles;
+        float currentPointDistance = 0 - (shipSize / 2);
+        float currentAngle = 0 - (maxAngle / 2) + playerRotationInAngles;
 
         for (int i = 0; i <= corners; i++)
         {
-            Vector3 start =  transform.up * currentShipSizeStep;
+            Vector3 start =  transform.up * currentPointDistance;
             Vector3 direction = GetVectorFromAngle(currentAngle);
             Vector3 target = direction * range + start;
 
-            endPoints[i] = (Vector2)target;
             startPoints[i] = (Vector2) start;
+            endPoints[i] = (Vector2)target;
 
-            currentShipSizeStep += pointDistanceStep;
+            currentPointDistance += pointDistanceStep;
             currentAngle += angleStep;
         }
     }
 
-    
-    Vector2[] GetColliderPoints(bool isRelative, int corners)
+    void SetLinePoints2(Vector2[] startPoints, Vector2[] endPoints)
+    {
+        //Step values
+        float angleStep = maxAngle / (corners - 1);
+        float pointDistanceStep = shipSize / (corners - 1);
+        //Current values
+        float currentPointDistance = 0 - (shipSize / 2);
+        float currentAngle = 0 - (maxAngle / 2) + transform.rotation.eulerAngles.z;
+
+        for (int i = 0; i <= corners; i++)
+        {
+            Vector2 start = transform.up * currentPointDistance;
+            Vector2 direction = GetVectorFromAngle(currentAngle);
+            Vector2 target = direction * range + start;
+
+            startPoints[i] = start;
+            endPoints[i] = target;
+
+            currentPointDistance += pointDistanceStep;
+            currentAngle += angleStep;
+        }
+    }
+
+
+    Vector2[] GetColliderPoints(int corners)
     {
         Vector2[] returnArray = new Vector2[corners+2];
 
         float angleStep = maxAngle / (corners - 1);
         float pointDistanceStep = shipSize / (corners - 1);
-        float playerRotationInAngles = transform.rotation.eulerAngles.z; //The gameobjects rotation in world space
-
+        float playerRotationInAngles = transform.rotation.eulerAngles.z; //The gameobjects rotation in world
 
         float currentShipSizeStep = 0 - (shipSize / 2);
-        
-
-        if (isRelative)
-        {
-            currentAngle = 0 - (maxAngle / 2) + playerRotationInAngles;
-        }
-
-        else
-        {
-            currentAngle = 0 - (maxAngle / 2);
-        }
-
+        float currentAngle = 0 - (maxAngle / 2);
 
         for (int i = 0; i <= corners; i++)
         {
@@ -115,28 +117,6 @@ public class ConeCollider : MonoBehaviour
 
         return returnArray;
     }
-
-
-    Vector2[] GetStartPoints(int arraySize)
-    {
-        Vector2[] returnArray = new Vector2[arraySize+2];
-
-        float pointDistanceStep = shipSize / (arraySize - 1);
-        float playerRotationInAngles = transform.parent.transform.rotation.eulerAngles.z; //Get's the parent's (the player's) z' rotation. 
-
-        for (int i = 0; i <= arraySize; i++)
-        {
-            Vector3 start = transform.up * currentShipSizeStep;
-            returnArray[i] = (Vector2)start;
-            currentShipSizeStep += pointDistanceStep;
-        }
-
-        return returnArray;
-    }
-    
-
-    
-    
 
     //Draws lines between startPoints and endPoints
     void OnDrawGizmosSelected()
@@ -176,7 +156,6 @@ public class ConeCollider : MonoBehaviour
             canonClone = Instantiate(canonPrefab, (Vector3)startPoints[i] + transform.position, rotation);
 
             canons[i] = canonClone;
-
         }
             
     }
@@ -198,19 +177,6 @@ public class ConeCollider : MonoBehaviour
         return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
     }
 
-    //Inverts y-values of 
-    void Invert()
-    {
-        if(inverted)
-        {
-            for (int i = 0; i < endPoints.Length; i++)
-            {
-                endPoints[i] = new Vector2(endPoints[i].x * -1, endPoints[i].y);                                        //Flips x-values of endpoints
-                //pc.points[i] = new Vector2(pc.points[i].x * -1, pc.points[i].y);
-            }
-        }
-    }
-
     void DestroyUnusedCannons()
     {
         for (int i = 0; i < canons.Length; i++)
@@ -225,16 +191,9 @@ public class ConeCollider : MonoBehaviour
     
     void Update()
     {
-        GetPoints();
-
-        Debug.Log("Relative: " + Vector3.Angle(relativeEndpoints[0], relativeEndpoints[relativeEndpoints.Length - 1]));
-        Debug.Log("Endpoint: " + Vector3.Angle(endPoints[0], endPoints[relativeEndpoints.Length - 1]));
-
-        //startPoints = GetStartPoints(corners);
-        Invert();
+        SetLinePoints(startPoints, endPoints);
         SpawnCanons();
         DestroyUnusedCannons();
-
-        pc.points = GetColliderPoints(false, corners);
+        pc.points = GetColliderPoints(corners);
     }
 }

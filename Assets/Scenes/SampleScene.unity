@@ -245,18 +245,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1839021619665846558, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: corners
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1839021619665846558, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: inverted
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1839021619665846558, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3685263541795606615, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
       propertyPath: m_Name
       value: Player
@@ -306,31 +294,34 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4797987322211426322, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: range
-      value: 5.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4797987322211426322, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: corners
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4797987322211426322, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6561855051026742838, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6561855051026742838, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6561855051026742838, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+--- !u!1 &726262245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 121773881, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+  m_PrefabInstance: {fileID: 726262244}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &726262246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726262245}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf18be10cca54d25bcac094800443e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shooterPrefab: {fileID: 9153223935004835648, guid: 00bbda18870e2464ca0f0b0af82ed86c, type: 3}
+  endPoints: []
+  range: 10
+  corners: 5
+  shipSize: 2
+  maxAngle: 45
 --- !u!1 &1219518959
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,7 +794,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894485280}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
