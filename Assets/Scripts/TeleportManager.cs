@@ -12,6 +12,7 @@ public class TeleportManager : MonoBehaviour
 
     public static TeleportManager instance; //Singleton - used in CanonBall
 
+    
     float mapH; //Size on Y-axis. Depended on camera size
     float mapL; ////Size on X-axis. Depended on camera size
     Camera camera;

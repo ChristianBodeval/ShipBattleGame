@@ -16,8 +16,11 @@ public class ConeCollider : MonoBehaviour
 
     public GameObject canonPrefab;
 
+    Vector2[] relativeEndPoints;
     Vector2[] endPoints;
     Vector2[] startPoints;
+
+    public float testAngle = 0;
 
     [Range(1,20)]
     public float range;
@@ -32,6 +35,7 @@ public class ConeCollider : MonoBehaviour
     public float maxAngle;
 
     private float currentAngle;
+    private float currentAngle2;
     private float currentShipSizeStep;
     private PolygonCollider2D pc;
     // Start is called before the first frame update
@@ -39,7 +43,7 @@ public class ConeCollider : MonoBehaviour
     {
         corners = 10;
         pc = GetComponent<PolygonCollider2D>();
-        endPoints = new Vector2[corners+2];
+        relativeEndPoints = new Vector2[corners+2];
         startPoints = new Vector2[corners+2];
         canons = new GameObject[corners];
 
@@ -51,53 +55,103 @@ public class ConeCollider : MonoBehaviour
     {
         float angleStep = maxAngle / (corners - 1);
         float pointDistanceStep = shipSize / (corners-1);
+        float playerRotationInAngles = transform.parent.transform.rotation.eulerAngles.z; //Get's the parent's (the player's) z' rotation. 
+
+
+        Debug.Log("Player rotation: " + playerRotationInAngles);
 
         currentShipSizeStep = 0 - (shipSize / 2);
+        currentAngle = 0 - (maxAngle / 2) + transform.parent.transform.rotation.eulerAngles.z;
 
-        Quaternion parentRotation = GetComponentInParent<Transform>().rotation;
-        Vector3 parentRotationVector = new Vector3(parentRotation.x, parentRotation.y, parentRotation.z);
-
-
-        currentAngle = 0 - (maxAngle / 2) + Vector3.Angle(parentRotationVector, Vector3.down);
-
+        
         for (int i = 0; i <= corners; i++)
         {
             
             Vector3 start =  transform.up * currentShipSizeStep;
-
-            
-
             Vector3 direction = GetVectorFromAngle(currentAngle);
-
             Vector3 target = direction * range + start;
 
-            endPoints[i] = (Vector2) target;
+
+            relativeEndPoints[i] = (Vector2)target;
             startPoints[i] = (Vector2) start;
 
             currentShipSizeStep += pointDistanceStep;
             currentAngle += angleStep;
-
-
         }
 
-        endPoints[corners] = new Vector2(0, (shipSize / 2));
-        endPoints[corners + 1] = new Vector2(0, -(shipSize / 2));
-
-
+        relativeEndPoints[corners] = new Vector2(0, (shipSize / 2));
+        relativeEndPoints[corners + 1] = new Vector2(0, -(shipSize / 2));
     }
+
+    
+    void GetEndPoints(bool isRelative, int arraySize)
+    {
+        float angleStep = maxAngle / (corners - 1);
+        float pointDistanceStep = shipSize / (corners - 1);
+        float playerRotationInAngles = transform.parent.transform.rotation.eulerAngles.z; //Get's the parent's (the player's) z' rotation. 
+
+
+        if (isRelative)
+        {
+            currentAngle = 0 - (maxAngle / 2) + playerRotationInAngles;
+        }
+
+        else
+        {
+            currentAngle = 0 - (maxAngle / 2);
+        }
+
+
+        for (int i = 0; i <= corners; i++)
+        {
+            Vector3 start = transform.up * currentShipSizeStep;
+            Vector3 direction = GetVectorFromAngle(currentAngle);
+            Vector3 target = direction * range + start;
+
+            relativeEndPoints[i] = (Vector2)target;
+
+            currentShipSizeStep += pointDistanceStep;
+            currentAngle += angleStep;
+        }
+
+        relativeEndPoints[corners] = new Vector2(0, (shipSize / 2));
+        relativeEndPoints[corners + 1] = new Vector2(0, -(shipSize / 2));
+    }
+
+
+    Vector2[] GetStartPoints(int arraySize)
+    {
+        Vector2[] returnArray = new Vector2[arraySize+2];
+
+        float pointDistanceStep = shipSize / (arraySize - 1);
+        float playerRotationInAngles = transform.parent.transform.rotation.eulerAngles.z; //Get's the parent's (the player's) z' rotation. 
+
+        for (int i = 0; i <= arraySize; i++)
+        {
+            Vector3 start = transform.up * currentShipSizeStep;
+            returnArray[i] = (Vector2)start;
+            currentShipSizeStep += pointDistanceStep;
+        }
+
+        return returnArray;
+    }
+    
+
+
+
 
     //Draws lines between startPoints and endPoints
     void OnDrawGizmosSelected()
     {
 
-        if(startPoints != null && endPoints != null)
+        if(startPoints != null && relativeEndPoints != null)
         {
-            if (startPoints.Length > 0 && endPoints.Length > 0)
+            if (startPoints.Length > 0 && relativeEndPoints.Length > 0)
             {
                 for (int i = 0; i < corners; i++)
                 {
                     Debug.Log("Drawing");
-                    Gizmos.DrawLine((Vector3)startPoints[i] + transform.position, (Vector3)endPoints[i] + transform.position);
+                    Gizmos.DrawLine((Vector3)startPoints[i] + transform.position, (Vector3)relativeEndPoints[i] + transform.position);
                 }
             }
         }
@@ -109,7 +163,7 @@ public class ConeCollider : MonoBehaviour
     {
         for (int i = 0; i < corners; i++)
         {
-            float angle = GetAngleFromVector((Vector3)endPoints[i]);
+            float angle = GetAngleFromVector((Vector3)relativeEndPoints[i]);
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
             if (canons[i] != null)
@@ -151,10 +205,10 @@ public class ConeCollider : MonoBehaviour
     {
         if(inverted)
         {
-            for (int i = 0; i < endPoints.Length; i++)
+            for (int i = 0; i < relativeEndPoints.Length; i++)
             {
                 
-                endPoints[i] = new Vector2(endPoints[i].x * -1, endPoints[i].y);                                        //Flips x-values of endpoints
+                relativeEndPoints[i] = new Vector2(relativeEndPoints[i].x * -1, relativeEndPoints[i].y);                                        //Flips x-values of endpoints
                 //pc.points[i] = new Vector2(pc.points[i].x * -1, pc.points[i].y);
             }
         }
@@ -171,14 +225,17 @@ public class ConeCollider : MonoBehaviour
         }
     }
 
+    
     void Update()
     {
+        //GetPoints();
 
-        GetPoints();
+        startPoints = GetStartPoints(corners);
+        //relativeEndPoints = GetEndPoints(true, (corners));
         Invert();
         SpawnCanons();
-
-        pc.points = new Vector2[endPoints.Length];
-        pc.points = endPoints;
+        DestroyUnusedCannons();
+        pc.points = new Vector2[relativeEndPoints.Length];
+        pc.points = relativeEndPoints;
     }
 }
