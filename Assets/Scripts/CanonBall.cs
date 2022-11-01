@@ -20,7 +20,7 @@ public class CanonBall : MonoBehaviour
     public Vector3 endMarker;
 
     // Movement speed in units per second.
-    public float speed = 1.0F;
+    public float speed;
 
     // Time when the movement started.
     private float startTime;
@@ -28,13 +28,37 @@ public class CanonBall : MonoBehaviour
     // Total distance between the markers.
     private float journeyLength;
 
+
+    CanonBall()
+    {
+        this.speed = 3;
+        this.target = new Vector3(0,0,0);
+    }
+    CanonBall(float speed, Vector3 target)
+    {
+        this.speed = speed;
+        this.target = target;
+    }
+
+    private void OnEnable()
+    {
+        endMarker = target;
+        startMarker = transform.position;
+
+        startTime = Time.time;
+
+        // Calculate the journey length.
+        journeyLength = Vector3.Distance(transform.position, target);
+    }
+
     void Start()
     {
-
-        startMarker = transform.position;
+        speed = 3f;
         endMarker = target;
+        startMarker = transform.position;
 
-        speed = 5f;
+
+
             
         TeleportManager.instance.AddTeleportable(this.gameObject);
         // If it isn't destroyed by then, destroy the shell after it's lifetime.
@@ -51,52 +75,47 @@ public class CanonBall : MonoBehaviour
 
     private void Update()
     {
+            // Distance moved equals elapsed time times speed..
+            float distCovered = (Time.time - startTime) * speed;
 
-        // Distance moved equals elapsed time times speed..
-        float distCovered = (Time.time - startTime) * speed;
+            // Fraction of journey completed equals current distance divided by total distance.
+            float fractionOfJourney = distCovered / journeyLength;
 
-        // Fraction of journey completed equals current distance divided by total distance.
-        float fractionOfJourney = distCovered / journeyLength;
+            // Set our position as a fraction of the distance between the markers.
+            transform.position = Vector3.Lerp(startMarker, endMarker, fractionOfJourney);
 
-        // Set our position as a fraction of the distance between the markers.
-        transform.position = Vector3.Lerp(startMarker, endMarker, fractionOfJourney);
-
-        if(fractionOfJourney >= 1)
-        {
-            Debug.Log("Destination reached");
-            GameObject.Destroy(gameObject);
-        }
-
-        
+            if (fractionOfJourney >= 1)
+            {
+                Debug.Log("Destination reached");
+                gameObject.SetActive(false);
+            }     
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "CanonBall(Clone)")
+ 
+
+        if (collision.gameObject.name != "Player" && collision.gameObject.name != "CanonBall(Clone)")
         {
-            return;
-        }
 
-        if (collision.gameObject.name == "Player")
-        {
-            return;
-        }
+            Health playerHealth = collision.GetComponent<Health>();
 
+            if (playerHealth != null)
+            {
+                // Deal this damage to the tank.
+                playerHealth.TakeDamage(damage);
+            }
 
-        // Collect all the colliders in a sphere from the shell's current position to a radius of the explosion radius
-
-        Rigidbody2D rigidbody2D = collision.GetComponent<Rigidbody2D>();
-
-        Health playerHealth = rigidbody2D.GetComponent<Health>();
-
-        // Deal this damage to the tank.
-        playerHealth.TakeDamage(damage);
 
 
             // Destroy the canonball.
 
-        TeleportManager.instance.RemoveTeleportable(this.gameObject);
-        Destroy(gameObject);
+            TeleportManager.instance.RemoveTeleportable(this.gameObject);
+            //Destroy(gameObject);
+        }
+
+
 
 
     }

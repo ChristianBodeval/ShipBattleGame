@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShooterGroup : MonoBehaviour
 {
-    GameObject[] canonGameObjects;
+    GameObject[] shooterGameObjects;
     public GameObject shooterPrefab;
     public Vector2[] endPoints;
     Vector2[] startPoints;
@@ -24,17 +24,22 @@ public class ShooterGroup : MonoBehaviour
 
     void Awake()
     {
+        corners = 10;
         endPoints = new Vector2[corners + 2];
         startPoints = new Vector2[corners + 2];
-        canonGameObjects = new GameObject[corners];
+        shooterGameObjects = new GameObject[corners];
     }
 
-    void Start()
+    void Update()
     {
         SetLinePoints(startPoints, endPoints);
-        SpawnCanons(startPoints, endPoints);
-        DestroyUnusedCannons();
-        FireCanons();
+        SpawnShooters(startPoints, endPoints);
+        DestroyUnusedShooters();
+
+        if (Input.anyKeyDown)
+        {
+            Fire();
+        }
     }
 
 
@@ -78,33 +83,33 @@ public class ShooterGroup : MonoBehaviour
         }
 
     }
-
-    public void FireCanons()
+    
+    public void Fire()
     {
-        for (int i = 0; i < canonGameObjects.Length; i++)
+        for (int i = 0; i < shooterGameObjects.Length; i++)
         {
-            Shooter shooterScript = canonGameObjects[i].GetComponent<Shooter>();
-            Vector3 position = canonGameObjects[i].transform.position;
+            Shooter shooterScript = shooterGameObjects[i].GetComponent<Shooter>();
+            Vector3 position = shooterGameObjects[i].transform.position;
 
             Vector3 direction = endPoints[i] - startPoints[i];
 
-            shooterScript.Shoot(direction + canonGameObjects[i].transform.position);
+            shooterScript.Shoot(direction + shooterGameObjects[i].transform.position);
         }
         
     }    
 
     //Spawn canons at startPoints and make them point towards endPoints.
-    public void SpawnCanons(Vector2[] startPoints, Vector2[] endPoints)
+    public void SpawnShooters(Vector2[] startPoints, Vector2[] endPoints)
     {
         for (int i = 0; i < corners; i++)
         {
             float angle = GetAngleFromVector(endPoints[i] - startPoints[i]);
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
 
-            if (canonGameObjects[i] != null)
+            if (shooterGameObjects[i] != null)
             {
-                canonGameObjects[i].transform.position = (Vector3)startPoints[i] + GetComponentInParent<Transform>().position;
-                canonGameObjects[i].transform.rotation = rotation;
+                shooterGameObjects[i].transform.position = (Vector3)startPoints[i] + GetComponentInParent<Transform>().position;
+                shooterGameObjects[i].transform.rotation = rotation;
                 continue;
             }
 
@@ -112,18 +117,18 @@ public class ShooterGroup : MonoBehaviour
             GameObject canonClone;
             canonClone = Instantiate(shooterPrefab, (Vector3)startPoints[i] + transform.position, rotation);
 
-            canonGameObjects[i] = canonClone;
+            shooterGameObjects[i] = canonClone;
         }
 
     }
 
-    void DestroyUnusedCannons()
+    void DestroyUnusedShooters()
     {
-        for (int i = 0; i < canonGameObjects.Length; i++)
+        for (int i = 0; i < shooterGameObjects.Length; i++)
         {
             if (i >= corners)
             {
-                GameObject.Destroy(canonGameObjects[i]);
+                GameObject.Destroy(shooterGameObjects[i]);
             }
         }
     }

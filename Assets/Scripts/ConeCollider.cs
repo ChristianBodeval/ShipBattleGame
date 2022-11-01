@@ -1,10 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.Image;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
-using static UnityEngine.GraphicsBuffer;
 using System;
 
 public class ConeCollider : MonoBehaviour

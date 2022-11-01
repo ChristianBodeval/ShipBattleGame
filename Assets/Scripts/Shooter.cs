@@ -21,10 +21,27 @@ public class Shooter : MonoBehaviour
 
     private Vector3 target;
 
+    public void Start()
+    {
+        
+    }
+
     public void Shoot(Vector3 target)
     {
-        projectilePrefab = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        projectilePrefab.GetComponent<CanonBall>().Target = target;
+        
+        GameObject canonball = ProjectilePooler.SharedInstance.GetPooledObject();
+        if (canonball != null)
+        {
+            canonball.transform.position = transform.position;
+            canonball.transform.rotation = transform.rotation;
+            canonball.gameObject.SetActive(true);
+            canonball.GetComponent<CanonBall>().Target = target;
+        }
+        
+
+
     }
 
 }
+
+
