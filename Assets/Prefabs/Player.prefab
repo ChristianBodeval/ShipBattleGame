@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -7976377503517882532}
   - component: {fileID: 9179054856239917684}
   - component: {fileID: 3794120215085976867}
+  - component: {fileID: 855461067}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player1
@@ -220,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19724f6be3e34e03ac622c093e1d770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRb: {fileID: 0}
   playerPrefab: {fileID: 3685263541795606615}
   shipManager: {fileID: 3794120215085976867}
 --- !u!114 &-7976377503517882532
@@ -238,10 +240,15 @@ MonoBehaviour:
   - {fileID: 6561855051242213174}
   FireTransformsRight:
   - {fileID: 1001008698}
-  fireRateInSeconds: 1
+  fireRateInSeconds: 0.2
   cannonballPrefab: {fileID: 275803821595653893, guid: 1b87212972fd5ff48ad50c613a0c9f75, type: 3}
-  damage: 34
+  playerRb: {fileID: 3685263541795606613}
+  knockbackVelocity: {x: 0, y: 0}
+  damage: 25
   speed: 10
+  knockbackForce: 1
+  knockbackDistance: 1
+  currentKnockBackForce: 0
 --- !u!114 &9179054856239917684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,16 +274,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Instance: {fileID: 0}
-  maxAcceleration: 1.5
+  maxAcceleration: 5
   turnAccelerationSpeed: 0.8
   smoothTurningFactor: 0.1
   smoothMovementFactor: 0.1
-  gears: 2
+  gears: 4
   speed: 0.11
-  health: 100
+  health: 2000
   cannonBallScaleMultiplier: 1
   fireRateInSeconds: 1
-  cannonBallForce: 6
+  cannonBallForce: 2
+--- !u!114 &855461067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685263541795606615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 192ddf6a37c35fc49bdb0bd62af52224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2149374170233691095
 PrefabInstance:
   m_ObjectHideFlags: 0

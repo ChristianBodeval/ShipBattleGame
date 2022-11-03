@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    public Rigidbody2D playerRb;
     public GameObject playerPrefab;
     public ShipManager shipManager;
 

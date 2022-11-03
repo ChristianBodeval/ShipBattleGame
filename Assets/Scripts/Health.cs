@@ -17,7 +17,13 @@ public class Health : MonoBehaviour
         shipManager = GetComponent<ShipManager>();
         health = shipManager.Health;
     }
+    private void Update()
+    {
+        Debug.Log("current health "+ health);
 
+        if(!dead)
+            Debug.Log("im not dead weee");
+    }
     private void OnEnable()
     {
         currentHealth = health;
@@ -33,14 +39,16 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0f && !dead)
         {
             OnDeath();
+            
         }
     }
 
 
     private void OnDeath()
     {
-        // Play the effects for the death of the tank and deactivate it.
+        Debug.Log("DIED!");
         dead = true;
         gameObject.SetActive(false);
+       
     }
 }

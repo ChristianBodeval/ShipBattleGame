@@ -8,7 +8,7 @@ public class CanonBall : MonoBehaviour
 {
     public LayerMask m_TankMask;                        // Used to filter what the explosion affects, this should be set to "Players".
 
-    public float m_MaxLifeTime = 3f;                    // The time in seconds before the shell is removed.
+    public float m_MaxLifeTime = 2f;                    // The time in seconds before the shell is removed.
     public float damage;
     public float cannonBallForce = 10f;                                                   // The speed of the cannonball
     public Rigidbody2D rb;
@@ -42,6 +42,7 @@ public class CanonBall : MonoBehaviour
         if (collision.gameObject.CompareTag("Player1"))
         {
             collision.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
+            Debug.Log("Took " + damage + " damage");
         }
 
         // Rigidbody2D rigidbody2D = collision.GetComponent<Rigidbody2D>();
