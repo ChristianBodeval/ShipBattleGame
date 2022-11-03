@@ -38,4 +38,26 @@ public class ShipManager : MonoBehaviour
     public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
     public float Health { get => health; set => health = value; }
     public float CannonBallForce { get => cannonBallForce; set => cannonBallForce = value; }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<PowerUpValue>())
+        {
+            Debug.Log(collision.gameObject.name);
+            switch (collision.gameObject.name)
+            {
+                case "PowerUpH(Clone)":
+                    GetComponent<Health>().currentHealth += collision.GetComponent<PowerUpValue>().value;
+                    Destroy(collision.gameObject);
+                    break;
+                case "PowerUpA(Clone)":
+                //TODO damage
+                    Destroy(collision.gameObject);
+                    break;
+                case "PowerUpS(Clone)":
+                    GetComponent<Movement>().speed += collision.GetComponent<PowerUpValue>().value;
+                    Destroy(collision.gameObject);
+                    break;
+            }
+        } 
+    }
 }

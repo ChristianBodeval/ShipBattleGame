@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5256241502257323973}
   - component: {fileID: 5256241502257323974}
   - component: {fileID: 5256241502257323975}
-  - component: {fileID: 5256241502257323993}
   - component: {fileID: 5256241502257323970}
   - component: {fileID: 2418000290312455934}
   m_Layer: 0
@@ -248,18 +247,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5256241502257323993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5256241502257323999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1860a52f4dfca4e4c99ebd11e3deb2ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!60 &5256241502257323970
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -330,9 +317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc89b14b300d56946b8a064db440f5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 0
   treasure: {fileID: 5920731980034095546}
-  powerUp: {fileID: 0}
+  powerUp: {fileID: 6577154827602510418, guid: 27b866cca7d92d248897f44ec3bd5176, type: 3}
 --- !u!1 &5920731980034095546
 GameObject:
   m_ObjectHideFlags: 0

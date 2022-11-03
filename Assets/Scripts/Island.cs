@@ -24,6 +24,10 @@ public class Island : MonoBehaviour
         {
 
             Instantiate(powerUp, treasure.GetComponent<Transform>().position, treasure.GetComponent<Transform>().rotation);
+
+
+
+
             treasure.transform.parent = null;
             Debug.Log("bababoi");
             gameObject.SetActive(false);

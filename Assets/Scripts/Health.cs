@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     private float health;
-    private float currentHealth;
+    public float currentHealth;
     private bool dead;
     private ShipManager shipManager;
 

@@ -16,10 +16,10 @@ public class Movement : MonoBehaviour
     private float smoothTurningFactor; //0.1
     private float smoothMovementFactor; //0.1
     private int gears; // 2
-    private float speed; //0.11
+    public float speed; //0.11
 
-    //Holder values
-    private float turnInputValue;
+//Holder values
+private float turnInputValue;
     private Vector3 turnDirection;
     private float currentTurnAcceleration;
     private float currentTurnValue;
