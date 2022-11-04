@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 275803821595653893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35363486, y: 0.35363486, z: 0.35363486}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -141,3 +141,6 @@ MonoBehaviour:
     m_Bits: 0
   m_MaxLifeTime: 3
   damage: 33.4
+  startMarker: {x: 0, y: 0, z: 0}
+  endMarker: {x: 0, y: 0, z: 0}
+  speed: 1

@@ -245,21 +245,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 726262251, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1597663325091702516, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1839021619665846558, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553736244253484406, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 726262246, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+      propertyPath: corners
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3685263541795606615, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
       propertyPath: m_Name
@@ -309,39 +297,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4797987322211426322, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: corners
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4797987322211426322, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
---- !u!1 &726262245 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 121773881, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
-  m_PrefabInstance: {fileID: 726262244}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &726262246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 726262245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf18be10cca54d25bcac094800443e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shooterPrefab: {fileID: 9153223935004835648, guid: 00bbda18870e2464ca0f0b0af82ed86c, type: 3}
-  endPoints: []
-  range: 10
-  corners: 5
-  shipSize: 2
-  maxAngle: 45
 --- !u!1 &1219518959
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects: []
   objectToPool: {fileID: 275803821595653893, guid: 1b87212972fd5ff48ad50c613a0c9f75, type: 3}
-  amountToPool: 40
+  amountToPool: 100
 --- !u!1 &1837403552
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,7 +818,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894485280}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
@@ -920,7 +877,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894485280}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c37e7e5eb9b14e2798715fde0b8ca44, type: 3}
   m_Name: 

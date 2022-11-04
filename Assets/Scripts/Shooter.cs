@@ -11,20 +11,7 @@ public class Shooter : MonoBehaviour
 
     public GameObject projectilePrefab;
 
-    // Time when the movement started.
-    private float startTime;
 
-    // Total distance between the markers.
-    private float journeyLength;
-
-    public Vector3 endMarker;
-
-    private Vector3 target;
-
-    public void Start()
-    {
-        
-    }
 
     public void Shoot(Vector3 target)
     {
@@ -34,10 +21,11 @@ public class Shooter : MonoBehaviour
         {
             canonball.transform.position = transform.position;
             canonball.transform.rotation = transform.rotation;
-            canonball.gameObject.SetActive(true);
             canonball.GetComponent<CanonBall>().Target = target;
+            canonball.gameObject.SetActive(true);
         }
         
+
 
 
     }
