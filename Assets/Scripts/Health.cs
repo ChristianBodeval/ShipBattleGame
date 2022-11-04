@@ -8,14 +8,13 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     private float health;
-    private float currentHealth;
+    public float currentHealth;
     private bool dead;
     private ShipManager shipManager;
 
     private void Start()
     {
-        shipManager = GetComponent<ShipManager>();
-        health = shipManager.Health;
+        
     }
     private void Update()
     {
@@ -26,6 +25,8 @@ public class Health : MonoBehaviour
     }
     private void OnEnable()
     {
+        shipManager = GetComponent<ShipManager>();
+        health = shipManager.Health;
         currentHealth = health;
         dead = false;
 

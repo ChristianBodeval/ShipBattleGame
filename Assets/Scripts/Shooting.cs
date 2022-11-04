@@ -25,7 +25,7 @@ public class Shooting : MonoBehaviour
     public float speed;
     public float knockbackForce = 2f;
     private bool isKnockbacked;
-    public float knockbackDistance = 2;
+    public float knockbackTime = 2;
     public float currentKnockBackForce;
     public float CannonBallScaleMultiplier { get => cannonBallScaleMultiplier; set => cannonBallScaleMultiplier = value; }
     public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
@@ -41,6 +41,8 @@ public class Shooting : MonoBehaviour
         UpdateValuesFromManager();
         sr = gameObject.AddComponent<SpriteRenderer>();
         playerRb = GetComponent<Rigidbody2D>();
+
+
     }
 
     void UpdateValuesFromManager()
@@ -56,15 +58,17 @@ public class Shooting : MonoBehaviour
     private void Update()
     {
 
-        currentKnockBackForce = Mathf.Lerp(currentKnockBackForce, 0, 0.001f);
-        if (isKnockbacked)
+        currentKnockBackForce = Mathf.Lerp(currentKnockBackForce, 0, 0.1f);
+        transform.Translate(currentKnockBackForce, 0f, 0f);
+
+        /*if (isKnockbacked)
         {                                                                           // If we are shooting, then call ShootLeft() and wait an amount equal to fireRate
             knockbackVelocity = transform.right;
             //playerRb.MovePosition(playerRb.position + knockbackVelocity * 20 * Time.fixedDeltaTime);
 
 
 
-        }
+        }*/
     }
 
 
@@ -125,7 +129,7 @@ public class Shooting : MonoBehaviour
         if (context.started && value < 0 && !isKnockbacked)
         {
             isKnockbacked = true;
-            Invoke("KnockbackOff", knockbackDistance);
+            Invoke("KnockbackOff", knockbackTime);
 
         }
     }
@@ -140,17 +144,9 @@ public class Shooting : MonoBehaviour
     {
         while (true)                                                                    // Uses a unending while loop to check if we are shooting throughout the
         {                                                                               // game
-           
-
-             
-
             if (isShootingLeft)
-            {                                                                           // If we are shooting, then call ShootLeft() and wait an amount equal to fireRate
-                if (isKnockbacked)
-                {
-                    currentKnockBackForce = 2;
-                    transform.Translate(currentKnockBackForce, 0f, 0f);
-                }
+            {     
+                currentKnockBackForce = knockbackForce;
                 ShootLeft();
 
                 yield return new WaitForSeconds(fireRateInSeconds);
@@ -158,7 +154,7 @@ public class Shooting : MonoBehaviour
             }
             else if (isShootingRight)
             {                                                // The same but for ShootRight();
-
+                currentKnockBackForce = -knockbackForce;
                 ShootRight();
                 yield return new WaitForSeconds(fireRateInSeconds);
 
@@ -169,6 +165,8 @@ public class Shooting : MonoBehaviour
                 yield return null;
         }
     }
+
     
+
 }
 

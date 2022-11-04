@@ -246,8 +246,8 @@ MonoBehaviour:
   knockbackVelocity: {x: 0, y: 0}
   damage: 25
   speed: 10
-  knockbackForce: 1
-  knockbackDistance: 1
+  knockbackForce: 0.2
+  knockbackTime: 1
   currentKnockBackForce: 0
 --- !u!114 &9179054856239917684
 MonoBehaviour:
@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1860a52f4dfca4e4c99ebd11e3deb2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
 --- !u!114 &3794120215085976867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,9 +279,9 @@ MonoBehaviour:
   turnAccelerationSpeed: 0.8
   smoothTurningFactor: 0.1
   smoothMovementFactor: 0.1
-  gears: 4
+  gears: 2
   speed: 0.11
-  health: 2000
+  health: 100
   cannonBallScaleMultiplier: 1
   fireRateInSeconds: 1
   cannonBallForce: 2
@@ -296,6 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192ddf6a37c35fc49bdb0bd62af52224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockBackMultiplier: 0.5
+  currentKnockBackMultiplier: 0
+  ballDirection: {x: 0, y: 0}
 --- !u!1001 &2149374170233691095
 PrefabInstance:
   m_ObjectHideFlags: 0
