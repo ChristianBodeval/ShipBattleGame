@@ -329,6 +329,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 121773881, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 121773883, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726262246, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+      propertyPath: corners
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1839021619665846558, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3685263541795606615, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
       propertyPath: m_Name
       value: Player
@@ -377,7 +393,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6561855051026742837, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6561855051026742839, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179054856239917684, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5565444406146598904, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+    - {fileID: 4797987322211426322, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+    - {fileID: 726262251, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+    - {fileID: 1597663325091702516, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+    - {fileID: 1839021619665846558, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+    - {fileID: 121773883, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
+    - {fileID: 6561855051026742839, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
 --- !u!1 &927959666
 GameObject:
@@ -813,6 +848,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406101965}
   m_CullTransparentMesh: 1
+--- !u!1 &1426580885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426580886}
+  - component: {fileID: 1426580887}
+  m_Layer: 0
+  m_Name: ProjectilePooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426580886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426580885}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.439588, y: -22.108105, z: -0.14566173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426580887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426580885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2bf5c202fd84a43875ff0d889cfcd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objects: []
+  objectToPool: {fileID: 275803821595653893, guid: 1b87212972fd5ff48ad50c613a0c9f75, type: 3}
+  amountToPool: 100
 --- !u!1 &1837403552
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +1013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1894485281
 MonoBehaviour:
   m_ObjectHideFlags: 0
