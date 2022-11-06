@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShooterGroup : MonoBehaviour
 {
-    GameObject[] canonGameObjects;
+    public GameObject[] canonGameObjects;
     public GameObject shooterPrefab;
     public Vector2[] endPoints;
     Vector2[] startPoints;
@@ -39,13 +39,6 @@ public class ShooterGroup : MonoBehaviour
         SetLinePoints(startPoints, endPoints);
         SpawnShooters(startPoints, endPoints);
         DestroyUnusedShooters();
-
-        if (Input.anyKeyDown)
-        {
-
-            //Tester - Should be called by the shooting
-            Fire();
-        }
     }
 
     //Sets points for the lines, which the shots will follow

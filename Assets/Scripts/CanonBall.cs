@@ -120,14 +120,14 @@ public class CanonBall : MonoBehaviour
 
         if (collision.gameObject.name != "Player" && collision.gameObject.name != "CanonBall(Clone)")
         {
-            return;
+            
         }
         
 
-        if (collision.gameObject.CompareTag("Player1"))
+        if (collision.gameObject.CompareTag(""))
         {
-            collision.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
-            Debug.Log("Took " + damage + " damage");
+            //collision.transform.gameObject.GetComponent<Health>().TakeDamage(damage);
+            //Debug.Log("Took " + damage + " damage");
         }
 
         // Rigidbody2D rigidbody2D = collision.GetComponent<Rigidbody2D>();
