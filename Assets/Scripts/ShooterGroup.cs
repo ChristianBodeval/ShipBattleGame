@@ -60,12 +60,12 @@ public class ShooterGroup : MonoBehaviour
         float currentPointDistance = 0 - (shipSize / 2);
         float currentAngle = 0 - (maxAngle / 2) + transform.rotation.eulerAngles.z;
 
-        if (corners == 1)
+        if(corners == 1)
         {
             currentPointDistance = 0;
             currentAngle = 0;
         }
-
+        
         for (int i = 0; i <= corners; i++)
         {
 
@@ -81,24 +81,24 @@ public class ShooterGroup : MonoBehaviour
             currentAngle += angleStep;
         }
 
-
+        
 
     }
 
     //Draws lines between startPoints and endPoints in Gizmo
     void OnDrawGizmosSelected()
     {
-        if (startPoints != null && endPoints != null)
-        {
-            if (startPoints.Length > 0 && endPoints.Length > 0)
+            if (startPoints != null && endPoints != null)
             {
+                if (startPoints.Length > 0 && endPoints.Length > 0)
+                {
 
                 for (int i = 0; i < corners; i++)
-                {
-                    Gizmos.DrawLine((Vector3)startPoints[i] + transform.position, (Vector3)endPoints[i] + transform.position);
+                    {
+                        Gizmos.DrawLine((Vector3)startPoints[i] + transform.position, (Vector3)endPoints[i] + transform.position);
+                    }
                 }
             }
-        }
     }
     //Fires the canons by iteration through all canons and shooting them at the target. 
     public void Fire()
@@ -112,8 +112,8 @@ public class ShooterGroup : MonoBehaviour
 
             shooterScript.Shoot(direction + canonGameObjects[i].transform.position);
         }
-
-    }
+        
+    }    
 
     //Spawn canons at startPoints and make them point towards endPoints.
     public void SpawnShooters(Vector2[] startPoints, Vector2[] endPoints)
