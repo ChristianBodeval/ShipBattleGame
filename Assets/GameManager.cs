@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
         p2.transform.rotation = spawn2.transform.rotation;
 
         //Set colors of the players
-        p1.GetComponent<SpriteRenderer>().color = player1Color;
-        p2.GetComponent<SpriteRenderer>().color = player2Color;
+//        p1.GetComponent<SpriteRenderer>().color = player1Color;
+//        p2.GetComponent<SpriteRenderer>().color = player2Color;
 
 
 

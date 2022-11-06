@@ -7,10 +7,11 @@ using System.Runtime.InteropServices;
 
 public class Shooting : MonoBehaviour
 {
+
     public PlayerInputActions inputActions;
     //public Rigidbody2D CannonBall;
-    public Transform[] FireTransformsLeft;                                                // Refers to the FireTransform that are attatched to the players left
-    public Transform[] FireTransformsRight;                                               // Refers to the FireTransform that are attatched to the players right
+    public ShooterGroup shooterGroupLeft;
+    public ShooterGroup shooterGroupRight;
     private bool isShootingLeft;                                                          // Tells if we are shooting left or not
     private bool isShootingRight;                                                         // Tells if we are shooting right or not
     public float fireRateInSeconds = 1f;                                                  // Firerate
@@ -61,7 +62,7 @@ public class Shooting : MonoBehaviour
     {
 
         currentKnockBackForce = Mathf.Lerp(currentKnockBackForce, 0, smoothKnockbackFactor);
-        transform.Translate(currentKnockBackForce, 0f, 0f);
+        transform.Translate(-currentKnockBackForce, 0f, 0f);
 
         /*if (isKnockbacked)
         {                                                                           // If we are shooting, then call ShootLeft() and wait an amount equal to fireRate
@@ -77,35 +78,12 @@ public class Shooting : MonoBehaviour
     //Instantiates a bullet and applies a force
     private void ShootLeft()
     {
-        // If ShootLeft() is called, then ShootCannon for all FireTransforms
-        foreach (var FireTransform in FireTransformsLeft)                                 // in FireTransformLEft
-        {
-            ShootCannon(FireTransform);
-        }
+        shooterGroupLeft.Fire();
     }
     private void ShootRight()
     {
-        // If Shoot() is called, then isShooting is true. aka we shoot
-        foreach (var FireTransform in FireTransformsRight)
-        {
-            ShootCannon(FireTransform);
-        }
+        shooterGroupRight.Fire();
     }
-    void ShootCannon(Transform FireTransform)
-    {
-
-        GameObject cannonBallInstance = Instantiate(                                       // Makes the variable  shellInstance equal to the instantiation of the 
-                                                    cannonballPrefab,                      // CannonBall Rigidbody with the position and rotation of FireTransform
-                                                    FireTransform.position,
-                                                    FireTransform.rotation);
-
-        cannonBallInstance.GetComponent<CanonBall>().SetVariables(damage, speed);
-
-    }
-
-
-
-
 
     //Called when fire key(s) is pressed
     public void OnFire(InputAction.CallbackContext context)
