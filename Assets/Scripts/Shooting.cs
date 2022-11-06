@@ -26,6 +26,8 @@ public class Shooting : MonoBehaviour
     public float knockbackForce = 2f;
     private bool isKnockbacked;
     public float knockbackTime = 2;
+    public float smoothKnockbackFactor;
+
     public float currentKnockBackForce;
     public float CannonBallScaleMultiplier { get => cannonBallScaleMultiplier; set => cannonBallScaleMultiplier = value; }
     public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
@@ -58,7 +60,7 @@ public class Shooting : MonoBehaviour
     private void Update()
     {
 
-        currentKnockBackForce = Mathf.Lerp(currentKnockBackForce, 0, 0.1f);
+        currentKnockBackForce = Mathf.Lerp(currentKnockBackForce, 0, smoothKnockbackFactor);
         transform.Translate(currentKnockBackForce, 0f, 0f);
 
         /*if (isKnockbacked)

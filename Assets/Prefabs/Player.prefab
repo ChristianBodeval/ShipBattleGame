@@ -248,6 +248,7 @@ MonoBehaviour:
   speed: 10
   knockbackForce: 0.2
   knockbackTime: 1
+  smoothKnockbackFactor: 0.01
   currentKnockBackForce: 0
 --- !u!114 &9179054856239917684
 MonoBehaviour:
@@ -354,6 +355,10 @@ PrefabInstance:
     - target: {fileID: 2149374170288342254, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
       propertyPath: m_Name
       value: CannonRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149374170288342254, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2149374171162342893, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
       propertyPath: m_LocalPosition.x
@@ -500,6 +505,10 @@ PrefabInstance:
     - target: {fileID: 2149374170288342254, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
       propertyPath: m_Name
       value: CannonLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149374170288342254, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2149374171162342893, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
       propertyPath: m_LocalPosition.x
