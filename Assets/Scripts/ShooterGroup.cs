@@ -12,22 +12,20 @@ public class ShooterGroup : MonoBehaviour
     public Vector2[] endPoints;
     Vector2[] startPoints;
 
-    [Range(1, 20)]
-    public float range;
 
-    [Range(1, 10)]
-    public int shooters;
-
-    [Range(1, 10)]
-    public float shipSize;
-
-    [Range(0, 180)]
-    public float maxAngle;
-
-    [Range(-2, 0)]
-    public float startCurve;
+    private float range;
+    private int shooters;
+    private float shipSize;
+    private float maxAngle;
+    private float startCurve;
 
     public bool isDrawingLines = true;
+
+    public float Range { get => range; set => range = value; }
+    public int Shooters { get => shooters; set => shooters = value; }
+    public float ShipSize { get => shipSize; set => shipSize = value; }
+    public float MaxAngle { get => maxAngle; set => maxAngle = value; }
+    public float StartCurve { get => startCurve; set => startCurve = value; }
 
     void Awake()
     {
@@ -100,8 +98,9 @@ public class ShooterGroup : MonoBehaviour
     //Fires the canons by iteration through all canons and shooting them at the target. 
     public void Fire(float projectileSpeed, float totalDamage)
     {
-        for (int i = 0; i < canonGameObjects.Length; i++)
+        for (int i = 0; i < shooters; i++)
         {
+
             Shooter shooterScript = canonGameObjects[i].GetComponent<Shooter>();
             Vector3 position = canonGameObjects[i].transform.position;
             Vector3 direction = endPoints[i] - startPoints[i] + (Vector2)canonGameObjects[i].transform.position; //TODO Kan dette skrives kun med endPoints?
@@ -132,11 +131,12 @@ public class ShooterGroup : MonoBehaviour
             GameObject canonClone;
             canonClone = Instantiate(shooterPrefab, (Vector3)startPoints[i] + transform.position, rotation);
 
-            canonClone.transform.parent = gameObject.transform;
+            //canonClone.transform.parent = gameObject.transform;
             canonGameObjects[i] = canonClone;
         }
 
     }
+
 
     //Check for the current size of corner, if corners is reduced in the inspecter, canons will still be left. Delete them. 
     void DestroyUnusedShooters()
@@ -149,6 +149,7 @@ public class ShooterGroup : MonoBehaviour
             }
         }
     }
+
     //Helper function to get an angle from any vector
     public static float GetAngleFromVector(Vector3 dir)
     {

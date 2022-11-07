@@ -35,13 +35,29 @@ public class ShipManager : MonoBehaviour
     private float knockbackValue;
     [SerializeField]
     private float smoothKnockbackFactor;
+    [Header("ShooterGroup")]
+    [Range(1, 20)]
+    public float range;
 
+    [Range(1, 10)]
+    public int shooters;
+
+    [Range(1, 10)]
+    public float shipSize;
+
+    [Range(0, 180)]
+    public float maxAngle;
+
+    [Range(-2, 0)]
+    public float startCurve;
 
 
     private Health healthScript;
     private Movement movementScript;
     private Shooting shootingScript;
     private Knockback knockbackScript;
+
+    private ShooterGroup[] shooterGroups; 
 
     private void Awake()
     {
@@ -50,22 +66,36 @@ public class ShipManager : MonoBehaviour
         shootingScript = GetComponent<Shooting>();
         knockbackScript = GetComponent<Knockback>();
         healthScript.StartingHealth = startingHealth;
+        shooterGroups = GetComponentsInChildren<ShooterGroup>();
     }
 
     void UpdateValues()
     {
-        healthScript.StartingHealth = startingHealth;
+        //Movement
         movementScript.MaxTurnSpeed = maxTurnSpeed;
         movementScript.TurnAcceleration = turnAcceleration;
         movementScript.SmoothMovementFactor = smoothMovementFactor;
         movementScript.SmoothTurningFactor = smoothTurningFactor;
         movementScript.NumberOfGears = numberOfGears;
         movementScript.MaxMovementSpeed = maxMovementSpeed;
+        //Health
+        healthScript.StartingHealth = startingHealth;
+        //Shooting
         shootingScript.FireRateInSeconds = fireRateInSeconds;
         shootingScript.ProjectileSpeed = projectileSpeed;
         shootingScript.TotalDamage = totalDamage;
+        //Knockback
         knockbackScript.KnockbackValue = knockbackValue;
         knockbackScript.SmoothKnockbackFactor = smoothKnockbackFactor;
+        //ShootingGroup e.g ConeShooting
+        foreach (ShooterGroup s in shooterGroups)
+        {
+            s.Range = range;
+            s.Shooters = shooters;
+            s.ShipSize = shipSize;
+            s.MaxAngle = maxAngle;
+            s.StartCurve = startCurve;
+        }
     }
 
     void Update()

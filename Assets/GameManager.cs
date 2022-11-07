@@ -9,13 +9,10 @@ public class GameManager : MonoBehaviour
 {
     public Color player1Color = Color.red;
     public Color player2Color = Color.blue;
-    public GameObject playerPrefab;
+    public GameObject player1Prefab;
+    public GameObject player2Prefab;
     
-
     public static GameManager instance; //Singleton
-
-    public ShipManager player1ShipManager;
-    public ShipManager player2ShipManager;
 
     public Transform spawn1;
     public Transform spawn2;
@@ -32,8 +29,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
 
-        var p1 = PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
-        var p2 = PlayerInput.Instantiate(playerPrefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
+        var p1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
+        var p2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
 
         //Set the two players
         players.Add(p1.gameObject);
@@ -44,12 +41,6 @@ public class GameManager : MonoBehaviour
         p1.transform.rotation = spawn1.transform.rotation;
         p2.transform.position = spawn2.transform.position;
         p2.transform.rotation = spawn2.transform.rotation;
-
-        //Set colors of the players
-//        p1.GetComponent<SpriteRenderer>().color = player1Color;
-//        p2.GetComponent<SpriteRenderer>().color = player2Color;
-
-
 
         //Make them teleportable
         TeleportManager.instance.AddTeleportable(p1.gameObject);

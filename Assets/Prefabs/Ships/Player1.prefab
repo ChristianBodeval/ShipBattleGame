@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 55141b080c67342a3a69e46ae465b985, type: 3}
-  m_Color: {r: 0.9433962, g: 0.54804456, b: 0.40494838, a: 1}
+  m_Color: {r: 0.9811321, g: 0.43098018, b: 0.36561054, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 3794120215085976867}
   - component: {fileID: 855461067}
   m_Layer: 0
-  m_Name: Player2
+  m_Name: Player1
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -253,7 +253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19724f6be3e34e03ac622c093e1d770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRb: {fileID: 0}
   playerPrefab: {fileID: 3685263541795606615}
   shipManager: {fileID: 3794120215085976867}
 --- !u!114 &-7976377503517882532
@@ -270,7 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooterGroupLeft: {fileID: 726262246}
   shooterGroupRight: {fileID: 1062078226}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 275803821595653893, guid: 5f501533e8219814a8dea60ed0e89225, type: 3}
+  knockbackScript: {fileID: 0}
   knockbackForce: 0.2
   smoothKnockbackFactor: 0.1
 --- !u!114 &9179054856239917684
@@ -299,16 +299,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Instance: {fileID: 0}
-  maxTurnSpeed: 1
-  turnAcceleration: 0.5
-  smoothTurningFactor: 0.01
-  smoothMovementFactor: 1
+  maxTurnSpeed: 0.4
+  turnAcceleration: 0.4
+  smoothTurningFactor: 0.1
+  smoothMovementFactor: 0.05
   numberOfGears: 2
-  maxMovementSpeed: 0.5
-  startingHealth: 0
-  cannonBallScaleMultiplier: 1
+  maxMovementSpeed: 0.1
+  startingHealth: 100
   fireRateInSeconds: 1
-  cannonBallForce: 2
+  totalDamage: 50
+  projectileSpeed: 5
+  knockbackValue: 0.15
+  smoothKnockbackFactor: 0.1
+  range: 8.9
+  shooters: 10
+  shipSize: 4.2
+  maxAngle: 107
+  startCurve: -0.23
 --- !u!114 &855461067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,9 +328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192ddf6a37c35fc49bdb0bd62af52224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackMultiplier: 0.5
-  currentKnockBackMultiplier: 0
-  ballDirection: {x: 0, y: 0}
+  knockbackValue: 0
+  currentKnockBackValue: 0
+  direction: {x: 0, y: 0, z: 0}
 --- !u!1001 &2149374170233691095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -437,6 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf18be10cca54d25bcac094800443e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootersTotalDamage: 0
   canonGameObjects: []
   shooterPrefab: {fileID: 9153223935004835648, guid: 00bbda18870e2464ca0f0b0af82ed86c, type: 3}
   endPoints:
@@ -452,11 +460,6 @@ MonoBehaviour:
   - {x: 8.500463, y: 6.5889673}
   - {x: 8.558441, y: 6.4508195}
   - {x: 0, y: 0}
-  range: 10
-  corners: 6
-  shipSize: 3
-  maxAngle: 45
-  startCurve: -0.17
   isDrawingLines: 1
 --- !u!4 &121773882 stripped
 Transform:
@@ -572,6 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf18be10cca54d25bcac094800443e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootersTotalDamage: 0
   canonGameObjects: []
   shooterPrefab: {fileID: 9153223935004835648, guid: 00bbda18870e2464ca0f0b0af82ed86c, type: 3}
   endPoints:
@@ -587,11 +591,6 @@ MonoBehaviour:
   - {x: 8.500463, y: 6.5889673}
   - {x: 8.558441, y: 6.4508195}
   - {x: 0, y: 0}
-  range: 10
-  corners: 6
-  shipSize: 3
-  maxAngle: 45
-  startCurve: -0.17
   isDrawingLines: 1
 --- !u!4 &6561855051026742838 stripped
 Transform:

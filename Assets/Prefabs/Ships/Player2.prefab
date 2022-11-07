@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 55141b080c67342a3a69e46ae465b985, type: 3}
-  m_Color: {r: 0.9811321, g: 0.43098018, b: 0.36561054, a: 1}
+  m_Color: {r: 0.36470586, g: 0.98039216, b: 0.4828477, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 3794120215085976867}
   - component: {fileID: 855461067}
   m_Layer: 0
-  m_Name: Player1
+  m_Name: Player2
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 3685263541795606615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0783, y: 0.4436, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.49, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 121773882}
@@ -308,9 +308,14 @@ MonoBehaviour:
   startingHealth: 100
   fireRateInSeconds: 1
   totalDamage: 50
-  projectileSpeed: 3
+  projectileSpeed: 5
   knockbackValue: 0.15
   smoothKnockbackFactor: 0.1
+  range: 15.9
+  shooters: 3
+  shipSize: 1.5
+  maxAngle: 0
+  startCurve: -0.49
 --- !u!114 &855461067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,11 +460,6 @@ MonoBehaviour:
   - {x: 8.500463, y: 6.5889673}
   - {x: 8.558441, y: 6.4508195}
   - {x: 0, y: 0}
-  range: 10
-  shooters: 0
-  shipSize: 3
-  maxAngle: 45
-  startCurve: -0.17
   isDrawingLines: 1
 --- !u!4 &121773882 stripped
 Transform:
@@ -591,11 +591,6 @@ MonoBehaviour:
   - {x: 8.500463, y: 6.5889673}
   - {x: 8.558441, y: 6.4508195}
   - {x: 0, y: 0}
-  range: 10
-  shooters: 0
-  shipSize: 3
-  maxAngle: 45
-  startCurve: -0.17
   isDrawingLines: 1
 --- !u!4 &6561855051026742838 stripped
 Transform:
