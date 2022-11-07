@@ -1,9 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Whirlpool : MonoBehaviour
+
+public class Whirlpool1 : MonoBehaviour
 {
     public float pullForce;
     public float rotationSpeed;
@@ -20,20 +21,23 @@ public class Whirlpool : MonoBehaviour
     {
         spriteHolderTransform.Rotate(new Vector3(0, 0, -rotationSpeed) * Time.deltaTime); //Rotates GameObject of the sprite
     }
-    
+
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.GetComponent<ShipManager>())
+        {
             //Moves player towards the center of the circleCollider2D based how close the player is to the center. 
             float colliderRadius = circleCollider2D.radius;
             Vector3 vectorToPlayer = transform.position - collision.gameObject.transform.position;
             float distance = vectorToPlayer.magnitude;
-            
+
             float step = MathF.Abs(colliderRadius - distance) / colliderRadius * 0.5f; //Step distance based on radius of collider and distance to player. The closer the player is the more drag.
 
-            if(distance > 0.001f) //Do only when player is at the center approx.
+            if (distance > 0.001f) //Do only when player is at the center approx.
             {
                 collision.transform.position = Vector3.MoveTowards(collision.transform.position, transform.position, step * pullForce * Time.deltaTime);
             }
+        }
 
     }
 }

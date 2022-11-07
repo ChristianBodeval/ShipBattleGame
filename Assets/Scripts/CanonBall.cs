@@ -74,8 +74,13 @@ public class CanonBall : MonoBehaviour
 
         if (collision.GetComponent<Health>() && shotBy != collision.gameObject)
         {
-            Debug.Log("Called");
             collision.GetComponent<Health>().TakeDamage(damage);
+            gameObject.SetActive(false);
+        }
+
+        if (collision.GetComponent<IslandHealth>() && shotBy != collision.gameObject)
+        {
+            collision.GetComponent<IslandHealth>().TakeDamage(damage);
             gameObject.SetActive(false);
         }
 
