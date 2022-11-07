@@ -34,6 +34,7 @@ public class PowerUpSpawner : MonoBehaviour
 
     private void Start()
     {
+
         SpawnRandom();
     }
 }
