@@ -7,27 +7,22 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    private float health;
+    private float startingHealth;
     public float currentHealth;
     private bool dead;
     private ShipManager shipManager;
 
+    //Accessor
+    public float StartingHealth { get => startingHealth; set => startingHealth = value; }
+
     private void Start()
     {
         
+        currentHealth = startingHealth;
     }
-    private void Update()
-    {
-        Debug.Log("current health "+ health);
 
-        if(!dead)
-            Debug.Log("im not dead weee");
-    }
     private void OnEnable()
     {
-        shipManager = GetComponent<ShipManager>();
-        health = shipManager.Health;
-        currentHealth = health;
         dead = false;
 
     }
@@ -36,6 +31,8 @@ public class Health : MonoBehaviour
     {
         // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
         currentHealth -= amount;
+
+        Debug.Log("Took: " + amount + " damage");
 
         if (currentHealth <= 0f && !dead)
         {

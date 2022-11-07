@@ -13,31 +13,21 @@ public class TeleportManager : MonoBehaviour
     public static TeleportManager instance; //Singleton - used in CanonBall
 
     
-    float mapH; //Size on Y-axis. Depended on camera size
-    float mapL; ////Size on X-axis. Depended on camera size
+    public float mapH; //Size on Y-axis. Depended on camera size
+    public float mapL; ////Size on X-axis. Depended on camera size
     Camera camera;
     float halfViewport;
 
     private void Awake()
     {
         instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         //Gets mapL and mapH from the screen size.
         camera = UnityEngine.Camera.main;
         halfViewport = camera.orthographicSize * camera.aspect;
-
         mapL = halfViewport * 2;
         mapH = camera.orthographicSize * 2;
-
         //Adds object who should be teleported when hitting border.
         objectsToTeleport.AddRange(GameObject.FindGameObjectsWithTag("Players"));
-
-
-
     }
 
     public void AddTeleportable(GameObject obj)

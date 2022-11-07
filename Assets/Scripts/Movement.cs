@@ -6,18 +6,17 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-    public Rigidbody2D playerRb;
     public GameObject playerPrefab;
     public ShipManager shipManager;
 
     //All the following values are public, so i makes it easier to test in the inspector
     //Values which have an impact on the movement
-    private float maxAcceleration; // 1.5
-    private float turnAccelerationSpeed; // 0.8
+    private float maxTurnSpeed; // 1.5
+    private float turnAcceleration; // 0.8
     private float smoothTurningFactor; //0.1
     private float smoothMovementFactor; //0.1
-    private int gears; // 2
-    private float speed; //0.11
+    private int numberOfGears; // 2
+    private float maxMovementSpeed; //0.11
 
     //Holder values
     private float turnInputValue;
@@ -27,21 +26,19 @@ public class Movement : MonoBehaviour
     private float currentMoveValue;
     private int currentGear; //The current gear
 
+    //Accessor values
+    public float MaxTurnSpeed { get => maxTurnSpeed; set => maxTurnSpeed = value; }
+    public float TurnAcceleration { get => turnAcceleration; set => turnAcceleration = value; }
+    public float SmoothTurningFactor { get => smoothTurningFactor; set => smoothTurningFactor = value; }
+    public float SmoothMovementFactor { get => smoothMovementFactor; set => smoothMovementFactor = value; }
+    public int NumberOfGears { get => numberOfGears; set => numberOfGears = value; }
+    public float MaxMovementSpeed { get => maxMovementSpeed; set => maxMovementSpeed = value; }
 
-    void UpdateValuesFromManager()
-    {
-        maxAcceleration = shipManager.MaxAcceleration;
-        turnAccelerationSpeed = shipManager.TurnAccelerationSpeed;
-        smoothTurningFactor = shipManager.SmoothMovementFactor;
-        smoothMovementFactor = shipManager.SmoothTurningFactor;
-        gears = shipManager.Gears;
-        speed = shipManager.Speed;
-    }
+    
 
     private void Start()
     {
         shipManager = GetComponent<ShipManager>();
-        UpdateValuesFromManager();
     }
 
     // Update is called once per frame
@@ -58,7 +55,7 @@ public class Movement : MonoBehaviour
         float value = context.ReadValue<float>();
 
         //Increases or decreases gear
-        if (currentGear < gears-1)
+        if (currentGear < numberOfGears-1)
         {
             if (value > 0)
                 currentGear++;
@@ -76,7 +73,7 @@ public class Movement : MonoBehaviour
     {
         //Smoothly change the turnValue to the inputValue
         currentMoveValue = Mathf.Lerp(currentMoveValue, currentGear, smoothMovementFactor);
-        transform.Translate(0f, currentMoveValue * speed, 0f);
+        transform.Translate(0f, currentMoveValue * maxMovementSpeed, 0f);
 
     }
 
@@ -94,13 +91,13 @@ public class Movement : MonoBehaviour
         //Is player turning, then accelerate turning, since input value is either 1 or -1
         if (currentTurnValue != 0)
         {
-            if (currentTurnAcceleration < maxAcceleration)
-                currentTurnAcceleration += turnAccelerationSpeed;
+            if (currentTurnAcceleration < maxTurnSpeed)
+                currentTurnAcceleration += turnAcceleration;
         }
         // If not turning, then deaccelerate turning
         else if (currentTurnAcceleration > 0)
         {
-            currentTurnAcceleration -= turnAccelerationSpeed;
+            currentTurnAcceleration -= turnAcceleration;
         }
         //When acceleration goes negative, set i to 0
         else if (currentTurnAcceleration <= 0)

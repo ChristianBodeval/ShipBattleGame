@@ -13,15 +13,22 @@ public class Shooter : MonoBehaviour
 
 
 
-    public void Shoot(Vector3 target)
+    public void Shoot(GameObject shotBy, Vector3 target, float speed, float damage)
     {
         
         GameObject canonball = ProjectilePooler.SharedInstance.GetPooledObject();
         if (canonball != null)
         {
+            CanonBall projectileScript = canonball.GetComponent<CanonBall>();
             canonball.transform.position = transform.position;
             canonball.transform.rotation = transform.rotation;
-            canonball.GetComponent<CanonBall>().Target = target;
+            
+
+            projectileScript.TargetPosition = target;
+            projectileScript.Damage = damage;
+            projectileScript.ProjectileSpeed = speed;
+            projectileScript.ShotBy = shotBy;
+            
             canonball.gameObject.SetActive(true);
         }
         

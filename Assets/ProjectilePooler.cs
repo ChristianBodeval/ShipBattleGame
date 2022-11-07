@@ -31,6 +31,7 @@ public class ProjectilePooler : MonoBehaviour
         {
             tmp = Instantiate(objectToPool);
             objects.Add(tmp);
+    
             tmp.SetActive(false);
         }
     }
