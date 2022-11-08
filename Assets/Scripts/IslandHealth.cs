@@ -15,7 +15,7 @@ public class IslandHealth : Health
     }
     public override void OnDeath ()
     {
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Debug.Log("Called");
             Instantiate(powerUp, treasure.GetComponent<Transform>().position, treasure.GetComponent<Transform>().rotation);
@@ -23,8 +23,6 @@ public class IslandHealth : Health
             treasure.transform.parent = null;
             gameObject.SetActive(false);
             treasure.SetActive(false);
-
-
         }
     }
 

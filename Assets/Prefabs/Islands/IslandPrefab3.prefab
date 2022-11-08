@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2598755149825388880}
-  m_LocalRotation: {x: 0.012408137, y: -0.0031398511, z: -0.0058974847, w: 0.99990076}
-  m_LocalPosition: {x: 0.542, y: 0.056, z: 1.105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc89b14b300d56946b8a064db440f5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  startingHealth: 10
+  currentHealth: 0
   treasure: {fileID: 2598755149825388880}
   powerUp: {fileID: 6577154827602510418, guid: 27b866cca7d92d248897f44ec3bd5176, type: 3}

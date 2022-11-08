@@ -101,6 +101,8 @@ GameObject:
   - component: {fileID: 9179054856239917684}
   - component: {fileID: 3794120215085976867}
   - component: {fileID: 855461067}
+  - component: {fileID: 1837952668997005173}
+  - component: {fileID: 8050088862250154163}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player1
@@ -285,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1860a52f4dfca4e4c99ebd11e3deb2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 0
   currentHealth: 0
 --- !u!114 &3794120215085976867
 MonoBehaviour:
@@ -299,18 +302,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Instance: {fileID: 0}
-  maxTurnSpeed: 0.4
-  turnAcceleration: 0.4
+  maxTurnSpeed: 0.8
+  turnAcceleration: 0.6
   smoothTurningFactor: 0.1
   smoothMovementFactor: 0.05
   numberOfGears: 2
-  maxMovementSpeed: 0.1
+  maxMovementSpeed: 0.12
   startingHealth: 100
+  currentHealth: 10
   fireRateInSeconds: 1
   totalDamage: 50
   projectileSpeed: 5
   knockbackValue: 0.15
   smoothKnockbackFactor: 0.1
+  rammingDamage: 50
   range: 15.9
   shooters: 3
   shipSize: 1.5
@@ -331,6 +336,44 @@ MonoBehaviour:
   knockbackValue: 0
   currentKnockBackValue: 0
   direction: {x: 0, y: 0, z: 0}
+--- !u!61 &1837952668997005173
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685263541795606615}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 3.3460908}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.3127184}
+  m_EdgeRadius: 0
+--- !u!114 &8050088862250154163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685263541795606615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a49d140713f544d6948422b296b3983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2149374170233691095
 PrefabInstance:
   m_ObjectHideFlags: 0
