@@ -131,7 +131,7 @@ public class ShooterGroup : MonoBehaviour
             GameObject canonClone;
             canonClone = Instantiate(shooterPrefab, (Vector3)startPoints[i] + transform.position, rotation);
 
-            //canonClone.transform.parent = gameObject.transform;
+            canonClone.transform.parent = gameObject.transform;
             canonGameObjects[i] = canonClone;
         }
 

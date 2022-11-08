@@ -17,7 +17,7 @@ public class IslandHealth : Health
     {
         if (CurrentHealth <= 0)
         {
-            Debug.Log("Called");
+            Debug.Log("Island Dead");
             Instantiate(powerUp, treasure.GetComponent<Transform>().position, treasure.GetComponent<Transform>().rotation);
 
             treasure.transform.parent = null;

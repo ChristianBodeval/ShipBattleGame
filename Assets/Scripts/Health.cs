@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     public float currentHealth;
     private bool dead;
     private ShipManager shipManager;
+    public GameObject powerUpH;
 
     //Accessor
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
@@ -40,9 +41,11 @@ public class Health : MonoBehaviour
 
     public virtual void OnDeath()
     {
-        Debug.Log("DIED!");
         dead = true;
         gameObject.SetActive(false);
+
+        Instantiate(powerUpH, transform.position, transform.rotation);
+                Debug.Log("DIED!");
        
     }
 }

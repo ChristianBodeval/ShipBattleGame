@@ -31,7 +31,7 @@ public class ProjectilePooler : MonoBehaviour
         {
             tmp = Instantiate(objectToPool);
             objects.Add(tmp);
-    
+            tmp.transform.parent = gameObject.transform;
             tmp.SetActive(false);
         }
     }

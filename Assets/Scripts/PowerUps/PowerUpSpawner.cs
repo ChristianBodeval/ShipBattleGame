@@ -30,8 +30,7 @@ public class PowerUpSpawner : MonoBehaviour
                 break;
             case Type.Speed:
                 randomPowerUp = Instantiate(powerUpS, transform.position, transform.rotation);
-
-                break;
+                break;  
         }
     }
 
