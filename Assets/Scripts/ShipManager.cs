@@ -23,6 +23,8 @@ public class ShipManager : MonoBehaviour
     [Header("Health")]
     [SerializeField]
     private float startingHealth; //100
+    [SerializeField]
+    private float currentHealth;
     [Header("Shooting")]
     [SerializeField]
     private float fireRateInSeconds;          // 1                                     // Firerate
@@ -35,7 +37,11 @@ public class ShipManager : MonoBehaviour
     private float knockbackValue;
     [SerializeField]
     private float smoothKnockbackFactor;
+    [Header("Ramming")]
+    [SerializeField]
+    private float rammingDamage;
     [Header("ShooterGroup")]
+    [SerializeField]
     [Range(1, 20)]
     public float range;
 
@@ -56,8 +62,13 @@ public class ShipManager : MonoBehaviour
     private Movement movementScript;
     private Shooting shootingScript;
     private Knockback knockbackScript;
+    private Ramming rammingScript;
 
-    private ShooterGroup[] shooterGroups; 
+    private ShooterGroup[] shooterGroups;
+
+    public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
+    public float TotalDamage { get => totalDamage; set => totalDamage = value; }
+    public float MaxMovementSpeed { get => maxMovementSpeed; set => maxMovementSpeed = value; }
 
     private void Awake()
     {
@@ -65,8 +76,11 @@ public class ShipManager : MonoBehaviour
         movementScript = GetComponent<Movement>();
         shootingScript = GetComponent<Shooting>();
         knockbackScript = GetComponent<Knockback>();
-        healthScript.StartingHealth = startingHealth;
+        rammingScript = GetComponent<Ramming>();
         shooterGroups = GetComponentsInChildren<ShooterGroup>();
+        healthScript.StartingHealth = startingHealth;
+        healthScript.CurrentHealth = startingHealth;
+        CurrentHealth = startingHealth;
     }
 
     void UpdateValues()
@@ -79,11 +93,15 @@ public class ShipManager : MonoBehaviour
         movementScript.NumberOfGears = numberOfGears;
         movementScript.MaxMovementSpeed = maxMovementSpeed;
         //Health
-        healthScript.StartingHealth = startingHealth;
+        healthScript.CurrentHealth = currentHealth;
+        rammingScript.RammingDamage = rammingDamage;
         //Shooting
         shootingScript.FireRateInSeconds = fireRateInSeconds;
         shootingScript.ProjectileSpeed = projectileSpeed;
         shootingScript.TotalDamage = totalDamage;
+
+        //Ramming
+        rammingScript.RammingDamage = rammingDamage;
         //Knockback
         knockbackScript.KnockbackValue = knockbackValue;
         knockbackScript.SmoothKnockbackFactor = smoothKnockbackFactor;
@@ -97,6 +115,8 @@ public class ShipManager : MonoBehaviour
             s.StartCurve = startCurve;
         }
     }
+
+    
 
     void Update()
     {

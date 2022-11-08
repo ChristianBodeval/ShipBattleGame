@@ -14,12 +14,9 @@ public class Health : MonoBehaviour
 
     //Accessor
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
+    public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
-    private void Start()
-    {
-        
-        currentHealth = startingHealth;
-    }
+    
 
     private void OnEnable()
     {

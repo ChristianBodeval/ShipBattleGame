@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 50
+  isPositive: 1
+  duration: 0
+  powerUpType: 0
 --- !u!58 &6977472321463549768
 CircleCollider2D:
   m_ObjectHideFlags: 0

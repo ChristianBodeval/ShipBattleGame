@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class PowerUpSpawner : MonoBehaviour
 {
-    public int rando;
+    public Type random;
     public enum Type {Health , Attack , Speed, NumberOfTypes };
 
     public GameObject powerUpH;
@@ -15,26 +15,33 @@ public class PowerUpSpawner : MonoBehaviour
 
     void SpawnRandom()
     {
-        Type rando = (Type)Random.Range(0, (int)Type.NumberOfTypes);
-        
 
-        switch (rando)
+        random = (Type)Random.Range(0, (int)Type.NumberOfTypes);
+
+        GameObject randomPowerUp;
+
+        switch (random)
         {
             case Type.Health:
-                Instantiate(powerUpH, transform.position, transform.rotation);
+                randomPowerUp = Instantiate(powerUpH, transform.position, transform.rotation);
                 break;
             case Type.Attack:
-                Instantiate(powerUpA, transform.position, transform.rotation);
+                randomPowerUp = Instantiate(powerUpA, transform.position, transform.rotation);
                 break;
             case Type.Speed:
-                Instantiate(powerUpS, transform.position, transform.rotation);
+                randomPowerUp = Instantiate(powerUpS, transform.position, transform.rotation);
+
                 break;
         }
     }
+
+    
 
     private void Start()
     {
 
         SpawnRandom();
     }
+
+    
 }
