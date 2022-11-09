@@ -94,14 +94,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3685263541795606619}
   - component: {fileID: 3685263541795606613}
+  - component: {fileID: 3794120215085976867}
+  - component: {fileID: 710602871}
   - component: {fileID: 3685263541795606612}
   - component: {fileID: 3685263541795606622}
   - component: {fileID: 3685263541795606623}
   - component: {fileID: -7976377503517882532}
   - component: {fileID: 9179054856239917684}
-  - component: {fileID: 3794120215085976867}
   - component: {fileID: 855461067}
-  - component: {fileID: 710602871}
   - component: {fileID: 710602870}
   m_Layer: 0
   m_Name: Player1
@@ -149,6 +149,64 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3794120215085976867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685263541795606615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042132e9a4c464514b9400d4e385e533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Instance: {fileID: 0}
+  maxTurnSpeed: 0.4
+  turnAcceleration: 0.4
+  smoothTurningFactor: 0.1
+  smoothMovementFactor: 0.05
+  numberOfGears: 2
+  maxMovementSpeed: 0.1
+  startingHealth: 100
+  currentHealth: 0
+  fireRateInSeconds: 1
+  totalDamage: 50
+  projectileSpeed: 5
+  knockbackValue: 0.15
+  smoothKnockbackFactor: 0.1
+  rammingDamage: 50
+  range: 8.9
+  shooters: 10
+  shipSize: 4.2
+  maxAngle: 107
+  startCurve: -0.23
+--- !u!61 &710602871
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685263541795606615}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 3.3460908}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.3127184}
+  m_EdgeRadius: 0
 --- !u!70 &3685263541795606612
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -290,38 +348,6 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 100
   powerUpH: {fileID: 0}
---- !u!114 &3794120215085976867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685263541795606615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042132e9a4c464514b9400d4e385e533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Instance: {fileID: 0}
-  maxTurnSpeed: 0.4
-  turnAcceleration: 0.4
-  smoothTurningFactor: 0.1
-  smoothMovementFactor: 0.05
-  numberOfGears: 2
-  maxMovementSpeed: 0.1
-  startingHealth: 100
-  currentHealth: 0
-  fireRateInSeconds: 1
-  totalDamage: 50
-  projectileSpeed: 5
-  knockbackValue: 0.15
-  smoothKnockbackFactor: 0.1
-  rammingDamage: 50
-  range: 8.9
-  shooters: 10
-  shipSize: 4.2
-  maxAngle: 107
-  startCurve: -0.23
 --- !u!114 &855461067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,32 +363,6 @@ MonoBehaviour:
   knockbackValue: 0
   currentKnockBackValue: 0
   direction: {x: 0, y: 0, z: 0}
---- !u!61 &710602871
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685263541795606615}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 3.3460908}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.3127184}
-  m_EdgeRadius: 0
 --- !u!114 &710602870
 MonoBehaviour:
   m_ObjectHideFlags: 0
