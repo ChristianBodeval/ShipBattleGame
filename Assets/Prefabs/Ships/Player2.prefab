@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 0
   currentHealth: 0
+  powerUpH: {fileID: 0}
 --- !u!114 &3794120215085976867
 MonoBehaviour:
   m_ObjectHideFlags: 0
