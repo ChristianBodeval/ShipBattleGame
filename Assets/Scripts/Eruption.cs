@@ -25,7 +25,7 @@ public class Eruption : MonoBehaviour
         }
         if (collision.gameObject.GetComponent<ShipManager>())
         {
-
+            int a = 1;
         }
     }
 }

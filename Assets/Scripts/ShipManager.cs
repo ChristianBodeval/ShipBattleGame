@@ -63,6 +63,7 @@ public class ShipManager : MonoBehaviour
     private Shooting shootingScript;
     private Knockback knockbackScript;
     private Ramming rammingScript;
+    private AudioSource audioSource;
 
     private ShooterGroup[] shooterGroups;
 
@@ -81,6 +82,8 @@ public class ShipManager : MonoBehaviour
         healthScript.StartingHealth = startingHealth;
         healthScript.CurrentHealth = startingHealth;
         CurrentHealth = startingHealth;
+        
+        audioSource = GetComponent<AudioSource>();
     }
 
     void UpdateValues()
@@ -116,7 +119,12 @@ public class ShipManager : MonoBehaviour
         }
     }
 
-    
+  if (gameObject.GetComponent<Movement>().currentMoveValue != 0)
+        {
+        audioSource.Play();
+        }
+
+
 
     void Update()
     {
