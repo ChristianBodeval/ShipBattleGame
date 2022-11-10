@@ -69,6 +69,7 @@ public class ShipManager : MonoBehaviour
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public float TotalDamage { get => totalDamage; set => totalDamage = value; }
     public float MaxMovementSpeed { get => maxMovementSpeed; set => maxMovementSpeed = value; }
+    public float StartingHealth { get => startingHealth; set => startingHealth = value; }
 
     private void Awake()
     {
@@ -93,7 +94,6 @@ public class ShipManager : MonoBehaviour
         movementScript.NumberOfGears = numberOfGears;
         movementScript.MaxMovementSpeed = maxMovementSpeed;
         //Health
-        healthScript.CurrentHealth = currentHealth;
         rammingScript.RammingDamage = rammingDamage;
         //Shooting
         shootingScript.FireRateInSeconds = fireRateInSeconds;
@@ -120,6 +120,8 @@ public class ShipManager : MonoBehaviour
 
     void Update()
     {
+        currentHealth = healthScript.CurrentHealth;
+
         UpdateValues();
     }
 }

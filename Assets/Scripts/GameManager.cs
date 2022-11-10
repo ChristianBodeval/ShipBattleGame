@@ -1,18 +1,31 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public sealed class GameManager : MonoBehaviour
 {
     public Color player1Color = Color.red;
     public Color player2Color = Color.blue;
     public GameObject player1Prefab;
     public GameObject player2Prefab;
     
-    public static GameManager instance; //Singleton
+    private static GameManager instance; //Singleton
+
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.Log("Gamemanger is null");
+            }
+            return instance;
+        }
+    }
 
     public Transform spawn1;
     public Transform spawn2;
@@ -20,17 +33,17 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> players = new List<GameObject>();
 
-    private void Start()
-    {
-        
-    }
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
+        instance = this;
+
 
         var p1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
         var p2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
+
+
 
         //Set the two players
         players.Add(p1.gameObject);
