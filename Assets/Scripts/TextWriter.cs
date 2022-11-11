@@ -5,36 +5,46 @@ using UnityEngine.UI;
 
 public class TextWriter : MonoBehaviour
 {
-
+    private int index = 1;
     public float delay = 0.1f;
     private string fullText;
     private string currentText = "";
     public GameObject[] textPopUp;
-    public int index;
-    public int runner;
-    private bool oneTime= false;
-    private bool twoTime= false;
+    private bool[] firstText = new bool[20];
+
     // Start is called before the first frame update
-    void Start()
-    {
-        //StartCoroutine(ShowText());
-
-
-    }
+    void Start(){}
     private void Update()
     {
-        if (index == 0 && !oneTime)
+       
+        // a switch to check and call which text is going to be runned
+        switch(index)
         {
-            fullText = "Vi tester nu nummer et";
-            oneTime = true;
-            StartCoroutine(ShowText());
-        }
-        if (index == 1 && !twoTime)
-        {
-            fullText = "Tester nu også to";
-            currentText = "Tester nu også to";
-            twoTime = true;
-            StartCoroutine(ShowText());
+            case 1:
+                if (!firstText[0])
+                {
+                    fullText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla";
+                    firstText[0] = true;
+                    StartCoroutine(ShowText());
+                }
+                break;
+
+            case 2:
+                if (!firstText[1])
+                {
+                    fullText = "Tester nu også to";
+                    firstText[1] = true;
+                    StartCoroutine(ShowText());
+                }
+                break;
+            case 3:
+                if (!firstText[2])
+                {
+                    fullText = "Nu tester vi fandme nummer 3 du";
+                    firstText[2] = true;
+                    StartCoroutine(ShowText());
+                }
+                break;
         }
         Debug.Log("Index is: " + index);
         Debug.Log("fullText er: "+fullText);
@@ -43,7 +53,7 @@ public class TextWriter : MonoBehaviour
 
     void CoroutineRunner()
     {
-       
+        index++;
     }
 
     IEnumerator ShowText()
@@ -54,6 +64,6 @@ public class TextWriter : MonoBehaviour
             this.GetComponent<Text>().text = currentText;
             yield return new WaitForSeconds(delay);
         }
-        index++;
+        Invoke("CoroutineRunner", 2f);
     }
 }
