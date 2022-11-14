@@ -303,21 +303,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Instance: {fileID: 0}
-  maxTurnSpeed: 0.8
+  maxTurnSpeed: 2.5
   turnAcceleration: 0.6
-  smoothTurningFactor: 0.1
-  smoothMovementFactor: 0.05
+  smoothTurningFactor: 0.3
+  smoothMovementFactor: 0.3
   numberOfGears: 2
-  maxMovementSpeed: 0.12
+  maxMovementSpeed: 0.2
   startingHealth: 100
   currentHealth: 10
-  fireRateInSeconds: 1
-  totalDamage: 50
-  projectileSpeed: 5
-  knockbackValue: 0.15
+  fireRateInSeconds: 1.5
+  totalDamage: 30
+  projectileSpeed: 8
+  knockbackValue: 0.1
   smoothKnockbackFactor: 0.1
-  rammingDamage: 50
-  range: 15.9
+  rammingDamage: 20
+  range: 20
   shooters: 3
   shipSize: 1.5
   maxAngle: 0
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3685263541795606615}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 192ddf6a37c35fc49bdb0bd62af52224, type: 3}
   m_Name: 
@@ -350,7 +350,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 3.3460908}
+  m_Offset: {x: -0.004150033, y: 3.108944}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -361,7 +361,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3127184}
+  m_Size: {x: 0.32769275, y: 0.8384249}
   m_EdgeRadius: 0
 --- !u!114 &8050088862250154163
 MonoBehaviour:

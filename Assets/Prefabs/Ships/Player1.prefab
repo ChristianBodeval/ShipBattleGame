@@ -162,24 +162,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Instance: {fileID: 0}
-  maxTurnSpeed: 0.4
+  maxTurnSpeed: 1.5
   turnAcceleration: 0.4
-  smoothTurningFactor: 0.1
-  smoothMovementFactor: 0.05
+  smoothTurningFactor: 0.3
+  smoothMovementFactor: 0.3
   numberOfGears: 2
-  maxMovementSpeed: 0.1
-  startingHealth: 100
-  currentHealth: 0
-  fireRateInSeconds: 1
+  maxMovementSpeed: 0.12
+  startingHealth: 150
+  currentHealth: 150
+  fireRateInSeconds: 0.8
   totalDamage: 50
-  projectileSpeed: 5
+  projectileSpeed: 8
   knockbackValue: 0.15
   smoothKnockbackFactor: 0.1
-  rammingDamage: 50
-  range: 8.9
+  rammingDamage: 40
+  range: 12
   shooters: 10
   shipSize: 4.2
-  maxAngle: 107
+  maxAngle: 50
   startCurve: -0.23
 --- !u!61 &710602871
 BoxCollider2D:
@@ -194,7 +194,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 3.3460908}
+  m_Offset: {x: -0.015789032, y: 3.0697813}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -205,7 +205,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3127184}
+  m_Size: {x: 0.2737007, y: 0.7600994}
   m_EdgeRadius: 0
 --- !u!70 &3685263541795606612
 CapsuleCollider2D:
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3685263541795606615}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 192ddf6a37c35fc49bdb0bd62af52224, type: 3}
   m_Name: 
