@@ -24,6 +24,7 @@ public class PowerUpValue : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         float timer = Time.time + duration;
