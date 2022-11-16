@@ -119,15 +119,16 @@ public class ShipManager : MonoBehaviour
         }
     }
 
-  if (gameObject.GetComponent<Movement>().currentMoveValue != 0)
-        {
-        audioSource.Play();
-        }
+  
+        
 
 
 
-    void Update()
+void Update()
     {
         UpdateValues();
+        if (gameObject.GetComponent<Movement>().currentMoveValue != 0)
+
+            audioSource.Play();
     }
 }

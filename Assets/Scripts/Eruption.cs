@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Eruption : MonoBehaviour
@@ -8,13 +10,19 @@ public class Eruption : MonoBehaviour
 
     public float eruptionTime = 20; // Set amount of time that eruption will occur.
     public float eruptionDamage = 1; //Set damage from eruption.
+ 
 
     // Start is called before the first frame update
     void Start()
     {
         initialTime = Time.timeSinceLevelLoad; // Set the time.
     }
-
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<Health>())
+            collision.gameObject.GetComponent<Health>().TakeDamage(eruptionDamage);
+        
+    }
     // Update is called once per frame
     void Update()
     {
@@ -23,9 +31,6 @@ public class Eruption : MonoBehaviour
         {
             Destroy(gameObject); //Remove Eruption from game after eruptiontime ends.
         }
-        if (collision.gameObject.GetComponent<ShipManager>())
-        {
-            int a = 1;
-        }
+    
     }
 }

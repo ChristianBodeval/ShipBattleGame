@@ -22,8 +22,8 @@ public class Movement : MonoBehaviour
     private float turnInputValue;
     private Vector3 turnDirection;
     private float currentTurnAcceleration;
-    private float currentTurnValue;
-    private float currentMoveValue;
+    public float currentTurnValue;
+    public float currentMoveValue;
     private int currentGear; //The current gear
 
     //Accessor values
