@@ -9,6 +9,7 @@ public class PowerUpValue : MonoBehaviour
     public bool isPositive;
     public bool isTemporary;
     public float duration;
+    private AudioSource audioSource;
 
     public Type powerUpType;
 
@@ -22,6 +23,7 @@ public class PowerUpValue : MonoBehaviour
         {
             value *= -1;
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,9 +45,11 @@ public class PowerUpValue : MonoBehaviour
                     pickupShip.MaxMovementSpeed += value;
                     break;
             }
+            audioSource.Play();
             Invoke("resetValue", duration);
             gameObject.SetActive(false);
         }
+        
     }
 
     void resetValue()

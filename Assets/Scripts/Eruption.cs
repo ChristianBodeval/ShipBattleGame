@@ -20,7 +20,11 @@ public class Eruption : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Health>())
+        {
+           
             collision.gameObject.GetComponent<Health>().TakeDamage(eruptionDamage);
+        }
+            
         
     }
     // Update is called once per frame
