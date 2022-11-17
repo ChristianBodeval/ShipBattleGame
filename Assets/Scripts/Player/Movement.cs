@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class Movement : MonoBehaviour
 {
@@ -19,7 +20,9 @@ public class Movement : MonoBehaviour
     private float maxMovementSpeed; //0.11
 
     //Holder values
+    float moveInputValue;
     private float turnInputValue;
+    private float latestInput;
     private Vector3 turnDirection;
     private float currentTurnAcceleration;
     private float currentTurnValue;
@@ -34,37 +37,162 @@ public class Movement : MonoBehaviour
     public int NumberOfGears { get => numberOfGears; set => numberOfGears = value; }
     public float MaxMovementSpeed { get => maxMovementSpeed; set => maxMovementSpeed = value; }
 
+    //Movement settings
+    public enum MoveType {Gears, OnHold, Constant, ConstantAndStop};
+    public MoveType moveType;
+
+    //Dash settings
+    public enum DashType {OnRelease, DoubleTap, ChargeUp};
+    public DashType dashType;
+
+    //Dash
+    public bool isDashing;
+    public bool canDash;
+    public float dashTime;
+    public int dashGearValue;
+    public float dashCooldown;
+    public InputActionReference actionReference;
+
     
 
     private void Start()
     {
+        canDash = true;
         shipManager = GetComponent<ShipManager>();
+        actionReference.action.started += context =>
+        {
+            Debug.Log("Action called");
+            if (context.interaction is MultiTapInteraction)
+            {
+                Debug.Log("Dash");
+                //Dash();
+            }
+        };
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         CalculateTurnAcceleration();
-        Turn();
+        if(!isDashing)
+            Turn();
         MoveForward();
     }
+
+    private void OnEnable()
+    {
+        actionReference.action.Enable();
+    }
+    private void OnDisable()
+    {
+        actionReference.action.Disable();
+    }
+
+   
 
     //Sets a gear between 0 and maxGears. W for going up a gear, S for going down.  
     public void OnMove(InputAction.CallbackContext context)
     {
-        float value = context.ReadValue<float>();
 
-        //Increases or decreases gear
-        if (currentGear < numberOfGears-1)
+        moveInputValue = context.ReadValue<float>();
+        Debug.Log("Calling On move");
+
+        // -----> Dash <---- //
+        //Dash on Multitap
+        if (latestInput > 0 && context.interaction is MultiTapInteraction && context.started && dashType == DashType.DoubleTap)
         {
-            if (value > 0)
+            Debug.Log("Dash");
+
+            StartCoroutine(Dash());
+        }
+        //Dash on Release
+        if (latestInput > 0 && dashType == DashType.OnRelease)
+        {
+            if (context.canceled && !isDashing && canDash)
+            {
+                Debug.Log("Input value: " + moveInputValue);
+                Debug.Log("Dash");
+
+                StartCoroutine(Dash());
+            }
+        }
+
+
+        // -----> MovementType <---- //
+        //LatestInput, needed for knowing what was last pressedbecause when context.cancelled is true the moveInputValue is 0
+        if (moveInputValue != 0)
+        {
+            if (moveInputValue > 0)
+                latestInput = 1;
+            else if (moveInputValue < 0)
+                latestInput = -1;
+        }
+
+
+        //Constant move
+        if (moveType == MoveType.Constant && !isDashing)
+        {
+            currentGear = 1;
+        }
+
+        //Constant move with stop
+        if (moveType == MoveType.ConstantAndStop && !isDashing)
+        {
+            if (moveInputValue > 0)
+            {
+                currentGear = (int)moveInputValue;
+
+            }
+            else if (moveInputValue < 0)
+            {
+                currentGear = 0;
+            }
+            return;
+        }
+
+        //Move while holding
+        if (moveType == MoveType.OnHold && !isDashing)
+        {
+            if(moveInputValue > 0)
+            {
+                currentGear = (int)moveInputValue;
+                
+            }
+            else
+            {
+                currentGear = 0;
+            }
+            return;
+        }
+
+        //Move dependent on gear
+        if (moveType == MoveType.Gears && currentGear < numberOfGears-1)
+        {
+            if (moveInputValue > 0)
                 currentGear++;
         }
         if (currentGear > 0)
         {
-            if (value < 0)
+            if (moveInputValue < 0)
                 currentGear--;
         }
+    }
+
+    IEnumerator Dash ()
+    {
+        isDashing = true;
+        canDash = false;
+        currentGear = dashGearValue;
+        yield return new WaitForSeconds(dashTime);
+
+        if (moveType == MoveType.OnHold)
+            currentGear = 0;
+        else 
+            currentGear = 1;
+
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
 

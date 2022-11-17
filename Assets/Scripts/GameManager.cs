@@ -12,6 +12,9 @@ public sealed class GameManager : MonoBehaviour
     public Color player2Color = Color.blue;
     public GameObject player1Prefab;
     public GameObject player2Prefab;
+
+    public bool spawnPlayer1;
+    public bool spawnPlayer2;
     
     private static GameManager instance; //Singleton
 
@@ -39,24 +42,29 @@ public sealed class GameManager : MonoBehaviour
     {
         instance = this;
 
+        if (spawnPlayer1)
+        {
+            var p1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
+            players.Add(p1.gameObject);
+            p1.transform.position = spawn1.transform.position;
+            p1.transform.rotation = spawn1.transform.rotation;
+            TeleportManager.instance.AddTeleportable(p1.gameObject);
+        }
 
-        var p1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
-        var p2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
 
+        if (spawnPlayer2)
+        {
+            var p2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
 
+            //Set the two players
+            players.Add(p2.gameObject);
 
-        //Set the two players
-        players.Add(p1.gameObject);
-        players.Add(p2.gameObject);
+            //Set position to spawnpoints
+            p2.transform.position = spawn2.transform.position;
+            p2.transform.rotation = spawn2.transform.rotation;
 
-        //Set position to spawnpoints
-        p1.transform.position = spawn1.transform.position;
-        p1.transform.rotation = spawn1.transform.rotation;
-        p2.transform.position = spawn2.transform.position;
-        p2.transform.rotation = spawn2.transform.rotation;
-
-        //Make them teleportable
-        TeleportManager.instance.AddTeleportable(p1.gameObject);
-        TeleportManager.instance.AddTeleportable(p2.gameObject);
+            //Make them teleportable
+            TeleportManager.instance.AddTeleportable(p2.gameObject);
+        }
     }
 }

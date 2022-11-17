@@ -176,7 +176,7 @@ MonoBehaviour:
   knockbackValue: 0.15
   smoothKnockbackFactor: 0.1
   rammingDamage: 40
-  range: 12
+  range: 18.1
   shooters: 10
   shipSize: 4.2
   maxAngle: 50
@@ -315,6 +315,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3685263541795606615}
   shipManager: {fileID: 3794120215085976867}
+  moveType: 2
+  dashType: 1
+  isDashing: 0
+  canDash: 1
+  dashTime: 0.5
+  dashGearValue: 2
+  dashCooldown: 1
+  actionReference: {fileID: -1680190386980627800, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
 --- !u!114 &-7976377503517882532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1860a52f4dfca4e4c99ebd11e3deb2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnOnDeath: 0
   startingHealth: 100
   currentHealth: 100
   powerUpH: {fileID: 0}
@@ -488,6 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf18be10cca54d25bcac094800443e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linePrefab: {fileID: 0}
   shootersTotalDamage: 0
   canonGameObjects: []
   shooterPrefab: {fileID: 9153223935004835648, guid: 00bbda18870e2464ca0f0b0af82ed86c, type: 3}
@@ -504,6 +514,7 @@ MonoBehaviour:
   - {x: 8.500463, y: 6.5889673}
   - {x: 8.558441, y: 6.4508195}
   - {x: 0, y: 0}
+  lines: []
   isDrawingLines: 1
 --- !u!4 &121773882 stripped
 Transform:
@@ -619,6 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf18be10cca54d25bcac094800443e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linePrefab: {fileID: 0}
   shootersTotalDamage: 0
   canonGameObjects: []
   shooterPrefab: {fileID: 9153223935004835648, guid: 00bbda18870e2464ca0f0b0af82ed86c, type: 3}
@@ -635,6 +647,7 @@ MonoBehaviour:
   - {x: 8.500463, y: 6.5889673}
   - {x: 8.558441, y: 6.4508195}
   - {x: 0, y: 0}
+  lines: []
   isDrawingLines: 1
 --- !u!4 &6561855051026742838 stripped
 Transform:
