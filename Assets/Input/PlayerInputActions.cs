@@ -180,7 +180,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""7705fab2-a7c5-4178-bd78-1e345c2b8f1f"",
-                    ""path"": ""<Keyboard>/h"",
+                    ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardLeft"",
@@ -191,7 +191,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""a61a2e33-b21d-4ad8-853f-8158bae24ce3"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/h"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardLeft"",
@@ -202,7 +202,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""83483ad4-870a-43bb-87a8-4c4492240e68"",
-                    ""path"": ""<Keyboard>/slash"",
+                    ""path"": ""<Keyboard>/period"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardRight"",
@@ -213,7 +213,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""1236827b-fc4d-4e96-9e16-5563837613b3"",
-                    ""path"": ""<Keyboard>/period"",
+                    ""path"": ""<Keyboard>/slash"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardRight"",

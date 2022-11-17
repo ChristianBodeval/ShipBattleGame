@@ -335,12 +335,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942d9e700ea224f819923b34cdfd1ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooterGroupLeft: {fileID: 726262246}
   shooterGroupRight: {fileID: 1062078226}
+  shooterGroupLeft: {fileID: 726262246}
   projectilePrefab: {fileID: 275803821595653893, guid: 5f501533e8219814a8dea60ed0e89225, type: 3}
   knockbackScript: {fileID: 0}
+  linesLeft: 1
+  linesRight: 1
   knockbackForce: 0.2
   smoothKnockbackFactor: 0.1
+  isChargingUp: 0
 --- !u!114 &9179054856239917684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf18be10cca54d25bcac094800443e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderLines: 0
   linePrefab: {fileID: 0}
   shootersTotalDamage: 0
   canonGameObjects: []
@@ -630,6 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf18be10cca54d25bcac094800443e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderLines: 0
   linePrefab: {fileID: 0}
   shootersTotalDamage: 0
   canonGameObjects: []

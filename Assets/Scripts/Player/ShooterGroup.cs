@@ -5,6 +5,7 @@ using static UnityEditor.FilePathAttribute;
 
 public class ShooterGroup : MonoBehaviour
 {
+    public bool renderLines;
     private float projectileSpeed;
     public GameObject linePrefab;
 
@@ -133,8 +134,18 @@ public class ShooterGroup : MonoBehaviour
                 canonGameObjects[i].transform.position = (Vector3)startPoints[i] + GetComponentInParent<Transform>().position;
                 canonGameObjects[i].transform.rotation = rotation;
 
-                canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(0, canonGameObjects[i].transform.position);
-                canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(1, (Vector3)endPoints[i] - (Vector3)startPoints[i] + canonGameObjects[i].transform.position);
+                if(renderLines)
+                {
+                    canonGameObjects[i].GetComponent<LineRenderer>().enabled = true;
+                    canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(0, canonGameObjects[i].transform.position);
+                    canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(1, (Vector3)endPoints[i] - (Vector3)startPoints[i] + canonGameObjects[i].transform.position);
+
+                }
+                else
+                {
+                    canonGameObjects[i].GetComponent<LineRenderer>().enabled = false;
+                }
+
                 continue;
             }
 
