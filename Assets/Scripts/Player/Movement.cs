@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour
     private float smoothMovementFactor; //0.1
     private int numberOfGears; // 2
     private float maxMovementSpeed; //0.11
+    private float speedMod; //The modifier for speedchage at different gears
+    public float moveDampener = 0.7F;
 
     //Holder values
     float moveInputValue;
@@ -201,7 +203,15 @@ public class Movement : MonoBehaviour
     {
         //Smoothly change the turnValue to the inputValue
         currentMoveValue = Mathf.Lerp(currentMoveValue, currentGear, smoothMovementFactor);
-        transform.Translate(0f, currentMoveValue * maxMovementSpeed, 0f);
+        if (currentGear >= 3)
+        {
+            transform.Translate(0f, moveDampener*currentMoveValue * maxMovementSpeed, 0f);
+        }
+        else
+        {
+            transform.Translate(0f, currentMoveValue * maxMovementSpeed, 0f);
+        }
+       
 
     }
 

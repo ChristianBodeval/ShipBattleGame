@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SliderScript : MonoBehaviour
 {
-    GameObject ship;
+   /* GameObject ship;
     public Slider slider;
 
 
@@ -32,4 +32,5 @@ public class SliderScript : MonoBehaviour
 
         slider.value = ship.GetComponent<ShipManager>().CurrentHealth;
     }
+   */
 }
