@@ -61,10 +61,10 @@ public class Movement : MonoBehaviour
         shipManager = GetComponent<ShipManager>();
         actionReference.action.started += context =>
         {
-            Debug.Log("Action called");
+            //Debug.Log("Action called");
             if (context.interaction is MultiTapInteraction)
             {
-                Debug.Log("Dash");
+                //Debug.Log("Dash");
                 //Dash();
             }
         };
@@ -164,7 +164,7 @@ public class Movement : MonoBehaviour
             }
             return;
         }
-
+        
         //Move dependent on gear
         if (moveType == MoveType.Gears && currentGear < numberOfGears-1)
         {

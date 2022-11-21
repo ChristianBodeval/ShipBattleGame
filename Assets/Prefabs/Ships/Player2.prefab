@@ -119,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 3685263541795606615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0783, y: 0.4436, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 121773882}
@@ -262,7 +262,7 @@ MonoBehaviour:
   isDashing: 0
   canDash: 1
   dashTime: 0.5
-  dashGearValue: 2
+  dashGearValue: 3
   dashCooldown: 1
   actionReference: {fileID: -1680190386980627800, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
 --- !u!114 &-7976377503517882532
@@ -316,24 +316,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Instance: {fileID: 0}
   maxTurnSpeed: 2.5
-  turnAcceleration: 0.6
-  smoothTurningFactor: 0.3
+  turnAcceleration: 0.05
+  smoothTurningFactor: 0.05
   smoothMovementFactor: 0.3
   numberOfGears: 2
-  maxMovementSpeed: 0.2
-  startingHealth: 100
-  currentHealth: 10
-  fireRateInSeconds: 1.5
-  totalDamage: 30
-  projectileSpeed: 8
-  knockbackValue: 0.1
+  maxMovementSpeed: 0.08
+  startingHealth: 200
+  currentHealth: 200
+  fireRateInSeconds: 3
+  totalDamage: 50
+  projectileSpeed: 10
+  knockbackValue: 0.15
   smoothKnockbackFactor: 0.1
-  rammingDamage: 20
-  range: 20
-  shooters: 3
-  shipSize: 1.5
-  maxAngle: 0
-  startCurve: -0.49
+  rammingDamage: 80
+  range: 18.1
+  shooters: 4
+  shipSize: 4.94
+  maxAngle: 15
+  startCurve: -0.06
 --- !u!114 &855461067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2149374170288342253, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.3846154
       objectReference: {fileID: 0}
     - target: {fileID: 2149374170288342253, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
       propertyPath: m_LocalPosition.z
@@ -542,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2149374170288342253, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.3846154
       objectReference: {fileID: 0}
     - target: {fileID: 2149374170288342253, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
       propertyPath: m_LocalPosition.z

@@ -162,22 +162,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Instance: {fileID: 0}
-  maxTurnSpeed: 1.5
+  maxTurnSpeed: 2
   turnAcceleration: 0.4
   smoothTurningFactor: 0.3
   smoothMovementFactor: 0.3
   numberOfGears: 2
-  maxMovementSpeed: 0.12
-  startingHealth: 150
-  currentHealth: 150
-  fireRateInSeconds: 0.8
+  maxMovementSpeed: 0.15
+  startingHealth: 100
+  currentHealth: 100
+  fireRateInSeconds: 1.5
   totalDamage: 50
   projectileSpeed: 8
   knockbackValue: 0.15
   smoothKnockbackFactor: 0.1
   rammingDamage: 40
-  range: 18.1
-  shooters: 10
+  range: 11
+  shooters: 8
   shipSize: 4.2
   maxAngle: 50
   startCurve: -0.23

@@ -18,7 +18,12 @@ public class Health : MonoBehaviour
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
-    
+
+    private void Update()
+    {
+        Debug.Log(gameObject.name + ": " + currentHealth);
+    }
+
 
     private void OnEnable()
     {
