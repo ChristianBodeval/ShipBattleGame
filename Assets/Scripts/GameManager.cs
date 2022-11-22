@@ -10,6 +10,7 @@ public sealed class GameManager : MonoBehaviour
 {
     public Color player1Color = Color.red;
     public Color player2Color = Color.blue;
+
     public GameObject player1Prefab;
     public GameObject player2Prefab;
 
@@ -29,6 +30,7 @@ public sealed class GameManager : MonoBehaviour
             return instance;
         }
     }
+
 
     public Transform spawn1;
     public Transform spawn2;
@@ -66,5 +68,33 @@ public sealed class GameManager : MonoBehaviour
             //Make them teleportable
             TeleportManager.instance.AddTeleportable(p2.gameObject);
         }
+
+    }
+
+    void NextRound()
+    {
+        /*
+        foreach (var player in players)
+        {
+            if (player.GetComponent<Health>().currentHealth >= 0)
+            {
+                players[0].transform.position = spawn1.transform.position;
+                players[0].transform.rotation = spawn1.transform.rotation;
+                players[0].SetActive(true);
+
+                players[1].transform.position = spawn2.transform.position;
+                players[1].transform.rotation = spawn2.transform.rotation;
+                players[1].SetActive(true);
+                return;
+            }
+
+
+
+        }*/
+    }
+
+    private void LateUpdate()
+    {
+        
     }
 }

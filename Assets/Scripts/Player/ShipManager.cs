@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShipManager : MonoBehaviour
 {
+    private PlayerInput Input;
+
+
+
+
     // This class is to manage various settings on a ship.
     [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the ship when it is created.
 
@@ -116,7 +122,22 @@ public class ShipManager : MonoBehaviour
         }
     }
 
-    
+
+
+
+
+    private void Start()
+    {
+        Input = GetComponent<PlayerInput>();
+    }
+
+    private void OnDisable()
+    {
+        Input.actions = null;
+    }
+
+
+
 
     void Update()
     {

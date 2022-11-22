@@ -60,6 +60,8 @@ public class ShooterGroup : MonoBehaviour
                 continue;
             }
 
+
+
             if (canon.GetComponent<LineRenderer>().material != null)
             {
                 canon.GetComponent<LineRenderer>().startColor = color;
@@ -154,9 +156,12 @@ public class ShooterGroup : MonoBehaviour
 
                 if(renderLines)
                 {
-                    canonGameObjects[i].GetComponent<LineRenderer>().enabled = true;
-                    canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(0, canonGameObjects[i].transform.position);
-                    canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(1, (Vector3)endPoints[i] - (Vector3)startPoints[i] + canonGameObjects[i].transform.position);
+                    if (canonGameObjects[i].GetComponent<LineRenderer>() != null)
+                    {
+                        canonGameObjects[i].GetComponent<LineRenderer>().enabled = true;
+                        canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(0, canonGameObjects[i].transform.position);
+                        canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(1, (Vector3)endPoints[i] - (Vector3)startPoints[i] + canonGameObjects[i].transform.position);
+                    }
 
                 }
                 else

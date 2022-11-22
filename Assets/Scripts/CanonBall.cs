@@ -73,7 +73,7 @@ public class CanonBall : MonoBehaviour
     {
 
         //Hit by another player
-        if (collision.GetComponent<Health>() && shotBy != collision.gameObject)
+        if (collision.GetComponent<Health>() != null && shotBy != collision.gameObject)
         {
             collision.GetComponent<Health>().TakeDamage(damage);
             gameObject.SetActive(false);
@@ -83,7 +83,7 @@ public class CanonBall : MonoBehaviour
 
         }
         //Hit an island
-        if (collision.GetComponent<IslandHealth>() && shotBy != collision.gameObject)
+        if (collision.GetComponent<IslandHealth>() != null && shotBy != collision.gameObject)
         {
             collision.GetComponent<IslandHealth>().TakeDamage(damage);
             gameObject.SetActive(false);

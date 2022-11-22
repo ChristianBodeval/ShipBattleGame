@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.U2D.Path.GUIFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -38,5 +39,7 @@ public class PlayerHealth : MonoBehaviour
         // Play the effects for the death of the tank and deactivate it.
         Dead = true;
         gameObject.SetActive(false);
+
+        
     }
 }
