@@ -50,7 +50,8 @@ public class Shooting : MonoBehaviour
 
     private void Start()
     {        
-        StartCoroutine(ShootingCoroutine());                                              // Starts a coroutine for shooting
+        StartCoroutine(ShootingCoroutineLeft());                                              // Starts a coroutine for shooting
+        StartCoroutine(ShootingCoroutineRight());                                              // Starts a coroutine for shooting
         //coroutine = ChargeUpValue();
     }
 
@@ -140,15 +141,12 @@ public class Shooting : MonoBehaviour
     }
    */
     //If holding firekey shoot every fireRate
-    IEnumerator ShootingCoroutine()                                                     // Coroutine called at start
+    IEnumerator ShootingCoroutineRight()                                                     // Coroutine called at start
     {
         while (true)                                                                    // Uses a unending while loop to check if we are shooting throughout the
         {                                                                               // game
-            
             if (isShootingRight)
             {
-
-
                 shooterGroupRight.SetLinesColor(Color.red);
                 knockbackScript.AddKnockback(Vector3.left);
 
@@ -159,7 +157,20 @@ public class Shooting : MonoBehaviour
 
                 shooterGroupRight.SetLinesColor(Color.white);
             }
-            else if (isShootingLeft)
+            
+            // else return nothing
+            else
+
+                yield return null;
+        }
+    }
+
+
+    IEnumerator ShootingCoroutineLeft()                                                     // Coroutine called at start
+    {
+        while (true)                                                                    // Uses a unending while loop to check if we are shooting throughout the
+        {                                                                               // game
+            if (isShootingLeft)
             {                                                // The same but for ShootRight();
                 knockbackScript.AddKnockback(Vector3.right);
 
@@ -168,7 +179,6 @@ public class Shooting : MonoBehaviour
                 yield return new WaitForSeconds(fireRateInSeconds);
 
                 shooterGroupLeft.SetLinesColor(Color.white);
-
             }
             // else return nothing
             else
@@ -177,7 +187,7 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    
+
 
 }
 

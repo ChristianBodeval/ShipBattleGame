@@ -40,7 +40,6 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0f && !dead)
         {
             OnDeath();
-            
         }
     }
 
@@ -48,7 +47,8 @@ public class Health : MonoBehaviour
     public virtual void OnDeath()
     {
         dead = true;
-        gameObject.SetActive(false);
+        
+
 
 
         if(respawnOnDeath)
