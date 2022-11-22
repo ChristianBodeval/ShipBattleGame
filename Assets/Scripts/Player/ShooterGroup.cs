@@ -50,6 +50,24 @@ public class ShooterGroup : MonoBehaviour
         DestroyUnusedShooters();
     }
 
+    public void SetLinesColor(Color color)
+    {
+        foreach (GameObject canon in canonGameObjects)
+        {
+
+            if (canon == null)
+            {
+                continue;
+            }
+
+            if (canon.GetComponent<LineRenderer>().material != null)
+            {
+                canon.GetComponent<LineRenderer>().startColor = color;
+                canon.GetComponent<LineRenderer>().endColor = color;
+            }
+        }
+    }
+
     //Sets points for the lines, which the shots will follow
     // Makes x amount of points in a cone from the 
     void SetLinePoints(Vector2[] startPoints, Vector2[] endPoints)

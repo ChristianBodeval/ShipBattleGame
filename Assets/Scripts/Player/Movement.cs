@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     private float turnAcceleration; // 0.8
     private float smoothTurningFactor; //0.1
     private float smoothMovementFactor; //0.1
-    private int numberOfGears; // 2
+    public int numberOfGears; // 2
     private float maxMovementSpeed; //0.11
 
     //Holder values
@@ -42,7 +42,7 @@ public class Movement : MonoBehaviour
     public MoveType moveType;
 
     //Dash settings
-    public enum DashType {OnRelease, DoubleTap, ChargeUp};
+    public enum DashType {OnRelease, DoubleTap, OneTap};
     public DashType dashType;
 
     //Dash
@@ -104,11 +104,23 @@ public class Movement : MonoBehaviour
             Debug.Log("Dash");
 
             StartCoroutine(Dash());
+            currentGear = 1;
         }
         //Dash on Release
         if (latestInput > 0 && dashType == DashType.OnRelease)
         {
             if (context.canceled && !isDashing && canDash)
+            {
+                Debug.Log("Input value: " + moveInputValue);
+                Debug.Log("Dash");
+
+                StartCoroutine(Dash());
+            }
+        }
+
+        if (latestInput > 0 && dashType == DashType.OneTap)
+        {
+            if (context.started && !isDashing && canDash)
             {
                 Debug.Log("Input value: " + moveInputValue);
                 Debug.Log("Dash");
@@ -153,28 +165,30 @@ public class Movement : MonoBehaviour
         //Move while holding
         if (moveType == MoveType.OnHold && !isDashing)
         {
-            if(moveInputValue > 0)
+            if(moveInputValue >= 0)
             {
-                currentGear = (int)moveInputValue;
+                currentGear = (int)Mathf.Abs(latestInput);
                 
             }
-            else
+            else if (moveInputValue < 0 && context.started)
             {
                 currentGear = 0;
             }
             return;
         }
+
         
         //Move dependent on gear
-        if (moveType == MoveType.Gears && currentGear < numberOfGears-1)
+        if(moveType == MoveType.Gears)
         {
-            if (moveInputValue > 0)
+            if (currentGear < numberOfGears-1 && moveInputValue > 0)
+            {
                 currentGear++;
-        }
-        if (currentGear > 0)
-        {
-            if (moveInputValue < 0)
+            }
+            if (currentGear > 0 && moveInputValue < 0)
+            {
                 currentGear--;
+            }         
         }
     }
 
@@ -201,14 +215,14 @@ public class Movement : MonoBehaviour
     {
         //Smoothly change the turnValue to the inputValue
         currentMoveValue = Mathf.Lerp(currentMoveValue, currentGear, smoothMovementFactor);
-        transform.Translate(0f, currentMoveValue * maxMovementSpeed, 0f);
+        transform.Translate(0f, currentMoveValue * maxMovementSpeed /* Gang speedAmplifier på her i stedet*/  , 0f);
 
     }
 
     //Sets input value
     public void OnTurn(InputAction.CallbackContext context)
     {
-        turnInputValue = context.ReadValue<float>();
+        turnInputValue = context.ReadValue<float    >();
     }
 
     /// <summary>

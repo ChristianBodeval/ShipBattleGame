@@ -6,6 +6,7 @@ using UnityEngine.XR;
 
 public class CanonBall : MonoBehaviour
 {
+    public GameObject hitParticle;
     private GameObject shotBy;
     private float damage;
     private float projectileSpeed;                                                   // The speed of the cannonball
@@ -71,13 +72,17 @@ public class CanonBall : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-
+        //Hit by another player
         if (collision.GetComponent<Health>() && shotBy != collision.gameObject)
         {
             collision.GetComponent<Health>().TakeDamage(damage);
             gameObject.SetActive(false);
-        }
 
+            //Make particles
+            Instantiate(hitParticle, collision.transform.position, collision.transform.rotation);
+
+        }
+        //Hit an island
         if (collision.GetComponent<IslandHealth>() && shotBy != collision.gameObject)
         {
             collision.GetComponent<IslandHealth>().TakeDamage(damage);

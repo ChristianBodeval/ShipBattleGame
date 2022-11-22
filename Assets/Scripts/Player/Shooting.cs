@@ -147,9 +147,9 @@ public class Shooting : MonoBehaviour
             
             if (isShootingRight)
             {
-                
 
 
+                shooterGroupRight.SetLinesColor(Color.red);
                 knockbackScript.AddKnockback(Vector3.left);
 
                 
@@ -157,12 +157,17 @@ public class Shooting : MonoBehaviour
                 ShootLeft();
                 yield return new WaitForSeconds(fireRateInSeconds);
 
+                shooterGroupRight.SetLinesColor(Color.white);
             }
             else if (isShootingLeft)
             {                                                // The same but for ShootRight();
                 knockbackScript.AddKnockback(Vector3.right);
+
+                shooterGroupLeft.SetLinesColor(Color.red);
                 ShootRight();
                 yield return new WaitForSeconds(fireRateInSeconds);
+
+                shooterGroupLeft.SetLinesColor(Color.white);
 
             }
             // else return nothing

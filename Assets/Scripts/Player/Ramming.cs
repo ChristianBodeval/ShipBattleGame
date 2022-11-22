@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ramming : MonoBehaviour
 {
+    public GameObject particleEffect;
     GameObject usedBy;
     BoxCollider2D boxCollider2D;
     float rammingDamage;
@@ -22,11 +23,19 @@ public class Ramming : MonoBehaviour
         {
             return;
         }
+        //Player hit
         if (collision.gameObject.GetComponent<Health>() && usedBy != collision.gameObject)
         {
-            collision.gameObject.GetComponent<Health>().TakeDamage(rammingDamage);
-        }
+            //Make particles
+            Instantiate(particleEffect, collision.transform.position,collision.transform.rotation);
 
+            collision.transform.Translate((collision.gameObject.transform.position-collision.transform.position)*2);
+            collision.gameObject.GetComponent<Health>().TakeDamage(rammingDamage);
+
+
+
+        }
+        //Island hit
         if (collision.gameObject.GetComponent<IslandHealth>() && usedBy != collision.gameObject)
         {
             collision.gameObject.GetComponent<IslandHealth>().TakeDamage(rammingDamage);
