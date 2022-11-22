@@ -1135,8 +1135,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -234, y: -146}
-  m_SizeDelta: {x: 383.3401, y: 219.1732}
+  m_AnchoredPosition: {x: -330, y: -122}
+  m_SizeDelta: {x: 123.9, y: 184.3608}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &556297066
 MonoBehaviour:
@@ -2665,6 +2665,8 @@ MonoBehaviour:
   player2Color: {r: 0.118725546, g: 0.31340063, b: 0.8679245, a: 1}
   player1Prefab: {fileID: 3685263541795606615, guid: 5ceae443dfa03435aa0d8c92b84fcc48, type: 3}
   player2Prefab: {fileID: 3685263541795606615, guid: 7f1a1cad6d6654917a4b13f892226411, type: 3}
+  spawnPlayer1: 1
+  spawnPlayer2: 1
   spawn1: {fileID: 1295180129}
   spawn2: {fileID: 2066169170}
   players: []
