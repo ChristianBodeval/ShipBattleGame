@@ -87,6 +87,7 @@ public class TextWriter : MonoBehaviour
                     fullText = "Try moving ya ship!";
                     firstText[3] = true;
                                                                     // Using invoke to show and unshow visuals after a certant amount of time
+                    
                     StartCoroutine(ShowText());
                     Invoke("ShowAAndDKeys", waitTimer);
                     Invoke("ShowWAndSKeys", waitTimer);
@@ -239,53 +240,64 @@ public class TextWriter : MonoBehaviour
    
     void MoveWAndS()
     {
-        if (Input.GetKey(KeyCode.W)         ||
-            Input.GetKey(KeyCode.S))
-        {
-            moveWAndSKeys = true;
-            Debug.Log("Movekeys is: " + moveWAndSKeys);
-        }
        
+            if (Input.GetKey(KeyCode.W) ||
+                Input.GetKey(KeyCode.S)&& index == 4)
+            {
+                moveWAndSKeys = true;
+                Debug.Log("Movekeys is: " + moveWAndSKeys);
+            }
+        
     }
     void MoveAAndD()
     {
-        if( Input.GetKey(KeyCode.A) ||
-            Input.GetKey(KeyCode.D))
-        {
-            moveAAndDKeys = true;
-        }
+        
+            if (Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.D) && index == 4)
+            {
+                moveAAndDKeys = true;
+            }
+        
     }
     void MoveLeftAndRight()
     {
-        if (Input.GetKey(KeyCode.LeftArrow) ||
-            Input.GetKey(KeyCode.RightArrow))
-        {
-            moveLeftAndRightKeys = true;
-        }
+       
+            if (Input.GetKey(KeyCode.LeftArrow) ||
+            Input.GetKey(KeyCode.RightArrow)&& index == 4)
+            {
+                moveLeftAndRightKeys = true;
+            }
+        
     }
     void MoveUpAndDown()
     {
-        if (Input.GetKey(KeyCode.UpArrow) ||
-            Input.GetKey(KeyCode.DownArrow))
-        {
-            moveUpAndDownKeys = true;
-        }
+        
+            if (Input.GetKey(KeyCode.UpArrow) ||
+            Input.GetKey(KeyCode.DownArrow) && index == 4)
+            {
+                moveUpAndDownKeys = true;
+           }
+        
     }
     void ShootKeyGAndH()
     {
-        if (Input.GetKey(KeyCode.G) || Input.GetKey(KeyCode.H))
-        {
-            shotKeyGAndH = true;
-        }
+        
+            if (Input.GetKey(KeyCode.G) || Input.GetKey(KeyCode.H) && index == 7)
+            {
+                shotKeyGAndH = true;
+            }
+        
         Debug.Log("THE shotKeyGAndH BOOLEAN IS "+ shotKeyGAndH);
       
     } 
     void ShootKeyPeriodAndMinus()
     {
-        if (Input.GetKey(KeyCode.Period) || Input.GetKey(KeyCode.Minus))
-        {
-            shotKeyPeriodAndMinus = true;
-        }
+       
+            if (Input.GetKey(KeyCode.Period) || Input.GetKey(KeyCode.Minus) && index == 7)
+            {
+                shotKeyPeriodAndMinus = true;
+            }
+        
     }
     void NextText()
     {
