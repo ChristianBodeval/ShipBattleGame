@@ -8,6 +8,10 @@ public class TeleportManager : MonoBehaviour
 {
     List<GameObject> objectsToTeleport = new List<GameObject>();
 
+    IEnumerable coroutine;
+
+    
+
     //ArrayList objectsToTeleport = new ArrayList();
 
     public static TeleportManager instance; //Singleton - used in CanonBall
@@ -52,33 +56,64 @@ public class TeleportManager : MonoBehaviour
         
     }
 
+    void DisableTrail(GameObject gameObject)
+    {
+        if (gameObject.GetComponentInChildren<TrailRenderer>())
+        {
+            Debug.Log("Trail renderer found");
+            gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
+        }
+    }
+
+
+    IEnumerator EnableTrail(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(2f);
+        if (gameObject.GetComponentInChildren<TrailRenderer>())
+        {
+
+            gameObject.GetComponentInChildren<TrailRenderer>().enabled = true;
+        }
+    }
+
+
+   
 
     // Update is called once per frame
     void Update()
     {
 
 
-
-        //Changes position of the object, if they go out from the screen size. 
+        //Changes position of the object, if they go out from the screen size.
+        //TODO This can be optimized
         foreach (GameObject obj in objectsToTeleport)
         {
             if (obj != null) {
 
                 if (obj.transform.position.y < 0 - mapH / 2)
                 {
+                    DisableTrail(obj);
                     obj.transform.position += new Vector3(0, +mapH + 1, 0);
+                    StartCoroutine(EnableTrail(obj));
+
                 }
                 if (obj.transform.position.y > mapH - mapH / 2)
                 {
+                    DisableTrail(obj);
                     obj.transform.position += new Vector3(0, -mapH - 1, 0);
+                    StartCoroutine(EnableTrail(obj));
                 }
                 if (obj.transform.position.x < 0 - mapL / 2)
                 {
+                    DisableTrail(obj);
                     obj.transform.position += new Vector3(+mapL + 1, 0, 0);
+                    StartCoroutine(EnableTrail(obj));
                 }
                 if (obj.transform.position.x > mapL - mapL / 2)
                 {
+                    DisableTrail(obj);
                     obj.transform.position += new Vector3(-mapL - 1, 0, 0);
+                    StartCoroutine(EnableTrail(obj));
                 }
             }
 

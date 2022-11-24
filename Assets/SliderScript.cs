@@ -28,11 +28,6 @@ public class SliderScript : MonoBehaviour
     void Update()
     {
         gameManager = GameManager.Instance;
-
-        Debug.Log("Slider: " + slider);
-        Debug.Log("Ship: " + ship);
-        Debug.Log("Script: " + ship.GetComponent<ShipManager>());
-        Debug.Log("Value: " + ship.GetComponent<ShipManager>().CurrentHealth);
         slider.value = ship.GetComponent<ShipManager>().CurrentHealth;
     }
 }

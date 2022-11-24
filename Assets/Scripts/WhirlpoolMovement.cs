@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WhirlpoolMovement : MonoBehaviour
 {
+    public bool huntPlayers;
     public float changeDirectionTimer;
     public float stepSpeed;
 
@@ -12,6 +13,8 @@ public class WhirlpoolMovement : MonoBehaviour
     float timerHolder;
     float mapL;
     float mapH;
+
+    int playerToHunt;
 
     public Vector3 target;
     // Start is called before the first frame update
@@ -32,7 +35,19 @@ public class WhirlpoolMovement : MonoBehaviour
 
             targetX = Random.Range(0, mapL); 
             targetY = Random.Range(0, mapH);
-            target = new Vector3(targetX-mapL/2, targetY-mapH/2, 0);
+
+            if(huntPlayers)
+            {
+                playerToHunt = Random.Range(0, 2);
+                target = GameManager.Instance.players[playerToHunt].transform.position;
+                
+            }
+
+            else
+            {
+                target = new Vector3(targetX-mapL/2, targetY-mapH/2, 0);
+            }
+
         }
 
         transform.position = Vector3.MoveTowards(transform.position, target, stepSpeed);

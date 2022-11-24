@@ -56,8 +56,6 @@ public class MerchantShipMovement : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-
-        Debug.Log("COldede");
         timerHolder = Time.time + changeDirectionTimer;
         target = GetRandomPointOnScreen();
     }

@@ -19,11 +19,6 @@ public class Health : MonoBehaviour
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
 
-    private void Update()
-    {
-        Debug.Log(gameObject.name + ": " + currentHealth);
-    }
-
 
     private void OnEnable()
     {
@@ -34,8 +29,6 @@ public class Health : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
-
-        Debug.Log("Took: " + amount + " damage");
 
         if (currentHealth <= 0f && !dead)
         {

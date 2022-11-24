@@ -96,13 +96,11 @@ public class Movement : MonoBehaviour
     {
 
         moveInputValue = context.ReadValue<float>();
-        Debug.Log("Calling On move");
 
         // -----> Dash <---- //
         //Dash on Multitap
         if (latestInput > 0 && context.interaction is MultiTapInteraction && context.started && dashType == DashType.DoubleTap)
         {
-            Debug.Log("Dash");
 
             StartCoroutine(Dash());
         }
@@ -111,8 +109,6 @@ public class Movement : MonoBehaviour
         {
             if (context.canceled && !isDashing && canDash)
             {
-                Debug.Log("Input value: " + moveInputValue);
-                Debug.Log("Dash");
 
                 StartCoroutine(Dash());
             }
@@ -122,8 +118,7 @@ public class Movement : MonoBehaviour
         {
             if (context.started && !isDashing && canDash)
             {
-                Debug.Log("Input value: " + moveInputValue);
-                Debug.Log("Dash");
+
 
                 StartCoroutine(Dash());
             }
