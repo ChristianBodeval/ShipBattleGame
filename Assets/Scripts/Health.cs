@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    public bool respawnOnDeath;
     public float startingHealth;
     public float currentHealth;
     private bool dead;
@@ -17,7 +18,12 @@ public class Health : MonoBehaviour
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
-    
+
+    private void Update()
+    {
+        Debug.Log(gameObject.name + ": " + currentHealth);
+    }
+
 
     private void OnEnable()
     {
@@ -34,7 +40,6 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0f && !dead)
         {
             OnDeath();
-            
         }
     }
 
@@ -42,10 +47,20 @@ public class Health : MonoBehaviour
     public virtual void OnDeath()
     {
         dead = true;
-        gameObject.SetActive(false);
+        
 
-        Instantiate(powerUpH, transform.position, transform.rotation);
-                Debug.Log("DIED!");
-       
+
+
+        if(respawnOnDeath)
+        {
+            Invoke("Respawn", 2);
+        }
+
+    }
+
+    public void Respawn()
+    {
+        gameObject.SetActive(true);
+        currentHealth = startingHealth;
     }
 }

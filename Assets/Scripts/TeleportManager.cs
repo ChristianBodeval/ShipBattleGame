@@ -12,7 +12,19 @@ public class TeleportManager : MonoBehaviour
 
     public static TeleportManager instance; //Singleton - used in CanonBall
 
-    
+    public static TeleportManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                Debug.Log("Gamemanger is null");
+            }
+            return instance;
+        }
+    }
+
+
     public float mapH; //Size on Y-axis. Depended on camera size
     public float mapL; ////Size on X-axis. Depended on camera size
     Camera camera;

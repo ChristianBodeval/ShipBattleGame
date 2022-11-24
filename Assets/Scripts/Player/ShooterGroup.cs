@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 
 public class ShooterGroup : MonoBehaviour
 {
+    public bool renderLines;
     private float projectileSpeed;
+    public GameObject linePrefab;
 
     public float shootersTotalDamage;
     public GameObject[] canonGameObjects;
     public GameObject shooterPrefab;
     public Vector2[] endPoints;
     Vector2[] startPoints;
-
+    public GameObject[] lines;
 
     private float range;
     private int shooters;
     private float shipSize;
     private float maxAngle;
     private float startCurve;
+
 
     public bool isDrawingLines = true;
 
@@ -33,7 +37,10 @@ public class ShooterGroup : MonoBehaviour
         endPoints = new Vector2[shooters + 2];
         startPoints = new Vector2[shooters + 2];
         canonGameObjects = new GameObject[shooters];
+        lines = new GameObject[shooters + 2];
     }
+
+   
 
     void Update()
     {
@@ -41,6 +48,26 @@ public class ShooterGroup : MonoBehaviour
         SetLinePoints(startPoints, endPoints);
         SpawnShooters(startPoints, endPoints);
         DestroyUnusedShooters();
+    }
+
+    public void SetLinesColor(Color color)
+    {
+        foreach (GameObject canon in canonGameObjects)
+        {
+
+            if (canon == null)
+            {
+                continue;
+            }
+
+
+
+            if (canon.GetComponent<LineRenderer>().material != null)
+            {
+                canon.GetComponent<LineRenderer>().startColor = color;
+                canon.GetComponent<LineRenderer>().endColor = color;
+            }
+        }
     }
 
     //Sets points for the lines, which the shots will follow
@@ -95,6 +122,8 @@ public class ShooterGroup : MonoBehaviour
                 }
             }
     }
+    
+
     //Fires the canons by iteration through all canons and shooting them at the target. 
     public void Fire(float projectileSpeed, float totalDamage)
     {
@@ -124,6 +153,22 @@ public class ShooterGroup : MonoBehaviour
             {
                 canonGameObjects[i].transform.position = (Vector3)startPoints[i] + GetComponentInParent<Transform>().position;
                 canonGameObjects[i].transform.rotation = rotation;
+
+                if(renderLines)
+                {
+                    if (canonGameObjects[i].GetComponent<LineRenderer>() != null)
+                    {
+                        canonGameObjects[i].GetComponent<LineRenderer>().enabled = true;
+                        canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(0, canonGameObjects[i].transform.position);
+                        canonGameObjects[i].GetComponent<LineRenderer>().SetPosition(1, (Vector3)endPoints[i] - (Vector3)startPoints[i] + canonGameObjects[i].transform.position);
+                    }
+
+                }
+                else
+                {
+                    canonGameObjects[i].GetComponent<LineRenderer>().enabled = false;
+                }
+
                 continue;
             }
 
@@ -131,6 +176,7 @@ public class ShooterGroup : MonoBehaviour
             GameObject canonClone;
             canonClone = Instantiate(shooterPrefab, (Vector3)startPoints[i] + transform.position, rotation);
 
+            
             canonClone.transform.parent = gameObject.transform;
             canonGameObjects[i] = canonClone;
         }

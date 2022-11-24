@@ -19,7 +19,7 @@ public class Knockback : MonoBehaviour
         if (currentKnockBackValue < 0.01F)
             currentKnockBackValue = 0;
 
-        transform.Translate(direction * currentKnockBackValue);
+        transform.Translate(-direction * currentKnockBackValue);
     }
     //Gives knockback to the ship in a given direction
     public void AddKnockback(Vector2 _direction)
@@ -36,7 +36,6 @@ public class Knockback : MonoBehaviour
             Vector2 _direction = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
             AddKnockback(_direction);
         }
-
 
     }
 
