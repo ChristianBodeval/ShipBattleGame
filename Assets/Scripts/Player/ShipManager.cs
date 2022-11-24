@@ -48,9 +48,15 @@ public class ShipManager : MonoBehaviour
     private float rammingDamage;
     [Header("ShooterGroup")]
     [SerializeField]
-    [Range(1, 20)]
-    public float range;
+    [Range(1, 25)]
+    private float range;
 
+    /*
+    [Range(1, 25)]
+    private float minRange;
+    [Range(25, 50)]
+    private float maxRange;
+    */
     [Range(1, 10)]
     public int shooters;
 
@@ -76,6 +82,11 @@ public class ShipManager : MonoBehaviour
     public float TotalDamage { get => totalDamage; set => totalDamage = value; }
     public float MaxMovementSpeed { get => maxMovementSpeed; set => maxMovementSpeed = value; }
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
+    /*
+    public float MinRange { get => minRange; set => minRange = value; }
+    public float MaxRange { get => maxRange; set => maxRange = value; }
+    */
+
 
     private void Awake()
     {

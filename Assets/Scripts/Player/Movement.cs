@@ -18,8 +18,7 @@ public class Movement : MonoBehaviour
     private float smoothMovementFactor; //0.1
     public int numberOfGears; // 2
     private float maxMovementSpeed; //0.11
-    private float speedMod; //The modifier for speedchage at different gears
-    public float moveDampener = 0.7F;
+    //public float moveDampener = 0.7F;
 
     //Holder values
     float moveInputValue;
@@ -106,7 +105,6 @@ public class Movement : MonoBehaviour
             Debug.Log("Dash");
 
             StartCoroutine(Dash());
-            currentGear = 1;
         }
         //Dash on Release
         if (latestInput > 0 && dashType == DashType.OnRelease)
@@ -203,8 +201,11 @@ public class Movement : MonoBehaviour
 
         if (moveType == MoveType.OnHold)
             currentGear = 0;
-        else 
+        else
+        {
             currentGear = 1;
+            currentTurnValue = 0;
+        }
 
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
@@ -217,14 +218,12 @@ public class Movement : MonoBehaviour
     {
         //Smoothly change the turnValue to the inputValue
         currentMoveValue = Mathf.Lerp(currentMoveValue, currentGear, smoothMovementFactor);
-        if (currentGear >= 3)
+        /*if (currentGear >= 3)
         {
             transform.Translate(0f, moveDampener*currentMoveValue * maxMovementSpeed, 0f);
-        }
-        else
-        {
-            transform.Translate(0f, currentMoveValue * maxMovementSpeed, 0f);
-        }
+            return;
+        }*/
+        transform.Translate(0f, currentMoveValue * maxMovementSpeed, 0f);
        
 
     }

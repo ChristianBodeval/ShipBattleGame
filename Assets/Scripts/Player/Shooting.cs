@@ -36,9 +36,12 @@ public class Shooting : MonoBehaviour
     public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
     public float TotalDamage { get => totalDamage; set => totalDamage = value; }
 
-
+    //ChargeUp
     public bool isChargingUp = false;
-    IEnumerator coroutine;
+    public float chargeUpValue;
+    public float minRange;
+    public float maxRange;
+    public float currentChargeUp;
 
     //float myFloat;
 
@@ -59,7 +62,7 @@ public class Shooting : MonoBehaviour
     {
         RenderLines();
 
-
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("StartingCoroutine");
@@ -71,7 +74,7 @@ public class Shooting : MonoBehaviour
             Debug.Log("StoppingCoroutine");
 
             StopCoroutine(coroutine);
-        }
+        }*/
     }
 
 
@@ -112,11 +115,55 @@ public class Shooting : MonoBehaviour
         {
             isShootingRight = false;
             isShootingLeft = false;
-        } 
+        }
+
+
+
+
+
+
+        // Track the current state of the fire button and make decisions based on the current launch force.
+        /* Charge up
+        if (shootingInputValue < 1)
+            if (CurrentLaunchForce >= MaxLaunchForce && !Fired)
+            {
+                CurrentLaunchForce = MaxLaunchForce;
+                Fire();
+            }
+
+            else if (Input.GetButtonDown(FireButton))
+            {
+                m_Fired = false;
+                m_CurrentLaunchForce = m_MinLaunchForce;
+                m_ShootingAudio.clip = m_ChargingClip;
+                m_ShootingAudio.Play();
+            }
+
+            else if (Input.GetButton(m_FireButton) && !m_Fired)
+            {
+                m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
+
+                m_AimSlider.value = m_CurrentLaunchForce;
+            }
+
+            else if (Input.GetButtonUp(m_FireButton) && !m_Fired)
+            {
+                Fire();
+            }
+            */
+
+
+
     }
 
-    /*
-    IEnumerator ChargeUpValue(float parameter)
+
+    void ChargeUp(float value)
+    {
+        
+    }
+
+    
+    IEnumerator ChargeUpValue()
     {
         Debug.Log("Running coroutine");
         if (!isChargingUp)
@@ -126,20 +173,20 @@ public class Shooting : MonoBehaviour
             float currentTime;
             currentTime = Time.time + chargeUpTime;
 
-            parameter = 0;
+            chargeUpValue = 0;
 
             while (Time.time < currentTime)
             {
                 yield return new WaitForSeconds(1);
-                parameter += 1;
-                Debug.Log("Parameter" + parameter);
+                chargeUpValue += 1;
+                Debug.Log("Parameter" + chargeUpValue);
             }
 
             isChargingUp = false;
         }
         yield return null;
     }
-   */
+   
     //If holding firekey shoot every fireRate
     IEnumerator ShootingCoroutineRight()                                                     // Coroutine called at start
     {

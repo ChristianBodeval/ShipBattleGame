@@ -93,12 +93,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3685263541795606619}
+  - component: {fileID: 3794120215085976867}
   - component: {fileID: 3685263541795606613}
   - component: {fileID: 3685263541795606612}
   - component: {fileID: 3685263541795606623}
   - component: {fileID: -7976377503517882532}
   - component: {fileID: 9179054856239917684}
-  - component: {fileID: 3794120215085976867}
   - component: {fileID: 855461067}
   - component: {fileID: 1837952668997005173}
   - component: {fileID: 8050088862250154163}
@@ -129,6 +129,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3794120215085976867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685263541795606615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 042132e9a4c464514b9400d4e385e533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Instance: {fileID: 0}
+  maxTurnSpeed: 2.5
+  turnAcceleration: 0.05
+  smoothTurningFactor: 0.05
+  smoothMovementFactor: 0.3
+  numberOfGears: 2
+  maxMovementSpeed: 0.08
+  startingHealth: 200
+  currentHealth: 200
+  fireRateInSeconds: 3
+  totalDamage: 50
+  projectileSpeed: 10
+  knockbackValue: 0.15
+  smoothKnockbackFactor: 0.1
+  rammingDamage: 70
+  range: 20
+  shooters: 4
+  shipSize: 4.94
+  maxAngle: 15
+  startCurve: -0.06
 --- !u!50 &3685263541795606613
 Rigidbody2D:
   serializedVersion: 4
@@ -181,9 +213,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 3685263541795606615}
   shipManager: {fileID: 3794120215085976867}
   numberOfGears: 0
-  moveDampener: 0.7
   moveType: 3
-  dashType: 1
+  dashType: 2
   isDashing: 0
   canDash: 1
   dashTime: 0.5
@@ -211,6 +242,10 @@ MonoBehaviour:
   knockbackForce: 0.2
   smoothKnockbackFactor: 0.1
   isChargingUp: 0
+  chargeUpValue: 0
+  minRange: 0
+  maxRange: 0
+  currentChargeUp: 0
 --- !u!114 &9179054856239917684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,38 +262,6 @@ MonoBehaviour:
   startingHealth: 0
   currentHealth: 0
   powerUpH: {fileID: 0}
---- !u!114 &3794120215085976867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685263541795606615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 042132e9a4c464514b9400d4e385e533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Instance: {fileID: 0}
-  maxTurnSpeed: 2.5
-  turnAcceleration: 0.05
-  smoothTurningFactor: 0.05
-  smoothMovementFactor: 0.3
-  numberOfGears: 2
-  maxMovementSpeed: 0.08
-  startingHealth: 200
-  currentHealth: 200
-  fireRateInSeconds: 3
-  totalDamage: 50
-  projectileSpeed: 10
-  knockbackValue: 0.15
-  smoothKnockbackFactor: 0.1
-  rammingDamage: 80
-  range: 18.1
-  shooters: 4
-  shipSize: 4.94
-  maxAngle: 15
-  startCurve: -0.06
 --- !u!114 &855461067
 MonoBehaviour:
   m_ObjectHideFlags: 0

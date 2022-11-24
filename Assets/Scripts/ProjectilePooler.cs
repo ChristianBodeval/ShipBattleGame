@@ -33,8 +33,16 @@ public class ProjectilePooler : MonoBehaviour
             objects.Add(tmp);
             tmp.transform.parent = gameObject.transform;
             tmp.SetActive(false);
+
+        }
+
+        foreach (var shot in objects)
+        {
+            TeleportManager.Instance.AddTeleportable(shot);
         }
     }
+
+
 
     //Finds a object from the list, which is not active. If all pre-defines objects are used - no object is availiable and it will return null.
     public GameObject GetPooledObject()
