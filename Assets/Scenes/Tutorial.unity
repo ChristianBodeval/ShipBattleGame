@@ -234,11 +234,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 217720973}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -126.08002, y: -151.02}
+  m_AnchoredPosition: {x: -135.66, y: -147.51}
   m_SizeDelta: {x: 300.0406, y: 300.0406}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &184973581
@@ -313,7 +313,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.49999994, y: 0.50000006}
 --- !u!114 &189078193
 MonoBehaviour:
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -363,7 +363,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &189078195
 CanvasRenderer:
@@ -465,11 +465,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 958196204}
   - {fileID: 1457890947}
   - {fileID: 184973580}
   - {fileID: 245432107}
   - {fileID: 556297065}
+  - {fileID: 958196204}
   - {fileID: 945214750}
   - {fileID: 975580015}
   - {fileID: 1459972316}
@@ -579,7 +579,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 217720973}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -948,7 +948,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &426536844
 MonoBehaviour:
@@ -963,7 +963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: Try shooting your cannons!
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &426536845
@@ -979,7 +979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -998,7 +998,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &426536846
 CanvasRenderer:
@@ -1326,7 +1326,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 217720973}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1405,7 +1405,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.8057, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &663335088
 MonoBehaviour:
@@ -1436,7 +1436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1455,7 +1455,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &663335090
 CanvasRenderer:
@@ -1512,7 +1512,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836724279
 MonoBehaviour:
@@ -1527,7 +1527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: Look! Some is coming this way!
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &836724280
@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1562,7 +1562,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &836724281
 CanvasRenderer:
@@ -1713,7 +1713,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &939791130
 MonoBehaviour:
@@ -1728,7 +1728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: Now the real fun begins! Muahahha
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &939791131
@@ -1744,7 +1744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1763,7 +1763,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &939791132
 CanvasRenderer:
@@ -1808,8 +1808,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958196203}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -141, y: -143, z: -4.4709845}
-  m_LocalScale: {x: 0.74142724, y: 0.74142724, z: 0.74142724}
+  m_LocalPosition: {x: -162, y: -137, z: -4.4709845}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 189078192}
@@ -1827,7 +1827,7 @@ Transform:
   - {fileID: 836724278}
   - {fileID: 2079025965}
   m_Father: {fileID: 217720973}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &958196205
 MonoBehaviour:
@@ -1844,16 +1844,16 @@ MonoBehaviour:
   index: 1
   Delay: 0.1
   waitTimer: 2
-  AAndDKey: {fileID: 0}
-  WAndSKey: {fileID: 0}
-  periodAndMinusKey: {fileID: 0}
-  GAndHKey: {fileID: 0}
-  LeftAndRightKey: {fileID: 0}
-  UpAndDownKey: {fileID: 0}
-  Island1: {fileID: 0}
-  Island2: {fileID: 0}
-  Mechantship: {fileID: 0}
-  PointingArrows: {fileID: 0}
+  AAndDKey: {fileID: 975580014}
+  WAndSKey: {fileID: 945214749}
+  periodAndMinusKey: {fileID: 287421316}
+  GAndHKey: {fileID: 1459972315}
+  LeftAndRightKey: {fileID: 556180475}
+  UpAndDownKey: {fileID: 1386957003}
+  Island1: {fileID: 686094506}
+  Island2: {fileID: 820639078}
+  Merchantship: {fileID: 0}
+  PointingArrows: {fileID: 1060549810}
   text1: {fileID: 189078194}
   text2: {fileID: 1182438089}
   text3: {fileID: 663335089}
@@ -2202,7 +2202,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1182438088
 MonoBehaviour:
@@ -2233,7 +2233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2252,7 +2252,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &1182438090
 CanvasRenderer:
@@ -2615,7 +2615,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1261803266
 MonoBehaviour:
@@ -2630,7 +2630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: Caus' theres only one way to regen it, by destroying merchantships!
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &1261803267
@@ -2646,7 +2646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2665,7 +2665,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &1261803268
 CanvasRenderer:
@@ -2929,7 +2929,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1379045080
 MonoBehaviour:
@@ -2944,7 +2944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: Keep an eye on ya ship's health in ur dedicated corner
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &1379045081
@@ -2960,7 +2960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2979,7 +2979,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &1379045082
 CanvasRenderer:
@@ -3078,7 +3078,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 217720973}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -3311,7 +3311,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1575195817
 MonoBehaviour:
@@ -3342,7 +3342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3361,7 +3361,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &1575195819
 CanvasRenderer:
@@ -3488,7 +3488,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601052305
 MonoBehaviour:
@@ -3503,7 +3503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: NICE SHOT!
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &1601052306
@@ -3519,7 +3519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3538,7 +3538,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &1601052307
 CanvasRenderer:
@@ -3665,7 +3665,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1783772295
 MonoBehaviour:
@@ -3680,7 +3680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: And as you know, the best Defense is OFFENSE!
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &1783772296
@@ -3696,7 +3696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3715,7 +3715,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &1783772297
 CanvasRenderer:
@@ -3860,7 +3860,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1918264838
 MonoBehaviour:
@@ -3875,7 +3875,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: NICE! Excellent maneuvers
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &1918264839
@@ -3891,7 +3891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3910,7 +3910,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &1918264840
 CanvasRenderer:
@@ -3957,7 +3957,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1923100089
 MonoBehaviour:
@@ -3972,7 +3972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: Ya' see those irrrlands?? Destroy them to gain powerups
   waitTimer: 2
   testTextWriter: {fileID: 958196205}
 --- !u!114 &1923100090
@@ -3988,7 +3988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4007,7 +4007,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &1923100091
 CanvasRenderer:
@@ -4085,7 +4085,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20.805614, y: 0}
-  m_SizeDelta: {x: 313.5236, y: 166.5456}
+  m_SizeDelta: {x: 207.4966, y: 108.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079025966
 MonoBehaviour:
@@ -4100,7 +4100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.05
-  fullText: "Time to show what ye\u2019ve got! "
+  fullText: Looks like ya got dis under wraps, time to go out and show ya skills!
   waitTimer: 2
   testTextWriter: {fileID: 0}
 --- !u!114 &2079025967
@@ -4116,7 +4116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4135,7 +4135,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: 
 --- !u!222 &2079025968
 CanvasRenderer:
