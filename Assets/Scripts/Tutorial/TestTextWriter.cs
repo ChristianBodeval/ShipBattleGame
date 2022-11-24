@@ -18,7 +18,7 @@ public class TestTextWriter : MonoBehaviour
     private bool shotKeyPeriodAndMinus = false;
     public GameObject AAndDKey;                     // GameObjects for all the different visuals
     public GameObject WAndSKey;
-    public GameObject periodAndMinusKey;
+    public GameObject PeriodAndMinusKey;
     public GameObject GAndHKey;
     public GameObject LeftAndRightKey;
     public GameObject UpAndDownKey;
@@ -26,6 +26,7 @@ public class TestTextWriter : MonoBehaviour
     public GameObject Island2;
     public GameObject Merchantship;
     public GameObject PointingArrows;
+    public GameObject TutorialImage;
     public Text text1;
     public Text text2;
     public Text text3;
@@ -43,6 +44,7 @@ public class TestTextWriter : MonoBehaviour
     private bool moveAAndDKeys;
     private bool moveLeftAndRightKeys;
     private bool moveUpAndDownKeys;
+    private bool checker = true;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +63,7 @@ public class TestTextWriter : MonoBehaviour
     }
     private void Update()
     {
-        StartCoroutine(ShowKeys());
+        StartCoroutine(ShowObjects());
         switch (index)
         {
             case 1:
@@ -80,12 +82,18 @@ public class TestTextWriter : MonoBehaviour
                 AAndDKey.gameObject.SetActive(true);
                 LeftAndRightKey.gameObject.SetActive(true);
                 UpAndDownKey.gameObject.SetActive(true);
+                //TutorialImage.gameObject.SetActive(false);
+
 
                 break;
             case 5:
 
-                if(moveAAndDKeys && moveWAndSKeys && moveLeftAndRightKeys && moveUpAndDownKeys)
-                text5.gameObject.SetActive(true);
+                if (moveAAndDKeys && moveWAndSKeys && moveLeftAndRightKeys && moveUpAndDownKeys)
+                {
+                    text5.gameObject.SetActive(true);
+                    TutorialImage.gameObject.SetActive(true);
+                }
+
 
                 break;
             case 6:
@@ -93,51 +101,83 @@ public class TestTextWriter : MonoBehaviour
                 break;
             case 7:
                 text7.gameObject.SetActive(true);
+                GAndHKey.gameObject.SetActive(true);
+                PeriodAndMinusKey.gameObject.SetActive(true);
                 break;
             case 8:
-                text8.gameObject.SetActive(true);
+                if (shotKeyPeriodAndMinus && shotKeyGAndH)
+                {
+                    text8.gameObject.SetActive(true);
+                }
                 break;
             case 9:
                 text9.gameObject.SetActive(true);
                 break;
             case 10:
                 text10.gameObject.SetActive(true);
+                Island1.gameObject.SetActive(true);
+                Island2.gameObject.SetActive(true);
+                break;
+            default:
+                Debug.Log("Oops, ran out of text UwU");
                 break;
         }
         Debug.Log(index);
 
     }
-    IEnumerator ShowKeys()
+    IEnumerator ShowObjects()
     {
 
         if (Input.GetKey(KeyCode.W) ||
                Input.GetKey(KeyCode.S) && index == 4)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             moveWAndSKeys = true;
             WAndSKey.gameObject.SetActive(false);
         }
         if (Input.GetKey(KeyCode.A) ||
             Input.GetKey(KeyCode.D) && index == 4)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             moveAAndDKeys = true;
             AAndDKey.gameObject.SetActive(false);
         }
         if (Input.GetKey(KeyCode.LeftArrow) ||
            Input.GetKey(KeyCode.RightArrow) && index == 4)
         { 
-            
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             moveLeftAndRightKeys = true;
             LeftAndRightKey.gameObject.SetActive(false);
         }
         if (Input.GetKey(KeyCode.UpArrow) ||
             Input.GetKey(KeyCode.DownArrow) && index == 4)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
             moveUpAndDownKeys = true;
             UpAndDownKey.gameObject.SetActive(false);
+        }
+        if (index == 4)
+        {
+            if (checker)
+            {
+            yield return new WaitForSeconds(3);
+                TutorialImage.gameObject.SetActive(false);
+                checker = false;
+            }
+        }
+        if (Input.GetKey(KeyCode.G) ||
+          Input.GetKey(KeyCode.H) && index == 7)
+        {
+            yield return new WaitForSeconds(1);
+            shotKeyGAndH = true;
+            GAndHKey.gameObject.SetActive(false);
+        }
+        if (Input.GetKey(KeyCode.Period) ||
+          Input.GetKey(KeyCode.Minus) && index == 7)
+        {
+            yield return new WaitForSeconds(1);
+            shotKeyPeriodAndMinus = true;
+            PeriodAndMinusKey.gameObject.SetActive(false);
         }
         yield return null;
     }
