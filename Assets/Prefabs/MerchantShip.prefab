@@ -115,8 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1860a52f4dfca4e4c99ebd11e3deb2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnOnDeath: 0
   startingHealth: 10
   currentHealth: 10
+  dead: 0
   powerUpH: {fileID: 0}
 --- !u!50 &5078371874343210501
 Rigidbody2D:

@@ -11,10 +11,13 @@ public class TextScript : MonoBehaviour
     public float waitTimer = 2f;
     public TestTextWriter testTextWriter;
     private int index = 0;
-
+    AudioSource TextSound;
+    AudioClip textSound;
     private void OnEnable()
     {
        StartCoroutine(ShowText());
+        TextSound.Play();
+
     }
 
     IEnumerator ShowText()
@@ -30,7 +33,8 @@ public class TextScript : MonoBehaviour
         this.gameObject.SetActive(false);
         index = testTextWriter.GetIndex();
         index = index +1;
-        testTextWriter.SetIndex(index) ;
+        testTextWriter.SetIndex(index);
+
     }
 
 }

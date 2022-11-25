@@ -27,6 +27,7 @@ public class TestTextWriter : MonoBehaviour
     public GameObject Merchantship;
     public GameObject PointingArrows;
     public GameObject TutorialImage;
+    public Health healthScript;
     public Text text1;
     public Text text2;
     public Text text3;
@@ -41,17 +42,17 @@ public class TestTextWriter : MonoBehaviour
     public Text text12;
     public Text text13;
     public Text text14;
+    public Text text15;
     private bool moveAAndDKeys;
     private bool moveLeftAndRightKeys;
     private bool moveUpAndDownKeys;
     private bool checker = true;
+    private bool checker2 = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        //SceneManager.sceneLoaded
     }
-
     public int GetIndex()
     {
         return index;
@@ -61,6 +62,8 @@ public class TestTextWriter : MonoBehaviour
         this.index = index;
         return this.index;
     }
+    
+    //healthScript = Health.CurrentHealth();
     private void Update()
     {
         StartCoroutine(ShowObjects());
@@ -82,9 +85,6 @@ public class TestTextWriter : MonoBehaviour
                 AAndDKey.gameObject.SetActive(true);
                 LeftAndRightKey.gameObject.SetActive(true);
                 UpAndDownKey.gameObject.SetActive(true);
-                //TutorialImage.gameObject.SetActive(false);
-
-
                 break;
             case 5:
 
@@ -93,8 +93,6 @@ public class TestTextWriter : MonoBehaviour
                     text5.gameObject.SetActive(true);
                     TutorialImage.gameObject.SetActive(true);
                 }
-
-
                 break;
             case 6:
                 text6.gameObject.SetActive(true);
@@ -108,6 +106,7 @@ public class TestTextWriter : MonoBehaviour
                 if (shotKeyPeriodAndMinus && shotKeyGAndH)
                 {
                     text8.gameObject.SetActive(true);
+                    TutorialImage.gameObject.SetActive(true);
                 }
                 break;
             case 9:
@@ -117,68 +116,110 @@ public class TestTextWriter : MonoBehaviour
                 text10.gameObject.SetActive(true);
                 Island1.gameObject.SetActive(true);
                 Island2.gameObject.SetActive(true);
+
+                break;
+            case 11:
+                //if (healthScript.dead)
+                if (Island1.active == false && Island2.active == false)
+                { 
+                text11.gameObject.SetActive(true);
+                }
+                break;
+            case 12:
+                text12.gameObject.SetActive(true);
+                PointingArrows.gameObject.SetActive(true);
+
+                break;
+            case 13:
+                text13.gameObject.SetActive(true);
+
+                break;
+            case 14:
+                text14.gameObject.SetActive(true);
+                Merchantship.gameObject.SetActive(true);
+                break;
+            case 15:
+                text15.gameObject.SetActive(true);
                 break;
             default:
                 Debug.Log("Oops, ran out of text UwU");
                 break;
         }
         Debug.Log(index);
-
     }
     IEnumerator ShowObjects()
     {
 
-        if (Input.GetKey(KeyCode.W) ||
-               Input.GetKey(KeyCode.S) && index == 4)
+        if (Input.GetKey(KeyCode.W) && index == 5 ||
+            Input.GetKey(KeyCode.S) && index == 5)
         {
             yield return new WaitForSeconds(1);
             moveWAndSKeys = true;
             WAndSKey.gameObject.SetActive(false);
         }
-        if (Input.GetKey(KeyCode.A) ||
-            Input.GetKey(KeyCode.D) && index == 4)
+        if (Input.GetKey(KeyCode.A) && index == 5 ||
+            Input.GetKey(KeyCode.D) && index == 5)
         {
             yield return new WaitForSeconds(1);
             moveAAndDKeys = true;
             AAndDKey.gameObject.SetActive(false);
         }
-        if (Input.GetKey(KeyCode.LeftArrow) ||
-           Input.GetKey(KeyCode.RightArrow) && index == 4)
+        if (Input.GetKey(KeyCode.LeftArrow) && index == 5 ||
+           Input.GetKey(KeyCode.RightArrow) && index == 5)
         { 
             yield return new WaitForSeconds(1);
             moveLeftAndRightKeys = true;
             LeftAndRightKey.gameObject.SetActive(false);
         }
-        if (Input.GetKey(KeyCode.UpArrow) ||
-            Input.GetKey(KeyCode.DownArrow) && index == 4)
+        if (Input.GetKey(KeyCode.UpArrow)   && index == 5 ||
+            Input.GetKey(KeyCode.DownArrow) && index == 5)
         {
             yield return new WaitForSeconds(1);
             moveUpAndDownKeys = true;
             UpAndDownKey.gameObject.SetActive(false);
+            Debug.Log("pressing moveing buttons atm!");
         }
-        if (index == 4)
+        if (index == 5)
         {
             if (checker)
             {
-            yield return new WaitForSeconds(3);
-                TutorialImage.gameObject.SetActive(false);
                 checker = false;
+                TutorialImage.gameObject.SetActive(false);
             }
         }
-        if (Input.GetKey(KeyCode.G) ||
-          Input.GetKey(KeyCode.H) && index == 7)
+        if (index == 8)
+        {
+            if (checker2)
+            {
+                checker2 = false;
+                TutorialImage.gameObject.SetActive(false);
+            }
+        }
+        if (Input.GetKey(KeyCode.G) && index == 8 ||
+          Input.GetKey(KeyCode.H) && index == 8)
         {
             yield return new WaitForSeconds(1);
             shotKeyGAndH = true;
             GAndHKey.gameObject.SetActive(false);
         }
-        if (Input.GetKey(KeyCode.Period) ||
-          Input.GetKey(KeyCode.Minus) && index == 7)
+        if (Input.GetKey(KeyCode.Period) && index == 8 ||
+          Input.GetKey(KeyCode.Minus) && index == 8)
         {
             yield return new WaitForSeconds(1);
             shotKeyPeriodAndMinus = true;
             PeriodAndMinusKey.gameObject.SetActive(false);
         }
+        if (index == 13)
+        {
+            yield return new WaitForSeconds(3);
+            PointingArrows.gameObject.SetActive(false);
+        }
+
+        if (index == 15)
+        {
+            
+        }
+
         yield return null;
     }
    

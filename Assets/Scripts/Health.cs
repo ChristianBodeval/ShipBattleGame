@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     public bool respawnOnDeath;
     public float startingHealth;
     public float currentHealth;
-    private bool dead;
+    public bool dead;
     private ShipManager shipManager;
     public GameObject powerUpH;
 
