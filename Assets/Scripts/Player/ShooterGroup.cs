@@ -22,14 +22,18 @@ public class ShooterGroup : MonoBehaviour
     private float maxAngle;
     private float startCurve;
 
+    private bool fireOnBullets;
 
     public bool isDrawingLines = true;
+
+
 
     public float Range { get => range; set => range = value; }
     public int Shooters { get => shooters; set => shooters = value; }
     public float ShipSize { get => shipSize; set => shipSize = value; }
     public float MaxAngle { get => maxAngle; set => maxAngle = value; }
     public float StartCurve { get => startCurve; set => startCurve = value; }
+    public bool FireOnBullets { get => fireOnBullets; set => fireOnBullets = value; }
 
     void Awake()
     {
@@ -38,13 +42,15 @@ public class ShooterGroup : MonoBehaviour
         startPoints = new Vector2[shooters + 2];
         canonGameObjects = new GameObject[shooters];
         lines = new GameObject[shooters + 2];
+
+        fireOnBullets = false;
     }
 
    
 
     void Update()
     {
-        
+        Debug.Log("Fire on bullets: " + fireOnBullets);
         SetLinePoints(startPoints, endPoints);
         SpawnShooters(startPoints, endPoints);
         DestroyUnusedShooters();
@@ -131,6 +137,8 @@ public class ShooterGroup : MonoBehaviour
         {
 
             Shooter shooterScript = canonGameObjects[i].GetComponent<Shooter>();
+            shooterScript.fireOnBullets = fireOnBullets;
+            
             Vector3 position = canonGameObjects[i].transform.position;
             Vector3 direction = endPoints[i] - startPoints[i] + (Vector2)canonGameObjects[i].transform.position; //TODO Kan dette skrives kun med endPoints?
             GameObject shotBy = transform.parent.gameObject;
@@ -176,6 +184,7 @@ public class ShooterGroup : MonoBehaviour
             GameObject canonClone;
             canonClone = Instantiate(shooterPrefab, (Vector3)startPoints[i] + transform.position, rotation);
 
+            
             
             canonClone.transform.parent = gameObject.transform;
             canonGameObjects[i] = canonClone;

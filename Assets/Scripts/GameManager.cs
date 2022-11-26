@@ -50,7 +50,7 @@ public sealed class GameManager : MonoBehaviour
             players.Add(p1.gameObject);
             p1.transform.position = spawn1.transform.position;
             p1.transform.rotation = spawn1.transform.rotation;
-            TeleportManager.instance.AddTeleportable(p1.gameObject);
+            TeleportManager.Instance.AddTeleportable(p1.gameObject);
         }
 
 
@@ -66,7 +66,7 @@ public sealed class GameManager : MonoBehaviour
             p2.transform.rotation = spawn2.transform.rotation;
 
             //Make them teleportable
-            TeleportManager.instance.AddTeleportable(p2.gameObject);
+            TeleportManager.Instance.AddTeleportable(p2.gameObject);
         }
 
     }

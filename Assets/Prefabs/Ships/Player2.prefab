@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 3685263541795606622}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Player1
+  m_TagString: Players
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,21 +143,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Instance: {fileID: 0}
-  maxTurnSpeed: 2.5
+  maxTurnSpeed: 2
   turnAcceleration: 0.05
   smoothTurningFactor: 0.05
-  smoothMovementFactor: 0.3
+  smoothMovementFactor: 0.15
   numberOfGears: 2
-  maxMovementSpeed: 0.08
+  maxMovementSpeed: 0.1
   startingHealth: 200
   currentHealth: 200
   fireRateInSeconds: 3
   totalDamage: 50
   projectileSpeed: 10
   knockbackValue: 0.15
-  smoothKnockbackFactor: 0.1
+  smoothKnockbackFactor: 0.15
   rammingDamage: 70
   range: 20
+  fireOnBullets: 0
   shooters: 4
   shipSize: 4.94
   maxAngle: 15
@@ -216,11 +217,11 @@ MonoBehaviour:
   numberOfGears: 0
   moveType: 3
   dashType: 2
+  dashGearValue: 3
   isDashing: 0
   canDash: 1
-  dashTime: 0.5
-  dashGearValue: 3
-  dashCooldown: 1
+  dashTime: 1
+  dashCooldown: 5
   actionReference: {fileID: -1680190386980627800, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
 --- !u!114 &-7976377503517882532
 MonoBehaviour:

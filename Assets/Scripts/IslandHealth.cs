@@ -5,7 +5,7 @@ using UnityEngine;
 public class IslandHealth : Health
 {
     public GameObject treasure;
-    public GameObject powerUp;
+    public GameObject powerUpSpawner;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -17,7 +17,7 @@ public class IslandHealth : Health
     {
         if (CurrentHealth <= 0)
         {
-            Instantiate(powerUp, treasure.GetComponent<Transform>().position, treasure.GetComponent<Transform>().rotation);
+            Instantiate(powerUpSpawner, treasure.GetComponent<Transform>().position, treasure.GetComponent<Transform>().rotation);
 
             treasure.transform.parent = null;
             gameObject.SetActive(false);

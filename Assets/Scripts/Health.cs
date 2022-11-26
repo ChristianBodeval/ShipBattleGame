@@ -12,13 +12,16 @@ public class Health : MonoBehaviour
     public float currentHealth;
     private bool dead;
     private ShipManager shipManager;
-    public GameObject powerUpH;
+    private Color playerColor;
 
     //Accessor
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
 
-
+    private void Awake()
+    {
+        shipManager = GetComponent<ShipManager>();
+    }
 
     private void OnEnable()
     {
@@ -40,20 +43,21 @@ public class Health : MonoBehaviour
     public virtual void OnDeath()
     {
         dead = true;
-        
+
+        shipManager.Die();
 
 
-
-        if(respawnOnDeath)
+        if (respawnOnDeath)
         {
-            Invoke("Respawn", 2);
+            Invoke("Respawn", 3);
         }
 
     }
 
     public void Respawn()
     {
-        gameObject.SetActive(true);
+        shipManager.Revive();
         currentHealth = startingHealth;
+        gameObject.SetActive(true);
     }
 }

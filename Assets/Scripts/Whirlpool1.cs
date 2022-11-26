@@ -22,10 +22,30 @@ public class Whirlpool1 : MonoBehaviour
         spriteHolderTransform.Rotate(new Vector3(0, 0, -rotationSpeed) * Time.deltaTime); //Rotates GameObject of the sprite
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //If ship is in whirlpool
+        if (collision.GetComponent<ShipManager>())
+        {
+            collision.GetComponent<ShipManager>().MaxMovementSpeed /= 2;
+        }
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        //If ship is in whirlpool
+        if (collision.GetComponent<ShipManager>())
+        {
+            collision.GetComponent<ShipManager>().MaxMovementSpeed *= 2;
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<ShipManager>())
         {
+
             //Moves player towards the center of the circleCollider2D based how close the player is to the center. 
             float colliderRadius = circleCollider2D.radius;
             Vector3 vectorToPlayer = transform.position - collision.gameObject.transform.position;

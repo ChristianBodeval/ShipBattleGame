@@ -123,7 +123,8 @@ public class Shooting : MonoBehaviour
 
 
         // Track the current state of the fire button and make decisions based on the current launch force.
-        /* Charge up
+        // Charge up
+        /*
         if (shootingInputValue < 1)
             if (CurrentLaunchForce >= MaxLaunchForce && !Fired)
             {
@@ -149,8 +150,8 @@ public class Shooting : MonoBehaviour
             else if (Input.GetButtonUp(m_FireButton) && !m_Fired)
             {
                 Fire();
-            }
-            */
+            }*/
+            
 
 
 

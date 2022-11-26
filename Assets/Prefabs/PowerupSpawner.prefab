@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8b37c79fc61494e9271bc6462da8a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rando: 0
+  random: 0
   powerUpH: {fileID: 4413057275651430867, guid: e982a8c3ee1db694a83268463ada83b6, type: 3}
   powerUpA: {fileID: 5326999071191009093, guid: 360b744e8d95ca44794bb695d7bc36bf, type: 3}
   powerUpS: {fileID: 5137852693265582955, guid: 150283ea5b7f1704fb8079134d891177, type: 3}

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class TeleportManager : MonoBehaviour
 {
-    List<GameObject> objectsToTeleport = new List<GameObject>();
+    public List<GameObject> objectsToTeleport = new List<GameObject>();
 
     IEnumerable coroutine;
 
@@ -22,7 +22,7 @@ public class TeleportManager : MonoBehaviour
         {
             if (instance == null)
             {
-                Debug.Log("Gamemanger is null");
+                Debug.Log("Teleportmanager is null");
             }
             return instance;
         }
@@ -43,16 +43,17 @@ public class TeleportManager : MonoBehaviour
         mapL = halfViewport * 2;
         mapH = camera.orthographicSize * 2;
         //Adds object who should be teleported when hitting border.
-        objectsToTeleport.AddRange(GameObject.FindGameObjectsWithTag("Players"));
+        instance.objectsToTeleport.AddRange(GameObject.FindGameObjectsWithTag("Players"));
+
     }
 
     public void AddTeleportable(GameObject obj)
     {
-        objectsToTeleport.Add(obj);
+        instance.objectsToTeleport.Add(obj);
     }
     public void RemoveTeleportable(GameObject obj)
     {
-        objectsToTeleport.Remove(obj); //TODO Can be optimized by instead re-using objects
+        instance.objectsToTeleport.Remove(obj); //TODO Can be optimized by instead re-using objects
         
     }
 
@@ -86,37 +87,76 @@ public class TeleportManager : MonoBehaviour
 
         //Changes position of the object, if they go out from the screen size.
         //TODO This can be optimized
-        foreach (GameObject obj in objectsToTeleport)
+        foreach (GameObject obj in instance.objectsToTeleport)
         {
-            if (obj != null) {
+            if(obj != null)
+            {
+                if (obj.GetComponent<ShipManager>()) {
 
-                if (obj.transform.position.y < 0 - mapH / 2)
-                {
-                    DisableTrail(obj);
-                    obj.transform.position += new Vector3(0, +mapH + 1, 0);
-                    StartCoroutine(EnableTrail(obj));
+                    if (obj.transform.position.y < 0 - mapH / 2)
+                    {
+                        DisableTrail(obj);
+                        obj.transform.position += new Vector3(0, +mapH + 1, 0);
+                        StartCoroutine(EnableTrail(obj));
 
+                    }
+                    if (obj.transform.position.y > mapH - mapH / 2)
+                    {
+                        DisableTrail(obj);
+                        obj.transform.position += new Vector3(0, -mapH - 1, 0);
+                        StartCoroutine(EnableTrail(obj));
+                    }
+                    if (obj.transform.position.x < 0 - mapL / 2)
+                    {
+                        DisableTrail(obj);
+                        obj.transform.position += new Vector3(+mapL + 1, 0, 0);
+                        StartCoroutine(EnableTrail(obj));
+                    }
+                    if (obj.transform.position.x > mapL - mapL / 2)
+                    {
+                        DisableTrail(obj);
+                        obj.transform.position += new Vector3(-mapL - 1, 0, 0);
+                        StartCoroutine(EnableTrail(obj));
+                    }
                 }
-                if (obj.transform.position.y > mapH - mapH / 2)
+
+
+
+
+                if(obj.GetComponent<CanonBall>())
                 {
-                    DisableTrail(obj);
-                    obj.transform.position += new Vector3(0, -mapH - 1, 0);
-                    StartCoroutine(EnableTrail(obj));
+                    if (obj.transform.position.y < 0 - mapH / 2)
+                    {
+                        obj.GetComponent<CanonBall>().startMarker += new Vector3(0, +mapH + 1, 0);
+                        obj.GetComponent<CanonBall>().endMarker += new Vector3(0, +mapH + 1, 0);
+                        obj.transform.position += new Vector3(0, +mapH + 1, 0);
+
+                    }
+                    if (obj.transform.position.y > mapH - mapH / 2)
+                    {
+                        obj.GetComponent<CanonBall>().startMarker += new Vector3(0, -mapH - 1, 0);
+                        obj.GetComponent<CanonBall>().endMarker += new Vector3(0, -mapH - 1, 0);
+                        obj.transform.position += new Vector3(0, -mapH - 1, 0);
+                    }
+
+                    if (obj.transform.position.x < 0 - mapL / 2)
+                    {
+                        obj.GetComponent<CanonBall>().startMarker += new Vector3(+mapL + 1, 0, 0);
+                        obj.GetComponent<CanonBall>().endMarker += new Vector3(+mapL + 1, 0, 0);
+                        obj.transform.position += new Vector3(+mapL + 1, 0, 0);
+                    }
+                    if (obj.transform.position.x > mapL - mapL / 2)
+                    {
+                        obj.GetComponent<CanonBall>().startMarker += new Vector3(-mapL - 1, 0, 0);
+                        obj.GetComponent<CanonBall>().endMarker += new Vector3(-mapL - 1, 0, 0);
+                        obj.transform.position += new Vector3(-mapL - 1, 0, 0);
+                    }
                 }
-                if (obj.transform.position.x < 0 - mapL / 2)
-                {
-                    DisableTrail(obj);
-                    obj.transform.position += new Vector3(+mapL + 1, 0, 0);
-                    StartCoroutine(EnableTrail(obj));
-                }
-                if (obj.transform.position.x > mapL - mapL / 2)
-                {
-                    DisableTrail(obj);
-                    obj.transform.position += new Vector3(-mapL - 1, 0, 0);
-                    StartCoroutine(EnableTrail(obj));
-                }
+
             }
 
         }
+
+        
     }
 }

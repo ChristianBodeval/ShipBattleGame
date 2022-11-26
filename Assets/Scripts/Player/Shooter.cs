@@ -9,14 +9,17 @@ public class Shooter : MonoBehaviour
     // Movement speed in units per second.
     public float speed = 1.0F;
 
+    public bool fireOnBullets;
+
     public GameObject projectilePrefab;
 
 
 
     public void Shoot(GameObject shotBy, Vector3 target, float speed, float damage)
     {
-        
         GameObject canonball = ProjectilePooler.SharedInstance.GetPooledObject();
+        
+
         if (canonball != null)
         {
             CanonBall projectileScript = canonball.GetComponent<CanonBall>();
@@ -29,7 +32,9 @@ public class Shooter : MonoBehaviour
             projectileScript.ProjectileSpeed = speed;
             projectileScript.ShotBy = shotBy;
             
+            projectileScript.fireOnBullet = fireOnBullets;
             canonball.gameObject.SetActive(true);
+            TeleportManager.Instance.AddTeleportable(canonball);
         }
         
 

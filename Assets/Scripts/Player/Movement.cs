@@ -47,10 +47,10 @@ public class Movement : MonoBehaviour
     public DashType dashType;
 
     //Dash
+    public int dashGearValue;
     public bool isDashing;
     public bool canDash;
     public float dashTime;
-    public int dashGearValue;
     public float dashCooldown;
     public InputActionReference actionReference;
 
@@ -75,7 +75,7 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         CalculateTurnAcceleration();
-        if(!isDashing)
+        if (!isDashing)
             Turn();
         MoveForward();
     }
@@ -99,12 +99,12 @@ public class Movement : MonoBehaviour
 
         // -----> Dash <---- //
         //Dash on Multitap
-        if (latestInput > 0 && context.interaction is MultiTapInteraction && context.started && dashType == DashType.DoubleTap)
+        if (moveInputValue > 0 && context.interaction is MultiTapInteraction && context.started && dashType == DashType.DoubleTap)
         {
-
+                
             StartCoroutine(Dash());
         }
-        //Dash on Release
+        //Dash on Release // Uses latestInput since context.cancelled is not called on context.cancelled
         if (latestInput > 0 && dashType == DashType.OnRelease)
         {
             if (context.canceled && !isDashing && canDash)
@@ -114,7 +114,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (latestInput > 0 && dashType == DashType.OneTap)
+        if (moveInputValue > 0 && dashType == DashType.OneTap)
         {
             if (context.started && !isDashing && canDash)
             {
@@ -190,8 +190,10 @@ public class Movement : MonoBehaviour
     IEnumerator Dash ()
     {
         isDashing = true;
-        canDash = false;
+        turnAcceleration /= 10;
+        maxTurnSpeed /= 10;
         currentGear = dashGearValue;
+        canDash = false;
         yield return new WaitForSeconds(dashTime);
 
         if (moveType == MoveType.OnHold)
@@ -199,9 +201,10 @@ public class Movement : MonoBehaviour
         else
         {
             currentGear = 1;
-            currentTurnValue = 0;
         }
 
+        turnAcceleration *= 10;
+        maxTurnSpeed *= 10;
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;

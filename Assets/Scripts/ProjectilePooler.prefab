@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects: []
   objectToPool: {fileID: 275803821595653893, guid: 5f501533e8219814a8dea60ed0e89225, type: 3}
-  amountToPool: 100
+  amountToPool: 50

@@ -51,6 +51,10 @@ public class ShipManager : MonoBehaviour
     [Range(1, 25)]
     private float range;
 
+
+    public bool fireOnBullets;
+
+
     /*
     [Range(1, 25)]
     private float minRange;
@@ -75,17 +79,31 @@ public class ShipManager : MonoBehaviour
     private Shooting shootingScript;
     private Knockback knockbackScript;
     private Ramming rammingScript;
+    private SpriteRenderer spriteRenderer;
 
     private ShooterGroup[] shooterGroups;
+    private Color playerColor;
 
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public float TotalDamage { get => totalDamage; set => totalDamage = value; }
     public float MaxMovementSpeed { get => maxMovementSpeed; set => maxMovementSpeed = value; }
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
+    public float Range { get => range; set => range = value; }
+    public float RammingDamage { get => rammingDamage; set => rammingDamage = value; }
+    public float MaxTurnSpeed { get => maxTurnSpeed; set => maxTurnSpeed = value; }
+    public float TurnAcceleration { get => turnAcceleration; set => turnAcceleration = value; }
+    public float SmoothTurningFactor { get => smoothTurningFactor; set => smoothTurningFactor = value; }
+    public float SmoothMovementFactor { get => smoothMovementFactor; set => smoothMovementFactor = value; }
+    public int NumberOfGears { get => numberOfGears; set => numberOfGears = value; }
+    public float FireRateInSeconds { get => fireRateInSeconds; set => fireRateInSeconds = value; }
+    public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
+    public float KnockbackValue { get => knockbackValue; set => knockbackValue = value; }
+    public float SmoothKnockbackFactor { get => smoothKnockbackFactor; set => smoothKnockbackFactor = value; }
+
     /*
-    public float MinRange { get => minRange; set => minRange = value; }
-    public float MaxRange { get => maxRange; set => maxRange = value; }
-    */
+public float MinRange { get => minRange; set => minRange = value; }
+public float MaxRange { get => maxRange; set => maxRange = value; }
+*/
 
 
     private void Awake()
@@ -96,6 +114,7 @@ public class ShipManager : MonoBehaviour
         knockbackScript = GetComponent<Knockback>();
         rammingScript = GetComponent<Ramming>();
         shooterGroups = GetComponentsInChildren<ShooterGroup>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         healthScript.StartingHealth = startingHealth;
         healthScript.CurrentHealth = startingHealth;
         CurrentHealth = startingHealth;
@@ -130,6 +149,8 @@ public class ShipManager : MonoBehaviour
             s.ShipSize = shipSize;
             s.MaxAngle = maxAngle;
             s.StartCurve = startCurve;
+            s.FireOnBullets = fireOnBullets;
+
         }
     }
 
@@ -142,9 +163,36 @@ public class ShipManager : MonoBehaviour
         Input = GetComponent<PlayerInput>();
     }
 
-    private void OnDisable()
+    public void Die()
     {
-        Input.actions = null;
+        //Input.actions = null;
+
+        playerColor = spriteRenderer.color;
+        spriteRenderer.color = Color.black;
+
+        healthScript.enabled = false;
+        movementScript.enabled = false;
+        shootingScript.enabled = false;
+        //knockbackScript.enabled = false;
+        rammingScript.enabled = false;
+        foreach (var shooterGroup in shooterGroups)
+        {
+            shooterGroup.enabled = false;
+        }
+    }
+
+    public void Revive()
+    {
+        spriteRenderer.color = playerColor;
+        healthScript.enabled = true;
+        movementScript.enabled = true;
+        shootingScript.enabled = true;
+        //knockbackScript.enabled = true;
+        rammingScript.enabled = true;
+        foreach (var shooterGroup in shooterGroups)
+        {
+            shooterGroup.enabled = true;
+        }
     }
 
 
