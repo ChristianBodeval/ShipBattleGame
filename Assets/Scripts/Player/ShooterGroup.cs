@@ -48,9 +48,8 @@ public class ShooterGroup : MonoBehaviour
 
    
 
-    void Update()
+    void FixedUpdate()
     {
-        Debug.Log("Fire on bullets: " + fireOnBullets);
         SetLinePoints(startPoints, endPoints);
         SpawnShooters(startPoints, endPoints);
         DestroyUnusedShooters();

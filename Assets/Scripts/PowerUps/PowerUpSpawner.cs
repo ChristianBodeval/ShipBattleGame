@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PowerUpSpawner : MonoBehaviour
 {
-    private Type random;
+    private Type randomPowerup;
     public enum Type {Health , Attack , Speed, NumberOfTypes };
 
     public GameObject powerUpH;
@@ -19,11 +19,11 @@ public class PowerUpSpawner : MonoBehaviour
     void SpawnRandom()
     {
         //1 to 4 to Ignore health
-        random = (Type)Random.Range(1, (int)Type.NumberOfTypes);
+        randomPowerup = (Type)Random.Range(1, (int)Type.NumberOfTypes);
 
         GameObject randomPowerUp;
 
-        switch (random)
+        switch (randomPowerup)
         {
             case Type.Health:
                 randomPowerUp = Instantiate(powerUpH, transform.position, transform.rotation);

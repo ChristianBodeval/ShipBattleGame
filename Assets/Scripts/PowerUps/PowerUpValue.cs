@@ -65,6 +65,7 @@ public class PowerUpValue : MonoBehaviour
             {
                 case Type.Health:
                     pickupShip.CurrentHealth += value;
+                    
                     break;
                 case Type.Attack:
                     pickupShip.TotalDamage += value;
@@ -85,6 +86,10 @@ public class PowerUpValue : MonoBehaviour
             }
             if (isTemporary)
                 Invoke("resetValue", duration);
+            else
+            {
+                pickupShip.hasPowerUp = false;
+            }
         }
     }
 

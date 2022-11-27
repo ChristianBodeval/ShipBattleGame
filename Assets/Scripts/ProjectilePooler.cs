@@ -23,7 +23,6 @@ public class ProjectilePooler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         //Initialize a list of a size containing the specified GameObject
         objects = new List<GameObject>();
         GameObject tmp;
@@ -31,7 +30,7 @@ public class ProjectilePooler : MonoBehaviour
         {
             tmp = Instantiate(objectToPool);
             objects.Add(tmp);
-            //tmp.transform.parent = gameObject.transform;
+            tmp.transform.parent = gameObject.transform;
             tmp.SetActive(false);
 
         }
