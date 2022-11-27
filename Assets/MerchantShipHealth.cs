@@ -14,8 +14,9 @@ public class MerchantShipHealth : Health
     }
     public override void OnDeath()
     {
-        if (CurrentHealth <= 0)
+        if (currentHealth <= 0)
         {
+            Debug.Log("Merchantship dead");
             Instantiate(healthPowerUp, transform.position, Quaternion.identity);
             gameObject.SetActive(false);
         }

@@ -20,13 +20,14 @@ public class PowerUpValue : MonoBehaviour
     public bool SpawnSpawnAttack;
     public bool SpawnSpawnSpeed;
 
+    ShipManager pickUpShip;
+
     List<Type> pickList = new List<Type>();
-
-
 
 
     private void Start()
     {
+        pickupShip = null;
         if (SpawnHealth)
             pickList.Add(Type.Health);
         if (SpawnSpawnAttack)
@@ -40,21 +41,25 @@ public class PowerUpValue : MonoBehaviour
         }
     }
 
-    private void SetDefaultValues()
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //If not colliding with a player ship --> do nothing
+        if(!collision.GetComponent<ShipManager>())
+        {
+            return;
+        }
 
-        float timer = Time.time + duration;
-        if (collision.gameObject.GetComponent<ShipManager>())
+        pickupShip = collision.GetComponent<ShipManager>();
+
+        //If no powerup is active;
+        if (pickupShip != null && !pickupShip.hasPowerUp)
         {
             gameObject.SetActive(false);
+
             Debug.Log("Applying powerup: " + gameObject.name);
 
-            pickupShip = collision.GetComponent<ShipManager>();
+            pickupShip.hasPowerUp = true;
 
             switch (powerUpType)
             {
@@ -87,30 +92,9 @@ public class PowerUpValue : MonoBehaviour
     {
         if (isTemporary)
         {
-            switch (powerUpType)
-            {
-                case Type.Health:
-                    pickupShip.CurrentHealth -= value;
-                    break;
-                case Type.Attack:
-                    pickupShip.TotalDamage -= value;
-                    pickupShip.fireOnBullets = false;
-                    pickupShip.maxAngle *= 3;
-                    pickupShip.Range /= 3;
-                    pickupShip.FireRateInSeconds *= 3;
-                    pickupShip.MaxMovementSpeed *= 2;
-                    pickupShip.ProjectileSpeed /= 2;
-                    pickupShip.TurnAcceleration *= 2;
-                    pickupShip.MaxTurnSpeed *= 2;
-
-
-                    break;
-                case Type.Speed:
-                    pickupShip.MaxMovementSpeed -= value;
-                    pickupShip.TurnAcceleration /= 2;
-                    pickupShip.MaxMovementSpeed /= 1.5f;
-                    break;
-            }
+            Debug.Log("Reverting powerup: " + gameObject.name);
+            pickupShip.hasPowerUp = false;
+            pickupShip.ResetValues();
         }
 
 

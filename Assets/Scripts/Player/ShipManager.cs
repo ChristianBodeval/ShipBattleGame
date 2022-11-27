@@ -52,7 +52,6 @@ public class ShipManager : MonoBehaviour
     private float range;
 
 
-    public bool fireOnBullets;
 
 
     /*
@@ -61,6 +60,7 @@ public class ShipManager : MonoBehaviour
     [Range(25, 50)]
     private float maxRange;
     */
+    public bool fireOnBullets;
     [Range(1, 10)]
     public int shooters;
 
@@ -100,6 +100,33 @@ public class ShipManager : MonoBehaviour
     public float KnockbackValue { get => knockbackValue; set => knockbackValue = value; }
     public float SmoothKnockbackFactor { get => smoothKnockbackFactor; set => smoothKnockbackFactor = value; }
 
+
+
+    float currentHealth_default;
+    float totalDamage_default;
+    float maxMovementSpeed_default;
+    float startingHealth_default;
+    float range_default;
+    float rammingDamage_default;
+    float maxTurnSpeed_default;
+    float turnAcceleration_default;
+    float smoothTurningFactor_default;
+    float smoothMovementFactor_default;
+    int numberOfGears_default;
+    float fireRateInSeconds_default;
+    float projectileSpeed_default;
+    float knockbackValue_default;
+    float smoothKnockbackFactor_default;
+    //ShooterGroups
+    bool fireOnBullets_default;
+    int shooters_default;
+    float shipSize_default;
+    float maxAngle_default;
+    float startCurve_default;
+
+    public bool hasPowerUp;
+    
+
     /*
 public float MinRange { get => minRange; set => minRange = value; }
 public float MaxRange { get => maxRange; set => maxRange = value; }
@@ -118,6 +145,38 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         healthScript.StartingHealth = startingHealth;
         healthScript.CurrentHealth = startingHealth;
         CurrentHealth = startingHealth;
+    }
+
+    void Start()
+    {
+        hasPowerUp = false;
+        Input = GetComponent<PlayerInput>();
+        SetDefaultValues();
+    }
+
+    void SetDefaultValues()
+    {
+        currentHealth_default = currentHealth;
+        totalDamage_default = totalDamage;
+        maxMovementSpeed_default = maxMovementSpeed;
+        startingHealth_default = startingHealth;
+        rammingDamage_default = rammingDamage;
+        maxTurnSpeed_default = maxMovementSpeed;
+        turnAcceleration_default = turnAcceleration;
+        smoothTurningFactor_default = smoothTurningFactor;
+        smoothMovementFactor_default = smoothMovementFactor;
+        numberOfGears_default = numberOfGears;
+        fireRateInSeconds_default = fireRateInSeconds;
+        projectileSpeed_default = projectileSpeed;
+        knockbackValue_default = knockbackValue;
+        smoothKnockbackFactor_default = smoothKnockbackFactor;
+
+        range_default = range;
+        shooters_default = shooters;
+        shipSize_default = shipSize;
+        maxAngle_default = maxAngle;
+        startCurve_default = startCurve;
+        fireOnBullets_default = fireOnBullets;
     }
 
     void UpdateValues()
@@ -155,14 +214,6 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
     }
 
 
-
-
-
-    private void Start()
-    {
-        Input = GetComponent<PlayerInput>();
-    }
-
     public void Die()
     {
         //Input.actions = null;
@@ -179,6 +230,33 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         {
             shooterGroup.enabled = false;
         }
+    }
+
+    public void ResetValues()
+    {
+        currentHealth = currentHealth_default;
+        totalDamage = totalDamage_default;
+        maxMovementSpeed = maxMovementSpeed_default;
+        startingHealth = startingHealth_default;
+        range = range_default;
+        rammingDamage = rammingDamage_default;
+        maxTurnSpeed = maxMovementSpeed_default;
+        turnAcceleration = turnAcceleration_default;
+        smoothTurningFactor = smoothTurningFactor_default;
+        smoothMovementFactor = smoothMovementFactor_default;
+        numberOfGears = numberOfGears_default;
+        fireRateInSeconds = fireRateInSeconds_default;
+        projectileSpeed = projectileSpeed_default;
+        knockbackValue = knockbackValue_default;
+        smoothKnockbackFactor = smoothKnockbackFactor_default;
+        //ShootingGroup
+        range = range_default;
+        shooters = shooters_default;
+        shipSize = shipSize_default;
+        maxAngle = maxAngle_default;
+        startCurve = startCurve_default;
+        fireOnBullets = fireOnBullets_default;
+
     }
 
     public void Revive()

@@ -53,6 +53,9 @@ MonoBehaviour:
   duration: 5
   powerUpType: 1
   pickupShip: {fileID: 0}
+  SpawnHealth: 0
+  SpawnSpawnAttack: 0
+  SpawnSpawnSpeed: 0
 --- !u!58 &2564205749354610453
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -68,7 +71,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.3239146
 --- !u!212 &7201860464279082917
 SpriteRenderer:
   m_ObjectHideFlags: 0
