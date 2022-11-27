@@ -1,7 +1,5 @@
-using Newtonsoft.Json.Linq;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TestTextWriter : MonoBehaviour
@@ -25,7 +23,6 @@ public class TestTextWriter : MonoBehaviour
     public GameObject PointingArrows;
     public GameObject TPArrows;
     public GameObject TutorialImage;
-    public Health healthScript;
     public Text text1;                              // Text objects for all the text being displayed
     public Text text2;
     public Text text3;
@@ -46,26 +43,23 @@ public class TestTextWriter : MonoBehaviour
     public Text text18;
     public Text text19;
     public Text text20;
+
     private bool moveAAndDKeys;
     private bool moveLeftAndRightKeys;
     private bool moveUpAndDownKeys;
-    private bool checker = true;
-    private bool checker2 = true;
+    private bool[] checker = new bool[4];          // Array of booleans to check if TutorialImage has been shown, Starts off false
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
     public int GetIndex()
     {
         return index;
     }
+
     public int SetIndex(int index)
     {
         this.index = index;
         return this.index;
     }
-    
+
     //healthScript = Health.CurrentHealth();
     private void Update()
     {
@@ -75,12 +69,15 @@ public class TestTextWriter : MonoBehaviour
             case 1:
                 text1.gameObject.SetActive(true);
                 break;
+
             case 2:
                 text2.gameObject.SetActive(true);
                 break;
+
             case 3:
                 text3.gameObject.SetActive(true);
                 break;
+
             case 4:
 
                 text4.gameObject.SetActive(true);
@@ -89,6 +86,7 @@ public class TestTextWriter : MonoBehaviour
                 LeftAndRightKey.gameObject.SetActive(true);
                 UpAndDownKey.gameObject.SetActive(true);
                 break;
+
             case 5:
 
                 if (moveAAndDKeys && moveWAndSKeys && moveLeftAndRightKeys && moveUpAndDownKeys)
@@ -97,22 +95,27 @@ public class TestTextWriter : MonoBehaviour
                     TutorialImage.gameObject.SetActive(true);
                 }
                 break;
-           case 6: // Teleporter
-               text6.gameObject.SetActive(true);
-               break; 
-           case 7: // Teleporter 2
-               text7.gameObject.SetActive(true);
+
+            case 6: // Teleporter
+                text6.gameObject.SetActive(true);
+                break;
+
+            case 7: // Teleporter 2
+                text7.gameObject.SetActive(true);
                 TPArrows.gameObject.SetActive(true);
-               break;
+                break;
+
             case 8:
                 text8.gameObject.SetActive(true);
                 TPArrows.gameObject.SetActive(false);
                 break;
+
             case 9:
                 text9.gameObject.SetActive(true);
                 GAndHKey.gameObject.SetActive(true);
                 PeriodAndMinusKey.gameObject.SetActive(true);
                 break;
+
             case 10:
                 if (shotKeyPeriodAndMinus && shotKeyGAndH)
                 {
@@ -120,59 +123,73 @@ public class TestTextWriter : MonoBehaviour
                     TutorialImage.gameObject.SetActive(true);
                 }
                 break;
+
             case 11: // Ramming
                 text11.gameObject.SetActive(true);
                 break;
+
             case 12: // Ramming 2
                 text12.gameObject.SetActive(true);
                 break;
+
             case 13: // Dash
                 text13.gameObject.SetActive(true);
                 break;
+
             case 14:
                 text14.gameObject.SetActive(true);
                 break;
+
             case 15:
                 text15.gameObject.SetActive(true);
                 Island1.gameObject.SetActive(true);
                 Island2.gameObject.SetActive(true);
 
                 break;
+
             case 16:
-                //if (healthScript.dead)
                 if (Island1.active == false && Island2.active == false)
-                { 
-                text16.gameObject.SetActive(true);
+                {
+                    text16.gameObject.SetActive(true);
+                    TutorialImage.gameObject.SetActive(true);
                 }
                 break;
+
             case 17:
                 text17.gameObject.SetActive(true);
                 PointingArrows.gameObject.SetActive(true);
 
                 break;
+
             case 18:
                 text18.gameObject.SetActive(true);
 
                 break;
+
             case 19:
                 text19.gameObject.SetActive(true);
                 Merchantship.gameObject.SetActive(true);
                 Merchantship2.gameObject.SetActive(true);
                 break;
+
             case 20:
                 if (Merchantship.active == false && Merchantship2.active == false)
+                {
                     text20.gameObject.SetActive(true);
+                    TutorialImage.gameObject.SetActive(true);
+                }
 
                 break;
+
             default:
                 Debug.Log("Oops, ran out of text UwU");
                 break;
         }
         Debug.Log(index);
     }
-    IEnumerator ShowObjects()
-    {
 
+    private IEnumerator ShowObjects()
+    {
         if (Input.GetKey(KeyCode.W) && index == 5 ||
             Input.GetKey(KeyCode.S) && index == 5)
         {
@@ -189,12 +206,12 @@ public class TestTextWriter : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftArrow) && index == 5 ||
            Input.GetKey(KeyCode.RightArrow) && index == 5)
-        { 
+        {
             yield return new WaitForSeconds(1);
             moveLeftAndRightKeys = true;
             LeftAndRightKey.gameObject.SetActive(false);
         }
-        if (Input.GetKey(KeyCode.UpArrow)   && index == 5 ||
+        if (Input.GetKey(KeyCode.UpArrow) && index == 5 ||
             Input.GetKey(KeyCode.DownArrow) && index == 5)
         {
             yield return new WaitForSeconds(1);
@@ -204,20 +221,37 @@ public class TestTextWriter : MonoBehaviour
         }
         if (index == 5)
         {
-            if (checker)
+            if (checker[1])
             {
-                checker = false;
+                checker[1] = true;
                 TutorialImage.gameObject.SetActive(false);
             }
         }
         if (index == 10)
         {
-            if (checker2)
+            if (checker[2])
             {
-                checker2 = false;
+                checker[2] = true;
                 TutorialImage.gameObject.SetActive(false);
             }
         }
+        if (index == 15)
+        {
+            if (checker[3])
+            {
+                checker[3] = true;
+                TutorialImage.gameObject.SetActive(false);
+            }
+        }
+        if (index == 19)
+        {
+            if (checker[4])
+            {
+                checker[4] = true;
+                TutorialImage.gameObject.SetActive(false);
+            }
+        }
+
         if (Input.GetKey(KeyCode.G) && index == 10 ||
           Input.GetKey(KeyCode.H) && index == 10)
         {
@@ -238,14 +272,6 @@ public class TestTextWriter : MonoBehaviour
             PointingArrows.gameObject.SetActive(false);
         }
 
-        if (index == 15)
-        {
-            
-        }
-
         yield return null;
     }
-   
-    
-        
 }
