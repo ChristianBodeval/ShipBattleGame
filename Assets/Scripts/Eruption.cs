@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,6 +11,7 @@ public class Eruption : MonoBehaviour
 
     public float eruptionTime = 20; // Set amount of time that eruption will occur.
     public float eruptionDamage = 1; //Set damage from eruption.
+    public bool canTakeDamage = true;
  
 
     // Start is called before the first frame update
@@ -19,14 +21,21 @@ public class Eruption : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Health>())
+        if (collision.gameObject.GetComponent<Health>() && canTakeDamage == true)
         {
-           
+            global::System.Object value = StartCoroutine(WaitForSeconds());
             collision.gameObject.GetComponent<Health>().TakeDamage(eruptionDamage);
         }
-            
-        
+
+
     }
+    IEnumerator WaitForSeconds()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSecondsRealTime(3);
+        canTakeDamage = true;
+    }
+    
     // Update is called once per frame
     void Update()
     {
