@@ -243,7 +243,7 @@ public class TestTextWriter : MonoBehaviour
                 TutorialImage.gameObject.SetActive(false);
             }
         }
-        if (index == 19)
+        if (index == 20 && Merchantship.active == true && Merchantship2.active == true)
         {
             if (!checker[4])
             {
@@ -251,6 +251,7 @@ public class TestTextWriter : MonoBehaviour
                 TutorialImage.gameObject.SetActive(false);
             }
         }
+        
 
         if (Input.GetKey(KeyCode.G) && index == 10 ||
           Input.GetKey(KeyCode.H) && index == 10)
@@ -258,6 +259,8 @@ public class TestTextWriter : MonoBehaviour
             yield return new WaitForSeconds(1);
             shotKeyGAndH = true;
             GAndHKey.gameObject.SetActive(false);
+            Debug.Log("shotkey pressed");
+
         }
         if (Input.GetKey(KeyCode.Period) && index == 10 ||
           Input.GetKey(KeyCode.Minus) && index == 10)
@@ -265,6 +268,7 @@ public class TestTextWriter : MonoBehaviour
             yield return new WaitForSeconds(1);
             shotKeyPeriodAndMinus = true;
             PeriodAndMinusKey.gameObject.SetActive(false);
+            Debug.Log("shotkey pressed");
         }
         if (index == 18)
         {
