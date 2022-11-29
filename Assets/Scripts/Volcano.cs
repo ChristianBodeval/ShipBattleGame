@@ -25,6 +25,7 @@ public class Volcano : MonoBehaviour
             random = Random.Range(0, inverseProbability); // Get the random number
             if(random == 0)
             {
+                Debug.Log("Eruption is active!");
                 Instantiate(eruption, transform.position, transform.rotation);
             }
         }
