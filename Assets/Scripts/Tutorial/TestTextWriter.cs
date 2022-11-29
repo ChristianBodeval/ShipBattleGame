@@ -221,7 +221,7 @@ public class TestTextWriter : MonoBehaviour
         }
         if (index == 5)
         {
-            if (checker[1])
+            if (!checker[1])
             {
                 checker[1] = true;
                 TutorialImage.gameObject.SetActive(false);
@@ -229,7 +229,7 @@ public class TestTextWriter : MonoBehaviour
         }
         if (index == 10)
         {
-            if (checker[2])
+            if (!checker[2])
             {
                 checker[2] = true;
                 TutorialImage.gameObject.SetActive(false);
@@ -237,7 +237,7 @@ public class TestTextWriter : MonoBehaviour
         }
         if (index == 15)
         {
-            if (checker[3])
+            if (!checker[3])
             {
                 checker[3] = true;
                 TutorialImage.gameObject.SetActive(false);
@@ -245,7 +245,7 @@ public class TestTextWriter : MonoBehaviour
         }
         if (index == 19)
         {
-            if (checker[4])
+            if (!checker[4])
             {
                 checker[4] = true;
                 TutorialImage.gameObject.SetActive(false);
