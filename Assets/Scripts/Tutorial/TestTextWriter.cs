@@ -68,7 +68,7 @@ public class TestTextWriter : MonoBehaviour
 //healthScript = Health.CurrentHealth();
 private void Update()
     {
-        bool isRamming = ramming.IsRammed;
+        //bool isRamming = ramming.IsRammed;
 
         StartCoroutine(ShowObjects());
         switch (index)
@@ -141,11 +141,11 @@ private void Update()
                 break;
 
             case 13: // Dash
-                if (isRamming == true)
-                {
+                //if (isRamming == true)
+                //{
                     text13.gameObject.SetActive(true);
                     RammingText.gameObject.SetActive(false);
-                }
+                //}
           
                 break;
 
@@ -199,8 +199,8 @@ private void Update()
                 break;
         }
 
-        if (isRamming)
-            Debug.Log("Ramming atm");
+        //if (isRamming)
+            //Debug.Log("Ramming atm");
 
         Debug.Log(index);
     }
