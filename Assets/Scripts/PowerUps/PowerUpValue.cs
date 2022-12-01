@@ -20,6 +20,8 @@ public class PowerUpValue : MonoBehaviour
     public bool SpawnSpawnAttack;
     public bool SpawnSpawnSpeed;
 
+    public AudioSource audioSource;
+
     ShipManager pickUpShip;
 
     List<Type> pickList = new List<Type>();
@@ -60,6 +62,8 @@ public class PowerUpValue : MonoBehaviour
             Debug.Log("Applying powerup: " + gameObject.name);
 
             pickupShip.hasPowerUp = true;
+
+            audioSource.Play();
 
             switch (powerUpType)
             {

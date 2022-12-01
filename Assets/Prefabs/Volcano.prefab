@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3932987438811461252}
   - component: {fileID: 3932987438811461255}
   - component: {fileID: 3932987438811461254}
+  - component: {fileID: 217157531}
   m_Layer: 0
   m_Name: Volcano
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.8396226, g: 0.2750239, b: 0.099012084, a: 1}
   m_FlipX: 0
@@ -98,4 +99,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inverseProbability: 20
-  eruption: {fileID: 0}
+  eruption: {fileID: 6188039020858170946, guid: 91a9e6598ee9f584f8239c200ed4178a, type: 3}
+--- !u!58 &217157531
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3932987438811461257}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
