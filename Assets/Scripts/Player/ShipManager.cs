@@ -17,7 +17,7 @@ public class ShipManager : MonoBehaviour
     [SerializeField]
     private float maxTurnSpeed; // 1.5
     [SerializeField]
-    private float turnAcceleration; // 0.8
+    private float turnAcceleration; // 0.08
     [SerializeField]
     private float smoothTurningFactor; //0.1
     [SerializeField]
