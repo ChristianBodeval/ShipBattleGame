@@ -8,8 +8,10 @@ public class Ramming : MonoBehaviour
     GameObject usedBy;
     BoxCollider2D boxCollider2D;
     float rammingDamage;
+    bool isRammed;
 
     public float RammingDamage { get => rammingDamage; set => rammingDamage = value; }
+    public bool IsRammed { get => isRammed; set => isRammed = value; }
 
     private void Start()
     {
@@ -21,6 +23,9 @@ public class Ramming : MonoBehaviour
     {
         if(!boxCollider2D.IsTouching(collision))
         {
+            IsRammed = true;
+            isRammed = true;
+            
             return;
         }
         //Player hit

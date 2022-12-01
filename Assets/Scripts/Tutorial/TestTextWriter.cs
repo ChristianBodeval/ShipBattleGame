@@ -10,6 +10,7 @@ public class TestTextWriter : MonoBehaviour
     private bool moveWAndSKeys = false;
     private bool shotKeyGAndH = false;
     private bool shotKeyPeriodAndMinus = false;
+    private Ramming ramming;
     public GameObject AAndDKey;                     // GameObjects for all the different visuals
     public GameObject WAndSKey;
     public GameObject PeriodAndMinusKey;
@@ -23,6 +24,7 @@ public class TestTextWriter : MonoBehaviour
     public GameObject PointingArrows;
     public GameObject TPArrows;
     public GameObject TutorialImage;
+    public GameObject RammingText;
     public Text text1;                              // Text objects for all the text being displayed
     public Text text2;
     public Text text3;
@@ -43,26 +45,31 @@ public class TestTextWriter : MonoBehaviour
     public Text text18;
     public Text text19;
     public Text text20;
-
     private bool moveAAndDKeys;
     private bool moveLeftAndRightKeys;
     private bool moveUpAndDownKeys;
     private bool[] checker = new bool[4];          // Array of booleans to check if TutorialImage has been shown, Starts off false
 
+
     public int GetIndex()
     {
         return index;
     }
-
     public int SetIndex(int index)
     {
         this.index = index;
         return this.index;
     }
 
-    //healthScript = Health.CurrentHealth();
-    private void Update()
+     void Start()
+    { 
+
+    }
+//healthScript = Health.CurrentHealth();
+private void Update()
     {
+        bool isRamming = ramming.IsRammed;
+
         StartCoroutine(ShowObjects());
         switch (index)
         {
@@ -130,10 +137,16 @@ public class TestTextWriter : MonoBehaviour
 
             case 12: // Ramming 2
                 text12.gameObject.SetActive(true);
+                RammingText.gameObject.SetActive(true);
                 break;
 
             case 13: // Dash
-                text13.gameObject.SetActive(true);
+                if (isRamming == true)
+                {
+                    text13.gameObject.SetActive(true);
+                    RammingText.gameObject.SetActive(false);
+                }
+          
                 break;
 
             case 14:
@@ -185,8 +198,13 @@ public class TestTextWriter : MonoBehaviour
                 Debug.Log("Oops, ran out of text UwU");
                 break;
         }
+
+        if (isRamming)
+            Debug.Log("Ramming atm");
+
         Debug.Log(index);
     }
+    
 
     private IEnumerator ShowObjects()
     {
@@ -218,6 +236,12 @@ public class TestTextWriter : MonoBehaviour
             moveUpAndDownKeys = true;
             UpAndDownKey.gameObject.SetActive(false);
             Debug.Log("pressing moveing buttons atm!");
+        }
+        // Ramming
+        if(Input.GetKey(KeyCode.W) && index == 12)
+        {
+            yield return new WaitForSeconds(1);
+            RammingText.gameObject.SetActive(false);
         }
         if (index == 5)
         {
@@ -259,7 +283,6 @@ public class TestTextWriter : MonoBehaviour
             yield return new WaitForSeconds(1);
             shotKeyGAndH = true;
             GAndHKey.gameObject.SetActive(false);
-            Debug.Log("shotkey pressed");
 
         }
         if (Input.GetKey(KeyCode.Period) && index == 10 ||
@@ -268,7 +291,6 @@ public class TestTextWriter : MonoBehaviour
             yield return new WaitForSeconds(1);
             shotKeyPeriodAndMinus = true;
             PeriodAndMinusKey.gameObject.SetActive(false);
-            Debug.Log("shotkey pressed");
         }
         if (index == 18)
         {
