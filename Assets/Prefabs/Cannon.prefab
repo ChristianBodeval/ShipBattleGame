@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderLines: 0
-  linePrefab: {fileID: 0}
+  linePrefab: {fileID: 1486240913666076351, guid: 33dfe116648ae41cc905ccfea3cecb7e, type: 3}
   shootersTotalDamage: 0
   canonGameObjects: []
   shooterPrefab: {fileID: 9153223935004835648, guid: 00bbda18870e2464ca0f0b0af82ed86c, type: 3}
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderLines: 0
-  linePrefab: {fileID: 0}
+  linePrefab: {fileID: 1486240913666076351, guid: 33dfe116648ae41cc905ccfea3cecb7e, type: 3}
   shootersTotalDamage: 0
   canonGameObjects: []
   shooterPrefab: {fileID: 9153223935004835648, guid: 00bbda18870e2464ca0f0b0af82ed86c, type: 3}

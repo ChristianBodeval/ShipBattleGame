@@ -104,7 +104,7 @@ public class ShipManager : MonoBehaviour
 
     float currentHealth_default;
     float totalDamage_default;
-    float maxMovementSpeed_default;
+    public float maxMovementSpeed_default; //Used for whirlpool
     float startingHealth_default;
     float range_default;
     float rammingDamage_default;
@@ -255,7 +255,6 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         spriteRenderer.color = Color.black;
 
         DisableScripts();
-        m_Instance.SetActive(false);
     }
 
     public void ResetValues()
@@ -292,6 +291,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
         m_Instance.transform.position = m_SpawnPoint.transform.position;
         m_Instance.transform.rotation = m_SpawnPoint.transform.rotation;
-        m_Instance.SetActive(true);
+
+        spriteRenderer.color = playerColor;
     }
 }

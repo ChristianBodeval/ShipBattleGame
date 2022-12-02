@@ -249,6 +249,7 @@ MonoBehaviour:
   shipSize: 4.2
   maxAngle: 50
   startCurve: -0.23
+  maxMovementSpeed_default: 0
   hasPowerUp: 0
 --- !u!50 &3685263541795606613
 Rigidbody2D:
@@ -348,8 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942d9e700ea224f819923b34cdfd1ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shooterGroupRight: {fileID: 5099332673746042313}
-  shooterGroupLeft: {fileID: 2149374170891565617}
+  shooterGroupRight: {fileID: 2149374170891565617}
+  shooterGroupLeft: {fileID: 5099332674081463101}
   projectilePrefab: {fileID: 275803821595653893, guid: 5f501533e8219814a8dea60ed0e89225, type: 3}
   knockbackScript: {fileID: 0}
   linesLeft: 1
@@ -778,9 +779,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
---- !u!114 &5099332673746042313 stripped
+--- !u!114 &5099332674081463101 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1062078226, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
+  m_CorrespondingSourceObject: {fileID: 726262246, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
   m_PrefabInstance: {fileID: 5099332673665694427}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

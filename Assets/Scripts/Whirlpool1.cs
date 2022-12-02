@@ -37,7 +37,7 @@ public class Whirlpool1 : MonoBehaviour
         //If ship is in whirlpool
         if (collision.GetComponent<ShipManager>())
         {
-            collision.GetComponent<ShipManager>().MaxMovementSpeed *= 2;
+            collision.GetComponent<ShipManager>().MaxMovementSpeed = collision.GetComponent<ShipManager>().maxMovementSpeed_default;
         }
     }
 
