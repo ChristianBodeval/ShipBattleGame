@@ -135,6 +135,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
     private void Awake()
     {
+        m_Instance = gameObject;
         healthScript = GetComponent<Health>();
         movementScript = GetComponent<Movement>();
         shootingScript = GetComponent<Shooting>();
@@ -289,8 +290,8 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
         EnableScripts();
 
-        m_Instance.transform.position = m_SpawnPoint.position;
-        m_Instance.transform.rotation = m_SpawnPoint.rotation;
+        m_Instance.transform.position = m_SpawnPoint.transform.position;
+        m_Instance.transform.rotation = m_SpawnPoint.transform.rotation;
         m_Instance.SetActive(true);
     }
 }

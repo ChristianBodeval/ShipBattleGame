@@ -18,7 +18,7 @@ public class SliderScript : MonoBehaviour
     void Start()
     {
 
-        ship = GameManager.Instance.players[playerNumber];
+        ship = GameManager.Instance.players[playerNumber].gameObject;
         slider.maxValue = ship.GetComponent<ShipManager>().StartingHealth;
         
 

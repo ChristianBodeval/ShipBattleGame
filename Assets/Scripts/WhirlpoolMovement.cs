@@ -26,6 +26,7 @@ public class WhirlpoolMovement : MonoBehaviour
         mapH = TeleportManager.instance.mapH;
     }
 
+
     // Update is called once per frame
     void FixedUpdate()
     {

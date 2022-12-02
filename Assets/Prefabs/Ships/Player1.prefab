@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 042132e9a4c464514b9400d4e385e533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SpawnPoint: {fileID: 0}
   m_Instance: {fileID: 0}
   maxTurnSpeed: 2.2
   turnAcceleration: 0.08
@@ -238,15 +239,17 @@ MonoBehaviour:
   fireRateInSeconds: 1.5
   totalDamage: 50
   projectileSpeed: 8
-  knockbackValue: 0.15
+  knockbackValue: 0.1
   smoothKnockbackFactor: 0.1
   rammingDamage: 60
   range: 13.5
+  wins: 0
   fireOnBullets: 0
   shooters: 8
   shipSize: 4.2
   maxAngle: 50
   startCurve: -0.23
+  hasPowerUp: 0
 --- !u!50 &3685263541795606613
 Rigidbody2D:
   serializedVersion: 4
@@ -373,6 +376,7 @@ MonoBehaviour:
   respawnOnDeath: 1
   startingHealth: 100
   currentHealth: 100
+  dead: 0
 --- !u!114 &855461067
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,10 +18,13 @@ public sealed class GameManager : MonoBehaviour
     public bool spawnPlayer1;
     public bool spawnPlayer2;
 
-    public float waitTimeBeforeStarting;
+    public int waitTimeBeforeStarting;
     public float waitTimeAfterEnd;
 
     private static GameManager instance; //Singleton
+
+
+    public CountDownUI startingUI;
 
     public static GameManager Instance
     {
@@ -40,7 +43,7 @@ public sealed class GameManager : MonoBehaviour
     public Transform spawn2;
 
 
-    public List<GameObject> players = new List<GameObject>();
+    public List<ShipManager> players = new List<ShipManager>();
     
 
     public int m_NumRoundsToWin = 3;
@@ -48,7 +51,7 @@ public sealed class GameManager : MonoBehaviour
     public float m_EndDelay = 3f;
     public Text m_MessageText;
     public GameObject m_TankPrefab;
-    public ShipManager[] m_Ships;
+
 
 
     private int m_RoundNumber;
@@ -58,23 +61,22 @@ public sealed class GameManager : MonoBehaviour
     private ShipManager m_GameWinner;
 
 
-
+    public List<WhirlpoolMovement> whirlpools = new List<WhirlpoolMovement>();
+    public List<MerchantShip> merchantShips = new List<MerchantShip>();
 
     // Start is called before the first frame update
     private void Awake()
     {
         instance = this;
 
-        spawn1 = player1Prefab.GetComponent<ShipManager>().m_SpawnPoint;
-        spawn2 = player2Prefab.GetComponent<ShipManager>().m_SpawnPoint;
-
-
         if (spawnPlayer1)
         {
 
             var p1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
-            players.Add(p1.gameObject);
-            
+            players.Add(p1.gameObject.GetComponent<ShipManager>());
+            Debug.Log("Player sapwned");
+
+            p1.GetComponent<ShipManager>().m_SpawnPoint = spawn1;
 
             p1.transform.position = spawn1.transform.position;
             p1.transform.rotation = spawn1.transform.rotation;
@@ -88,7 +90,10 @@ public sealed class GameManager : MonoBehaviour
             var p2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
 
             //Set the two players
-            players.Add(p2.gameObject);
+            players.Add(p2.gameObject.GetComponent<ShipManager>());
+
+            p2.GetComponent<ShipManager>().m_SpawnPoint = spawn2;
+
 
             //Set position to spawnpoints
             p2.transform.position = spawn2.transform.position;
@@ -98,6 +103,21 @@ public sealed class GameManager : MonoBehaviour
             TeleportManager.Instance.AddTeleportable(p2.gameObject);
         }
 
+        //Sets the countdown before beginning
+        Debug.Log("Before" + startingUI.countDown);
+        Debug.Log("Waitteim" + waitTimeBeforeStarting);
+        startingUI.countDownLength = waitTimeBeforeStarting;
+
+        Debug.Log("After" + startingUI.countDown);
+
+
+
+
+    }
+
+    private void Start()
+    {
+        StartCoroutine(GameLoop());
     }
 
     void NextRound()
@@ -125,9 +145,6 @@ public sealed class GameManager : MonoBehaviour
     private IEnumerator GameLoop()
     {
         yield return StartCoroutine(RoundStarting());
-
-
-
         yield return StartCoroutine(RoundPlaying());
         yield return StartCoroutine(RoundEnding());
 
@@ -144,29 +161,37 @@ public sealed class GameManager : MonoBehaviour
 
     private IEnumerator RoundStarting()
     {
-        ResetAllShips();
+        DisableShipControl();
+        DisableWhirlpoolsMovement();
+        DisableMerchanshipMovement();
+
         //m_RoundNumber++;
         //m_MessageText.text = "ROUND " + m_RoundNumber;
-
+        Debug.Log("Setting up");
         yield return new WaitForSeconds(waitTimeBeforeStarting);
     }
 
 
     private IEnumerator RoundPlaying()
     {
-        EnableTankControl();
+        EnableShipControl();
+        EnableWhirlpoolsMovement();
+        EnableMerchanshipMovement();
         //m_MessageText.text = string.Empty;
         while (!OneTankLeft())
         {
-
+            // ... return on the next frame.
+            yield return null;
+            Debug.Log("Playing");
         }
-        yield return null;
     }
 
 
     private IEnumerator RoundEnding()
     {
-        DisableTankControl();
+        DisableShipControl();
+        DisableWhirlpoolsMovement();
+        DisableMerchanshipMovement();
         m_RoundWinner = GetRoundWinner();
 
         if (m_RoundWinner != null)
@@ -185,9 +210,9 @@ public sealed class GameManager : MonoBehaviour
     {
         int numTanksLeft = 0;
 
-        for (int i = 0; i < m_Ships.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
-            if (m_Ships[i].m_Instance.activeSelf)
+            if (players[i].m_Instance.activeSelf)
                 numTanksLeft++;
         }
 
@@ -197,10 +222,10 @@ public sealed class GameManager : MonoBehaviour
 
     private ShipManager GetRoundWinner()
     {
-        for (int i = 0; i < m_Ships.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
-            if (m_Ships[i].m_Instance.activeSelf)
-                return m_Ships[i];
+            if (players[i].m_Instance.activeSelf)
+                return players[i];
         }
 
         return null;
@@ -209,10 +234,10 @@ public sealed class GameManager : MonoBehaviour
 
     private ShipManager GetGameWinner()
     {
-        for (int i = 0; i < m_Ships.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
-            if (m_Ships[i].wins == m_NumRoundsToWin)
-                return m_Ships[i];
+            if (players[i].wins == m_NumRoundsToWin)
+                return players[i];
         }
 
         return null;
@@ -221,27 +246,61 @@ public sealed class GameManager : MonoBehaviour
 
     private void ResetAllShips()
     {
-        for (int i = 0; i < m_Ships.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
-            m_Ships[i].Revive();
+            players[i].Revive();
         }
     }
 
 
-    private void EnableTankControl()
+    private void EnableShipControl()
     {
-        for (int i = 0; i < m_Ships.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
-            m_Ships[i].EnableScripts();
+            players[i].EnableScripts();
         }
     }
 
 
-    private void DisableTankControl()
+    private void DisableShipControl()
     {
-        for (int i = 0; i < m_Ships.Length; i++)
+        for (int i = 0; i < players.Count; i++)
         {
-            m_Ships[i].DisableScripts();
+            players[i].DisableScripts();
+        }
+    }
+
+
+    private void EnableWhirlpoolsMovement()
+    {
+        for (int i = 0; i < whirlpools.Count; i++)
+        {
+            whirlpools[i].enabled = true;
+        }
+    }
+
+    private void DisableWhirlpoolsMovement()
+    {
+        for (int i = 0; i < whirlpools.Count; i++)
+        {
+            whirlpools[i].enabled = false;
+        }
+    }
+
+    private void EnableMerchanshipMovement()
+    {
+        for (int i = 0; i < merchantShips.Count; i++)
+        {
+            merchantShips[i].enabled = true;
+        }
+    }
+
+
+    private void DisableMerchanshipMovement()
+    {
+        for (int i = 0; i < merchantShips.Count; i++)
+        {
+            merchantShips[i].enabled = false;
         }
     }
 }
