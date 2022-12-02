@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public sealed class GameManager : MonoBehaviour
 {
@@ -16,7 +17,10 @@ public sealed class GameManager : MonoBehaviour
 
     public bool spawnPlayer1;
     public bool spawnPlayer2;
-    
+
+    public float waitTimeBeforeStarting;
+    public float waitTimeAfterEnd;
+
     private static GameManager instance; //Singleton
 
     public static GameManager Instance
@@ -37,6 +41,23 @@ public sealed class GameManager : MonoBehaviour
 
 
     public List<GameObject> players = new List<GameObject>();
+    
+
+    public int m_NumRoundsToWin = 3;
+    public float m_StartDelay = 3f;
+    public float m_EndDelay = 3f;
+    public Text m_MessageText;
+    public GameObject m_TankPrefab;
+    public ShipManager[] m_Ships;
+
+
+    private int m_RoundNumber;
+    private WaitForSeconds m_StartWait;
+    private WaitForSeconds m_EndWait;
+    private ShipManager m_RoundWinner;
+    private ShipManager m_GameWinner;
+
+
 
 
     // Start is called before the first frame update
@@ -44,14 +65,22 @@ public sealed class GameManager : MonoBehaviour
     {
         instance = this;
 
+        spawn1 = player1Prefab.GetComponent<ShipManager>().m_SpawnPoint;
+        spawn2 = player2Prefab.GetComponent<ShipManager>().m_SpawnPoint;
+
+
         if (spawnPlayer1)
         {
+
             var p1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
             players.Add(p1.gameObject);
+            
+
             p1.transform.position = spawn1.transform.position;
             p1.transform.rotation = spawn1.transform.rotation;
             TeleportManager.Instance.AddTeleportable(p1.gameObject);
         }
+
 
 
         if (spawnPlayer2)
@@ -93,8 +122,126 @@ public sealed class GameManager : MonoBehaviour
         }*/
     }
 
-    private void LateUpdate()
+    private IEnumerator GameLoop()
     {
-        
+        yield return StartCoroutine(RoundStarting());
+
+
+
+        yield return StartCoroutine(RoundPlaying());
+        yield return StartCoroutine(RoundEnding());
+
+        if (m_GameWinner != null)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            StartCoroutine(GameLoop());
+        }
+    }
+
+
+    private IEnumerator RoundStarting()
+    {
+        ResetAllShips();
+        //m_RoundNumber++;
+        //m_MessageText.text = "ROUND " + m_RoundNumber;
+
+        yield return new WaitForSeconds(waitTimeBeforeStarting);
+    }
+
+
+    private IEnumerator RoundPlaying()
+    {
+        EnableTankControl();
+        //m_MessageText.text = string.Empty;
+        while (!OneTankLeft())
+        {
+
+        }
+        yield return null;
+    }
+
+
+    private IEnumerator RoundEnding()
+    {
+        DisableTankControl();
+        m_RoundWinner = GetRoundWinner();
+
+        if (m_RoundWinner != null)
+        {
+            m_RoundWinner.wins++;
+        }
+
+        m_GameWinner = GetGameWinner();
+
+        //TODO Connect with WINNER UI
+        yield return new  WaitForSeconds(waitTimeAfterEnd);
+    }
+
+
+    private bool OneTankLeft()
+    {
+        int numTanksLeft = 0;
+
+        for (int i = 0; i < m_Ships.Length; i++)
+        {
+            if (m_Ships[i].m_Instance.activeSelf)
+                numTanksLeft++;
+        }
+
+        return numTanksLeft <= 1;
+    }
+
+
+    private ShipManager GetRoundWinner()
+    {
+        for (int i = 0; i < m_Ships.Length; i++)
+        {
+            if (m_Ships[i].m_Instance.activeSelf)
+                return m_Ships[i];
+        }
+
+        return null;
+    }
+
+
+    private ShipManager GetGameWinner()
+    {
+        for (int i = 0; i < m_Ships.Length; i++)
+        {
+            if (m_Ships[i].wins == m_NumRoundsToWin)
+                return m_Ships[i];
+        }
+
+        return null;
+    }
+
+
+    private void ResetAllShips()
+    {
+        for (int i = 0; i < m_Ships.Length; i++)
+        {
+            m_Ships[i].Revive();
+        }
+    }
+
+
+    private void EnableTankControl()
+    {
+        for (int i = 0; i < m_Ships.Length; i++)
+        {
+            m_Ships[i].EnableScripts();
+        }
+    }
+
+
+    private void DisableTankControl()
+    {
+        for (int i = 0; i < m_Ships.Length; i++)
+        {
+            m_Ships[i].DisableScripts();
+        }
     }
 }

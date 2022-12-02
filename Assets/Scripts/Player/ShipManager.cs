@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +5,7 @@ public class ShipManager : MonoBehaviour
 {
     private PlayerInput Input;
 
-
+    public Transform m_SpawnPoint;
 
 
     // This class is to manage various settings on a ship.
@@ -51,6 +49,9 @@ public class ShipManager : MonoBehaviour
     [Range(1, 25)]
     private float range;
 
+
+
+    [HideInInspector] public int wins;
 
 
 
@@ -99,7 +100,6 @@ public class ShipManager : MonoBehaviour
     public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
     public float KnockbackValue { get => knockbackValue; set => knockbackValue = value; }
     public float SmoothKnockbackFactor { get => smoothKnockbackFactor; set => smoothKnockbackFactor = value; }
-
 
 
     float currentHealth_default;
@@ -154,7 +154,15 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         SetDefaultValues();
     }
 
-    void SetDefaultValues()
+    void Update()
+    {
+        currentHealth = healthScript.CurrentHealth;
+
+        UpdateValues();
+    }
+
+
+    public void SetDefaultValues()
     {
         currentHealth_default = currentHealth;
         totalDamage_default = totalDamage;
@@ -179,7 +187,33 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         fireOnBullets_default = fireOnBullets;
     }
 
-    void UpdateValues()
+    public void EnableScripts()
+    {
+        healthScript.enabled = true;
+        movementScript.enabled = true;
+        shootingScript.enabled = true;
+        knockbackScript.enabled = true;
+        rammingScript.enabled = true;
+        foreach (var s in shooterGroups)
+        {
+            s.enabled = true;
+        }
+    }
+
+    public void DisableScripts()
+    {
+        healthScript.enabled = false;
+        movementScript.enabled = false;
+        shootingScript.enabled = false;
+        knockbackScript.enabled = false;
+        rammingScript.enabled = false;
+        foreach (var s in shooterGroups)
+        {
+            s.enabled = true;
+        }
+    }
+
+    public void UpdateValues()
     {
         //Movement
         movementScript.MaxTurnSpeed = maxTurnSpeed;
@@ -216,20 +250,11 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
     public void Die()
     {
-        //Input.actions = null;
-
         playerColor = spriteRenderer.color;
         spriteRenderer.color = Color.black;
 
-        healthScript.enabled = false;
-        movementScript.enabled = false;
-        shootingScript.enabled = false;
-        //knockbackScript.enabled = false;
-        rammingScript.enabled = false;
-        foreach (var shooterGroup in shooterGroups)
-        {
-            shooterGroup.enabled = false;
-        }
+        DisableScripts();
+        m_Instance.SetActive(false);
     }
 
     public void ResetValues()
@@ -261,25 +286,11 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
     public void Revive()
     {
-        spriteRenderer.color = playerColor;
-        healthScript.enabled = true;
-        movementScript.enabled = true;
-        shootingScript.enabled = true;
-        //knockbackScript.enabled = true;
-        rammingScript.enabled = true;
-        foreach (var shooterGroup in shooterGroups)
-        {
-            shooterGroup.enabled = true;
-        }
-    }
 
+        EnableScripts();
 
-
-
-    void Update()
-    {
-        currentHealth = healthScript.CurrentHealth;
-
-        UpdateValues();
+        m_Instance.transform.position = m_SpawnPoint.position;
+        m_Instance.transform.rotation = m_SpawnPoint.rotation;
+        m_Instance.SetActive(true);
     }
 }
