@@ -44,6 +44,8 @@ public class PowerUpValue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
+        Debug.Log("Powerup collision");
         //If not colliding with a player ship --> do nothing
         if(!collision.GetComponent<ShipManager>())
         {

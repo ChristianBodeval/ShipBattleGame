@@ -15,6 +15,7 @@ public class IslandHealth : Health
     }
     public override void OnDeath ()
     {
+        //Debug.Log("Calling on death");
         if (CurrentHealth <= 0)
         {
             Instantiate(powerUpSpawner, treasure.GetComponent<Transform>().position, treasure.GetComponent<Transform>().rotation);

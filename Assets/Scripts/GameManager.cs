@@ -74,7 +74,6 @@ public sealed class GameManager : MonoBehaviour
 
             var p1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
             players.Add(p1.gameObject.GetComponent<ShipManager>());
-            Debug.Log("Player sapwned");
 
             p1.GetComponent<ShipManager>().m_SpawnPoint = spawn1;
 
@@ -104,11 +103,11 @@ public sealed class GameManager : MonoBehaviour
         }
 
         //Sets the countdown before beginning
-        Debug.Log("Before" + startingUI.countDown);
-        Debug.Log("Waitteim" + waitTimeBeforeStarting);
+
+
         startingUI.countDownLength = waitTimeBeforeStarting;
 
-        Debug.Log("After" + startingUI.countDown);
+
 
 
 
@@ -167,7 +166,6 @@ public sealed class GameManager : MonoBehaviour
 
         //m_RoundNumber++;
         //m_MessageText.text = "ROUND " + m_RoundNumber;
-        Debug.Log("Setting up");
         yield return new WaitForSeconds(waitTimeBeforeStarting);
     }
 
@@ -182,7 +180,6 @@ public sealed class GameManager : MonoBehaviour
         {
             // ... return on the next frame.
             yield return null;
-            Debug.Log("Playing");
         }
     }
 
