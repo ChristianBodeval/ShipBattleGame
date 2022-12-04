@@ -49,7 +49,7 @@ MonoBehaviour:
   value: 0.04
   isPositive: 1
   isTemporary: 1
-  duration: 5
+  duration: 7
   powerUpType: 2
   pickupShip: {fileID: 0}
   SpawnHealth: 0

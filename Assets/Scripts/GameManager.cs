@@ -23,8 +23,12 @@ public sealed class GameManager : MonoBehaviour
 
     private static GameManager instance; //Singleton
 
-
+    public float timeToRespawn;
+    public bool playUnlimited;
+    public float timeToNewGame;
+    //UI
     public CountDownUI startingUI;
+    public GameOver_UI gameOver_UI;
 
     public static GameManager Instance
     {
@@ -44,9 +48,9 @@ public sealed class GameManager : MonoBehaviour
 
 
     public List<ShipManager> players = new List<ShipManager>();
-    
 
-    public int m_NumRoundsToWin = 3;
+
+    public int m_NumRoundsToWin;
     public float m_StartDelay = 3f;
     public float m_EndDelay = 3f;
     public Text m_MessageText;
@@ -117,6 +121,8 @@ public sealed class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(GameLoop());
+
+        m_GameWinner = null;
     }
 
     void NextRound()
@@ -143,22 +149,30 @@ public sealed class GameManager : MonoBehaviour
 
     private IEnumerator GameLoop()
     {
-        yield return StartCoroutine(RoundStarting());
-        yield return StartCoroutine(RoundPlaying());
-        yield return StartCoroutine(RoundEnding());
+        yield return StartCoroutine(GameStarting());
+        yield return StartCoroutine(GamePlaying());
+        yield return StartCoroutine(GameEnding());
 
-        if (m_GameWinner != null)
+        Debug.Log("RUNNING GAME LOOP");
+
+
+        if (playUnlimited)
         {
-            SceneManager.LoadScene(0);
+            gameOver_UI.gameObject.SetActive(false);
+            m_GameWinner = null;
+            ResetAllShips();
+            StartCoroutine(GameLoop());
         }
         else
         {
+            SceneManager.LoadScene("MainMenu_Start");
+
             StartCoroutine(GameLoop());
         }
     }
 
 
-    private IEnumerator RoundStarting()
+    private IEnumerator GameStarting()
     {
         DisableShipControl();
         DisableWhirlpoolsMovement();
@@ -170,50 +184,74 @@ public sealed class GameManager : MonoBehaviour
     }
 
 
-    private IEnumerator RoundPlaying()
+    private IEnumerator GamePlaying()
     {
         EnableShipControl();
         EnableWhirlpoolsMovement();
         EnableMerchanshipMovement();
         //m_MessageText.text = string.Empty;
-        while (!OneTankLeft())
+
+        //If there is no game winner, revive dead player and add win for the player alive.
+        while (m_GameWinner == null)
         {
-            // ... return on the next frame.
-            yield return null;
+            //Run when there are more than 1 ship left
+            while (!OneShipLeft())
+            {   
+                Debug.Log("Playing");
+                yield return null;
+            }
+            m_RoundWinner = GetRoundWinner();
+            m_RoundWinner.roundWins++;
+            m_GameWinner = GetGameWinner();
+
+            //Revive dead player;
+            for (int i = 0; i < players.Count; i++)
+            {
+                if (players[i].isDead)
+                    StartCoroutine(players[i].Revive());
+                while(players[i].isDead) {
+                    yield return null;
+                }
+            }
         }
+        yield return null;
     }
 
 
-    private IEnumerator RoundEnding()
+    private IEnumerator GameEnding()
     {
+        
+        Debug.Log("Gamewinner: " + m_GameWinner);
+        //TODO Connect with WINNER UI
+
+
+        gameOver_UI.winningPlayer = players.IndexOf(m_GameWinner);
+        gameOver_UI.gameObject.SetActive(true);
+
         DisableShipControl();
         DisableWhirlpoolsMovement();
         DisableMerchanshipMovement();
-        m_RoundWinner = GetRoundWinner();
 
-        if (m_RoundWinner != null)
-        {
-            m_RoundWinner.wins++;
-        }
+        yield return new WaitForSeconds(timeToNewGame);
+        
 
-        m_GameWinner = GetGameWinner();
-
-        //TODO Connect with WINNER UI
-        yield return new  WaitForSeconds(waitTimeAfterEnd);
+        yield return null;
     }
 
 
-    private bool OneTankLeft()
+    private bool OneShipLeft()
     {
-        int numTanksLeft = 0;
+        int numShipsLeft = 0;
 
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i].m_Instance.activeSelf)
-                numTanksLeft++;
+            if (!players[i].isDead)
+                numShipsLeft++;
         }
 
-        return numTanksLeft <= 1;
+        Debug.Log("Ships left:" + numShipsLeft);
+
+        return numShipsLeft <= 1;
     }
 
 
@@ -221,7 +259,7 @@ public sealed class GameManager : MonoBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i].m_Instance.activeSelf)
+            if (!players[i].isDead)
                 return players[i];
         }
 
@@ -233,7 +271,7 @@ public sealed class GameManager : MonoBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
-            if (players[i].wins == m_NumRoundsToWin)
+            if (players[i].roundWins == m_NumRoundsToWin)
                 return players[i];
         }
 

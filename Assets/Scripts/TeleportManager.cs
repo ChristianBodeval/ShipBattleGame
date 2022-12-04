@@ -61,7 +61,6 @@ public class TeleportManager : MonoBehaviour
     {
         if (gameObject.GetComponentInChildren<TrailRenderer>())
         {
-            Debug.Log("Trail renderer found");
             gameObject.GetComponentInChildren<TrailRenderer>().enabled = false;
         }
     }

@@ -155,17 +155,20 @@ MonoBehaviour:
   fireRateInSeconds: 3
   totalDamage: 50
   projectileSpeed: 10
-  knockbackValue: 0.1
+  knockbackValue: 0.07
   smoothKnockbackFactor: 0.15
   rammingDamage: 70
   range: 20
-  wins: 0
+  isDead: 0
+  roundWins: 0
   fireOnBullets: 0
   shooters: 4
   shipSize: 4.94
   maxAngle: 15
   startCurve: -0.06
+  maxMovementSpeed_default: 0
   hasPowerUp: 0
+  timeToRespawn: 0
 --- !u!50 &3685263541795606613
 Rigidbody2D:
   serializedVersion: 4
@@ -217,7 +220,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 3685263541795606615}
   shipManager: {fileID: 3794120215085976867}
+  maxTurnSpeed: 0
+  turnAcceleration: 0
+  smoothTurningFactor: 0
+  smoothMovementFactor: 0
   numberOfGears: 0
+  maxMovementSpeed: 0
   moveType: 3
   dashType: 2
   dashGearValue: 3
@@ -251,6 +259,8 @@ MonoBehaviour:
   minRange: 0
   maxRange: 0
   currentChargeUp: 0
+  lineColor: {r: 0.6886792, g: 0.6854307, b: 0.6854307, a: 0.29803923}
+  cooldownColor: {r: 1, g: 0, b: 0, a: 0.29803923}
 --- !u!114 &9179054856239917684
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -76,7 +76,6 @@ public class CanonBall : MonoBehaviour
 
             if (fractionOfJourney >= 1)
             {
-                Debug.Log("Destination reached");
                 gameObject.SetActive(false);
             }     
     }

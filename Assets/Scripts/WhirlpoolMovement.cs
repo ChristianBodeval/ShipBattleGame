@@ -14,17 +14,29 @@ public class WhirlpoolMovement : MonoBehaviour
     float mapL;
     float mapH;
 
-    int playerToHunt;
+    int randomPlayerToHunt;
+
+    ShipManager leadPlayer;
 
     public Vector3 target;
     // Start is called before the first frame update
     void Start()
     {
-
-        
         mapL = TeleportManager.instance.mapL;
         mapH = TeleportManager.instance.mapH;
     }
+
+    ShipManager GetLeadPlayer()
+    {
+        ShipManager player1 = GameManager.Instance.players[0];
+        ShipManager player2 = GameManager.Instance.players[1];
+        if (player1.roundWins > player2.roundWins)
+            return player1;
+        else if (player1.roundWins < player2.roundWins)
+            return player2;
+        else
+            return null;
+    } 
 
 
     // Update is called once per frame
@@ -39,9 +51,15 @@ public class WhirlpoolMovement : MonoBehaviour
 
             if(huntPlayers)
             {
-                playerToHunt = Random.Range(0, 2);
-                target = GameManager.Instance.players[playerToHunt].transform.position;
-                
+                leadPlayer = GetLeadPlayer();
+                if (leadPlayer != null)
+                    target = leadPlayer.transform.position;
+
+                else
+                {
+                    randomPlayerToHunt = Random.Range(0, 2);
+                    target = GameManager.Instance.players[randomPlayerToHunt].transform.position;
+                }
             }
 
             else

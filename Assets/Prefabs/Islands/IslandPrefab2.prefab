@@ -344,5 +344,6 @@ MonoBehaviour:
   respawnOnDeath: 0
   startingHealth: 10
   currentHealth: 0
+  dead: 0
   treasure: {fileID: 3154618357950914716}
   powerUpSpawner: {fileID: 0}

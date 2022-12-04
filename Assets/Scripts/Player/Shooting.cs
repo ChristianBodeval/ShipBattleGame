@@ -43,6 +43,8 @@ public class Shooting : MonoBehaviour
     public float maxRange;
     public float currentChargeUp;
 
+    public Color lineColor;
+    public Color cooldownColor;
     //float myFloat;
 
     private void Awake()
@@ -56,6 +58,8 @@ public class Shooting : MonoBehaviour
         StartCoroutine(ShootingCoroutineLeft());                                              // Starts a coroutine for shooting
         StartCoroutine(ShootingCoroutineRight());                                              // Starts a coroutine for shooting
         //coroutine = ChargeUpValue();
+        shooterGroupLeft.SetLinesColor(lineColor);
+        shooterGroupRight.SetLinesColor(lineColor);
     }
 
     private void Update()
@@ -104,12 +108,12 @@ public class Shooting : MonoBehaviour
         if (context.performed && shootingInputValue < 0)
         {                                                                                   // context.performed means whilst the button is pressed down
             isShootingRight = true;                                                          // .start would be when the button is first pressed and
-            Debug.Log("Shot left");                                                         // .canceled would be at the release of the button
+                                                         // .canceled would be at the release of the button
         }
         else if (context.performed && shootingInputValue > 0)
         {
             isShootingLeft = true;
-            Debug.Log("Shot right");
+
         }
         else
         {
@@ -195,7 +199,7 @@ public class Shooting : MonoBehaviour
         {                                                                               // game
             if (isShootingRight)
             {
-                shooterGroupRight.SetLinesColor(Color.red);
+                shooterGroupRight.SetLinesColor(cooldownColor);
                 knockbackScript.AddKnockback(Vector3.left);
 
                 
@@ -203,7 +207,7 @@ public class Shooting : MonoBehaviour
                 ShootLeft();
                 yield return new WaitForSeconds(fireRateInSeconds);
 
-                shooterGroupRight.SetLinesColor(Color.white);
+                shooterGroupRight.SetLinesColor(lineColor);
             }
             
             // else return nothing
@@ -222,11 +226,11 @@ public class Shooting : MonoBehaviour
             {                                                // The same but for ShootRight();
                 knockbackScript.AddKnockback(Vector3.right);
 
-                shooterGroupLeft.SetLinesColor(Color.red);
+                shooterGroupLeft.SetLinesColor(cooldownColor);
                 ShootRight();
                 yield return new WaitForSeconds(fireRateInSeconds);
 
-                shooterGroupLeft.SetLinesColor(Color.white);
+                shooterGroupLeft.SetLinesColor(lineColor);
             }
             // else return nothing
             else

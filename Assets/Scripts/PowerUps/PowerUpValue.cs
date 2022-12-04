@@ -54,6 +54,12 @@ public class PowerUpValue : MonoBehaviour
 
         pickupShip = collision.GetComponent<ShipManager>();
 
+        if(pickupShip != null && pickupShip.hasPowerUp)
+        {
+            CancelInvoke("resetValues");
+            resetValues();
+        }
+
         //If no powerup is active;
         if (pickupShip != null && !pickupShip.hasPowerUp)
         {
@@ -66,7 +72,7 @@ public class PowerUpValue : MonoBehaviour
             switch (powerUpType)
             {
                 case Type.Health:
-                    pickupShip.CurrentHealth += value;
+                    pickupShip.GetComponent<Health>().CurrentHealth += value;
                     
                     break;
                 case Type.Attack:
@@ -87,7 +93,7 @@ public class PowerUpValue : MonoBehaviour
                     break;
             }
             if (isTemporary)
-                Invoke("resetValue", duration);
+                Invoke("resetValues", duration);
             else
             {
                 pickupShip.hasPowerUp = false;
@@ -95,13 +101,14 @@ public class PowerUpValue : MonoBehaviour
         }
     }
 
-    void resetValue()
+    void resetValues()
     {
+        Debug.Log("Resetting values");
         if (isTemporary)
         {
             Debug.Log("Reverting powerup: " + gameObject.name);
-            pickupShip.hasPowerUp = false;
             pickupShip.ResetValues();
+            pickupShip.hasPowerUp = false;
         }
 
 

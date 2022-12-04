@@ -11,17 +11,14 @@ public class IslandHealth : Health
     // Update is called once per frame
     void Update()
     {
-        OnDeath();
+        //OnDeath();
     }
     public override void OnDeath ()
     {
-        //Debug.Log("Calling on death");
-        if (CurrentHealth <= 0)
-        {
-            Instantiate(powerUpSpawner, treasure.GetComponent<Transform>().position, treasure.GetComponent<Transform>().rotation);
-            treasure.transform.parent = null;
-            gameObject.SetActive(false);
-            treasure.SetActive(false);
-        }
+        dead = true;
+        Instantiate(powerUpSpawner, treasure.GetComponent<Transform>().position, treasure.GetComponent<Transform>().rotation);
+        treasure.transform.parent = null;
+        gameObject.SetActive(false);
+        treasure.SetActive(false);
     }
 }

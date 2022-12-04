@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -50,8 +51,8 @@ public class ShipManager : MonoBehaviour
     private float range;
 
 
-
-    [HideInInspector] public int wins;
+    public bool isDead;
+    public int roundWins;
 
 
 
@@ -125,8 +126,8 @@ public class ShipManager : MonoBehaviour
     float startCurve_default;
 
     public bool hasPowerUp;
-    
 
+    public float timeToRespawn;
     /*
 public float MinRange { get => minRange; set => minRange = value; }
 public float MaxRange { get => maxRange; set => maxRange = value; }
@@ -136,6 +137,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
     private void Awake()
     {
         m_Instance = gameObject;
+        timeToRespawn = GameManager.Instance.timeToRespawn;
         healthScript = GetComponent<Health>();
         movementScript = GetComponent<Movement>();
         shootingScript = GetComponent<Shooting>();
@@ -157,6 +159,8 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
     void Update()
     {
+
+        Debug.Log(gameObject.name + ": " + roundWins);
         currentHealth = healthScript.CurrentHealth;
 
         UpdateValues();
@@ -251,6 +255,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
     public void Die()
     {
+        isDead = true;
         playerColor = spriteRenderer.color;
         spriteRenderer.color = Color.black;
 
@@ -281,11 +286,12 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         maxAngle = maxAngle_default;
         startCurve = startCurve_default;
         fireOnBullets = fireOnBullets_default;
-
     }
 
-    public void Revive()
+    public IEnumerator Revive()
     {
+        yield return new WaitForSeconds(timeToRespawn);
+        isDead = false;
 
         EnableScripts();
 
@@ -293,5 +299,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         m_Instance.transform.rotation = m_SpawnPoint.transform.rotation;
 
         spriteRenderer.color = playerColor;
+
+        yield return null;
     }
 }

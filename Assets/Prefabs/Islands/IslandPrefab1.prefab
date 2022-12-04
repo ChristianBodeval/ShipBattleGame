@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 5256241502257323999}
   m_LocalRotation: {x: -0.012426327, y: 0.003062852, z: 0.000038063114, w: 0.9999181}
   m_LocalPosition: {x: 45, y: -13.299999, z: 0}
-  m_LocalScale: {x: 1.4999999, y: 1.4999998, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.4999995, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6937019252506972954}
@@ -553,6 +553,7 @@ MonoBehaviour:
   respawnOnDeath: 0
   startingHealth: 200
   currentHealth: 200
+  dead: 0
   treasure: {fileID: 5920731980034095546}
   powerUpSpawner: {fileID: 6577154827602510418, guid: 27b866cca7d92d248897f44ec3bd5176, type: 3}
 --- !u!1 &5920731980034095546

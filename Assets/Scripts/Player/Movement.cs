@@ -12,12 +12,12 @@ public class Movement : MonoBehaviour
 
     //All the following values are public, so i makes it easier to test in the inspector
     //Values which have an impact on the movement
-    private float maxTurnSpeed; // 1.5
-    private float turnAcceleration; // 0.8
-    private float smoothTurningFactor; //0.1
-    private float smoothMovementFactor; //0.1
+    public float maxTurnSpeed; // 1.5
+    public float turnAcceleration; // 0.8
+    public float smoothTurningFactor; //0.1
+    public float smoothMovementFactor; //0.1
     public int numberOfGears; // 2
-    private float maxMovementSpeed; //0.11
+    public float maxMovementSpeed; //0.11
     //public float moveDampener = 0.7F;
 
     //Holder values

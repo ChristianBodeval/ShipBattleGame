@@ -29,6 +29,7 @@ public class Health : MonoBehaviour
 
     }
 
+
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
@@ -49,14 +50,14 @@ public class Health : MonoBehaviour
 
         if (respawnOnDeath)
         {
-            Invoke("Respawn", 3);
+            Respawn();
         }
 
     }
 
     public void Respawn()
     {
-        shipManager.Revive();
+        StartCoroutine(shipManager.Revive());
         currentHealth = startingHealth;
         gameObject.SetActive(true);
     }
