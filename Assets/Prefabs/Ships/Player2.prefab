@@ -255,9 +255,9 @@ MonoBehaviour:
   knockbackForce: 0.2
   smoothKnockbackFactor: 0.1
   isChargingUp: 0
-  chargeUpValue: 0
-  minRange: 0
-  maxRange: 0
+  chargeUpValue: 1
+  minRange: 4
+  maxRange: 8
   currentChargeUp: 0
   lineColor: {r: 0.6886792, g: 0.6854307, b: 0.6854307, a: 0.29803923}
   cooldownColor: {r: 1, g: 0, b: 0, a: 0.29803923}

@@ -103,27 +103,27 @@ public class ShipManager : MonoBehaviour
     public float SmoothKnockbackFactor { get => smoothKnockbackFactor; set => smoothKnockbackFactor = value; }
 
 
-    float currentHealth_default;
-    float totalDamage_default;
     public float maxMovementSpeed_default; //Used for whirlpool
-    float startingHealth_default;
-    float range_default;
-    float rammingDamage_default;
-    float maxTurnSpeed_default;
-    float turnAcceleration_default;
-    float smoothTurningFactor_default;
-    float smoothMovementFactor_default;
-    int numberOfGears_default;
-    float fireRateInSeconds_default;
-    float projectileSpeed_default;
-    float knockbackValue_default;
-    float smoothKnockbackFactor_default;
+    [HideInInspector] public float currentHealth_default;
+    [HideInInspector] public float totalDamage_default;
+    [HideInInspector] public float startingHealth_default;
+    [HideInInspector] public float range_default;
+    [HideInInspector] public float rammingDamage_default;
+    [HideInInspector] public float maxTurnSpeed_default;
+    [HideInInspector] public float turnAcceleration_default;
+    [HideInInspector] public float smoothTurningFactor_default;
+    [HideInInspector] public float smoothMovementFactor_default;
+    [HideInInspector] public float fireRateInSeconds_default;
+    [HideInInspector] public float projectileSpeed_default;
+    [HideInInspector] public float knockbackValue_default;
+    [HideInInspector] public float smoothKnockbackFactor_default;
+    [HideInInspector] public int numberOfGears_default;
     //ShooterGroups
-    bool fireOnBullets_default;
-    int shooters_default;
-    float shipSize_default;
-    float maxAngle_default;
-    float startCurve_default;
+    [HideInInspector] public bool fireOnBullets_default;
+    [HideInInspector] public int shooters_default;
+    [HideInInspector] public float shipSize_default;
+    [HideInInspector] public float maxAngle_default;
+    [HideInInspector] public float startCurve_default;
 
     public bool hasPowerUp;
 
@@ -155,15 +155,13 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         hasPowerUp = false;
         Input = GetComponent<PlayerInput>();
         SetDefaultValues();
+
+        UpdateValues();
     }
 
     void Update()
     {
-
-        Debug.Log(gameObject.name + ": " + roundWins);
         currentHealth = healthScript.CurrentHealth;
-
-        UpdateValues();
     }
 
 
@@ -216,6 +214,11 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         {
             s.enabled = true;
         }
+    }
+
+    public void OnValidate()
+    {
+        UpdateValues();
     }
 
     public void UpdateValues()

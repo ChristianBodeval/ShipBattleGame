@@ -197,9 +197,11 @@ public sealed class GameManager : MonoBehaviour
             //Run when there are more than 1 ship left
             while (!OneShipLeft())
             {   
-                Debug.Log("Playing");
+
                 yield return null;
             }
+
+            //TODO Dosen't work when both players die at the same time
             m_RoundWinner = GetRoundWinner();
             m_RoundWinner.roundWins++;
             m_GameWinner = GetGameWinner();
@@ -222,7 +224,6 @@ public sealed class GameManager : MonoBehaviour
     {
         
         Debug.Log("Gamewinner: " + m_GameWinner);
-        //TODO Connect with WINNER UI
 
 
         gameOver_UI.winningPlayer = players.IndexOf(m_GameWinner);
@@ -249,7 +250,6 @@ public sealed class GameManager : MonoBehaviour
                 numShipsLeft++;
         }
 
-        Debug.Log("Ships left:" + numShipsLeft);
 
         return numShipsLeft <= 1;
     }
@@ -257,10 +257,13 @@ public sealed class GameManager : MonoBehaviour
 
     private ShipManager GetRoundWinner()
     {
+
         for (int i = 0; i < players.Count; i++)
         {
             if (!players[i].isDead)
                 return players[i];
+
+
         }
 
         return null;

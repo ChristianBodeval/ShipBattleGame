@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEditor;
+
 using System.Runtime.InteropServices;
 
 public class Shooting : MonoBehaviour
@@ -37,26 +38,39 @@ public class Shooting : MonoBehaviour
     public float TotalDamage { get => totalDamage; set => totalDamage = value; }
 
     //ChargeUp
-    public bool isChargingUp = false;
-    public float chargeUpValue;
-    public float minRange;
+    public float chargeUpValueRight;
+    public float chargeUpValueLeft;
+    private bool canShootLeft;
+    private bool canShootRight;
     public float maxRange;
-    public float currentChargeUp;
-
+    //LineColors
     public Color lineColor;
     public Color cooldownColor;
-    //float myFloat;
+    /*
+    //private IEnumerator ShootLeftCoroutine;
+    //private IEnumerator ShootRightCoroutine;
+    //private IEnumerator ChargeUpLeftCoroutine;
+    //private IEnumerator ChargeUpRightCoroutine;
+    */
 
     private void Awake()
     {
         knockbackScript = GetComponent<Knockback>();
         shipManager = GetComponent<ShipManager>();
+        /*
+        ShootLeftCoroutine = ShootingCoroutine(isShootingLeft, canShootLeft, chargeUpValueLeft, ChargeUpLeftCoroutine, Vector3.left, shooterGroupLeft);
+        ShootRightCoroutine = ShootingCoroutine(isShootingRight, canShootRight,chargeUpValueRight, ChargeUpRightCoroutine, Vector3.right, shooterGroupRight);
+        ChargeUpLeftCoroutine = ChargeUpValueLeft();
+        ChargeUpRightCoroutine = ChargeUpValueRight();
+        */
     }
 
     private void Start()
-    {        
-        StartCoroutine(ShootingCoroutineLeft());                                              // Starts a coroutine for shooting
-        StartCoroutine(ShootingCoroutineRight());                                              // Starts a coroutine for shooting
+    {
+        canShootLeft = true;
+        canShootRight = true;
+        //StartCoroutine(ShootingCoroutineLeft());                                              // Starts a coroutine for shooting
+        //StartCoroutine(ShootingCoroutineRight());                                              // Starts a coroutine for shooting
         //coroutine = ChargeUpValue();
         shooterGroupLeft.SetLinesColor(lineColor);
         shooterGroupRight.SetLinesColor(lineColor);
@@ -65,20 +79,6 @@ public class Shooting : MonoBehaviour
     private void Update()
     {
         RenderLines();
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("StartingCoroutine");
-            StartCoroutine(coroutine);
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-
-        {
-            Debug.Log("StoppingCoroutine");
-
-            StopCoroutine(coroutine);
-        }*/
     }
 
 
@@ -93,27 +93,34 @@ public class Shooting : MonoBehaviour
     //Instantiates a bullet and applies a force
     private void ShootLeft()
     {
-        shooterGroupRight.Fire(projectileSpeed, totalDamage);
+        shooterGroupLeft.Fire(projectileSpeed, totalDamage);
     }
     private void ShootRight()
     {
-        shooterGroupLeft.Fire(projectileSpeed, totalDamage);
+        shooterGroupRight.Fire(projectileSpeed, totalDamage);
     }
+
 
     //Called when fire key(s) is pressed
     public void OnFire(InputAction.CallbackContext context)
     {
         shootingInputValue = context.ReadValue<float>();
 
+
         if (context.performed && shootingInputValue < 0)
         {                                                                                   // context.performed means whilst the button is pressed down
             isShootingRight = true;                                                          // .start would be when the button is first pressed and
-                                                         // .canceled would be at the release of the button
+            if(canShootRight)
+                StartCoroutine(ShootingCoroutineRight());
+            //StartCoroutine(ShootRightCoroutine);
+
+                                                                                            // .canceled would be at the release of the button
         }
         else if (context.performed && shootingInputValue > 0)
         {
             isShootingLeft = true;
-
+            if(canShootLeft)
+                StartCoroutine(ShootingCoroutineLeft());
         }
         else
         {
@@ -121,123 +128,113 @@ public class Shooting : MonoBehaviour
             isShootingLeft = false;
         }
 
-
-
-
-
-
-        // Track the current state of the fire button and make decisions based on the current launch force.
-        // Charge up
-        /*
-        if (shootingInputValue < 1)
-            if (CurrentLaunchForce >= MaxLaunchForce && !Fired)
-            {
-                CurrentLaunchForce = MaxLaunchForce;
-                Fire();
-            }
-
-            else if (Input.GetButtonDown(FireButton))
-            {
-                m_Fired = false;
-                m_CurrentLaunchForce = m_MinLaunchForce;
-                m_ShootingAudio.clip = m_ChargingClip;
-                m_ShootingAudio.Play();
-            }
-
-            else if (Input.GetButton(m_FireButton) && !m_Fired)
-            {
-                m_CurrentLaunchForce += m_ChargeSpeed * Time.deltaTime;
-
-                m_AimSlider.value = m_CurrentLaunchForce;
-            }
-
-            else if (Input.GetButtonUp(m_FireButton) && !m_Fired)
-            {
-                Fire();
-            }*/
-            
-
-
-
-    }
-
-
-    void ChargeUp(float value)
-    {
-        
     }
 
     
-    IEnumerator ChargeUpValue()
+    IEnumerator ChargeUpValueRight()
     {
-        Debug.Log("Running coroutine");
-        if (!isChargingUp)
+        chargeUpValueRight = 8f;
+        while (isShootingRight)
         {
-            isChargingUp = true;
-            float chargeUpTime = 5;
-            float currentTime;
-            currentTime = Time.time + chargeUpTime;
-
-            chargeUpValue = 0;
-
-            while (Time.time < currentTime)
-            {
-                yield return new WaitForSeconds(1);
-                chargeUpValue += 1;
-                Debug.Log("Parameter" + chargeUpValue);
-            }
-
-            isChargingUp = false;
+            shooterGroupRight.Range += chargeUpValueRight * Time.deltaTime;
+            yield return null;
         }
-        yield return null;
     }
-   
-    //If holding firekey shoot every fireRate
-    IEnumerator ShootingCoroutineRight()                                                     // Coroutine called at start
+
+
+    IEnumerator ChargeUpValueLeft()
     {
-        while (true)                                                                    // Uses a unending while loop to check if we are shooting throughout the
-        {                                                                               // game
-            if (isShootingRight)
-            {
-                shooterGroupRight.SetLinesColor(cooldownColor);
-                knockbackScript.AddKnockback(Vector3.left);
 
+        chargeUpValueLeft = 8f;
+        while (isShootingLeft)
+        {
+            shooterGroupLeft.Range += chargeUpValueLeft * Time.deltaTime;
+            yield return null;
+        }
+    }
+    /*
+    IEnumerator ChargeUpValue(bool isShooting, ShooterGroup shooterGroup, float chargeUpValue)
+    {
+        chargeUpValue = 8f;
+        while (isShooting)
+        {
+            shooterGroup.Range += chargeUpValue * Time.deltaTime;
+            yield return null;
+        }
+    }*/
+
+
+
+
+    IEnumerator ShootingCoroutineRight()                                                     // Coroutine called at OnFire
+    {
+        if (isShootingRight && canShootRight)
+        {
+            canShootRight = false;
+            //TODO Check for current powerup attack then skip this step
+            //Increase range, while holding down
+            yield return StartCoroutine(ChargeUpValueRight());
                 
+            shooterGroupRight.SetLinesColor(cooldownColor);
+            knockbackScript.AddKnockback(Vector3.left);
 
-                ShootLeft();
-                yield return new WaitForSeconds(fireRateInSeconds);
-
-                shooterGroupRight.SetLinesColor(lineColor);
-            }
-            
-            // else return nothing
-            else
-
-                yield return null;
+            ShootRight();
+            //Reset range
+            shooterGroupRight.Range = shipManager.range_default;
+            yield return new WaitForSeconds(fireRateInSeconds);
+                
+            shooterGroupRight.SetLinesColor(lineColor);
+            canShootRight = true;
         }
     }
 
 
     IEnumerator ShootingCoroutineLeft()                                                     // Coroutine called at start
     {
-        while (true)                                                                    // Uses a unending while loop to check if we are shooting throughout the
-        {                                                                               // game
-            if (isShootingLeft)
-            {                                                // The same but for ShootRight();
-                knockbackScript.AddKnockback(Vector3.right);
+        //Same as shootRight but for left
+        if (isShootingLeft && canShootLeft)
+        {
+            canShootLeft = false;
+            //TODO Check for current powerup attack then skip this step
+            //Increase range, while holding down
+            yield return StartCoroutine(ChargeUpValueLeft());
 
-                shooterGroupLeft.SetLinesColor(cooldownColor);
-                ShootRight();
-                yield return new WaitForSeconds(fireRateInSeconds);
+            shooterGroupLeft.SetLinesColor(cooldownColor);
+            knockbackScript.AddKnockback(Vector3.right);
 
-                shooterGroupLeft.SetLinesColor(lineColor);
-            }
-            // else return nothing
-            else
+            ShootLeft();
+            //Reset range
+            shooterGroupLeft.Range = shipManager.range_default;
+            yield return new WaitForSeconds(fireRateInSeconds);
 
-                yield return null;
+            shooterGroupLeft.SetLinesColor(lineColor);
+            canShootLeft = true;
         }
     }
+    /*
+    IEnumerator ShootingCoroutine(bool isShooting, bool canShoot, float chargeUpValue, IEnumerator chargeUpCoroutine, Vector3 knockbackDirection, ShooterGroup shooterGroup)                                                     // Coroutine called at start
+    {
+        //Same as shootRight but for left
+        if (isShooting && canShoot)
+        {
+            canShootLeft = false;
+            //TODO Check for current powerup attack then skip this step
+            //Increase range, while holding down
+            yield return StartCoroutine(ChargeUpValue(isShooting, shooterGroup, chargeUpValue));
+
+            knockbackScript.AddKnockback(knockbackDirection);
+            shooterGroup.SetLinesColor(cooldownColor);
+            shooterGroup.Fire(projectileSpeed, totalDamage);
+            shooterGroup.Range = shipManager.range_default;
+
+            yield return new WaitForSeconds(fireRateInSeconds);
+
+            shooterGroup.SetLinesColor(lineColor);
+
+            canShootLeft = true;
+        }
+    }
+    */
 
 
 
