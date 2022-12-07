@@ -6522,6 +6522,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b6ea190a3e3e84a928a4c6758e087e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicSounds:
+  - name: BattleTheme
+    clip: {fileID: 8300000, guid: c74d217c48a194f40a5af95fcfc79985, type: 3}
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: 63650a6930ce61a4c9a13e0ee55bc0c5, type: 3}
+  - name: Seagull
+    clip: {fileID: 8300000, guid: 406d9201d1ddb0f42b0e55e3480fbf16, type: 3}
+  effectsSounds:
+  - name: Eruption
+    clip: {fileID: 8300000, guid: a30a1b10b8934f04988f07921271ff3c, type: 3}
+  - name: Sailing
+    clip: {fileID: 8300000, guid: 63f14801054984940b398332fbd0f4e3, type: 3}
+  - name: ShipBreak
+    clip: {fileID: 8300000, guid: d9391b79d2eae8a4380695674ff9bc54, type: 3}
+  - name: WaterSplash
+    clip: {fileID: 8300000, guid: 54efaff14cc93c342970d19782bc4ccc, type: 3}
+  - name: ProjectileHit
+    clip: {fileID: 8300000, guid: aa4356ead97240b44b4e880ab1b2ee0d, type: 3}
+  - name: Heal
+    clip: {fileID: 8300000, guid: 9025d1fb320febe48b907717bfba7623, type: 3}
+  - name: SpeedUp
+    clip: {fileID: 8300000, guid: bdcc168afc48a244b9d5199a9ced4d0b, type: 3}
+  - name: AttackUp
+    clip: {fileID: 8300000, guid: 36155e8c79ab0d14ca625754cadfadb5, type: 3}
   _musicSource: {fileID: 290400303}
   _effectsSource: {fileID: 742031394}
 --- !u!4 &1502763876
@@ -7345,7 +7369,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2087481023, guid: 91a9e6598ee9f584f8239c200ed4178a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 91a9e6598ee9f584f8239c200ed4178a, type: 3}
 --- !u!1001 &13626275988343372
 PrefabInstance:

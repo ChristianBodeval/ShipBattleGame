@@ -20,7 +20,7 @@ public class PowerUpValue : MonoBehaviour
     public bool SpawnSpawnAttack;
     public bool SpawnSpawnSpeed;
 
-    public AudioSource audioSource;
+   
 
     ShipManager pickUpShip;
 
@@ -63,13 +63,13 @@ public class PowerUpValue : MonoBehaviour
 
             pickupShip.hasPowerUp = true;
 
-            audioSource.Play();
+            
 
             switch (powerUpType)
             {
                 case Type.Health:
                     pickupShip.CurrentHealth += value;
-                    
+                    SoundManager.Instance.PlayEffects("Heal");
                     break;
                 case Type.Attack:
                     pickupShip.TotalDamage += value;
@@ -81,11 +81,13 @@ public class PowerUpValue : MonoBehaviour
                     pickupShip.ProjectileSpeed *= 2;
                     pickupShip.TurnAcceleration /= 2;
                     pickupShip.MaxTurnSpeed /= 2;
+                    SoundManager.Instance.PlayEffects("AttackUp");
                     break;
                 case Type.Speed:
                     pickupShip.MaxMovementSpeed += value;
                     pickupShip.TurnAcceleration *= 2;
                     pickupShip.MaxMovementSpeed *= 1.5f;
+                    SoundManager.Instance.PlayEffects("SpeedUp");
                     break;
             }
             if (isTemporary)

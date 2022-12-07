@@ -11,13 +11,16 @@ public class Eruption : MonoBehaviour
 
     public float eruptionTime = 20; // Set amount of time that eruption will occur.
     public float eruptionDamage = 5; //Set damage from eruption.
+    public float scaleFactor = 1;
+    public float opacityFactor = 1;
     public bool canTakeDamage = true;
- 
+    
 
     // Start is called before the first frame update
     void Start()
     {
         initialTime = Time.timeSinceLevelLoad; // Set the time.
+        SoundManager.Instance.PlayEffects("Eruption");
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,6 +46,14 @@ public class Eruption : MonoBehaviour
         {
             Destroy(gameObject); //Remove Eruption from game after eruptiontime ends.
         }
-    
+       
+
+        if (timeSinceInitialization == eruptionTime-3)
+        {
+            this.GetComponent<MeshRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, opacityFactor/3*(timeSinceInitialization- eruptionTime)); //Make eruption fade out
+        }
+
+        Vector2 vec = new Vector2(timeSinceInitialization, timeSinceInitialization);
+        transform.localScale = vec * scaleFactor;
     }
 }
