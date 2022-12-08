@@ -665,7 +665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1238054256947990700, guid: 7ad61f808c3ee3a4f93293e8a5fc64d0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1238054256947990700, guid: 7ad61f808c3ee3a4f93293e8a5fc64d0, type: 3}
       propertyPath: m_SizeDelta.y
@@ -701,7 +701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1238054256947990700, guid: 7ad61f808c3ee3a4f93293e8a5fc64d0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -150
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 1238054256947990700, guid: 7ad61f808c3ee3a4f93293e8a5fc64d0, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -795,6 +795,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 653214433}
+  oldHealthUpdateRate: 10
+  numberOfBlinks: 2
   playerNumber: 1
 --- !u!1 &681737822
 GameObject:
@@ -914,6 +916,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 733508552}
+  oldHealthUpdateRate: 10
+  numberOfBlinks: 2
   playerNumber: 0
 --- !u!1 &948779974
 GameObject:
@@ -7406,7 +7410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1238054256947990700, guid: 7ad61f808c3ee3a4f93293e8a5fc64d0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1238054256947990700, guid: 7ad61f808c3ee3a4f93293e8a5fc64d0, type: 3}
       propertyPath: m_SizeDelta.y
@@ -7442,7 +7446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1238054256947990700, guid: 7ad61f808c3ee3a4f93293e8a5fc64d0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 99.99999
+      value: 149.99998
       objectReference: {fileID: 0}
     - target: {fileID: 1238054256947990700, guid: 7ad61f808c3ee3a4f93293e8a5fc64d0, type: 3}
       propertyPath: m_AnchoredPosition.y
