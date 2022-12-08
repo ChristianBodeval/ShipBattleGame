@@ -7,16 +7,10 @@ public class TestTextWriter : MonoBehaviour
     public int index = 1;
     public float Delay = 0.1f;
     public float waitTimer = 2f;
-    private bool moveWAndSKeys = false;
-    private bool shotKeyGAndH = false;
-    private bool shotKeyPeriodAndMinus = false;
-    private Ramming ramming;
-    public GameObject AAndDKey;                     // GameObjects for all the different visuals
-    public GameObject WAndSKey;
-    public GameObject PeriodAndMinusKey;
-    public GameObject GAndHKey;
-    public GameObject LeftAndRightKey;
-    public GameObject UpAndDownKey;
+    bool[] soundChecker = new bool[20];
+    bool[] hasBeenPressed = new bool[20];
+    private Ramming[] ramming;
+    private Health[] health;
     public GameObject Island1;
     public GameObject Island2;
     public GameObject Merchantship;
@@ -25,136 +19,143 @@ public class TestTextWriter : MonoBehaviour
     public GameObject TPArrows;
     public GameObject TutorialImage;
     public GameObject RammingText;
-    public Text text1;                              // Text objects for all the text being displayed
-    public Text text2;
-    public Text text3;
-    public Text text4;
-    public Text text5;
-    public Text text6;
-    public Text text7;
-    public Text text8;
-    public Text text9;
-    public Text text10;
-    public Text text11;
-    public Text text12;
-    public Text text13;
-    public Text text14;
-    public Text text15;
-    public Text text16;
-    public Text text17;
-    public Text text18;
-    public Text text19;
-    public Text text20;
-    private bool moveAAndDKeys;
-    private bool moveLeftAndRightKeys;
-    private bool moveUpAndDownKeys;
-    private bool[] checker = new bool[4];          // Array of booleans to check if TutorialImage has been shown, Starts off false
-
-
+    public GameObject UpAndWKey;
+    public GameObject[] Key;
+    bool[] moveKeys = new bool[20];
+    bool[] shootKeys = new bool[20];
+    
+    public Animator pirateAnimator;
+    private AudioSource backgroundMusic; 
+    public AudioSource textSound; 
+    public Text[] text;
+                                                             // Array of booleans to check if TutorialImage has been shown, Starts off false
+   
     public int GetIndex()
     {
         return index;
     }
+
     public int SetIndex(int index)
     {
         this.index = index;
         return this.index;
     }
 
-     void Start()
-    { 
-
-    }
-//healthScript = Health.CurrentHealth();
-private void Update()
+    private void Start()
     {
-        //bool isRamming = ramming.IsRammed;
+        backgroundMusic.Play();
+        ramming = FindObjectsOfType<Ramming>();
+        health = FindObjectsOfType<Health>();
+        for (int i = 0; i < health.Length; i++)
+        {
+            if (health[i].GetComponent<ShipManager>())
+            {
+                health[1].CanTakeDamage = false;
+                health[2].CanTakeDamage = false;
+            }
+        }
+    }
 
-        StartCoroutine(ShowObjects());
+    private void Update()
+    {
+        ShowObjects();
         switch (index)
         {
             case 1:
-                text1.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 break;
 
             case 2:
-                text2.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 break;
 
             case 3:
-                text3.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 break;
 
             case 4:
 
-                text4.gameObject.SetActive(true);
-                WAndSKey.gameObject.SetActive(true);
-                AAndDKey.gameObject.SetActive(true);
-                LeftAndRightKey.gameObject.SetActive(true);
-                UpAndDownKey.gameObject.SetActive(true);
+                for (int i = 0; i < 8; i++)
+                {
+                    Key[i].SetActive(true);
+                }
+                text[index].gameObject.SetActive(true);
                 break;
 
             case 5:
+                TutorialImage.gameObject.SetActive(false);
 
-                if (moveAAndDKeys && moveWAndSKeys && moveLeftAndRightKeys && moveUpAndDownKeys)
+                if (moveKeys[0] && moveKeys[1] && moveKeys[2] && moveKeys[3] && moveKeys[4] && moveKeys[5] && moveKeys[6] && moveKeys[7]) //all versions of movement keys for both boats
                 {
-                    text5.gameObject.SetActive(true);
+                    text[index].gameObject.SetActive(true);
                     TutorialImage.gameObject.SetActive(true);
                 }
                 break;
 
             case 6: // Teleporter
-                text6.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 break;
 
             case 7: // Teleporter 2
-                text7.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 TPArrows.gameObject.SetActive(true);
                 break;
 
             case 8:
-                text8.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 TPArrows.gameObject.SetActive(false);
                 break;
 
             case 9:
-                text9.gameObject.SetActive(true);
-                GAndHKey.gameObject.SetActive(true);
-                PeriodAndMinusKey.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
+                for (int i = 8; i < 12; i++)
+                {
+                    Key[i].SetActive(true);
+                }
                 break;
 
             case 10:
-                if (shotKeyPeriodAndMinus && shotKeyGAndH)
+                TutorialImage.gameObject.SetActive(false);
+                
+                if (shootKeys[8] && shootKeys[9] && shootKeys[10] && shootKeys[11]) //both version of shootKeys from each boat
                 {
-                    text10.gameObject.SetActive(true);
+                    text[index].gameObject.SetActive(true);
                     TutorialImage.gameObject.SetActive(true);
                 }
                 break;
 
             case 11: // Ramming
-                text11.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 break;
 
             case 12: // Ramming 2
-                text12.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 RammingText.gameObject.SetActive(true);
                 break;
 
             case 13: // Dash
-                //if (isRamming == true)
-                //{
-                    text13.gameObject.SetActive(true);
-                    RammingText.gameObject.SetActive(false);
-                //}
-          
+                TutorialImage.SetActive(false);
+                for (int i = 0; i < ramming.Length; i++)
+                {
+                    if (ramming[i].IsRammed == true)
+                    {
+                        text[index].gameObject.SetActive(true);
+                        RammingText.gameObject.SetActive(false);
+                        TutorialImage.SetActive(true);
+                        UpAndWKey.gameObject.SetActive(true);
+                    }
+                }
                 break;
 
             case 14:
-                text14.gameObject.SetActive(true);
+                UpAndWKey.gameObject.SetActive(false);
+                text[index].gameObject.SetActive(true);
                 break;
 
             case 15:
-                text15.gameObject.SetActive(true);
+                TutorialImage.gameObject.SetActive(false);
+
+                text[index].gameObject.SetActive(true);
                 Island1.gameObject.SetActive(true);
                 Island2.gameObject.SetActive(true);
 
@@ -163,141 +164,94 @@ private void Update()
             case 16:
                 if (Island1.active == false && Island2.active == false)
                 {
-                    text16.gameObject.SetActive(true);
+                    text[index].gameObject.SetActive(true);
                     TutorialImage.gameObject.SetActive(true);
                 }
                 break;
 
             case 17:
-                text17.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 PointingArrows.gameObject.SetActive(true);
 
                 break;
 
             case 18:
-                text18.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
 
                 break;
 
             case 19:
-                text19.gameObject.SetActive(true);
+                text[index].gameObject.SetActive(true);
                 Merchantship.gameObject.SetActive(true);
                 Merchantship2.gameObject.SetActive(true);
                 break;
 
             case 20:
+                TutorialImage.gameObject.SetActive(false);
                 if (Merchantship.active == false && Merchantship2.active == false)
                 {
-                    text20.gameObject.SetActive(true);
+                    text[index].gameObject.SetActive(true);
                     TutorialImage.gameObject.SetActive(true);
                 }
 
                 break;
 
             default:
-                Debug.Log("Oops, ran out of text UwU");
+                Debug.Log("Oops, ran out of text");
                 break;
         }
+        Debug.Log("Ramming is: " + ramming[0].IsRammed);
+        Debug.Log("Ramming is: " + ramming[1].IsRammed);
 
         //if (isRamming)
-            //Debug.Log("Ramming atm");
+        //Debug.Log("Ramming atm");
 
-        Debug.Log(index);
+        Debug.Log("index is: " + index);
     }
-    
 
-    private IEnumerator ShowObjects()
+    private void ShowObjects()
     {
-        if (Input.GetKey(KeyCode.W) && index == 5 ||
-            Input.GetKey(KeyCode.S) && index == 5)
-        {
-            yield return new WaitForSeconds(1);
-            moveWAndSKeys = true;
-            WAndSKey.gameObject.SetActive(false);
-        }
-        if (Input.GetKey(KeyCode.A) && index == 5 ||
-            Input.GetKey(KeyCode.D) && index == 5)
-        {
-            yield return new WaitForSeconds(1);
-            moveAAndDKeys = true;
-            AAndDKey.gameObject.SetActive(false);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) && index == 5 ||
-           Input.GetKey(KeyCode.RightArrow) && index == 5)
-        {
-            yield return new WaitForSeconds(1);
-            moveLeftAndRightKeys = true;
-            LeftAndRightKey.gameObject.SetActive(false);
-        }
-        if (Input.GetKey(KeyCode.UpArrow) && index == 5 ||
-            Input.GetKey(KeyCode.DownArrow) && index == 5)
-        {
-            yield return new WaitForSeconds(1);
-            moveUpAndDownKeys = true;
-            UpAndDownKey.gameObject.SetActive(false);
-            Debug.Log("pressing moveing buttons atm!");
-        }
-        // Ramming
-        if(Input.GetKey(KeyCode.W) && index == 12)
-        {
-            yield return new WaitForSeconds(1);
-            RammingText.gameObject.SetActive(false);
-        }
-        if (index == 5)
-        {
-            if (!checker[1])
-            {
-                checker[1] = true;
-                TutorialImage.gameObject.SetActive(false);
-            }
-        }
-        if (index == 10)
-        {
-            if (!checker[2])
-            {
-                checker[2] = true;
-                TutorialImage.gameObject.SetActive(false);
-            }
-        }
-        if (index == 15)
-        {
-            if (!checker[3])
-            {
-                checker[3] = true;
-                TutorialImage.gameObject.SetActive(false);
-            }
-        }
-        if (index == 20 && Merchantship.active == true && Merchantship2.active == true)
-        {
-            if (!checker[4])
-            {
-                checker[4] = true;
-                TutorialImage.gameObject.SetActive(false);
-            }
-        }
-        
+        KeyCode[] keyCodes = { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.G, KeyCode.H, KeyCode.Period, KeyCode.Minus };
 
-        if (Input.GetKey(KeyCode.G) && index == 10 ||
-          Input.GetKey(KeyCode.H) && index == 10)
+        for (int i = 0; i < 8; i++)
         {
-            yield return new WaitForSeconds(1);
-            shotKeyGAndH = true;
-            GAndHKey.gameObject.SetActive(false);
+            if (index == 5 && Input.GetKeyDown(keyCodes[i]) && soundChecker[i] == false) // Move keys
+            {
+                soundChecker[i] = true;
+                moveKeys[i] = true;
+                Key[i].SetActive(false);
 
+                if (hasBeenPressed[i] == false)
+                {
+                    textSound.Play();
+                    hasBeenPressed[i] = true;
+                }
+            }
         }
-        if (Input.GetKey(KeyCode.Period) && index == 10 ||
-          Input.GetKey(KeyCode.Minus) && index == 10)
+        for (int i = 8; i < 12; i++)
         {
-            yield return new WaitForSeconds(1);
-            shotKeyPeriodAndMinus = true;
-            PeriodAndMinusKey.gameObject.SetActive(false);
-        }
-        if (index == 18)
-        {
-            yield return new WaitForSeconds(3);
-            PointingArrows.gameObject.SetActive(false);
-        }
+            //TEST
+            //Destroy
+            if (index == 10 && Input.GetKeyDown(keyCodes[i]) && soundChecker[i] == false) // Shoot keys
+            {
+                soundChecker[i] = true;
+                shootKeys[i] = true;
+                Key[i].SetActive(false);
 
-        yield return null;
+                if (hasBeenPressed[i] == false)
+                {
+                    textSound.Play();
+                    hasBeenPressed[i] = true;
+                }
+
+
+            }
+            //if (index == 10 && Input.GetKeyDown(keyCodes[i]) && soundChecker[i] == false && periodKeyPressed == false)
+            //    {
+            //    textSound.Play();
+                
+            //    periodKeyPressed = true;
+            //    }
+        }
     }
 }
