@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +10,11 @@ public class TextScript : MonoBehaviour
     public string fullText = "";
     public float waitTimer = 2f;
     public TestTextWriter testTextWriter;
+    public PirateAnimation pirateAnimation;
     private int index = 0;
     private AudioSource TextSound;
     private AudioClip textSound;
+    private Animator pirateAnimator;
 
     private void OnEnable()
     {
@@ -27,6 +30,8 @@ public class TextScript : MonoBehaviour
             this.GetComponent<Text>().text = currentText;
             yield return new WaitForSeconds(delay);
         }
+        //pirateAnimator = pirateAnimation.GetComponent<Animator>();
+        //pirateAnimator.Play();
         yield return new WaitForSeconds(waitTimer);
         this.gameObject.SetActive(false);
         index = testTextWriter.GetIndex();

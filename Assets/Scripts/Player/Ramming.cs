@@ -8,19 +8,22 @@ public class Ramming : MonoBehaviour
     GameObject usedBy;
     BoxCollider2D boxCollider2D;
     float rammingDamage;
+    bool isRammed;
 
     public float RammingDamage { get => rammingDamage; set => rammingDamage = value; }
+    public bool IsRammed { get => isRammed; set => isRammed = value; }
 
     private void Start()
     {
         usedBy = gameObject;
         boxCollider2D = GetComponent<BoxCollider2D>();
     }
-
+   
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(!boxCollider2D.IsTouching(collision))
         {
+            //IsRammed = false;
             return;
         }
         //Do nothing on collision with own ship
@@ -32,12 +35,16 @@ public class Ramming : MonoBehaviour
         //Player hit
         if (collision.gameObject.GetComponent<Health>())
         {
+            IsRammed = true;
             //Make particles
             Instantiate(particleEffect, collision.transform.position,collision.transform.rotation);
 
             collision.transform.Translate((collision.gameObject.transform.position-collision.transform.position)*2);
             collision.gameObject.GetComponent<Health>().TakeDamage(rammingDamage);
+            
+           
         }
+        
         //Island hit
         if (collision.gameObject.GetComponent<IslandHealth>())
         {

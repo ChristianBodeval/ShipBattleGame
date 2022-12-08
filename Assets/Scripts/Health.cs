@@ -13,10 +13,11 @@ public class Health : MonoBehaviour
     public bool dead;
     private ShipManager shipManager;
     private Color playerColor;
-
+    private bool canTakeDamage = true;
     //Accessor
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
+    public bool CanTakeDamage { get => canTakeDamage; set => canTakeDamage = value; }
 
     private void Awake()
     {
@@ -32,11 +33,14 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        currentHealth -= amount;
-
-        if (currentHealth <= 0f && !dead)
+        if (CanTakeDamage)
         {
-            OnDeath();
+            currentHealth -= amount;
+
+            if (currentHealth <= 0f && !dead)
+            {
+                OnDeath();
+            }
         }
     }
 
