@@ -32,6 +32,10 @@ public class CanonBall : MonoBehaviour
 
     
     
+    // sounds
+    public AudioSource audioSource;
+
+
 
     private void OnEnable()
     {
@@ -76,8 +80,11 @@ public class CanonBall : MonoBehaviour
 
             if (fractionOfJourney >= 1)
             {
+                Debug.Log("Destination reached");
+                audioSource.Play();
                 gameObject.SetActive(false);
-            }     
+                  
+        }     
     }
 
     private void Deactivate()

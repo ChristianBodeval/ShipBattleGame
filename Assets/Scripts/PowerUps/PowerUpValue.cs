@@ -48,11 +48,13 @@ public class PowerUpValue : MonoBehaviour
 
             pickupShip.hasPowerUp = true;
 
+            
+
             switch (powerUpType)
             {
                 case PowerUpType.Health:
-                    pickupShip.GetComponent<Health>().CurrentHealth += value;
-                    
+                    pickupShip.CurrentHealth += value;
+                    SoundManager.Instance.PlayEffects("Heal");
                     break;
                 case PowerUpType.Attack:
                     pickupShip.fireOnBullets = true;
@@ -64,13 +66,14 @@ public class PowerUpValue : MonoBehaviour
                     pickupShip.TurnAcceleration /= 4;
                     pickupShip.MaxTurnSpeed /= 2;
                     pickupShip.SmoothTurningFactor = 0.01f;
+                    SoundManager.Instance.PlayEffects("AttackUp");
                     break;
                 case PowerUpType.Speed:
                     pickupShip.TurnAcceleration *= 4;
                     pickupShip.MaxTurnSpeed *= 2;
                     pickupShip.MaxMovementSpeed *= 2.5f;
                     pickupShip.SmoothTurningFactor = 0.3f;
-
+                    SoundManager.Instance.PlayEffects("SpeedUp");
                     Debug.Log("Adding speed");
                     break;
                 case PowerUpType.Snipe:
