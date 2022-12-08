@@ -2,45 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+public enum PowerUpType { Health, Attack, Speed, Snipe, NumberOfTypes};   
+
 public class PowerUpValue : MonoBehaviour
-{
+{   
     public float value;
 
     public bool isPositive;
     public bool isTemporary;
     public float duration;
 
-    public Type powerUpType;
+    public PowerUpType powerUpType;
 
-    public enum Type { Health, Attack, Speed, NumberOfTypes };
-
+    
     public ShipManager pickupShip;
 
-    public bool SpawnHealth;
-    public bool SpawnSpawnAttack;
-    public bool SpawnSpawnSpeed;
-
     ShipManager pickUpShip;
-
-    List<Type> pickList = new List<Type>();
-
-
-    private void Start()
-    {
-        pickupShip = null;
-        if (SpawnHealth)
-            pickList.Add(Type.Health);
-        if (SpawnSpawnAttack)
-            pickList.Add(Type.Attack);
-        if (SpawnSpawnSpeed)
-            pickList.Add(Type.Speed);
-
-        if (!isPositive)
-        {
-            value *= -1;
-        }
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -71,27 +50,42 @@ public class PowerUpValue : MonoBehaviour
 
             switch (powerUpType)
             {
-                case Type.Health:
+                case PowerUpType.Health:
                     pickupShip.GetComponent<Health>().CurrentHealth += value;
                     
                     break;
-                case Type.Attack:
-                    pickupShip.TotalDamage += value;
+                case PowerUpType.Attack:
                     pickupShip.fireOnBullets = true;
                     pickupShip.maxAngle /= 3;
-                    pickupShip.Range *= 3;
-                    pickupShip.FireRateInSeconds /= 3;
-                    pickupShip.MaxMovementSpeed /= 2;
-                    pickupShip.ProjectileSpeed *= 2;
-                    pickupShip.TurnAcceleration /= 2;
+                    pickupShip.Range *= 6;
+                    pickupShip.FireRateInSeconds /= 7;
+                    pickupShip.MaxMovementSpeed /= 3;
+                    pickupShip.ProjectileSpeed *= 3;
+                    pickupShip.TurnAcceleration /= 4;
                     pickupShip.MaxTurnSpeed /= 2;
+                    pickupShip.SmoothTurningFactor = 0.01f;
                     break;
-                case Type.Speed:
-                    pickupShip.MaxMovementSpeed += value;
-                    pickupShip.TurnAcceleration *= 2;
-                    pickupShip.MaxMovementSpeed *= 1.5f;
+                case PowerUpType.Speed:
+                    pickupShip.TurnAcceleration *= 4;
+                    pickupShip.MaxTurnSpeed *= 2;
+                    pickupShip.MaxMovementSpeed *= 2.5f;
+                    pickupShip.SmoothTurningFactor = 0.3f;
+
+                    Debug.Log("Adding speed");
+                    break;
+                case PowerUpType.Snipe:
+                    pickupShip.shooters = 1;
+                    pickupShip.TotalDamage = 300;
+                    pickupShip.fireOnBullets = true;
+                    pickupShip.Range *= 8;
+                    pickupShip.FireRateInSeconds *= 4;
+                    pickupShip.ProjectileSpeed *= 8;
+                    pickupShip.SmoothTurningFactor = 0.03f;
                     break;
             }
+
+            pickupShip.UpdateValues();
+
             if (isTemporary)
                 Invoke("resetValues", duration);
             else
@@ -103,13 +97,11 @@ public class PowerUpValue : MonoBehaviour
 
     void resetValues()
     {
+
         Debug.Log("Resetting values");
-        if (isTemporary)
-        {
-            Debug.Log("Reverting powerup: " + gameObject.name);
-            pickupShip.ResetValues();
-            pickupShip.hasPowerUp = false;
-        }
+        Debug.Log("Reverting powerup: " + gameObject.name);
+        pickupShip.ResetValues();
+        pickupShip.hasPowerUp = false;
 
 
     }

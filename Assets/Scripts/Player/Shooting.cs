@@ -16,8 +16,8 @@ public class Shooting : MonoBehaviour
     public GameObject projectilePrefab;
 
     public Knockback knockbackScript;
-    public bool linesLeft;
-    public bool linesRight;
+    public bool renderLinesLeft;
+    public bool renderLinesRight;
 
     float shootingInputValue;
 
@@ -46,6 +46,7 @@ public class Shooting : MonoBehaviour
     //LineColors
     public Color lineColor;
     public Color cooldownColor;
+    public Color chargingColor;
     /*
     //private IEnumerator ShootLeftCoroutine;
     //private IEnumerator ShootRightCoroutine;
@@ -84,8 +85,8 @@ public class Shooting : MonoBehaviour
 
     private void RenderLines()
     {
-        shooterGroupRight.renderLines = linesLeft;
-        shooterGroupLeft.renderLines = linesRight;
+        shooterGroupRight.renderLines = renderLinesRight;
+        shooterGroupLeft.renderLines = renderLinesLeft;
 
     }
 
@@ -136,6 +137,7 @@ public class Shooting : MonoBehaviour
         chargeUpValueRight = 8f;
         while (isShootingRight)
         {
+            shooterGroupRight.SetLinesColor(chargingColor);
             shooterGroupRight.Range += chargeUpValueRight * Time.deltaTime;
             yield return null;
         }
@@ -148,6 +150,7 @@ public class Shooting : MonoBehaviour
         chargeUpValueLeft = 8f;
         while (isShootingLeft)
         {
+            shooterGroupLeft.SetLinesColor(chargingColor);
             shooterGroupLeft.Range += chargeUpValueLeft * Time.deltaTime;
             yield return null;
         }
@@ -173,7 +176,9 @@ public class Shooting : MonoBehaviour
             canShootRight = false;
             //TODO Check for current powerup attack then skip this step
             //Increase range, while holding down
-            yield return StartCoroutine(ChargeUpValueRight());
+
+            if(!shipManager.hasPowerUp)
+                yield return StartCoroutine(ChargeUpValueRight());
                 
             shooterGroupRight.SetLinesColor(cooldownColor);
             knockbackScript.AddKnockback(Vector3.left);
@@ -181,6 +186,7 @@ public class Shooting : MonoBehaviour
             ShootRight();
             //Reset range
             shooterGroupRight.Range = shipManager.range_default;
+            shipManager.UpdateValues();
             yield return new WaitForSeconds(fireRateInSeconds);
                 
             shooterGroupRight.SetLinesColor(lineColor);
@@ -197,7 +203,8 @@ public class Shooting : MonoBehaviour
             canShootLeft = false;
             //TODO Check for current powerup attack then skip this step
             //Increase range, while holding down
-            yield return StartCoroutine(ChargeUpValueLeft());
+            if (!shipManager.hasPowerUp)
+                yield return StartCoroutine(ChargeUpValueLeft());
 
             shooterGroupLeft.SetLinesColor(cooldownColor);
             knockbackScript.AddKnockback(Vector3.right);
@@ -205,6 +212,8 @@ public class Shooting : MonoBehaviour
             ShootLeft();
             //Reset range
             shooterGroupLeft.Range = shipManager.range_default;
+            //TODO Write with events
+            shipManager.UpdateValues();
             yield return new WaitForSeconds(fireRateInSeconds);
 
             shooterGroupLeft.SetLinesColor(lineColor);

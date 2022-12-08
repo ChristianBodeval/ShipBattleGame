@@ -229,7 +229,7 @@ public class Movement : MonoBehaviour
     //Sets input value
     public void OnTurn(InputAction.CallbackContext context)
     {
-        turnInputValue = context.ReadValue<float    >();
+        turnInputValue = context.ReadValue<float>();
     }
 
     /// <summary>

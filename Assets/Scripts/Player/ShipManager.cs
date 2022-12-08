@@ -6,8 +6,11 @@ public class ShipManager : MonoBehaviour
 {
     private PlayerInput Input;
 
+    
+
     public Transform m_SpawnPoint;
 
+    public PowerUpType currentPowerup; 
 
     // This class is to manage various settings on a ship.
     [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the ship when it is created.
@@ -50,18 +53,7 @@ public class ShipManager : MonoBehaviour
     [Range(1, 25)]
     private float range;
 
-
-    public bool isDead;
-    public int roundWins;
-
-
-
-    /*
-    [Range(1, 25)]
-    private float minRange;
-    [Range(25, 50)]
-    private float maxRange;
-    */
+    
     public bool fireOnBullets;
     [Range(1, 10)]
     public int shooters;
@@ -74,6 +66,14 @@ public class ShipManager : MonoBehaviour
 
     [Range(-2, 0)]
     public float startCurve;
+
+
+    public bool shooterGroupsAreIdentical;
+
+
+    public bool isDead;
+    public int roundWins;
+
 
 
     private Health healthScript;
@@ -137,7 +137,6 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
     private void Awake()
     {
         m_Instance = gameObject;
-        timeToRespawn = GameManager.Instance.timeToRespawn;
         healthScript = GetComponent<Health>();
         movementScript = GetComponent<Movement>();
         shootingScript = GetComponent<Shooting>();
@@ -152,15 +151,16 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
     void Start()
     {
+        timeToRespawn = GameManager.Instance.timeToRespawn;
         hasPowerUp = false;
         Input = GetComponent<PlayerInput>();
         SetDefaultValues();
-
         UpdateValues();
     }
 
     void Update()
     {
+        //UpdateValues();
         currentHealth = healthScript.CurrentHealth;
     }
 
@@ -216,10 +216,6 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         }
     }
 
-    public void OnValidate()
-    {
-        UpdateValues();
-    }
 
     public void UpdateValues()
     {
@@ -243,15 +239,19 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         knockbackScript.KnockbackValue = knockbackValue;
         knockbackScript.SmoothKnockbackFactor = smoothKnockbackFactor;
         //ShootingGroup e.g ConeShooting
+
+
         foreach (ShooterGroup s in shooterGroups)
         {
-            s.Range = range;
-            s.Shooters = shooters;
-            s.ShipSize = shipSize;
-            s.MaxAngle = maxAngle;
-            s.StartCurve = startCurve;
-            s.FireOnBullets = fireOnBullets;
-
+            if(shooterGroupsAreIdentical)
+            {
+                s.Range = range;
+                s.Shooters = shooters;
+                s.ShipSize = shipSize;
+                s.MaxAngle = maxAngle;
+                s.StartCurve = startCurve;
+                s.FireOnBullets = fireOnBullets;
+            }
         }
     }
 

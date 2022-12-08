@@ -12,8 +12,8 @@ public class MerchantShip : MonoBehaviour
     float timerHolder;
     float mapL;
     float mapH;
-
     private Vector3 target;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,9 +28,15 @@ public class MerchantShip : MonoBehaviour
         {
             timerHolder = Time.time + changeDirectionTimer;
             target = GetRandomPointOnScreen();
-        }        
-        transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed);
-        transform.Find("Ship").transform.up = target - transform.position;
+        }
+
+        else
+        {
+            
+            transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed);
+
+            transform.Find("Ship").transform.up = target - transform.position;
+        }
     }
 
 
@@ -47,5 +53,6 @@ public class MerchantShip : MonoBehaviour
         timerHolder = Time.time + changeDirectionTimer;
         target = GetRandomPointOnScreen();
     }
-    
+
+
 }

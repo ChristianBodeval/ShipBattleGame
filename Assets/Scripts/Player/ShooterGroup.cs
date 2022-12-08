@@ -16,15 +16,25 @@ public class ShooterGroup : MonoBehaviour
     Vector2[] startPoints;
     public GameObject[] lines;
 
+    [Range(1, 25)]
     private float range;
-    private int shooters;
-    private float shipSize;
-    private float maxAngle;
-    private float startCurve;
+
+    [Range(1, 10)]
+    public int shooters;
+
+    [Range(1, 10)]
+    public float shipSize;
+
+    [Range(0, 180)]
+    public float maxAngle;
+
+    [Range(-2, 0)]
+    public float startCurve;
 
     private bool fireOnBullets;
 
     public bool isDrawingLines = true;
+
 
 
 
@@ -46,10 +56,11 @@ public class ShooterGroup : MonoBehaviour
         fireOnBullets = false;
     }
 
-   
+
 
     void FixedUpdate()
     {
+
         SetLinePoints(startPoints, endPoints);
         SpawnShooters(startPoints, endPoints);
         DestroyUnusedShooters();
@@ -87,47 +98,58 @@ public class ShooterGroup : MonoBehaviour
         float currentPointDistance = 0 - (shipSize / 2);
         float currentAngle = 0 - (maxAngle / 2) + transform.rotation.eulerAngles.z;
 
-        if(shooters == 1)
+        if (shooters == 1)
         {
-            currentPointDistance = 0;
-            currentAngle = 0;
-        }
-        
-        for (int i = 0; i <= shooters; i++)
-        {
+            currentPointDistance = 1;
+            currentAngle = 0.00001f;
 
-            Vector3 start = transform.up * currentPointDistance;                                //Gets start position by moving the point a little up or down dependenet on currentPointDistance
-            start += startCurve * Mathf.Abs(currentPointDistance) * transform.right;            //Curves the points, by moving them a little left or nothing at all. 
-            Vector3 direction = GetVectorFromAngle(currentAngle);                               //Vector from the angle
-            Vector3 target = direction * range + start;                                         //Ending of the line
+            Vector3 start = Vector3.zero;                                
+            Vector3 direction = transform.right;                              
+            Vector3 target = direction * range + start;                                         
 
-            startPoints[i] = start;
-            endPoints[i] = target;
-
-            currentPointDistance += pointDistanceStep;
-            currentAngle += angleStep;
+            startPoints[0] = start;
+            endPoints[0] = target;
         }
 
-        
+        else
+        {
+            for (int i = 0; i <= shooters; i++)
+            {
+
+                Vector3 start = transform.up * currentPointDistance;                                //Gets start position by moving the point a little up or down dependenet on currentPointDistance
+                start += startCurve * Mathf.Abs(currentPointDistance) * transform.right;            //Curves the points, by moving them a little left or nothing at all. 
+                Vector3 direction = GetVectorFromAngle(currentAngle);                               //Vector from the angle
+                Vector3 target = direction * range + start;                                         //Ending of the line
+
+                startPoints[i] = start;
+                endPoints[i] = target;
+
+                currentPointDistance += pointDistanceStep;
+                currentAngle += angleStep;
+            }
+        }
+
+
+
 
     }
 
     //Draws lines between startPoints and endPoints in Gizmo
     void OnDrawGizmosSelected()
     {
-            if (startPoints != null && endPoints != null)
+        if (startPoints != null && endPoints != null)
+        {
+            if (startPoints.Length > 0 && endPoints.Length > 0)
             {
-                if (startPoints.Length > 0 && endPoints.Length > 0)
-                {
 
                 for (int i = 0; i < shooters; i++)
-                    {
-                        Gizmos.DrawLine((Vector3)startPoints[i] + transform.position, (Vector3)endPoints[i] + transform.position);
-                    }
+                {
+                    Gizmos.DrawLine((Vector3)startPoints[i] + transform.position, (Vector3)endPoints[i] + transform.position);
                 }
             }
+        }
     }
-    
+
 
     //Fires the canons by iteration through all canons and shooting them at the target. 
     public void Fire(float projectileSpeed, float totalDamage)
@@ -137,20 +159,20 @@ public class ShooterGroup : MonoBehaviour
 
             Shooter shooterScript = canonGameObjects[i].GetComponent<Shooter>();
             shooterScript.fireOnBullets = fireOnBullets;
-            
+
             Vector3 position = canonGameObjects[i].transform.position;
             Vector3 direction = endPoints[i] - startPoints[i] + (Vector2)canonGameObjects[i].transform.position; //TODO Kan dette skrives kun med endPoints?
             GameObject shotBy = transform.parent.gameObject;
 
-            shooterScript.Shoot(shotBy, direction, projectileSpeed, totalDamage/shooters);
+            shooterScript.Shoot(shotBy, direction, projectileSpeed, totalDamage / shooters);
         }
-        
-    }    
+
+    }
 
     //Spawn canons at startPoints and make them point towards endPoints.
     public void SpawnShooters(Vector2[] startPoints, Vector2[] endPoints)
     {
-        
+
         for (int i = 0; i < shooters; i++)
         {
             float angle = GetAngleFromVector(endPoints[i] - startPoints[i]);
@@ -161,7 +183,7 @@ public class ShooterGroup : MonoBehaviour
                 canonGameObjects[i].transform.position = (Vector3)startPoints[i] + GetComponentInParent<Transform>().position;
                 canonGameObjects[i].transform.rotation = rotation;
 
-                if(renderLines)
+                if (renderLines)
                 {
                     if (canonGameObjects[i].GetComponent<LineRenderer>() != null)
                     {
@@ -183,9 +205,12 @@ public class ShooterGroup : MonoBehaviour
             GameObject canonClone;
             canonClone = Instantiate(shooterPrefab, (Vector3)startPoints[i] + transform.position, rotation);
 
-            
-            
-            canonClone.transform.parent = gameObject.transform;
+            if (shooters == 1)
+            {
+                canonClone.transform.localScale *= 3;
+            }
+
+                canonClone.transform.parent = gameObject.transform;
             canonGameObjects[i] = canonClone;
         }
 

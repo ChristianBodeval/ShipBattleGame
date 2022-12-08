@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class CanonBall : MonoBehaviour
 {
@@ -13,6 +10,7 @@ public class CanonBall : MonoBehaviour
     private float projectileSpeed;                                                   // The speed of the cannonball
 
 
+    public SpriteRenderer spriteRenderer;
     private Vector3 targetPosition;
 
     public Vector3 TargetPosition { get => targetPosition; set => targetPosition = value; }
@@ -33,9 +31,11 @@ public class CanonBall : MonoBehaviour
     public bool hitSomething;
 
     
+    
 
     private void OnEnable()
     {
+        spriteRenderer.enabled = true;
         if(fireOnBullet)
         {
             fireParticle.Play();
@@ -82,6 +82,7 @@ public class CanonBall : MonoBehaviour
 
     private void Deactivate()
     {
+        spriteRenderer.enabled = false;
         //Stops movement on hit, so hitparticles plays on the hit position
         endMarker = transform.position;
         //Plays particles
