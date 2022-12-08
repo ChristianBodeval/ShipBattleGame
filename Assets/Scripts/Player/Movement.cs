@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -54,7 +55,10 @@ public class Movement : MonoBehaviour
     public float dashCooldown;
     public InputActionReference actionReference;
 
-    
+    //Sail
+    public GameObject sail;
+
+
 
     private void Start()
     {
@@ -94,7 +98,6 @@ public class Movement : MonoBehaviour
     //Sets a gear between 0 and maxGears. W for going up a gear, S for going down.  
     public void OnMove(InputAction.CallbackContext context)
     {
-
         moveInputValue = context.ReadValue<float>();
 
         // -----> Dash <---- //
@@ -190,6 +193,8 @@ public class Movement : MonoBehaviour
     IEnumerator Dash ()
     {
         isDashing = true;
+        BoxCollider2D ram = GetComponent<BoxCollider2D>();
+        ram.enabled = true;
         turnAcceleration /= 10;
         maxTurnSpeed /= 10;
         currentGear = dashGearValue;
@@ -206,6 +211,7 @@ public class Movement : MonoBehaviour
         turnAcceleration *= 10;
         maxTurnSpeed *= 10;
         isDashing = false;
+        ram.enabled = false;   
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
@@ -268,6 +274,33 @@ public class Movement : MonoBehaviour
 
         //Turn
         transform.Rotate(turnDirection * currentTurnAcceleration);
+        
+        
+        // Sail rotation
+        Debug.Log(turnInputValue);
+        Debug.Log("Eular angles: " + sail.transform.localRotation.eulerAngles.z);
+        //Debug.Log("Rotation" + Sail.transform.localRotation.z);
+
+        float sailRotation = sail.transform.localRotation.eulerAngles.z;
+
+
+        if (sailRotation < 60 || sailRotation > 300)
+        {
+            Debug.Log("Running");
+
+            if (turnInputValue > 0 && (sailRotation < 59 || sailRotation > 300))
+            {
+                sail.transform.Rotate(0f, 0f, 1f);
+                Debug.Log("Turning left!");
+            }
+            if (turnInputValue < 0 && (sailRotation > 301 || sailRotation < 60))
+            {
+                sail.transform.Rotate(0f, 0f, -1f);
+                Debug.Log("Turning right!");
+            }
+           
+        }
+        
     }
 
 }
