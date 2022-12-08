@@ -14,9 +14,6 @@ public class SliderScript : MonoBehaviour
     private Color color = new Color(0 / 255f, 255 / 255f, 0 / 255f);
     private Color normalColor;
 
-    private int oldHealthUpdateCounter = 0;
-    public int oldHealthUpdateRate = 10;
-    private float oldHealth;
     GameManager gameManager;
 
     public int playerNumber;
