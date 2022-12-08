@@ -103,11 +103,13 @@ public class Shooting : MonoBehaviour
 
         if (context.performed && shootingInputValue < 0)
         {                                                                                   // context.performed means whilst the button is pressed down
+            SoundManager.Instance.PlayEffects("CannonShoot");
             isShootingRight = true;                                                          // .start would be when the button is first pressed and
             Debug.Log("Shot left");                                                         // .canceled would be at the release of the button
         }
         else if (context.performed && shootingInputValue > 0)
         {
+            SoundManager.Instance.PlayEffects("CannonShoot");
             isShootingLeft = true;
             Debug.Log("Shot right");
         }

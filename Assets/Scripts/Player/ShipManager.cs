@@ -217,7 +217,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
     public void Die()
     {
         //Input.actions = null;
-
+        SoundManager.Instance.PlayEffects("ShipBreak");
         playerColor = spriteRenderer.color;
         spriteRenderer.color = Color.black;
 
