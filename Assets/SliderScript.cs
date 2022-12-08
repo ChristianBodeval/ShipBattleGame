@@ -19,12 +19,6 @@ public class SliderScript : MonoBehaviour
     private float oldHealth;
     GameManager gameManager;
 
-    private float tempTime;
-
-    private bool blinkingEvent = false;
-    private int blinkCounter = 0;
-    public int numberOfBlinks = 2;
-
     public int playerNumber;
     
     // Start is called before the first frame update
