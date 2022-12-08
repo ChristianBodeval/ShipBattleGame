@@ -94,10 +94,12 @@ public class Shooting : MonoBehaviour
     //Instantiates a bullet and applies a force
     private void ShootLeft()
     {
+        SoundManager.Instance.PlayEffects("CannonShoot");
         shooterGroupLeft.Fire(projectileSpeed, totalDamage);
     }
     private void ShootRight()
     {
+        SoundManager.Instance.PlayEffects("CannonShoot");
         shooterGroupRight.Fire(projectileSpeed, totalDamage);
     }
 
@@ -110,7 +112,6 @@ public class Shooting : MonoBehaviour
 
         if (context.performed && shootingInputValue < 0)
         {                                                                                   // context.performed means whilst the button is pressed down
-            SoundManager.Instance.PlayEffects("CannonShoot");
             isShootingRight = true;                                                          // .start would be when the button is first pressed and
             if(canShootRight)
                 StartCoroutine(ShootingCoroutineRight());
@@ -120,7 +121,6 @@ public class Shooting : MonoBehaviour
         }
         else if (context.performed && shootingInputValue > 0)
         {
-            SoundManager.Instance.PlayEffects("CannonShoot");
             isShootingLeft = true;
             if(canShootLeft)
                 StartCoroutine(ShootingCoroutineLeft());

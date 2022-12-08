@@ -33,7 +33,6 @@ public class CanonBall : MonoBehaviour
     
     
     // sounds
-    public AudioSource audioSource;
 
 
 
@@ -81,7 +80,6 @@ public class CanonBall : MonoBehaviour
             if (fractionOfJourney >= 1)
             {
                 Debug.Log("Destination reached");
-                audioSource.Play();
                 gameObject.SetActive(false);
                   
         }     
@@ -113,6 +111,7 @@ public class CanonBall : MonoBehaviour
             //Hit by another player
             if (collision.GetComponent<Health>() != null && shotBy != collision.gameObject)
             {
+                SoundManager.Instance.PlayEffects("ProjectileHit");
                 hitSomething = true;
                 collision.GetComponent<Health>().TakeDamage(damage);
                 Deactivate();
