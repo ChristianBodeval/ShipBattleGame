@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.05
   fullText: Feeling like a sitting duck? Don't worry, ya can dash to avoid cannonballs!
-  waitTimer: 5
+  waitTimer: 1
   testTextWriter: {fileID: 0}
   pirateAnimation: {fileID: 0}
 --- !u!82 &2898014743336329277

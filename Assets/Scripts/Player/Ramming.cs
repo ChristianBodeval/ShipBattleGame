@@ -23,7 +23,7 @@ public class Ramming : MonoBehaviour
     {
         if(!boxCollider2D.IsTouching(collision))
         {
-            IsRammed = false;
+            //IsRammed = false;
             return;
         }
         //Player hit

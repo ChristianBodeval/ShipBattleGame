@@ -7,8 +7,8 @@ public class TestTextWriter : MonoBehaviour
     public int index = 1;
     public float Delay = 0.1f;
     public float waitTimer = 2f;
-    bool[] soundChecker = new bool[20];
-    bool[] hasBeenPressed = new bool[20];
+    bool[] soundChecker = new bool[50];
+    bool[] hasBeenPressed = new bool[50];
     private Ramming[] ramming;
     private Health[] health;
     public GameObject Island1;
@@ -21,15 +21,16 @@ public class TestTextWriter : MonoBehaviour
     public GameObject RammingText;
     public GameObject UpAndWKey;
     public GameObject[] Key;
-    bool[] moveKeys = new bool[20];
-    bool[] shootKeys = new bool[20];
-    
+    bool[] moveKeys = new bool[50];
+    bool[] shootKeys = new bool[50];
+    bool[] dashKeys = new bool[50];
+
     public Animator pirateAnimator;
-    private AudioSource backgroundMusic; 
-    public AudioSource textSound; 
+    private AudioSource backgroundMusic;
+    public AudioSource textSound;
     public Text[] text;
-                                                             // Array of booleans to check if TutorialImage has been shown, Starts off false
-   
+    // Array of booleans to check if TutorialImage has been shown, Starts off false
+
     public int GetIndex()
     {
         return index;
@@ -44,8 +45,7 @@ public class TestTextWriter : MonoBehaviour
     private void Start()
     {
         backgroundMusic.Play();
-        ramming = FindObjectsOfType<Ramming>();
-        health = FindObjectsOfType<Health>();
+
         for (int i = 0; i < health.Length; i++)
         {
             if (health[i].GetComponent<ShipManager>())
@@ -58,6 +58,8 @@ public class TestTextWriter : MonoBehaviour
 
     private void Update()
     {
+        ramming = FindObjectsOfType<Ramming>();
+        health = FindObjectsOfType<Health>();
         ShowObjects();
         switch (index)
         {
@@ -116,7 +118,7 @@ public class TestTextWriter : MonoBehaviour
 
             case 10:
                 TutorialImage.gameObject.SetActive(false);
-                
+
                 if (shootKeys[8] && shootKeys[9] && shootKeys[10] && shootKeys[11]) //both version of shootKeys from each boat
                 {
                     text[index].gameObject.SetActive(true);
@@ -137,19 +139,26 @@ public class TestTextWriter : MonoBehaviour
                 TutorialImage.SetActive(false);
                 for (int i = 0; i < ramming.Length; i++)
                 {
-                    if (ramming[i].IsRammed == true)
+                    if (ramming[i].IsRammed == true && index == 13)
                     {
+                        Debug.Log("RAMMED");
                         text[index].gameObject.SetActive(true);
                         RammingText.gameObject.SetActive(false);
                         TutorialImage.SetActive(true);
-                        UpAndWKey.gameObject.SetActive(true);
+                        Key[12].gameObject.SetActive(true);
+                        Key[13].gameObject.SetActive(true);
                     }
                 }
                 break;
 
             case 14:
-                UpAndWKey.gameObject.SetActive(false);
-                text[index].gameObject.SetActive(true);
+                TutorialImage.SetActive(false);
+                if (dashKeys[12] && dashKeys[13])
+                {
+                    text[index].gameObject.SetActive(true);
+                    TutorialImage.gameObject.SetActive(true);
+
+                }
                 break;
 
             case 15:
@@ -200,18 +209,15 @@ public class TestTextWriter : MonoBehaviour
                 Debug.Log("Oops, ran out of text");
                 break;
         }
-        Debug.Log("Ramming is: " + ramming[0].IsRammed);
-        Debug.Log("Ramming is: " + ramming[1].IsRammed);
 
-        //if (isRamming)
-        //Debug.Log("Ramming atm");
 
         Debug.Log("index is: " + index);
+
     }
 
     private void ShowObjects()
     {
-        KeyCode[] keyCodes = { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.G, KeyCode.H, KeyCode.Period, KeyCode.Minus };
+        KeyCode[] keyCodes = { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.G, KeyCode.H, KeyCode.Period, KeyCode.Minus, KeyCode.W, KeyCode.UpArrow };
 
         for (int i = 0; i < 8; i++)
         {
@@ -230,8 +236,6 @@ public class TestTextWriter : MonoBehaviour
         }
         for (int i = 8; i < 12; i++)
         {
-            //TEST
-            //Destroy
             if (index == 10 && Input.GetKeyDown(keyCodes[i]) && soundChecker[i] == false) // Shoot keys
             {
                 soundChecker[i] = true;
@@ -243,15 +247,27 @@ public class TestTextWriter : MonoBehaviour
                     textSound.Play();
                     hasBeenPressed[i] = true;
                 }
-
-
             }
-            //if (index == 10 && Input.GetKeyDown(keyCodes[i]) && soundChecker[i] == false && periodKeyPressed == false)
-            //    {
-            //    textSound.Play();
-                
-            //    periodKeyPressed = true;
-            //    }
+            
         }
+
+        for (int i = 12; i < 14; i++)
+        {
+            if (index == 14 && Input.GetKeyDown(keyCodes[i]) && soundChecker[i] == false) // Dash keys
+            {
+                
+                soundChecker[i] = true;
+                dashKeys[i] = true;
+                Key[i].SetActive(false);
+
+                if (hasBeenPressed[i] == false)
+                {
+                    textSound.Play();
+                    hasBeenPressed[i] = true;
+                }
+            }
+        }
+
+
     }
 }
