@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 55141b080c67342a3a69e46ae465b985, type: 3}
-  m_Color: {r: 0.9811321, g: 0.43098018, b: 0.36561054, a: 1}
+  m_Color: {r: 0.9056604, g: 0.5895336, b: 0.06407974, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpawnPoint: {fileID: 0}
+  currentPowerup: 0
   m_Instance: {fileID: 0}
   maxTurnSpeed: 2.2
   turnAcceleration: 0.08
@@ -275,7 +276,6 @@ MonoBehaviour:
   startCurve_default: 0
   hasPowerUp: 0
   timeToRespawn: 0
-  hasPowerUp: 0
 --- !u!50 &3685263541795606613
 Rigidbody2D:
   serializedVersion: 4
@@ -1058,7 +1058,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &1500456554002344869
 TrailRenderer:
-  serializedVersion: 3
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1159,14 +1159,11 @@ TrailRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 1
-    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.05
-  m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
-  m_ApplyActiveColorSpace: 0
 --- !u!114 &8584185919068338539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,13 +1201,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7575997117501919773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0121, y: 0.7853, z: 0}
-  m_LocalScale: {x: 0.29350078, y: 0.24951674, z: 1}
+  m_LocalPosition: {x: 0, y: 0.24, z: 0}
+  m_LocalScale: {x: 0.21048702, y: 0.17894343, z: 0.71716}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6250168267811266463}
   m_Father: {fileID: 3685263541795606619}
-  m_RootOrder: -1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1076561182550857800
 SpriteRenderer:
@@ -1250,9 +1247,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingLayerID: 1877588357
+  m_SortingLayer: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 4a8c3a492cd3b9f44a4af6f408ee4966, type: 3}
   m_Color: {r: 0.43958703, g: 0.72410595, b: 0.9245283, a: 1}
   m_FlipX: 0
@@ -1294,7 +1291,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 435012545601467024}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5993028462709873828
 SpriteRenderer:
@@ -1334,9 +1331,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingLayerID: 1877588357
+  m_SortingLayer: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 030699015f0f05c45a621f152075406a, type: 3}
   m_Color: {r: 0.8113208, g: 0.49291563, b: 0.5096789, a: 1}
   m_FlipX: 0
@@ -1353,7 +1350,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 3685263541795606619}
     m_Modifications:
     - target: {fileID: 2149374170288342253, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
@@ -1405,7 +1401,6 @@ PrefabInstance:
       value: ShootingGroupLeft
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
 --- !u!4 &121773882 stripped
 Transform:
@@ -1428,7 +1423,6 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 3685263541795606619}
     m_Modifications:
     - target: {fileID: 2149374170288342253, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
@@ -1480,7 +1474,6 @@ PrefabInstance:
       value: ShootingGroupRight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7948eabac38b34cf3a40d37563a89887, type: 3}
 --- !u!114 &5099332674081463101 stripped
 MonoBehaviour:
