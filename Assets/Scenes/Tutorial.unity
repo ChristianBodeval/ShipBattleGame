@@ -1756,22 +1756,22 @@ PrefabInstance:
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_ShapeTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 5c1443d1c9e0d4bd08573a2e81b2b045, type: 3}
+      objectReference: {fileID: 2800000, guid: 7ab622be54f244543b618862c911f881, type: 3}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
-      value: 0.030635118
+      value: -0.7558942
       objectReference: {fileID: 0}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -0.46529746
+      value: -0.4689622
       objectReference: {fileID: 0}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
-      value: 3.1475666
+      value: 4.1864257
       objectReference: {fileID: 0}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 2.5836082
+      value: 2.8263965
       objectReference: {fileID: 0}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_Sprites.Array.data[0]
@@ -3017,6 +3017,9 @@ MonoBehaviour:
   rotationSpeed: 30
   circleCollider2D: {fileID: 0}
   spriteHolderTransform: {fileID: 0}
+  whirlpoolDamage: 0
+  takeDamageEverySeconds: 0
+  healthObjects: []
 --- !u!224 &939791129 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8008262562444094246, guid: 39e17ee56f34ebb4a89de6d553e6aad7, type: 3}
@@ -3129,7 +3132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b110cd33e3b7d149b164b579b0c1936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 13
+  index: 1
   Delay: 0.02
   waitTimer: 0.5
   Island1: {fileID: 1608410100}
@@ -4227,22 +4230,22 @@ PrefabInstance:
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_ShapeTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 5c1443d1c9e0d4bd08573a2e81b2b045, type: 3}
+      objectReference: {fileID: 2800000, guid: 7ab622be54f244543b618862c911f881, type: 3}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
-      value: 0.030635118
+      value: -0.7558942
       objectReference: {fileID: 0}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -0.46529746
+      value: -0.4689622
       objectReference: {fileID: 0}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
-      value: 3.1475666
+      value: 4.1864257
       objectReference: {fileID: 0}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 2.5836082
+      value: 2.8263965
       objectReference: {fileID: 0}
     - target: {fileID: 5256241502257323973, guid: be453078ffef9e94887e1542f5d9bba0, type: 3}
       propertyPath: m_Sprites.Array.data[0]
@@ -6240,7 +6243,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c9b53093405f2fd49a45a242224ec657, type: 3}
-  m_Color: {r: 0, g: 0.80052567, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6360,9 +6363,23 @@ MonoBehaviour:
   player2Prefab: {fileID: 3685263541795606615, guid: 7f1a1cad6d6654917a4b13f892226411, type: 3}
   spawnPlayer1: 1
   spawnPlayer2: 1
+  waitTimeBeforeStarting: 0
+  waitTimeAfterEnd: 0
+  timeToRespawn: 0
+  playUnlimited: 0
+  timeToNewGame: 0
+  startingUI: {fileID: 0}
+  gameOver_UI: {fileID: 0}
   spawn1: {fileID: 1295180129}
   spawn2: {fileID: 2066169170}
   players: []
+  m_NumRoundsToWin: 0
+  m_StartDelay: 3
+  m_EndDelay: 3
+  m_MessageText: {fileID: 0}
+  m_TankPrefab: {fileID: 0}
+  whirlpools: []
+  merchantShips: []
 --- !u!224 &1918264837 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3287162864446760254, guid: 24be89e2b675ac84691568211a3dbaaa, type: 3}
