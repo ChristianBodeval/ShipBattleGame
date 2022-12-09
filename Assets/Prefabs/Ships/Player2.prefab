@@ -98,12 +98,12 @@ GameObject:
   - component: {fileID: 3685263541795606612}
   - component: {fileID: 3685263541795606623}
   - component: {fileID: -7976377503517882532}
-  - component: {fileID: 9179054856239917684}
   - component: {fileID: 855461067}
   - component: {fileID: 1837952668997005173}
   - component: {fileID: 8050088862250154163}
   - component: {fileID: 3685263541795606622}
   - component: {fileID: 7348946215053083942}
+  - component: {fileID: -237376708553411844}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Players
@@ -148,8 +148,8 @@ MonoBehaviour:
   currentPowerup: 0
   m_Instance: {fileID: 0}
   maxTurnSpeed: 2
-  turnAcceleration: 0.05
-  smoothTurningFactor: 0.05
+  turnAcceleration: 1
+  smoothTurningFactor: 0.1
   smoothMovementFactor: 0.15
   numberOfGears: 2
   maxMovementSpeed: 0.1
@@ -161,7 +161,7 @@ MonoBehaviour:
   knockbackValue: 0.07
   smoothKnockbackFactor: 0.15
   rammingDamage: 70
-  range: 20
+  range: 15
   fireOnBullets: 0
   shooters: 4
   shipSize: 4.94
@@ -206,7 +206,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 10
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -249,6 +249,8 @@ MonoBehaviour:
   smoothMovementFactor: 0
   numberOfGears: 0
   maxMovementSpeed: 0
+  currentTurnAcceleration: 0
+  currentTurnValue: 0
   moveType: 3
   dashType: 2
   dashGearValue: 3
@@ -278,28 +280,11 @@ MonoBehaviour:
   renderLinesRight: 1
   knockbackForce: 0.2
   smoothKnockbackFactor: 0.1
-  chargeUpValueRight: 0
-  chargeUpValueLeft: 0
+  chargeUpValue: 11
   maxRange: 8
   lineColor: {r: 0.6886792, g: 0.6854307, b: 0.6854307, a: 0.23921569}
   cooldownColor: {r: 1, g: 0, b: 0, a: 0.29803923}
   chargingColor: {r: 1, g: 1, b: 1, a: 0.77254903}
---- !u!114 &9179054856239917684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685263541795606615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1860a52f4dfca4e4c99ebd11e3deb2ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnOnDeath: 1
-  startingHealth: 0
-  currentHealth: 0
-  dead: 0
 --- !u!114 &855461067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,6 +912,23 @@ ParticleSystemForceField:
         m_RotationOrder: 4
     m_MultiplyDragByParticleSize: 1
     m_MultiplyDragByParticleVelocity: 1
+--- !u!114 &-237376708553411844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685263541795606615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5700866446bd646983e5d416dde230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnOnDeath: 0
+  startingHealth: 0
+  currentHealth: 0
+  dead: 0
+  spriteRenderer: {fileID: 0}
 --- !u!1 &6184022049533668883
 GameObject:
   m_ObjectHideFlags: 0

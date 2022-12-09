@@ -33,14 +33,14 @@ public class Ramming : MonoBehaviour
         }
 
         //Player hit
-        if (collision.gameObject.GetComponent<Health>())
+        if (collision.gameObject.GetComponent<PlayerHealth>())
         {
             IsRammed = true;
             //Make particles
             Instantiate(particleEffect, collision.transform.position,collision.transform.rotation);
 
             collision.transform.Translate((collision.gameObject.transform.position-collision.transform.position)*2);
-            collision.gameObject.GetComponent<Health>().TakeDamage(rammingDamage);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(rammingDamage);
             
            
         }

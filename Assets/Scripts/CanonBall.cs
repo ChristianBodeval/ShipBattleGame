@@ -30,6 +30,8 @@ public class CanonBall : MonoBehaviour
 
     public bool hitSomething;
 
+    public float startingTimeScale = Time.timeScale;
+
     
     
     // sounds
@@ -67,6 +69,7 @@ public class CanonBall : MonoBehaviour
 
     private void Update()
     {
+            Debug.Log("TimeScale: " + Time.timeScale);
             // Distance moved equals elapsed time times speed..
             float distCovered = (Time.time - startTime) * projectileSpeed;
 
@@ -83,6 +86,11 @@ public class CanonBall : MonoBehaviour
                 gameObject.SetActive(false);
                   
         }     
+    }
+
+    private void NormalTime()
+    {
+        Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.5f);
     }
 
     private void Deactivate()
@@ -109,8 +117,11 @@ public class CanonBall : MonoBehaviour
         {
             
             //Hit by another player
-            if (collision.GetComponent<Health>() != null && shotBy != collision.gameObject)
+            if (collision.GetComponent<PlayerHealth>() != null && shotBy != collision.gameObject)
             {
+                
+                Time.timeScale = Mathf.Lerp(Time.timeScale, 0.2f,0.5f);
+                Invoke("NormalTime", 0.1f);
                 SoundManager.Instance.PlayEffects("ProjectileHit");
                 hitSomething = true;
                 collision.GetComponent<Health>().TakeDamage(damage);

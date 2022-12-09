@@ -10,18 +10,18 @@ public class Health : MonoBehaviour
     public float startingHealth;
     public float currentHealth;
     public bool dead;
-    private ShipManager shipManager;
-    private Color playerColor;
-    private bool canTakeDamage = true;
+    public SpriteRenderer spriteRenderer;
+    protected Color startingColor;
+    protected bool canTakeDamage = true;
+    protected bool reactToHit = true;
+    protected float reactCooldown = 0.2f;
+    private float respawnTime = 3f;
+
     //Accessor
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public bool CanTakeDamage { get => canTakeDamage; set => canTakeDamage = value; }
 
-    private void Awake()
-    {
-        shipManager = GetComponent<ShipManager>();
-    }
 
     private void OnEnable()
     {
@@ -30,11 +30,17 @@ public class Health : MonoBehaviour
     }
 
 
-    public void TakeDamage(float amount)
+    public virtual void TakeDamage(float amount)
     {
         if (CanTakeDamage)
         {
-            currentHealth -= amount;
+            
+            if (currentHealth > 0)
+            {
+                currentHealth -= amount;
+                spriteRenderer.color = Color.red;
+                Invoke("ResetColor", 0.2f);
+            }
 
             if (currentHealth <= 0f && !dead)
             {
@@ -43,24 +49,24 @@ public class Health : MonoBehaviour
         }
     }
 
+    public virtual void ResetColor()
+    {
+        spriteRenderer.color = startingColor;
+    }
 
     public virtual void OnDeath()
     {
         dead = true;
-
-        shipManager.Die();
-
-
+        CancelInvoke("ResetColor");
         if (respawnOnDeath)
         {
-            Respawn();
+            Invoke("Respawn", respawnTime);
         }
 
     }
 
-    public void Respawn()
+    public virtual void Respawn()
     {
-        StartCoroutine(shipManager.Revive());
         currentHealth = startingHealth;
         gameObject.SetActive(true);
     }

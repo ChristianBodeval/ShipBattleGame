@@ -2,43 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : Health
 {
-    public float StartingHealth = 100f;
-    public float CurrentHealth;
-    private bool Dead;
+    private ShipManager shipManager;
 
-
+    private void Awake()
+    {
+        spriteRenderer = transform.Find("PlayerSprite").GetComponent<SpriteRenderer>();
+        startingColor = spriteRenderer.color;
+        shipManager = GetComponent<ShipManager>();
+    }
 
     private void OnEnable()
     {
-        CurrentHealth = StartingHealth;
-        Dead = false;
+        dead = false;
 
     }
 
-
-    public void TakeDamage(float amount)
+    IEnumerator OnHit()
     {
-        // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
-        CurrentHealth -= amount;
-
-        if (CurrentHealth <= 0f && !Dead)
+        if (reactToHit)
         {
-            OnDeath();
+            reactToHit = false;
+
+            yield return new WaitForSeconds(reactCooldown);
+            ResetColor();
+
+            reactToHit = true;
         }
     }
 
 
-    private void OnDeath()
+    public override void OnDeath()
     {
-        // Play the effects for the death of the tank and deactivate it.
-        Dead = true;
-        gameObject.SetActive(false);
+        dead = true;
 
-        
+        shipManager.Die();
+
+
+
+
+        if (respawnOnDeath)
+        {
+            Respawn();
+        }
+
+    }
+
+    public override void Respawn()
+    {
+        ResetColor();
+        shipManager.SetDefaultValues();
+        currentHealth = startingHealth;
+        gameObject.SetActive(true);
     }
 }

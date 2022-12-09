@@ -38,8 +38,7 @@ public class Shooting : MonoBehaviour
     public float TotalDamage { get => totalDamage; set => totalDamage = value; }
 
     //ChargeUp
-    public float chargeUpValueRight;
-    public float chargeUpValueLeft;
+    public float chargeUpValue = 8f;
     private bool canShootLeft;
     private bool canShootRight;
     public float maxRange;
@@ -136,11 +135,16 @@ public class Shooting : MonoBehaviour
     
     IEnumerator ChargeUpValueRight()
     {
-        chargeUpValueRight = 8f;
+        
         while (isShootingRight)
         {
             shooterGroupRight.SetLinesColor(chargingColor);
-            shooterGroupRight.Range += chargeUpValueRight * Time.deltaTime;
+
+            shooterGroupRight.Range += chargeUpValue * Time.deltaTime;
+            //Scales the projectile speed to the increase in range
+            projectileSpeed = shipManager.projectileSpeed_default * shooterGroupRight.Range / shipManager.range_default / 2f;
+            if (projectileSpeed < shipManager.projectileSpeed_default)
+                projectileSpeed = shipManager.projectileSpeed_default;
             yield return null;
         }
     }
@@ -148,12 +152,14 @@ public class Shooting : MonoBehaviour
 
     IEnumerator ChargeUpValueLeft()
     {
-
-        chargeUpValueLeft = 8f;
         while (isShootingLeft)
         {
             shooterGroupLeft.SetLinesColor(chargingColor);
-            shooterGroupLeft.Range += chargeUpValueLeft * Time.deltaTime;
+            shooterGroupLeft.Range += chargeUpValue * Time.deltaTime;
+            //Scales the projectile speed to the increase in range
+            projectileSpeed = shipManager.projectileSpeed_default * shooterGroupLeft.Range / shipManager.range_default / 2;
+            if (projectileSpeed < shipManager.projectileSpeed_default)
+                projectileSpeed = shipManager.projectileSpeed_default;
             yield return null;
         }
     }
@@ -188,6 +194,7 @@ public class Shooting : MonoBehaviour
             ShootRight();
             //Reset range
             shooterGroupRight.Range = shipManager.range_default;
+            projectileSpeed = shipManager.projectileSpeed_default;
             shipManager.UpdateValues();
             yield return new WaitForSeconds(fireRateInSeconds);
                 

@@ -8,11 +8,12 @@ TagManager:
   - Players
   - Shots
   - Player1
+  - Sail
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Effects
   - Water
   - UI
   - Text

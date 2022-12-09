@@ -12,6 +12,7 @@ public class Whirlpool1 : MonoBehaviour
     public Transform spriteHolderTransform;
     public float whirlpoolDamage;
     public float takeDamageEverySeconds;
+    public float movementSlowMultiplier;
 
     public List<Health> healthObjects;
 
@@ -39,7 +40,8 @@ public class Whirlpool1 : MonoBehaviour
         InvokeRepeating("DealDamage(aliveObject)", takeDamageEverySeconds, takeDamageEverySeconds);
         if (collision.GetComponent<ShipManager>())
         {
-            collision.GetComponent<ShipManager>().MaxMovementSpeed /= 2;
+            
+            collision.GetComponent<ShipManager>().MaxMovementSpeed /= movementSlowMultiplier;
         }
 
        
@@ -78,6 +80,18 @@ public class Whirlpool1 : MonoBehaviour
         if (collision.GetComponent<ShipManager>())
         {
             collision.GetComponent<ShipManager>().MaxMovementSpeed = collision.GetComponent<ShipManager>().maxMovementSpeed_default;
+        }
+
+        //Reset forces when leaving
+        if (collision.attachedRigidbody && GetComponent<ShipManager>())
+        {
+            collision.attachedRigidbody.isKinematic = true;
+            collision.attachedRigidbody.isKinematic = false;
+            collision.attachedRigidbody.freezeRotation = true;
+            collision.attachedRigidbody.freezeRotation = false;
+            GetComponent<Movement>().currentTurnValue = 0;
+            GetComponent<Movement>().currentTurnAcceleration = 0;
+            Debug.Log("RGB velocity: " + collision.GetComponent<Rigidbody2D>().velocity);
         }
 
         if (collision.gameObject.GetComponent<Health>())

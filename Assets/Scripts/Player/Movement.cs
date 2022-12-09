@@ -26,8 +26,8 @@ public class Movement : MonoBehaviour
     private float turnInputValue;
     private float latestInput;
     private Vector3 turnDirection;
-    private float currentTurnAcceleration;
-    private float currentTurnValue;
+    public float currentTurnAcceleration;
+    public float currentTurnValue;
     private float currentMoveValue;
     private int currentGear; //The current gear
 
@@ -195,8 +195,8 @@ public class Movement : MonoBehaviour
         isDashing = true;
         BoxCollider2D ram = GetComponent<BoxCollider2D>();
         ram.enabled = true;
-        turnAcceleration /= 10;
-        maxTurnSpeed /= 10;
+        currentTurnAcceleration = 0;
+        currentTurnValue = 0;
         currentGear = dashGearValue;
         canDash = false;
         yield return new WaitForSeconds(dashTime);
@@ -208,10 +208,9 @@ public class Movement : MonoBehaviour
             currentGear = 1;
         }
 
-        turnAcceleration *= 10;
-        maxTurnSpeed *= 10;
         isDashing = false;
-        ram.enabled = false;   
+        ram.enabled = false;
+
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
@@ -244,15 +243,14 @@ public class Movement : MonoBehaviour
     void CalculateTurnAcceleration()
     {
         //Is player turning, then accelerate turning, since input value is either 1 or -1
-        if (currentTurnValue != 0)
+        if (turnInputValue != 0 && currentTurnAcceleration < maxTurnSpeed)
         {
-            if (currentTurnAcceleration < maxTurnSpeed)
-                currentTurnAcceleration += turnAcceleration;
+            currentTurnAcceleration += turnAcceleration * Time.deltaTime; 
         }
         // If not turning, then deaccelerate turning
-        else if (currentTurnAcceleration > 0)
+        if (currentTurnAcceleration > 0 && turnInputValue == 0)
         {
-            currentTurnAcceleration -= turnAcceleration;
+            currentTurnAcceleration -= turnAcceleration * Time.deltaTime;
         }
         //When acceleration goes negative, set i to 0
         else if (currentTurnAcceleration <= 0)
@@ -277,28 +275,31 @@ public class Movement : MonoBehaviour
         
         
         // Sail rotation
-        Debug.Log(turnInputValue);
-        Debug.Log("Eular angles: " + sail.transform.localRotation.eulerAngles.z);
-        //Debug.Log("Rotation" + Sail.transform.localRotation.z);
 
         float sailRotation = sail.transform.localRotation.eulerAngles.z;
 
 
         if (sailRotation < 60 || sailRotation > 300)
         {
-            Debug.Log("Running");
 
             if (turnInputValue > 0 && (sailRotation < 59 || sailRotation > 300))
             {
                 sail.transform.Rotate(0f, 0f, 1f);
-                Debug.Log("Turning left!");
             }
             if (turnInputValue < 0 && (sailRotation > 301 || sailRotation < 60))
             {
                 sail.transform.Rotate(0f, 0f, -1f);
-                Debug.Log("Turning right!");
             }
-           
+
+            if (turnInputValue == 0 && !Mathf.Approximately(sailRotation,0))
+            {
+                if (sailRotation < 179) {
+                    sail.transform.Rotate(0f, 0f, -1f);
+                }
+                if (sailRotation > 179) {
+                    sail.transform.Rotate(0f, 0f, 1f);
+                }
+            }
         }
         
     }
