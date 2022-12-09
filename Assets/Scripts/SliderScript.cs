@@ -32,7 +32,7 @@ public class SliderScript : MonoBehaviour
     {
         color = new Color(red / 255f, green / 255f, blue / 255f);
         slider.gameObject.transform.Find("Fill Area").Find("Fill").GetComponent<Image>().color = color;
-        ship = GameManager.Instance.players[playerNumber];
+        ship = GameManager.Instance.players[playerNumber].gameObject;
         slider.maxValue = ship.GetComponent<ShipManager>().StartingHealth;
         
 

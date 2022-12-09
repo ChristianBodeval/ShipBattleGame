@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ramming : MonoBehaviour
 {
+    public SpriteRenderer ramSprite;
     public GameObject particleEffect;
     GameObject usedBy;
     BoxCollider2D boxCollider2D;

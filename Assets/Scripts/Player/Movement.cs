@@ -10,6 +10,8 @@ public class Movement : MonoBehaviour
 {
     public GameObject playerPrefab;
     public ShipManager shipManager;
+    public SpriteRenderer ramSprite;
+    private Color ramSpriteColor;
 
     //All the following values are public, so i makes it easier to test in the inspector
     //Values which have an impact on the movement
@@ -62,6 +64,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        ramSpriteColor = ramSprite.color;
         canDash = true;
         shipManager = GetComponent<ShipManager>();
         actionReference.action.started += context =>
@@ -193,13 +196,15 @@ public class Movement : MonoBehaviour
     IEnumerator Dash ()
     {
         isDashing = true;
+        canDash = false;
         BoxCollider2D ram = GetComponent<BoxCollider2D>();
         ram.enabled = true;
         currentTurnAcceleration = 0;
         currentTurnValue = 0;
         currentGear = dashGearValue;
-        canDash = false;
-        yield return new WaitForSeconds(dashTime);
+
+
+       
 
         if (moveType == MoveType.OnHold)
             currentGear = 0;
@@ -208,10 +213,33 @@ public class Movement : MonoBehaviour
             currentGear = 1;
         }
 
+        yield return new WaitForSeconds(dashTime);
+
         isDashing = false;
         ram.enabled = false;
 
+        /*
+        float timer = Time.time + dashCooldown;
+
+        float percentage = timer / Time.time;
+        while (timer > Time.time)
+        {
+            percentage = Time.time / timer;
+            Debug.Log("Calling");
+            Debug.Log("Percentage: " + percentage);
+            //ramSprite.color = Color.Lerp(Color.black, ramSprite.color, percentage * Time.deltaTime);
+
+            ramSprite.color = new Color(1-percentage, 1-percentage, 1-percentage, 1);
+            yield return null;
+        }
+
+        ramSprite.color = Color.green;
+        yield return new WaitForSeconds(0.1f);
+        ramSprite.color = ramSpriteColor;
+        */
+
         yield return new WaitForSeconds(dashCooldown);
+
         canDash = true;
     }
 

@@ -30,7 +30,6 @@ public class CanonBall : MonoBehaviour
 
     public bool hitSomething;
 
-    public float startingTimeScale = Time.timeScale;
 
     
     

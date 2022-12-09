@@ -9,7 +9,7 @@ public class MerchantShipHealth : Health
 
     public void Awake()
     {
-        spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+
     }
 
     public 
