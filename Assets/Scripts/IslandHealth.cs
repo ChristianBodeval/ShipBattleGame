@@ -28,7 +28,7 @@ public class IslandHealth : Health
             else
             {
                 currentHealth -= amount;
-                spriteRenderer.color = Color.red;
+                spriteShapeRenderer.color = Color.red;
                 Invoke("ResetColor", 0.2f);
             }
 

@@ -30,8 +30,8 @@ public class Movement : MonoBehaviour
     private Vector3 turnDirection;
     public float currentTurnAcceleration;
     public float currentTurnValue;
-    private float currentMoveValue;
-    private int currentGear; //The current gear
+    public float currentMoveValue;
+    public int currentGear; //The current gear
 
     //Accessor values
     public float MaxTurnSpeed { get => maxTurnSpeed; set => maxTurnSpeed = value; }
@@ -199,12 +199,13 @@ public class Movement : MonoBehaviour
         canDash = false;
         BoxCollider2D ram = GetComponent<BoxCollider2D>();
         ram.enabled = true;
-        currentTurnAcceleration = 0;
-        currentTurnValue = 0;
+        //currentTurnAcceleration = 0;
+        //currentTurnValue = 0;
+
+
         currentGear = dashGearValue;
-
-
        
+        yield return new WaitForSeconds(dashTime);
 
         if (moveType == MoveType.OnHold)
             currentGear = 0;
@@ -213,32 +214,25 @@ public class Movement : MonoBehaviour
             currentGear = 1;
         }
 
-        yield return new WaitForSeconds(dashTime);
-
         isDashing = false;
         ram.enabled = false;
 
-        /*
+        //Supposed to be fading, good enough for now. TODO ...
         float timer = Time.time + dashCooldown;
 
         float percentage = timer / Time.time;
         while (timer > Time.time)
         {
             percentage = Time.time / timer;
-            Debug.Log("Calling");
-            Debug.Log("Percentage: " + percentage);
+
             //ramSprite.color = Color.Lerp(Color.black, ramSprite.color, percentage * Time.deltaTime);
 
             ramSprite.color = new Color(1-percentage, 1-percentage, 1-percentage, 1);
             yield return null;
         }
 
-        ramSprite.color = Color.green;
-        yield return new WaitForSeconds(0.1f);
         ramSprite.color = ramSpriteColor;
-        */
-
-        yield return new WaitForSeconds(dashCooldown);
+        
 
         canDash = true;
     }

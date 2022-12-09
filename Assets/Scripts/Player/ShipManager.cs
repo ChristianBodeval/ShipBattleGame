@@ -147,6 +147,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         healthScript.StartingHealth = startingHealth;
         healthScript.CurrentHealth = startingHealth;
         CurrentHealth = startingHealth;
+        playerColor = spriteRenderer.color;
     }
 
     void Start()
@@ -263,7 +264,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         isDead = true;
         //Input.actions = null;
         SoundManager.Instance.PlayEffects("ShipBreak");
-        playerColor = spriteRenderer.color;
+        
         spriteRenderer.color = Color.black;
 
         DisableScripts();
@@ -301,12 +302,16 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         yield return new WaitForSeconds(timeToRespawn);
         isDead = false;
 
-        EnableScripts();
+        ResetValues();
+        UpdateValues();
         SetDefaultValues();
+        healthScript.CurrentHealth = startingHealth_default;
+        healthScript.ResetColor();
         m_Instance.transform.position = m_SpawnPoint.transform.position;
         m_Instance.transform.rotation = m_SpawnPoint.transform.rotation;
 
         spriteRenderer.color = playerColor;
+        EnableScripts();
 
         yield return null;
     }

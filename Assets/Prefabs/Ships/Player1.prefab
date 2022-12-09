@@ -161,7 +161,7 @@ MonoBehaviour:
   knockbackValue: 0.07
   smoothKnockbackFactor: 0.1
   rammingDamage: 60
-  range: 10
+  range: 15
   fireOnBullets: 0
   shooters: 8
   shipSize: 4.2
@@ -278,13 +278,15 @@ MonoBehaviour:
   maxMovementSpeed: 0
   currentTurnAcceleration: 0
   currentTurnValue: 0
+  currentMoveValue: 0
+  currentGear: 0
   moveType: 3
   dashType: 2
-  dashGearValue: 2
+  dashGearValue: 3
   isDashing: 0
   canDash: 1
   dashTime: 0.5
-  dashCooldown: 2
+  dashCooldown: 3
   actionReference: {fileID: -1680190386980627800, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   sail: {fileID: 7575997117501919773}
 --- !u!114 &-7976377503517882532

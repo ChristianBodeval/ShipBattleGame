@@ -87,10 +87,7 @@ public class CanonBall : MonoBehaviour
         }     
     }
 
-    private void NormalTime()
-    {
-        Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.5f);
-    }
+    
 
     private void Deactivate()
     {
@@ -118,9 +115,12 @@ public class CanonBall : MonoBehaviour
             //Hit by another player
             if (collision.GetComponent<PlayerHealth>() != null && shotBy != collision.gameObject)
             {
-                
-                Time.timeScale = Mathf.Lerp(Time.timeScale, 0.2f,0.5f);
-                Invoke("NormalTime", 0.1f);
+
+                Vector3 direction = this.gameObject.transform.position - collision.gameObject.transform.position;
+
+                collision.gameObject.GetComponent<Knockback>().AddKnockback((direction) * 0.2f);
+
+                GameManager.Instance.SlowTime();
                 SoundManager.Instance.PlayEffects("ProjectileHit");
                 hitSomething = true;
                 collision.GetComponent<Health>().TakeDamage(damage);
@@ -130,6 +130,7 @@ public class CanonBall : MonoBehaviour
             if (collision.GetComponent<IslandHealth>() != null && shotBy != collision.gameObject)
             {
                 hitSomething = true;
+                SoundManager.Instance.PlayEffects("ProjectileHit");
                 collision.GetComponent<IslandHealth>().TakeDamage(damage);
                 Deactivate();
             }
@@ -137,6 +138,7 @@ public class CanonBall : MonoBehaviour
             if (collision.gameObject.transform.root.GetComponent<MerchantShipHealth>() != null && shotBy != collision.gameObject)
             {
                 hitSomething = true;
+                SoundManager.Instance.PlayEffects("ProjectileHit");
                 collision.gameObject.transform.root.GetComponent<MerchantShipHealth>().TakeDamage(damage);
                 Deactivate();
             }

@@ -161,8 +161,8 @@ MonoBehaviour:
   projectileSpeed: 12
   knockbackValue: 0.07
   smoothKnockbackFactor: 0.15
-  rammingDamage: 70
-  range: 15
+  rammingDamage: 80
+  range: 22
   fireOnBullets: 0
   shooters: 4
   shipSize: 4.94
@@ -253,9 +253,11 @@ MonoBehaviour:
   maxMovementSpeed: 0
   currentTurnAcceleration: 0
   currentTurnValue: 0
+  currentMoveValue: 0
+  currentGear: 0
   moveType: 3
   dashType: 2
-  dashGearValue: 3
+  dashGearValue: 4
   isDashing: 0
   canDash: 1
   dashTime: 1

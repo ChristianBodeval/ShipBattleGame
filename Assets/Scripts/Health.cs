@@ -34,7 +34,7 @@ public class Health : MonoBehaviour
     {
         if (CanTakeDamage)
         {
-            
+
             if (currentHealth > 0)
             {
                 currentHealth -= amount;
@@ -58,6 +58,8 @@ public class Health : MonoBehaviour
     {
         dead = true;
         CancelInvoke("ResetColor");
+
+
         if (respawnOnDeath)
         {
             Invoke("Respawn", respawnTime);

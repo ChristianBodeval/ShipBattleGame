@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ramming : MonoBehaviour
@@ -33,14 +32,37 @@ public class Ramming : MonoBehaviour
             return;
         }
 
+        
+
         //Player hit
         if (collision.gameObject.GetComponent<PlayerHealth>())
         {
+            boxCollider2D.enabled = false;
+            GetComponent<Movement>().currentMoveValue = 0;
+            GetComponent<Movement>().currentGear = 1;
+            GameManager.Instance.SlowTime();
+            GameManager.Instance.SlowTime();
             IsRammed = true;
             //Make particles
             Instantiate(particleEffect, collision.transform.position,collision.transform.rotation);
 
-            collision.transform.Translate((collision.gameObject.transform.position-collision.transform.position)*2);
+            Debug.Log("Ramming");
+            Vector3 direction = (this.gameObject.transform.position - collision.transform.position);
+
+
+            collision.gameObject.GetComponent<Knockback>().AddKnockbackWorld((direction)*0.5f);
+            //gameObject.GetComponent<Knockback>().AddKnockbackWorld((-direction)*1.5f);
+
+
+            GetComponent<Rigidbody2D>().isKinematic = true;
+            GetComponent<Rigidbody2D>().isKinematic = false;
+            //collision.gameObject.transform.Translate((collision.gameObject.transform.position-this.gameObject.transform.position)*1.5f);
+
+            //collision.gameObject.transform.position = Vector3.Lerp(collision.gameObject.transform.position, collision.gameObject.transform.position + (collision.gameObject.transform.position - this.gameObject.transform.position)*3, 1f);
+
+
+            Debug.Log("Target: " + collision.gameObject.transform);
+            Debug.Log("Direction: " + direction);
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(rammingDamage);
             
            
