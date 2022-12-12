@@ -12,6 +12,7 @@ public class Eruption : MonoBehaviour
     public float eruptionTime = 20; // Set amount of time that eruption will occur.
     public float eruptionDamage = 5; //Set damage from eruption.
     public float scaleFactor = 1;
+    public float maxSize = 30;
     public float opacityFactor = 1;
     public bool canTakeDamage = true;
     
@@ -26,6 +27,7 @@ public class Eruption : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Health>() && canTakeDamage == true)
         {
+            SoundManager.Instance.PlayMusic("LavaDamage");
             global::System.Object value = StartCoroutine(WaitingTime());
             collision.gameObject.GetComponent<Health>().TakeDamage(eruptionDamage);
             Debug.Log("lava damage");
@@ -55,5 +57,7 @@ public class Eruption : MonoBehaviour
 
         Vector2 vec = new Vector2(timeSinceInitialization, timeSinceInitialization);
         transform.localScale = vec * scaleFactor;
+        //if (localScale.y < maxSize) { transform.localScale = vec * scaleFactor; }
+        
     }
 }

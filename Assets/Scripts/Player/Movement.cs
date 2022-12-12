@@ -85,6 +85,11 @@ public class Movement : MonoBehaviour
         if (!isDashing)
             Turn();
         MoveForward();
+        if (!(currentGear == 0)) {
+            SoundManager.Instance.PlayEffects("Sailing");
+            Debug.Log("No sound ?");
+        }
+        
     }
 
     private void OnEnable()
@@ -107,7 +112,7 @@ public class Movement : MonoBehaviour
         //Dash on Multitap
         if (moveInputValue > 0 && context.interaction is MultiTapInteraction && context.started && dashType == DashType.DoubleTap)
         {
-                
+            SoundManager.Instance.PlayEffects("Dash");
             StartCoroutine(Dash());
         }
         //Dash on Release // Uses latestInput since context.cancelled is not called on context.cancelled
@@ -168,11 +173,13 @@ public class Movement : MonoBehaviour
         {
             if(moveInputValue >= 0)
             {
+               
                 currentGear = (int)Mathf.Abs(latestInput);
                 
             }
             else if (moveInputValue < 0 && context.started)
             {
+                
                 currentGear = 0;
             }
             return;
@@ -184,6 +191,7 @@ public class Movement : MonoBehaviour
         {
             if (currentGear < numberOfGears-1 && moveInputValue > 0)
             {
+               
                 currentGear++;
             }
             if (currentGear > 0 && moveInputValue < 0)
@@ -210,6 +218,7 @@ public class Movement : MonoBehaviour
             currentGear = 0;
         else
         {
+           
             currentGear = 1;
         }
 
@@ -255,7 +264,7 @@ public class Movement : MonoBehaviour
             return;
         }*/
         transform.Translate(0f, currentMoveValue * maxMovementSpeed, 0f);
-       
+        SoundManager.Instance.PlayEffects("Sailing");
 
     }
 

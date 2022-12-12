@@ -37,6 +37,7 @@ public class Whirlpool1 : MonoBehaviour
 
         //If ship is in whirlpool
         Health aliveObject = collision.GetComponent<Health>();
+        SoundManager.Instance.PlayEffects("Whirlpool");
         InvokeRepeating("DealDamage(aliveObject)", takeDamageEverySeconds, takeDamageEverySeconds);
         if (collision.GetComponent<ShipManager>())
         {
