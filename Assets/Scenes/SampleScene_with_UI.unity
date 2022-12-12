@@ -1508,9 +1508,41 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 531cf10fafbdbda4690ef8701b5afddc, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.data[3].name
+      value: LavaDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
       propertyPath: effectsSounds.Array.data[4].clip
       value: 
       objectReference: {fileID: 8300000, guid: 93a1872ca405749b38dc5e9399eb7046, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e9820762657aed46ad0191ae714868f, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[9].name
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 35874bf8d2342f945880bd1ccac76d9c, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[10].name
+      value: Whirlpool
+      objectReference: {fileID: 0}
     - target: {fileID: 8573664019270065371, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
       propertyPath: m_Name
       value: Sound Manager
@@ -1558,6 +1590,10 @@ PrefabInstance:
     - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664020492365718, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
