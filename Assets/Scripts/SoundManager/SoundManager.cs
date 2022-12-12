@@ -44,8 +44,8 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            if (_effectsSource.isPlaying)
-                _effectsSource.Stop();
+            //if (_effectsSource.isPlaying)
+              //  _effectsSource.Stop();
             _effectsSource.PlayOneShot(s.clip);
         }
     }
