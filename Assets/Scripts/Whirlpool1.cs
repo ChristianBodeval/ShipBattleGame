@@ -33,17 +33,26 @@ public class Whirlpool1 : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Health>())
+        {
             healthObjects.Add(collision.gameObject.GetComponent<Health>());
+          
+        }
+           
 
         //If ship is in whirlpool
         Health aliveObject = collision.GetComponent<Health>();
         InvokeRepeating("DealDamage(aliveObject)", takeDamageEverySeconds, takeDamageEverySeconds);
+        
         if (collision.GetComponent<ShipManager>())
         {
-            
+            SoundManager.Instance.PlayEffects("WhirlPool");
+            Debug.Log("Whirlpool sound");
             collision.GetComponent<ShipManager>().MaxMovementSpeed /= movementSlowMultiplier;
         }
-
+       /* else {
+            !SoundManager.Instance.PlayEffects("WhirlPool");
+            Debug.Log("No whirlpool sound");
+        }*/
        
     }
 

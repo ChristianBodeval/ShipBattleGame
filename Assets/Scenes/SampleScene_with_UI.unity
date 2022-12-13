@@ -1508,9 +1508,85 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f713b8699116dae4f99ec907acd3d820, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63f14801054984940b398332fbd0f4e3, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.data[3].name
+      value: Sailing
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
       propertyPath: effectsSounds.Array.data[4].clip
       value: 
       objectReference: {fileID: 8300000, guid: 93a1872ca405749b38dc5e9399eb7046, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e9820762657aed46ad0191ae714868f, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[8].name
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6409e9cc65dd8ad46a5ffa511f8fa614, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[9].name
+      value: Ram
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 35874bf8d2342f945880bd1ccac76d9c, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[10].name
+      value: WhirlPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0453d8a82c4dc24aab6600024d2802c, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[11].name
+      value: IslandDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 531cf10fafbdbda4690ef8701b5afddc, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[12].name
+      value: LavaDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a5c7e8533b7fbcf4aa0ef9c0b3c09d97, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[13].name
+      value: CannonShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63f14801054984940b398332fbd0f4e3, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[14].name
+      value: Sailing
+      objectReference: {fileID: 0}
     - target: {fileID: 8573664019270065371, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
       propertyPath: m_Name
       value: Sound Manager

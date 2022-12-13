@@ -29,6 +29,7 @@ public class Eruption : MonoBehaviour
             global::System.Object value = StartCoroutine(WaitingTime());
             collision.gameObject.GetComponent<Health>().TakeDamage(eruptionDamage);
             Debug.Log("lava damage");
+            SoundManager.Instance.PlayEffects("LavaDamage");
         }
     }
     IEnumerator WaitingTime()

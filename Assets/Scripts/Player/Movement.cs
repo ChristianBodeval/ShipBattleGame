@@ -85,6 +85,11 @@ public class Movement : MonoBehaviour
         if (!isDashing)
             Turn();
         MoveForward();
+      /*  if ((currentGear == 0))
+        {
+            SoundManager.Instance.PlayEffects("Sailing");
+            Debug.Log("Play sound sailing");
+        }*/
     }
 
     private void OnEnable()
