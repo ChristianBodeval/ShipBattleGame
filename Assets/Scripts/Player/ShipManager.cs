@@ -76,7 +76,7 @@ public class ShipManager : MonoBehaviour
 
 
 
-    private Health healthScript;
+    private PlayerHealth healthScript;
     private Movement movementScript;
     private Shooting shootingScript;
     private Knockback knockbackScript;
@@ -137,7 +137,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
     private void Awake()
     {
         m_Instance = gameObject;
-        healthScript = GetComponent<Health>();
+        healthScript = GetComponent<PlayerHealth>();
         movementScript = GetComponent<Movement>();
         shootingScript = GetComponent<Shooting>();
         knockbackScript = GetComponent<Knockback>();
@@ -147,6 +147,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         healthScript.StartingHealth = startingHealth;
         healthScript.CurrentHealth = startingHealth;
         CurrentHealth = startingHealth;
+        playerColor = spriteRenderer.color;
     }
 
     void Start()
@@ -172,7 +173,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         maxMovementSpeed_default = maxMovementSpeed;
         startingHealth_default = startingHealth;
         rammingDamage_default = rammingDamage;
-        maxTurnSpeed_default = maxMovementSpeed;
+        maxTurnSpeed_default = maxTurnSpeed;
         turnAcceleration_default = turnAcceleration;
         smoothTurningFactor_default = smoothTurningFactor;
         smoothMovementFactor_default = smoothMovementFactor;
@@ -220,6 +221,8 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
     public void UpdateValues()
     {
         //Movement
+        Debug.Log("New" + maxTurnSpeed);
+        Debug.Log("Def" + movementScript.MaxTurnSpeed);
         movementScript.MaxTurnSpeed = maxTurnSpeed;
         movementScript.TurnAcceleration = turnAcceleration;
         movementScript.SmoothMovementFactor = smoothMovementFactor;
@@ -261,7 +264,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         isDead = true;
         //Input.actions = null;
         SoundManager.Instance.PlayEffects("ShipBreak");
-        playerColor = spriteRenderer.color;
+        
         spriteRenderer.color = Color.black;
 
         DisableScripts();
@@ -275,7 +278,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         startingHealth = startingHealth_default;
         range = range_default;
         rammingDamage = rammingDamage_default;
-        maxTurnSpeed = maxMovementSpeed_default;
+        maxTurnSpeed = maxTurnSpeed_default;
         turnAcceleration = turnAcceleration_default;
         smoothTurningFactor = smoothTurningFactor_default;
         smoothMovementFactor = smoothMovementFactor_default;
@@ -291,6 +294,7 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         maxAngle = maxAngle_default;
         startCurve = startCurve_default;
         fireOnBullets = fireOnBullets_default;
+        UpdateValues();
     }
 
     public IEnumerator Revive()
@@ -298,12 +302,16 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         yield return new WaitForSeconds(timeToRespawn);
         isDead = false;
 
-        EnableScripts();
-
+        ResetValues();
+        UpdateValues();
+        SetDefaultValues();
+        healthScript.CurrentHealth = startingHealth_default;
+        healthScript.ResetColor();
         m_Instance.transform.position = m_SpawnPoint.transform.position;
         m_Instance.transform.rotation = m_SpawnPoint.transform.rotation;
 
         spriteRenderer.color = playerColor;
+        EnableScripts();
 
         yield return null;
     }

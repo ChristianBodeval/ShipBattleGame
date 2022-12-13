@@ -5,6 +5,7 @@ public class CanonBall : MonoBehaviour
 {
     public ParticleSystem hitParticle;
     public ParticleSystem fireParticle;
+    //To ignore self
     private GameObject shotBy;
     private float damage;
     private float projectileSpeed;                                                   // The speed of the cannonball
@@ -29,6 +30,7 @@ public class CanonBall : MonoBehaviour
     public bool fireOnBullet;
 
     public bool hitSomething;
+
 
     
     
@@ -67,23 +69,23 @@ public class CanonBall : MonoBehaviour
 
     private void Update()
     {
-            // Distance moved equals elapsed time times speed..
-            float distCovered = (Time.time - startTime) * projectileSpeed;
+        // Distance moved equals elapsed time times speed..
+        float distCovered = (Time.time - startTime) * projectileSpeed;
 
-            // Fraction of journey completed equals current distance divided by total distance.
-            float fractionOfJourney = distCovered / journeyLength;
+        // Fraction of journey completed equals current distance divided by total distance.
+        float fractionOfJourney = distCovered / journeyLength;
 
-            // Set our position as a fraction of the distance between the markers.
-            if(!hitSomething)
-                transform.position = Vector3.Lerp(startMarker, endMarker, fractionOfJourney);
+        // Set our position as a fraction of the distance between the markers.
+        if(!hitSomething)
+            transform.position = Vector3.Lerp(startMarker, endMarker, fractionOfJourney);
 
-            if (fractionOfJourney >= 1)
-            {
-                Debug.Log("Destination reached");
-                gameObject.SetActive(false);
-                  
+        if (fractionOfJourney >= 1)
+        {
+            gameObject.SetActive(false);
         }     
     }
+
+    
 
     private void Deactivate()
     {
@@ -93,7 +95,6 @@ public class CanonBall : MonoBehaviour
         //Plays particles
         fireParticle.Stop();
         hitParticle.Play();
-
 
         if (!hitParticle.isPlaying)
         {
@@ -107,10 +108,15 @@ public class CanonBall : MonoBehaviour
         //Don't collide with own ship
         if(shotBy != collision.gameObject)
         {
-            
-            //Hit by another player
-            if (collision.GetComponent<Health>() != null && shotBy != collision.gameObject)
+            //Hit another ship
+            if (collision.GetComponent<PlayerHealth>() != null && shotBy != collision.gameObject)
             {
+
+                Vector3 direction = this.gameObject.transform.position - collision.gameObject.transform.position;
+
+                collision.gameObject.GetComponent<Knockback>().AddKnockback((direction) * 0.2f);
+
+                GameManager.Instance.SlowTime();
                 SoundManager.Instance.PlayEffects("ProjectileHit");
                 hitSomething = true;
                 collision.GetComponent<Health>().TakeDamage(damage);
@@ -120,13 +126,15 @@ public class CanonBall : MonoBehaviour
             if (collision.GetComponent<IslandHealth>() != null && shotBy != collision.gameObject)
             {
                 hitSomething = true;
+                SoundManager.Instance.PlayEffects("ProjectileHit");
                 collision.GetComponent<IslandHealth>().TakeDamage(damage);
                 Deactivate();
             }
-
+            //Hit a merchantship
             if (collision.gameObject.transform.root.GetComponent<MerchantShipHealth>() != null && shotBy != collision.gameObject)
             {
                 hitSomething = true;
+                SoundManager.Instance.PlayEffects("ProjectileHit");
                 collision.gameObject.transform.root.GetComponent<MerchantShipHealth>().TakeDamage(damage);
                 Deactivate();
             }

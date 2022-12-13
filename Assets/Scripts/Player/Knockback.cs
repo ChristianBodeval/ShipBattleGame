@@ -27,6 +27,13 @@ public class Knockback : MonoBehaviour
         direction = _direction;
         currentKnockBackValue = knockbackValue;
     }
+    //Gives knockback to the ship in a given direction
+    public void AddKnockbackWorld(Vector2 _direction)
+    {
+        _direction = transform.InverseTransformPoint(_direction);
+        direction = _direction;
+        currentKnockBackValue = knockbackValue;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

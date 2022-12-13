@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8603611129008310949}
   - component: {fileID: 8628165496087537763}
-  - component: {fileID: 833049793}
   - component: {fileID: 3132826621636346969}
   - component: {fileID: 3441952327160104596}
   - component: {fileID: 493138567}
@@ -90,27 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &833049793
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275803821595653893}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &3132826621636346969
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -146,7 +124,6 @@ MonoBehaviour:
   endMarker: {x: 0, y: 0, z: 0}
   fireOnBullet: 0
   hitSomething: 0
-  audioSource: {fileID: 0}
 --- !u!82 &493138567
 AudioSource:
   m_ObjectHideFlags: 0
@@ -259,8 +236,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8464674298970153096, guid: b8dc61c97720f44388eeb0c76d6f3f13, type: 3}
+      propertyPath: ExternalForcesModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8464674298970153096, guid: b8dc61c97720f44388eeb0c76d6f3f13, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8464674298970153096, guid: b8dc61c97720f44388eeb0c76d6f3f13, type: 3}
+      propertyPath: ExternalForcesModule.influenceMask.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8464674298970153097, guid: b8dc61c97720f44388eeb0c76d6f3f13, type: 3}
       propertyPath: m_RootOrder

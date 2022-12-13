@@ -117,6 +117,17 @@ public sealed class GameManager : MonoBehaviour
 
 
     }
+    private void NormalTime()
+    {
+        Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.5f);
+    }
+
+    public void SlowTime()
+    {
+        Time.timeScale = Mathf.Lerp(Time.timeScale, 0.2f,0.5f);
+        Invoke("NormalTime", 0.1f);
+    }
+
 
     private void Start()
     {
@@ -180,7 +191,7 @@ public sealed class GameManager : MonoBehaviour
 
         //m_RoundNumber++;
         //m_MessageText.text = "ROUND " + m_RoundNumber;
-        yield return new WaitForSeconds(waitTimeBeforeStarting);
+        yield return new WaitForSeconds(waitTimeBeforeStarting + 1);
     }
 
 

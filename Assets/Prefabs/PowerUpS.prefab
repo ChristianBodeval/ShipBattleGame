@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5137852693265582955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.87282, y: -0.68433726, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,10 +53,6 @@ MonoBehaviour:
   duration: 7
   powerUpType: 2
   pickupShip: {fileID: 0}
-  SpawnHealth: 0
-  SpawnSpawnAttack: 0
-  SpawnSpawnSpeed: 0
-  audioSource: {fileID: 0}
 --- !u!58 &1920771925672291824
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -72,7 +68,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3239146
+  m_Radius: 1.4
 --- !u!212 &6955802437721764242
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -80,7 +76,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5137852693265582955}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
