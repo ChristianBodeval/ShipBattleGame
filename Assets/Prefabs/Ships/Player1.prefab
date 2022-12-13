@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a49d140713f544d6948422b296b3983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ramSprite: {fileID: 0}
+  ramSprite: {fileID: 2473110872052828688}
   particleEffect: {fileID: 8464674298970153098, guid: b8dc61c97720f44388eeb0c76d6f3f13, type: 3}
 --- !u!114 &3685263541795606622
 MonoBehaviour:

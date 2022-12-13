@@ -23,6 +23,7 @@ public class IslandHealth : Health
         {
             if (currentHealth <= 0f && !dead)
             {
+                SoundManager.Instance.PlayEffects("IslandDeath");
                 OnDeath();
             }
             else
