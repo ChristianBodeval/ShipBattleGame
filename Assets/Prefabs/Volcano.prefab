@@ -11,14 +11,13 @@ GameObject:
   - component: {fileID: 4653466982099559745}
   - component: {fileID: 3021077131124757776}
   - component: {fileID: 3849564311368861463}
-  - component: {fileID: 90835865452072065}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4653466982099559745
 Transform:
   m_ObjectHideFlags: 0
@@ -137,18 +136,6 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
---- !u!122 &90835865452072065
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94653051579029840}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278749682
-  m_Size: 6.88
 --- !u!1 &170804199055312905
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +287,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 1.1888522
 --- !u!1 &5010916498632085787
 GameObject:
   m_ObjectHideFlags: 0

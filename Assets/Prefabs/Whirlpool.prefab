@@ -1181,6 +1181,7 @@ MonoBehaviour:
   spriteHolderTransform: {fileID: 0}
   whirlpoolDamage: 2
   takeDamageEverySeconds: 0.5
+  movementSlowMultiplier: 2
   healthObjects: []
 --- !u!250 &1886452410
 PointEffector2D:
@@ -1189,7 +1190,7 @@ PointEffector2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4867156978250480000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2

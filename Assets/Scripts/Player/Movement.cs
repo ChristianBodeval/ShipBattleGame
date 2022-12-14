@@ -85,6 +85,10 @@ public class Movement : MonoBehaviour
         if (!isDashing)
             Turn();
         MoveForward();
+
+        if(Mathf.Approximately(currentTurnValue,0)) {
+            currentTurnValue = 0;
+        }
       /*  if ((currentGear == 0))
         {
             SoundManager.Instance.PlayEffects("Sailing");
@@ -106,6 +110,14 @@ public class Movement : MonoBehaviour
     //Sets a gear between 0 and maxGears. W for going up a gear, S for going down.  
     public void OnMove(InputAction.CallbackContext context)
     {
+        //Fix, since the currentMoveValue sometimes becomes infinity
+        if (currentMoveValue > 1000000000000f)
+        {
+            currentMoveValue = 0;
+            Debug.Log("MoveValue is infinite");
+            return;
+        }
+
         moveInputValue = context.ReadValue<float>();
 
         // -----> Dash <---- //
@@ -246,6 +258,12 @@ public class Movement : MonoBehaviour
 
     public void MoveForward()
     {
+        //BugFix
+        if (currentMoveValue > 100000f)
+        {
+            currentMoveValue = 1;
+            return;
+        }
         //Smoothly change the turnValue to the inputValue
         currentMoveValue = Mathf.Lerp(currentMoveValue, currentGear, smoothMovementFactor);
         /*if (currentGear >= 3)
@@ -253,6 +271,15 @@ public class Movement : MonoBehaviour
             transform.Translate(0f, moveDampener*currentMoveValue * maxMovementSpeed, 0f);
             return;
         }*/
+        //Not close to infinity
+        //        if(currentMoveValue * maxMovementSpeed < 10000f &&)
+
+        //BugFix
+        if (currentMoveValue > 100000f)
+        {
+            currentMoveValue = 1;
+            return;
+        }
         transform.Translate(0f, currentMoveValue * maxMovementSpeed, 0f);
        
 

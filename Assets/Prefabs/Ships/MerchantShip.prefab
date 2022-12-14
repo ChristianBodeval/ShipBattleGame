@@ -68,7 +68,9 @@ MonoBehaviour:
   currentHealth: 50
   dead: 0
   spriteRenderer: {fileID: 6050618235859519629}
+  canTakeDamage: 1
   healthPowerUp: {fileID: 4413057275651430867, guid: e982a8c3ee1db694a83268463ada83b6, type: 3}
+  movementScript: {fileID: 1293587724}
 --- !u!50 &5860384736660146784
 Rigidbody2D:
   serializedVersion: 4

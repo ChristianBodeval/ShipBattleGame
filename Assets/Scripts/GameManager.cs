@@ -56,8 +56,6 @@ public sealed class GameManager : MonoBehaviour
     public Text m_MessageText;
     public GameObject m_TankPrefab;
 
-
-
     private int m_RoundNumber;
     private WaitForSeconds m_StartWait;
     private WaitForSeconds m_EndWait;
@@ -65,8 +63,11 @@ public sealed class GameManager : MonoBehaviour
     private ShipManager m_GameWinner;
 
 
-    public List<WhirlpoolMovement> whirlpools = new List<WhirlpoolMovement>();
+    public List<GameObject> whirlpools = new List<GameObject>();
+    public List<GameObject> volcanos = new List<GameObject>();
     public List<MerchantShip> merchantShips = new List<MerchantShip>();
+    public List<IslandHealth> islands = new List<IslandHealth>();
+
 
     // Start is called before the first frame update
     private void Awake()
@@ -75,7 +76,6 @@ public sealed class GameManager : MonoBehaviour
 
         if (spawnPlayer1)
         {
-
             var p1 = PlayerInput.Instantiate(player1Prefab, controlScheme: "KeyboardLeft", pairWithDevice: Keyboard.current);
             players.Add(p1.gameObject.GetComponent<ShipManager>());
 
@@ -85,8 +85,6 @@ public sealed class GameManager : MonoBehaviour
             p1.transform.rotation = spawn1.transform.rotation;
             TeleportManager.Instance.AddTeleportable(p1.gameObject);
         }
-
-
 
         if (spawnPlayer2)
         {
@@ -125,7 +123,7 @@ public sealed class GameManager : MonoBehaviour
     public void SlowTime()
     {
         Time.timeScale = Mathf.Lerp(Time.timeScale, 0.2f,0.5f);
-        Invoke("NormalTime", 0.1f);
+        Invoke("NormalTime", 0.05f);
     }
 
 
@@ -186,8 +184,10 @@ public sealed class GameManager : MonoBehaviour
     private IEnumerator GameStarting()
     {
         DisableShipControl();
-        DisableWhirlpoolsMovement();
+        DisableWhirlpools();
         DisableMerchanshipMovement();
+
+
 
         //m_RoundNumber++;
         //m_MessageText.text = "ROUND " + m_RoundNumber;
@@ -198,8 +198,13 @@ public sealed class GameManager : MonoBehaviour
     private IEnumerator GamePlaying()
     {
         EnableShipControl();
-        EnableWhirlpoolsMovement();
+        EnableWhirlpools();
+        EnableVolcanos();
+        EnableIslands();
         EnableMerchanshipMovement();
+
+        SoundManager.Instance.PlayMusic("BattleTheme");
+
         //m_MessageText.text = string.Empty;
 
         //If there is no game winner, revive dead player and add win for the player alive.
@@ -241,7 +246,9 @@ public sealed class GameManager : MonoBehaviour
         gameOver_UI.gameObject.SetActive(true);
 
         DisableShipControl();
-        DisableWhirlpoolsMovement();
+        DisableWhirlpools();
+        DisableVolcanos();
+        DisableIslands();
         DisableMerchanshipMovement();
 
         yield return new WaitForSeconds(timeToNewGame);
@@ -320,19 +327,52 @@ public sealed class GameManager : MonoBehaviour
     }
 
 
-    private void EnableWhirlpoolsMovement()
+
+    private void EnableVolcanos()
     {
-        for (int i = 0; i < whirlpools.Count; i++)
+        for (int i = 0; i < volcanos.Count; i++)
         {
-            whirlpools[i].enabled = true;
+            volcanos[i].GetComponent<Volcano>().enabled = true;
         }
     }
 
-    private void DisableWhirlpoolsMovement()
+    private void DisableVolcanos()
+    {
+        for (int i = 0; i < volcanos.Count; i++)
+        {
+            volcanos[i].GetComponent<Volcano>().enabled = false;
+        }
+    }
+
+    private void EnableIslands()
+    {
+        for (int i = 0; i < islands.Count; i++)
+        {
+            islands[i].GetComponent<IslandHealth>().enabled = true;
+        }
+    }
+    private void DisableIslands()
+    {
+        for (int i = 0; i < islands.Count; i++)
+        {
+            islands[i].GetComponent<IslandHealth>().enabled = false;
+        }
+    }
+
+
+    private void EnableWhirlpools()
     {
         for (int i = 0; i < whirlpools.Count; i++)
         {
-            whirlpools[i].enabled = false;
+            whirlpools[i].GetComponent<WhirlpoolMovement>().enabled = true;
+        }
+    }
+
+    private void DisableWhirlpools()
+    {
+        for (int i = 0; i < whirlpools.Count; i++)
+        {
+            whirlpools[i].GetComponent<WhirlpoolMovement>().enabled = false;
         }
     }
 

@@ -32,11 +32,12 @@ public class Ramming : MonoBehaviour
             return;
         }
 
-        
+        SoundManager.Instance.PlayEffects("Ram");
 
         //Player hit
         if (collision.gameObject.GetComponent<PlayerHealth>())
         {
+
             boxCollider2D.enabled = false;
             GetComponent<Movement>().currentMoveValue = 0;
             GetComponent<Movement>().currentGear = 1;

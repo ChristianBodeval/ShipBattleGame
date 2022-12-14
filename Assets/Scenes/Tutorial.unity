@@ -429,7 +429,154 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 31994865}
+  oldHealthUpdateRate: 10
+  numberOfBlinks: 2
   playerNumber: 1
+--- !u!1001 &64819216
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f713b8699116dae4f99ec907acd3d820, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63f14801054984940b398332fbd0f4e3, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: musicSounds.Array.data[3].name
+      value: Sailing
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d03d8ca9d333b4858b401110800788cb, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e9820762657aed46ad0191ae714868f, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[8].name
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6409e9cc65dd8ad46a5ffa511f8fa614, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[9].name
+      value: Ram
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 35874bf8d2342f945880bd1ccac76d9c, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[10].name
+      value: WhirlPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0453d8a82c4dc24aab6600024d2802c, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[11].name
+      value: IslandDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 531cf10fafbdbda4690ef8701b5afddc, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[12].name
+      value: LavaDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a5c7e8533b7fbcf4aa0ef9c0b3c09d97, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[13].name
+      value: CannonShoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63f14801054984940b398332fbd0f4e3, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[14].name
+      value: Sailing
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[15].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 77aeb85185f8b41979ba1a7686fc6bc8, type: 3}
+    - target: {fileID: 8573664019270065370, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: effectsSounds.Array.data[15].name
+      value: Countdown
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065371, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_Name
+      value: Sound Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573664019270065373, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: db9dfa19484a30143ae58aa15e64994f, type: 3}
 --- !u!1 &138904406 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4335437176891903352, guid: 44e4c15491e2ab449b34860a099ef40d, type: 3}
@@ -2423,6 +2570,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 13367112}
+  oldHealthUpdateRate: 10
+  numberOfBlinks: 2
   playerNumber: 0
 --- !u!1 &608506635
 GameObject:
@@ -3019,6 +3168,7 @@ MonoBehaviour:
   spriteHolderTransform: {fileID: 0}
   whirlpoolDamage: 0
   takeDamageEverySeconds: 0
+  movementSlowMultiplier: 0
   healthObjects: []
 --- !u!224 &939791129 stripped
 RectTransform:
@@ -6379,7 +6529,9 @@ MonoBehaviour:
   m_MessageText: {fileID: 0}
   m_TankPrefab: {fileID: 0}
   whirlpools: []
+  volcanos: []
   merchantShips: []
+  islands: []
 --- !u!224 &1918264837 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3287162864446760254, guid: 24be89e2b675ac84691568211a3dbaaa, type: 3}
