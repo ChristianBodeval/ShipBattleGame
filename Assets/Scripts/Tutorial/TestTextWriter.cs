@@ -1,5 +1,6 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TestTextWriter : MonoBehaviour
@@ -7,26 +8,24 @@ public class TestTextWriter : MonoBehaviour
     public int index = 1;
     public float Delay = 0.1f;
     public float waitTimer = 2f;
-    bool[] soundChecker = new bool[50];
-    bool[] hasBeenPressed = new bool[50];
+    private bool[] soundChecker = new bool[50];
+    private bool[] hasBeenPressed = new bool[50];
     private Ramming[] ramming;
-    private Health[] health;
+    public Health health;
     public GameObject Island1;
     public GameObject Island2;
     public GameObject Merchantship;
     public GameObject Merchantship2;
     public GameObject PointingArrows;
+    public GameObject PointingArrows2;
     public GameObject TPArrows;
     public GameObject TutorialImage;
     public GameObject RammingText;
-    public GameObject UpAndWKey;
     public GameObject[] Key;
-    bool[] moveKeys = new bool[50];
-    bool[] shootKeys = new bool[50];
-    bool[] dashKeys = new bool[50];
+    private bool[] moveKeys = new bool[50];
+    private bool[] shootKeys = new bool[50];
+    private bool[] dashKeys = new bool[50];
 
-    public Animator pirateAnimator;
-    private AudioSource backgroundMusic;
     public AudioSource textSound;
     public Text[] text;
     // Array of booleans to check if TutorialImage has been shown, Starts off false
@@ -44,22 +43,17 @@ public class TestTextWriter : MonoBehaviour
 
     private void Start()
     {
-        backgroundMusic.Play();
-
-        for (int i = 0; i < health.Length; i++)
+        /*
+        foreach (ShipManager ship in GameManager.Instance.players)
         {
-            if (health[i].GetComponent<ShipManager>())
-            {
-                health[1].CanTakeDamage = false;
-                health[2].CanTakeDamage = false;
-            }
+            ramming.Add ship.GetComponent<Ramming>();
         }
+        GameManager.Instance.players*/
     }
 
     private void Update()
     {
         ramming = FindObjectsOfType<Ramming>();
-        health = FindObjectsOfType<Health>();
         ShowObjects();
         switch (index)
         {
@@ -133,86 +127,79 @@ public class TestTextWriter : MonoBehaviour
             case 12: // Ramming 2
                 text[index].gameObject.SetActive(true);
                 RammingText.gameObject.SetActive(true);
+                Key[12].gameObject.SetActive(true);
+                Key[13].gameObject.SetActive(true);
                 break;
 
             case 13: // Dash
                 TutorialImage.SetActive(false);
                 for (int i = 0; i < ramming.Length; i++)
                 {
-                    if (ramming[i].IsRammed == true && index == 13)
+                    if (ramming[i].IsRammed == true && index == 13 && dashKeys[12] && dashKeys[13])
                     {
                         Debug.Log("RAMMED");
                         text[index].gameObject.SetActive(true);
                         RammingText.gameObject.SetActive(false);
                         TutorialImage.SetActive(true);
-                        Key[12].gameObject.SetActive(true);
-                        Key[13].gameObject.SetActive(true);
                     }
                 }
                 break;
 
             case 14:
-                TutorialImage.SetActive(false);
-                if (dashKeys[12] && dashKeys[13])
-                {
-                    text[index].gameObject.SetActive(true);
-                    TutorialImage.gameObject.SetActive(true);
-
-                }
+                text[index].gameObject.SetActive(true);
+                Island1.gameObject.SetActive(true);
+                Island2.gameObject.SetActive(true);
                 break;
 
             case 15:
                 TutorialImage.gameObject.SetActive(false);
-
-                text[index].gameObject.SetActive(true);
-                Island1.gameObject.SetActive(true);
-                Island2.gameObject.SetActive(true);
-
+                if (Island1.active == false && Island2.active == false)
+                {
+                    TutorialImage.gameObject.SetActive(true);
+                    text[index].gameObject.SetActive(true);
+                }
                 break;
 
             case 16:
-                if (Island1.active == false && Island2.active == false)
-                {
-                    text[index].gameObject.SetActive(true);
-                    TutorialImage.gameObject.SetActive(true);
-                }
+                text[index].gameObject.SetActive(true);
+                TutorialImage.gameObject.SetActive(true);
+                PointingArrows.gameObject.SetActive(true);
+                PointingArrows2.gameObject.SetActive(true);
+
                 break;
 
             case 17:
                 text[index].gameObject.SetActive(true);
-                PointingArrows.gameObject.SetActive(true);
+                PointingArrows.gameObject.SetActive(false);
+                PointingArrows2.gameObject.SetActive(false);
 
                 break;
 
             case 18:
                 text[index].gameObject.SetActive(true);
+                Merchantship.gameObject.SetActive(true);
+                Merchantship2.gameObject.SetActive(true);
 
                 break;
 
             case 19:
-                text[index].gameObject.SetActive(true);
-                Merchantship.gameObject.SetActive(true);
-                Merchantship2.gameObject.SetActive(true);
-                break;
-
-            case 20:
                 TutorialImage.gameObject.SetActive(false);
-                if (Merchantship.active == false && Merchantship2.active == false)
+                if (health.dead == true)
                 {
                     text[index].gameObject.SetActive(true);
                     TutorialImage.gameObject.SetActive(true);
+                    //index++;
                 }
-
                 break;
-
+            case 20:
+                SceneManager.LoadScene("MainMenu_Start");
+                break;
             default:
                 Debug.Log("Oops, ran out of text");
                 break;
         }
 
-
         Debug.Log("index is: " + index);
-
     }
 
     private void ShowObjects()
@@ -248,14 +235,12 @@ public class TestTextWriter : MonoBehaviour
                     hasBeenPressed[i] = true;
                 }
             }
-            
         }
 
         for (int i = 12; i < 14; i++)
         {
-            if (index == 14 && Input.GetKeyDown(keyCodes[i]) && soundChecker[i] == false) // Dash keys
+            if (index == 13 && Input.GetKeyDown(keyCodes[i]) && soundChecker[i] == false) // Dash keys
             {
-                
                 soundChecker[i] = true;
                 dashKeys[i] = true;
                 Key[i].SetActive(false);
@@ -267,7 +252,5 @@ public class TestTextWriter : MonoBehaviour
                 }
             }
         }
-
-
     }
 }

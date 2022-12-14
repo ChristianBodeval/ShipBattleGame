@@ -13,8 +13,6 @@ public class TextScript : MonoBehaviour
     public PirateAnimation pirateAnimation;
     private int index = 0;
     private AudioSource TextSound;
-    private AudioClip textSound;
-    private Animator pirateAnimator;
 
     private void OnEnable()
     {

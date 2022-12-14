@@ -18,6 +18,9 @@ public sealed class GameManager : MonoBehaviour
     public bool spawnPlayer1;
     public bool spawnPlayer2;
 
+    public bool isPlayersInvincible;
+    private bool tutorialIsPlaying;
+
     public int waitTimeBeforeStarting;
     public float waitTimeAfterEnd;
 
@@ -89,7 +92,7 @@ public sealed class GameManager : MonoBehaviour
         if (spawnPlayer2)
         {
             var p2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
-
+            Debug.Log("player2 going wild");
             //Set the two players
             players.Add(p2.gameObject.GetComponent<ShipManager>());
 
@@ -109,6 +112,7 @@ public sealed class GameManager : MonoBehaviour
 
         startingUI.countDownLength = waitTimeBeforeStarting;
 
+       
 
 
 
@@ -126,12 +130,28 @@ public sealed class GameManager : MonoBehaviour
         Invoke("NormalTime", 0.05f);
     }
 
+    private void OnDisable()
+    {
+        this.enabled = true;
+    }
+
 
     private void Start()
     {
         StartCoroutine(GameLoop());
 
         m_GameWinner = null;
+    }
+
+    private void Update()
+    {
+        if (isPlayersInvincible)
+        {
+            foreach (var player in players)
+            {
+                player.GetComponent<PlayerHealth>().CanTakeDamage = false;
+            }
+        }
     }
 
     void NextRound()
@@ -203,13 +223,26 @@ public sealed class GameManager : MonoBehaviour
         EnableIslands();
         EnableMerchanshipMovement();
 
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene == SceneManager.GetSceneByName("Tutorial"))
+        {
+            tutorialIsPlaying = true;
+        }
+        else
+        {
+            tutorialIsPlaying = false;
+        }
+
+        if (!tutorialIsPlaying)
         SoundManager.Instance.PlayMusic("BattleTheme");
+
 
         //m_MessageText.text = string.Empty;
 
         //If there is no game winner, revive dead player and add win for the player alive.
         while (m_GameWinner == null)
         {
+            
             //Run when there are more than 1 ship left
             while (!OneShipLeft())
             {   

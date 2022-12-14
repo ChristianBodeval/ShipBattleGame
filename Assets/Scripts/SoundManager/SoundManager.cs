@@ -73,8 +73,8 @@ public class SoundManager : MonoBehaviour
             if (name == "ProjectileHit")
                 _effectsSource.pitch = (Random.Range(0.95f, 1.05f));
 
-            if (name == "Sailing")
-                _effectsSource.pitch = (Random.Range(0.8f, 1f));
+            if (name == "CannonShoot")
+                _effectsSource.pitch = (Random.Range(0.50f, 1.5f));
             _effectsSource.PlayOneShot(s.clip);
         }
     }
