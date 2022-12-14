@@ -4,29 +4,43 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
+//Standard class for health scripts. Used for Merchantships, Players and Islands, health script which inherits this. 
 public class Health : MonoBehaviour
 {
-    public bool respawnOnDeath;
-    public float startingHealth;
-    public float currentHealth;
-    public bool dead;
+    //Color transformation
     public SpriteRenderer spriteRenderer;
     protected Color startingColor;
-    protected bool canTakeDamage = true;
-    protected bool reactToHit = true;
-    protected float reactCooldown = 0.2f;
+    public float startingHealth;
+    public float currentHealth;
+
     private float respawnTime = 3f;
+    protected float reactCooldown = 0.2f;
+
+    public bool dead;
+    public bool respawnOnDeath;
+    public bool canTakeDamage = true;
+    protected bool reactToHit = true;
 
     //Accessor
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public bool CanTakeDamage { get => canTakeDamage; set => canTakeDamage = value; }
 
+    private void Start()
+    {
+        CanTakeDamage = true;
+    }
 
     private void OnEnable()
     {
         dead = false;
-
+        CanTakeDamage = true;
+    }
+    private void OnDisable()
+    {
+        dead = true;
+        CanTakeDamage = false;
     }
 
 

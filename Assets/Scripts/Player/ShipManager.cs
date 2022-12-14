@@ -305,12 +305,11 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         ResetValues();
         UpdateValues();
         SetDefaultValues();
-        healthScript.CurrentHealth = startingHealth_default;
-        healthScript.ResetColor();
+        healthScript.StartingHealth = startingHealth_default;
+        healthScript.CurrentHealth = currentHealth_default;
         m_Instance.transform.position = m_SpawnPoint.transform.position;
         m_Instance.transform.rotation = m_SpawnPoint.transform.rotation;
-
-        spriteRenderer.color = playerColor;
+        healthScript.ResetColor();
         EnableScripts();
 
         yield return null;

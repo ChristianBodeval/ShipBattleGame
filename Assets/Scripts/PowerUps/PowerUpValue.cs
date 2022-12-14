@@ -53,8 +53,15 @@ public class PowerUpValue : MonoBehaviour
             switch (powerUpType)
             {
                 case PowerUpType.Health:
-                    pickupShip.GetComponent<PlayerHealth>().currentHealth += value;
                     SoundManager.Instance.PlayEffects("Heal");
+
+                    //Heal only to the maxHealth
+                    PlayerHealth healthScript = pickupShip.GetComponent<PlayerHealth>();
+
+                    if (healthScript.currentHealth + value > healthScript.startingHealth)
+                        healthScript.currentHealth = healthScript.startingHealth;
+                    else
+                        healthScript.currentHealth += value;
                     break;
                 case PowerUpType.Attack:
                     pickupShip.fireOnBullets = true;
