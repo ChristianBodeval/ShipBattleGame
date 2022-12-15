@@ -21,8 +21,8 @@ public class characterStatsScreen : MonoBehaviour
     {
         maxSpeed.maxValue = 0.2f;
         maxSpeed.value = shipPrefab.MaxMovementSpeed;
-        handling.maxValue = 0.1f;
-        handling.value = shipPrefab.TurnAcceleration;
+        handling.maxValue = 0.17f;
+        handling.value = shipPrefab.SmoothTurningFactor;
         health.text = shipPrefab.StartingHealth.ToString();
         damage.text = shipPrefab.TotalDamage.ToString();
         fireRateS.text = shipPrefab.FireRateInSeconds.ToString();
@@ -32,6 +32,6 @@ public class characterStatsScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
- 
+        
     }
 }
