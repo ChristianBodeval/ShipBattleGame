@@ -366,6 +366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d83d73e184e048a3aa066abda253e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  takeDamageEverySeconds: 1.5
+  damage: 15
+  takeDamageEverySeconds: 1
   healthObjects: []

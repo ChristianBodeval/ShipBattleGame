@@ -1083,7 +1083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3932987438811461254, guid: d2ef774d70e50ad4bb54e268300450d5, type: 3}
       propertyPath: inverseProbability
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3932987438811461255, guid: d2ef774d70e50ad4bb54e268300450d5, type: 3}
       propertyPath: m_Color.b
@@ -7786,6 +7786,10 @@ PrefabInstance:
     - target: {fileID: 3932987438811461254, guid: d2ef774d70e50ad4bb54e268300450d5, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932987438811461254, guid: d2ef774d70e50ad4bb54e268300450d5, type: 3}
+      propertyPath: inverseProbability
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3932987438811461255, guid: d2ef774d70e50ad4bb54e268300450d5, type: 3}
       propertyPath: m_Color.b
