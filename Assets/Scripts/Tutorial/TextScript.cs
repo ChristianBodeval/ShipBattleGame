@@ -10,14 +10,13 @@ public class TextScript : MonoBehaviour
     public string fullText = "";
     public float waitTimer = 2f;
     public TestTextWriter testTextWriter;
-    public PirateAnimation pirateAnimation;
     private int index = 0;
-    private AudioSource TextSound;
+    //private AudioSource TextSound;
 
     private void OnEnable()
     {
         StartCoroutine(ShowText());
-        TextSound.Play();
+        //TextSound.Play();
     }
 
     private IEnumerator ShowText()

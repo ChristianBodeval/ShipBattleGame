@@ -703,8 +703,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad16027949d4bc346b351b4e3cfeac94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 1
   delay: 0.06
   waitTimer: 2
+  fullText: 
+  currentText: 
+  firstText: 
+  buttonClicked: 1
+  moveWAndSKeys: 0
+  shotKeyGAndH: 0
+  shotKeyPeriodAndMinus: 0
   AAndDKey: {fileID: 975580014}
   WAndSKey: {fileID: 945214749}
   periodAndMinusKey: {fileID: 287421316}
@@ -715,6 +723,9 @@ MonoBehaviour:
   Island2: {fileID: 0}
   Mechantship: {fileID: 0}
   PointingArrows: {fileID: 1060549810}
+  moveAAndDKeys: 0
+  moveLeftAndRightKeys: 0
+  moveUpAndDownKeys: 0
 --- !u!114 &245432109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1490,29 +1501,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &556297064 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 239709278237840190, guid: bc78ee51bc545a946a86a9567079f19f, type: 3}
-  m_PrefabInstance: {fileID: 239709278788859990}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &556297065 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 239709278237840191, guid: bc78ee51bc545a946a86a9567079f19f, type: 3}
   m_PrefabInstance: {fileID: 239709278788859990}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &556297071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556297064}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 551b850e48432414286719a115fc52b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testTextWriter: {fileID: 958196205}
 --- !u!1 &573306955
 GameObject:
   m_ObjectHideFlags: 0
@@ -6178,10 +6171,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2043581553}
     m_Modifications:
-    - target: {fileID: 556297070, guid: bc78ee51bc545a946a86a9567079f19f, type: 3}
-      propertyPath: m_Color.a
-      value: 0.7882353
-      objectReference: {fileID: 0}
     - target: {fileID: 239709278237840190, guid: bc78ee51bc545a946a86a9567079f19f, type: 3}
       propertyPath: m_Name
       value: PirateImage
