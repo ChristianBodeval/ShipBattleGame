@@ -526,7 +526,7 @@
 		</data>
 		<key>Resources/Data/globalgamemanagers</key>
 		<data>
-		z9Ov0depVEyHVZwxrw3Ctuif4dY=
+		DDDocI/j/SAIf2EttMuJg1EVv1w=
 		</data>
 		<key>Resources/Data/globalgamemanagers.assets</key>
 		<data>
@@ -789,10 +789,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			cDlQV+x1iYXUgL97cTipGKoIuJ4=
+			r6P1ER5bwdIm2nMvEdVQv7Bi5Ps=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"70395057ec758985d480bf7b7138a918aa08b89e" or cdhash H"f285bad6ba9a80945d6436918ffbeb74ecf1ff9f"</string>
+			<string>cdhash H"afa3f5111e5bc1d226da732f11d550bfb062e4fb" or cdhash H"baa074ce79626f5a4913a1a74bb30bf9e536e177"</string>
 		</dict>
 		<key>Resources/Data/Managed/Assembly-CSharp.dll</key>
 		<dict>
@@ -1708,7 +1708,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			k9YHvmkGyuhxvZw7Zd/ATcaToSEM/H0j5a2dkOp6pr8=
+			dPdQQIyI+Xm/2HiFct3ZuPO9w1FJu5ijOaek7pT3l0o=
 			</data>
 		</dict>
 		<key>Resources/Data/globalgamemanagers.assets</key>
