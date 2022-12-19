@@ -27,7 +27,7 @@ public class AreaOfEffectDamage : MonoBehaviour
         {
             healthObjects.Add(collision.gameObject.GetComponent<Health>());
         }
-        //If ship is in whirlpool
+        //If the object is inside the trigger
         Health aliveObject = collision.GetComponent<Health>();
         InvokeRepeating("DealDamage(aliveObject)", takeDamageEverySeconds, takeDamageEverySeconds);
     }

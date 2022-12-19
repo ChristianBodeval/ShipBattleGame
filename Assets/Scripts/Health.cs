@@ -5,32 +5,25 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
-//Standard class for health scripts. Used for Merchantships, Players and Islands, health script which inherits this. 
+//Standard class for health scripts. Used for Merchantships, Players and Islands, health script which inherits this.
+// Handles health, what happens on death and changes color momentarity when damage is taken. 
 public class Health : MonoBehaviour
 {
     //Color transformation
     public SpriteRenderer spriteRenderer;
     protected Color startingColor;
+    protected Color damagedColor = Color.red;
     public float startingHealth;
     public float currentHealth;
 
-    private float respawnTime = 3f;
-    protected float reactCooldown = 0.2f;
-
     public bool dead;
-    public bool respawnOnDeath;
-    public bool canTakeDamage = true;
-    protected bool reactToHit = true;
+    public bool canTakeDamage;
 
     //Accessor
     public float StartingHealth { get => startingHealth; set => startingHealth = value; }
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public bool CanTakeDamage { get => canTakeDamage; set => canTakeDamage = value; }
 
-    private void Start()
-    {
-        CanTakeDamage = true;
-    }
 
     private void OnEnable()
     {
@@ -42,17 +35,15 @@ public class Health : MonoBehaviour
         dead = true;
         CanTakeDamage = false;
     }
-
-
+    
     public virtual void TakeDamage(float amount)
     {
         if (CanTakeDamage)
         {
-
             if (currentHealth > 0)
             {
                 currentHealth -= amount;
-                spriteRenderer.color = Color.red;
+                spriteRenderer.color = damagedColor;
                 Invoke("ResetColor", 0.2f);
             }
 
@@ -72,18 +63,5 @@ public class Health : MonoBehaviour
     {
         dead = true;
         CancelInvoke("ResetColor");
-
-
-        if (respawnOnDeath)
-        {
-            Invoke("Respawn", respawnTime);
-        }
-
-    }
-
-    public virtual void Respawn()
-    {
-        currentHealth = startingHealth;
-        gameObject.SetActive(true);
     }
 }

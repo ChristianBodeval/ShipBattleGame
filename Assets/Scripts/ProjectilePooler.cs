@@ -35,6 +35,7 @@ public class ProjectilePooler : MonoBehaviour
 
         }
 
+        //Makes them teleport when hit border
         foreach (var shot in objects)
         {
             TeleportManager.Instance.AddTeleportable(shot);

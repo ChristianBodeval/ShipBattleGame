@@ -10,10 +10,6 @@ public class IslandHealth : Health
     public GameObject powerUpSpawner;
     public SpriteShapeRenderer spriteShapeRenderer;
 
-
-    
-
-
     // Start is called before the first frame update
     private void Awake()
     {
@@ -28,7 +24,6 @@ public class IslandHealth : Health
         {
             if (currentHealth <= 0f && !dead)
             {
-                SoundManager.Instance.PlayEffects("IslandDeath");
                 OnDeath();
             }
             else

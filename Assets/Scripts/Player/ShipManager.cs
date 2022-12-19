@@ -2,17 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+//Handles values of the player scripts & the state (alive or dead)
+
 public class ShipManager : MonoBehaviour
 {
     private PlayerInput Input;
-
-    
-
     public Transform m_SpawnPoint;
-
-    public PowerUpType currentPowerup; 
-
-    // This class is to manage various settings on a ship.
+   
     [HideInInspector] public GameObject m_Instance;         // A reference to the instance of the ship when it is created.
 
     [Header("Movement")]
@@ -67,14 +64,9 @@ public class ShipManager : MonoBehaviour
     [Range(-2, 0)]
     public float startCurve;
 
-
     public bool shooterGroupsAreIdentical;
-
-
     public bool isDead;
     public int roundWins;
-
-
 
     private PlayerHealth healthScript;
     private Movement movementScript;
@@ -104,6 +96,8 @@ public class ShipManager : MonoBehaviour
 
 
     public float maxMovementSpeed_default; //Used for whirlpool
+
+    /* Default Values */
     [HideInInspector] public float currentHealth_default;
     [HideInInspector] public float totalDamage_default;
     [HideInInspector] public float startingHealth_default;
@@ -126,13 +120,7 @@ public class ShipManager : MonoBehaviour
     [HideInInspector] public float startCurve_default;
 
     public bool hasPowerUp;
-
     public float timeToRespawn;
-    /*
-public float MinRange { get => minRange; set => minRange = value; }
-public float MaxRange { get => maxRange; set => maxRange = value; }
-*/
-
 
     private void Awake()
     {
@@ -161,10 +149,8 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
 
     void Update()
     {
-        //UpdateValues();
         currentHealth = healthScript.CurrentHealth;
     }
-
 
     public void SetDefaultValues()
     {
@@ -221,8 +207,6 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
     public void UpdateValues()
     {
         //Movement
-        Debug.Log("New" + maxTurnSpeed);
-        Debug.Log("Def" + movementScript.MaxTurnSpeed);
         movementScript.MaxTurnSpeed = maxTurnSpeed;
         movementScript.TurnAcceleration = turnAcceleration;
         movementScript.SmoothMovementFactor = smoothMovementFactor;
@@ -235,15 +219,12 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         shootingScript.FireRateInSeconds = fireRateInSeconds;
         shootingScript.ProjectileSpeed = projectileSpeed;
         shootingScript.TotalDamage = totalDamage;
-
         //Ramming
         rammingScript.RammingDamage = rammingDamage;
         //Knockback
         knockbackScript.KnockbackValue = knockbackValue;
         knockbackScript.SmoothKnockbackFactor = smoothKnockbackFactor;
-        //ShootingGroup e.g ConeShooting
-
-
+        //ShootingGroup
         foreach (ShooterGroup s in shooterGroups)
         {
             if(shooterGroupsAreIdentical)
@@ -258,15 +239,10 @@ public float MaxRange { get => maxRange; set => maxRange = value; }
         }
     }
 
-
     public void Die()
     {
         isDead = true;
-        //Input.actions = null;
         SoundManager.Instance.PlayEffects("ShipBreak");
-        
-        spriteRenderer.color = Color.black;
-
         DisableScripts();
     }
 

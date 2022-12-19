@@ -28,10 +28,4 @@ public class characterStatsScreen : MonoBehaviour
         fireRateS.text = shipPrefab.FireRateInSeconds.ToString();
         rammingDamage.text = shipPrefab.RammingDamage.ToString();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -13,7 +13,8 @@ public class MerchantShip : MonoBehaviour
     float mapL;
     float mapH;
     private Vector3 target;
-    
+
+    //Gets random point on screen, moves the ship towards that. Changes the point after {changeDirectionTimer} or when colliding with something.
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +30,9 @@ public class MerchantShip : MonoBehaviour
             timerHolder = Time.time + changeDirectionTimer;
             target = GetRandomPointOnScreen();
         }
-
         else
         {
-            
             transform.position = Vector3.MoveTowards(transform.position, target, movementSpeed);
-
             transform.Find("Ship").transform.up = target - transform.position;
         }
     }

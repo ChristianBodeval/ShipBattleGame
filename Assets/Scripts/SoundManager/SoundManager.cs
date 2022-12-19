@@ -27,7 +27,8 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-     
+
+    
     public void PlayMusic(string name)
     {
         Sound s = Array.Find(musicSounds, x => x.name == name);

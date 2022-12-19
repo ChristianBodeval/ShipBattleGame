@@ -13,6 +13,7 @@ public class Knockback : MonoBehaviour
     public float KnockbackValue { get => knockbackValue; set => knockbackValue = value; }
     public float SmoothKnockbackFactor { get => smoothKnockbackFactor; set => smoothKnockbackFactor = value; }
 
+    //Applies knockback, if currenKnockBackValue is not close to zero. 
     private void Update()
     {
         currentKnockBackValue = Mathf.Lerp(currentKnockBackValue, 0, smoothKnockbackFactor);
@@ -22,29 +23,19 @@ public class Knockback : MonoBehaviour
         transform.Translate(-direction * currentKnockBackValue);
     }
     //Gives knockback to the ship in a given direction
+    //Used as knockback for cannonballs
     public void AddKnockback(Vector2 _direction)
     {
         direction = _direction;
         currentKnockBackValue = knockbackValue;
     }
+
     //Gives knockback to the ship in a given direction
+    //Used as knockback for ramming.
     public void AddKnockbackWorld(Vector2 _direction)
     {
         _direction = transform.InverseTransformPoint(_direction);
         direction = _direction;
         currentKnockBackValue = knockbackValue;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "CannonBall(Clone)") //If cannonball
-        {
-            //Where the projectile is going
-            Vector2 _direction = collision.gameObject.GetComponent<Rigidbody2D>().velocity.normalized;
-            AddKnockback(_direction);
-        }
-
-    }
-
-    
+    }    
 }

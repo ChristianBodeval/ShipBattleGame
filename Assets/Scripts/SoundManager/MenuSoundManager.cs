@@ -10,6 +10,12 @@ public class MenuSoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Stop all audio
+        foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
+        {
+            audioSource.Stop();
+        }
+
         DontDestroyOnLoad(gameObject);
         MenuSound.Play();
     }
@@ -17,7 +23,7 @@ public class MenuSoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "SampleScene_with_UI" || SceneManager.GetActiveScene().name == "Tutorial")
+        if (SceneManager.GetActiveScene().name == "GameScene" || SceneManager.GetActiveScene().name == "Tutorial")
         {
             Destroy(gameObject);
         }

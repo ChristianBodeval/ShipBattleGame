@@ -16,28 +16,14 @@ public class ShooterGroup : MonoBehaviour
     Vector2[] startPoints;
     public GameObject[] lines;
 
-    [Range(1, 25)]
     private float range;
-
-    [Range(1, 10)]
-    public int shooters;
-
-    [Range(1, 10)]
-    public float shipSize;
-
-    [Range(0, 180)]
-    public float maxAngle;
-
-    [Range(-2, 0)]
-    public float startCurve;
-
+    private int shooters;
+    private float shipSize;
+    private float maxAngle;
+    private float startCurve;
     private bool fireOnBullets;
 
     public bool isDrawingLines = true;
-
-
-
-
     public float Range { get => range; set => range = value; }
     public int Shooters { get => shooters; set => shooters = value; }
     public float ShipSize { get => shipSize; set => shipSize = value; }
@@ -56,11 +42,8 @@ public class ShooterGroup : MonoBehaviour
         fireOnBullets = false;
     }
 
-
-
     void FixedUpdate()
     {
-
         SetLinePoints(startPoints, endPoints);
         SpawnShooters(startPoints, endPoints);
         DestroyUnusedShooters();
@@ -70,14 +53,10 @@ public class ShooterGroup : MonoBehaviour
     {
         foreach (GameObject canon in canonGameObjects)
         {
-
             if (canon == null)
             {
                 continue;
             }
-
-
-
             if (canon.GetComponent<LineRenderer>().material != null)
             {
                 canon.GetComponent<LineRenderer>().startColor = color;
@@ -115,7 +94,6 @@ public class ShooterGroup : MonoBehaviour
         {
             for (int i = 0; i <= shooters; i++)
             {
-
                 Vector3 start = transform.up * currentPointDistance;                                //Gets start position by moving the point a little up or down dependenet on currentPointDistance
                 start += startCurve * Mathf.Abs(currentPointDistance) * transform.right;            //Curves the points, by moving them a little left or nothing at all. 
                 Vector3 direction = GetVectorFromAngle(currentAngle);                               //Vector from the angle
@@ -128,10 +106,6 @@ public class ShooterGroup : MonoBehaviour
                 currentAngle += angleStep;
             }
         }
-
-
-
-
     }
 
     //Draws lines between startPoints and endPoints in Gizmo
@@ -156,7 +130,6 @@ public class ShooterGroup : MonoBehaviour
     {
         for (int i = 0; i < shooters; i++)
         {
-
             Shooter shooterScript = canonGameObjects[i].GetComponent<Shooter>();
             shooterScript.fireOnBullets = fireOnBullets;
 
@@ -166,13 +139,11 @@ public class ShooterGroup : MonoBehaviour
 
             shooterScript.Shoot(shotBy, direction, projectileSpeed, totalDamage / shooters);
         }
-
     }
 
     //Spawn canons at startPoints and make them point towards endPoints.
     public void SpawnShooters(Vector2[] startPoints, Vector2[] endPoints)
     {
-
         for (int i = 0; i < shooters; i++)
         {
             float angle = GetAngleFromVector(endPoints[i] - startPoints[i]);
@@ -202,16 +173,16 @@ public class ShooterGroup : MonoBehaviour
             }
 
 
-            GameObject canonClone;
-            canonClone = Instantiate(shooterPrefab, (Vector3)startPoints[i] + transform.position, rotation);
+            GameObject cannon;
+            cannon = Instantiate(shooterPrefab, (Vector3)startPoints[i] + transform.position, rotation);
 
             if (shooters == 1)
             {
-                canonClone.transform.localScale *= 3;
+                cannon.transform.localScale *= 3;
             }
 
-                canonClone.transform.parent = gameObject.transform;
-            canonGameObjects[i] = canonClone;
+            cannon.transform.parent = gameObject.transform;
+            canonGameObjects[i] = cannon;
         }
 
     }

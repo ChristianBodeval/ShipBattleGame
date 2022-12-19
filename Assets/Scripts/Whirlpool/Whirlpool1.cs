@@ -42,7 +42,6 @@ public class Whirlpool1 : MonoBehaviour
         
         if (collision.GetComponent<ShipManager>())
         {
-            Debug.Log("Called");
             collision.GetComponent<ShipManager>().MaxMovementSpeed /= movementSlowMultiplier;
         }
     }
@@ -79,22 +78,6 @@ public class Whirlpool1 : MonoBehaviour
                 DealDamage();
             }
         }
-
-        //Todo use promise instead
-        /*
-        for (int i = 0; i < tempGameObjectsToDamage.Count; i++)
-        {
-            if()
-            tempGameObjectsToDamage[i].TakeDamage(whirlpoolDamage);
-            
-                continue;
-            if (tempGameObjectsToDamage[i].GetComponent<ShipManager>())
-            {
-                SoundManager.Instance.PlayEffects("WhirlPool");
-            }
-        }
-        */
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -111,7 +94,6 @@ public class Whirlpool1 : MonoBehaviour
             collision.gameObject.GetComponent<Movement>().currentTurnValue = 0;
             collision.gameObject.GetComponent<Movement>().currentTurnAcceleration = 0;
             collision.gameObject.GetComponent<Movement>().currentMoveValue = 1;
-            Debug.Log("RGB velocity: " + collision.GetComponent<Rigidbody2D>().velocity);
         }
 
         if (collision.gameObject.GetComponent<Health>())

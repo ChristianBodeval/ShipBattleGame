@@ -23,8 +23,6 @@ public class PowerUpValue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        Debug.Log("Powerup collision");
         //If not colliding with a player ship --> do nothing
         if(!collision.GetComponent<ShipManager>())
         {
@@ -43,12 +41,7 @@ public class PowerUpValue : MonoBehaviour
         if (pickupShip != null && !pickupShip.hasPowerUp)
         {
             gameObject.SetActive(false);
-
-            Debug.Log("Applying powerup: " + gameObject.name);
-
             pickupShip.hasPowerUp = true;
-
-            
 
             switch (powerUpType)
             {
@@ -81,7 +74,6 @@ public class PowerUpValue : MonoBehaviour
                     pickupShip.MaxMovementSpeed *= 2.5f;
                     pickupShip.SmoothTurningFactor = 0.3f;
                     SoundManager.Instance.PlayEffects("SpeedUp");
-                    Debug.Log("Adding speed");
                     break;
                 case PowerUpType.Snipe:
                     pickupShip.shooters = 1;
@@ -107,13 +99,8 @@ public class PowerUpValue : MonoBehaviour
 
     void resetValues()
     {
-
-        Debug.Log("Resetting values");
-        Debug.Log("Reverting powerup: " + gameObject.name);
         pickupShip.ResetValues();
         pickupShip.hasPowerUp = false;
-
-
     }
 
 }

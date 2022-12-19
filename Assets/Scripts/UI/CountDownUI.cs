@@ -17,19 +17,17 @@ public class CountDownUI : MonoBehaviour
     private bool playingCountdown;
     private void Start()
     {
-        timeElapsed = Time.time;
+        timeElapsed = Time.timeSinceLevelLoad;
         //countDownLength will start from countDownLength-1, therefore add 1
-        countDownLength += 1;
+        countDownLength += 1; 
     }
 
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void FixedUpdate()
     {
-        
-
-        scalor = (Time.time - (int)Time.time) + 0.5f;
+        scalor = (Time.timeSinceLevelLoad - (int)Time.timeSinceLevelLoad) + 0.5f;
         timerUI.transform.localScale = new Vector3(scalor, scalor, 1);
-        countDown = (int) (countDownLength - (Time.time - timeElapsed));
+        countDown = (int) (countDownLength - (Time.timeSinceLevelLoad - timeElapsed));
         timerUI.text = countDown.ToString();
 
         if (countDown < 1)

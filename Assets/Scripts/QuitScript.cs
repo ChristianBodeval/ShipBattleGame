@@ -10,9 +10,6 @@ public class QuitScript : MonoBehaviour
     void Update()
     {
         if(Input.GetKey(KeyCode.Escape) == true)
-        Application.Quit();
-
+            SceneManager.LoadScene("MainMenu_Start");
     }
-
-
 }

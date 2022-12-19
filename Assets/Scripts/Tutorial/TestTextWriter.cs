@@ -198,8 +198,6 @@ public class TestTextWriter : MonoBehaviour
                 Debug.Log("Oops, ran out of text");
                 break;
         }
-
-        Debug.Log("index is: " + index);
     }
 
     private void ShowObjects()

@@ -8,7 +8,6 @@ using UnityEngine;
 public class Eruption : MonoBehaviour
 {
     private float initialTime; // Get variable that tells us the time when object spawned.
-
     public float eruptionTime; // Set amount of time that eruption will occur.
     public float eruptionDamage; //Set damage from eruption.
     public float scaleFactor;
@@ -22,27 +21,6 @@ public class Eruption : MonoBehaviour
         initialTime = Time.timeSinceLevelLoad; // Set the time.
         SoundManager.Instance.PlayEffects("Eruption");
     }
-
-    /*
-    public void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<Health>() && canTakeDamage == true)
-        {
-            StartCoroutine(WaitingTime());
-            Debug.Log("Log:" + collision.gameObject.GetComponent<Health>());
-            collision.gameObject.GetComponent<Health>().TakeDamage(eruptionDamage);
-            Debug.Log(eruptionDamage);
-            Debug.Log("lava damage");
-            SoundManager.Instance.PlayEffects("LavaDamage");
-        }
-    }
-    IEnumerator WaitingTime()
-    {
-        canTakeDamage = false;
-        yield return new WaitForSeconds(1);
-        canTakeDamage = true;
-    }
-    */
     
     // Update is called once per frame
     void Update()
@@ -50,7 +28,6 @@ public class Eruption : MonoBehaviour
         float timeSinceInitialization = Time.timeSinceLevelLoad - initialTime;
         if (timeSinceInitialization >= eruptionTime)
         {
-            Debug.Log(eruptionTime);
             Destroy(gameObject); //Remove Eruption from game after eruptiontime ends.
         }
        

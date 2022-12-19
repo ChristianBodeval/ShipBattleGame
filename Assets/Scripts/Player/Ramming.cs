@@ -18,12 +18,6 @@ public class Ramming : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
-    {
-        Debug.Log("isRammed is: " + isRammed);
-    }
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!boxCollider2D.IsTouching(collision))
@@ -46,29 +40,16 @@ public class Ramming : MonoBehaviour
             isRammed = true;
             GetComponent<Movement>().currentMoveValue = 0;
             GetComponent<Movement>().currentGear = 1;
+
+            //Double on purpose, to ephasize a ram
             GameManager.Instance.SlowTime();
             GameManager.Instance.SlowTime();
             //Make particles
             Instantiate(particleEffect, collision.transform.position, collision.transform.rotation);
 
-            Debug.Log("Ramming");
-
-
             Vector3 direction = (this.gameObject.transform.position - collision.transform.position);
-
-            collision.gameObject.GetComponent<Knockback>().AddKnockbackWorld((direction) * 0.5f);
-            //gameObject.GetComponent<Knockback>().AddKnockbackWorld((-direction)*1.5f);
-
-            GetComponent<Rigidbody2D>().isKinematic = true;
-            GetComponent<Rigidbody2D>().isKinematic = false;
-            //collision.gameObject.transform.Translate((collision.gameObject.transform.position-this.gameObject.transform.position)*1.5f);
-
-            //collision.gameObject.transform.position = Vector3.Lerp(collision.gameObject.transform.position, collision.gameObject.transform.position + (collision.gameObject.transform.position - this.gameObject.transform.position)*3, 1f);
-
-            Debug.Log("Target: " + collision.gameObject.transform);
-            Debug.Log("Direction: " + direction);
+            collision.gameObject.GetComponent<Knockback>().AddKnockback((direction) * 0.5f);
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(rammingDamage);
-
         }
 
         //Island hit

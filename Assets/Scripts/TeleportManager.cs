@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+//Teleports objects when they go off screen. Each objects in the list is teleported. Currently only players and their cannonballs are teleported. 
 public class TeleportManager : MonoBehaviour
 {
     public List<GameObject> objectsToTeleport = new List<GameObject>();
@@ -27,7 +29,6 @@ public class TeleportManager : MonoBehaviour
             return instance;
         }
     }
-
 
     public float mapH; //Size on Y-axis. Depended on camera size
     public float mapL; ////Size on X-axis. Depended on camera size
@@ -122,32 +123,32 @@ public class TeleportManager : MonoBehaviour
 
 
 
-                if(obj.GetComponent<CanonBall>())
+                if(obj.GetComponent<CannonBall>())
                 {
                     if (obj.transform.position.y < 0 - mapH / 2)
                     {
-                        obj.GetComponent<CanonBall>().startMarker += new Vector3(0, +mapH + 1, 0);
-                        obj.GetComponent<CanonBall>().endMarker += new Vector3(0, +mapH + 1, 0);
+                        obj.GetComponent<CannonBall>().startMarker += new Vector3(0, +mapH + 1, 0);
+                        obj.GetComponent<CannonBall>().endMarker += new Vector3(0, +mapH + 1, 0);
                         obj.transform.position += new Vector3(0, +mapH + 1, 0);
 
                     }
                     if (obj.transform.position.y > mapH - mapH / 2)
                     {
-                        obj.GetComponent<CanonBall>().startMarker += new Vector3(0, -mapH - 1, 0);
-                        obj.GetComponent<CanonBall>().endMarker += new Vector3(0, -mapH - 1, 0);
+                        obj.GetComponent<CannonBall>().startMarker += new Vector3(0, -mapH - 1, 0);
+                        obj.GetComponent<CannonBall>().endMarker += new Vector3(0, -mapH - 1, 0);
                         obj.transform.position += new Vector3(0, -mapH - 1, 0);
                     }
 
                     if (obj.transform.position.x < 0 - mapL / 2)
                     {
-                        obj.GetComponent<CanonBall>().startMarker += new Vector3(+mapL + 1, 0, 0);
-                        obj.GetComponent<CanonBall>().endMarker += new Vector3(+mapL + 1, 0, 0);
+                        obj.GetComponent<CannonBall>().startMarker += new Vector3(+mapL + 1, 0, 0);
+                        obj.GetComponent<CannonBall>().endMarker += new Vector3(+mapL + 1, 0, 0);
                         obj.transform.position += new Vector3(+mapL + 1, 0, 0);
                     }
                     if (obj.transform.position.x > mapL - mapL / 2)
                     {
-                        obj.GetComponent<CanonBall>().startMarker += new Vector3(-mapL - 1, 0, 0);
-                        obj.GetComponent<CanonBall>().endMarker += new Vector3(-mapL - 1, 0, 0);
+                        obj.GetComponent<CannonBall>().startMarker += new Vector3(-mapL - 1, 0, 0);
+                        obj.GetComponent<CannonBall>().endMarker += new Vector3(-mapL - 1, 0, 0);
                         obj.transform.position += new Vector3(-mapL - 1, 0, 0);
                     }
                 }

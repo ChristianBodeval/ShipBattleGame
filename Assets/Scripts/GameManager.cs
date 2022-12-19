@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//Spawns players, handles Game State, disables and enables objects
+
 public sealed class GameManager : MonoBehaviour
 {
     public Color player1Color = Color.red;
@@ -72,9 +74,18 @@ public sealed class GameManager : MonoBehaviour
     public List<IslandHealth> islands = new List<IslandHealth>();
 
 
+
+
     // Start is called before the first frame update
     private void Awake()
     {
+
+        //Stop all audio
+        foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
+        {
+            audioSource.Stop();
+        }
+
         instance = this;
 
         if (spawnPlayer1)
@@ -92,7 +103,6 @@ public sealed class GameManager : MonoBehaviour
         if (spawnPlayer2)
         {
             var p2 = PlayerInput.Instantiate(player2Prefab, controlScheme: "KeyboardRight", pairWithDevice: Keyboard.current);
-            Debug.Log("player2 going wild");
             //Set the two players
             players.Add(p2.gameObject.GetComponent<ShipManager>());
 
@@ -109,10 +119,11 @@ public sealed class GameManager : MonoBehaviour
 
         //Sets the countdown before beginning
 
-
-        startingUI.countDownLength = waitTimeBeforeStarting;
+        if (startingUI != null)
+            startingUI.countDownLength = waitTimeBeforeStarting;
 
        
+
 
 
 
@@ -154,35 +165,13 @@ public sealed class GameManager : MonoBehaviour
         }
     }
 
-    void NextRound()
-    {
-        /*
-        foreach (var player in players)
-        {
-            if (player.GetComponent<Health>().currentHealth >= 0)
-            {
-                players[0].transform.position = spawn1.transform.position;
-                players[0].transform.rotation = spawn1.transform.rotation;
-                players[0].SetActive(true);
-
-                players[1].transform.position = spawn2.transform.position;
-                players[1].transform.rotation = spawn2.transform.rotation;
-                players[1].SetActive(true);
-                return;
-            }
-
-
-
-        }*/
-    }
-
     private IEnumerator GameLoop()
     {
         yield return StartCoroutine(GameStarting());
         yield return StartCoroutine(GamePlaying());
         yield return StartCoroutine(GameEnding());
 
-        Debug.Log("RUNNING GAME LOOP");
+
 
 
         if (playUnlimited)
@@ -206,11 +195,6 @@ public sealed class GameManager : MonoBehaviour
         DisableShipControl();
         DisableWhirlpools();
         DisableMerchanshipMovement();
-
-
-
-        //m_RoundNumber++;
-        //m_MessageText.text = "ROUND " + m_RoundNumber;
         yield return new WaitForSeconds(waitTimeBeforeStarting + 1);
     }
 
@@ -236,17 +220,12 @@ public sealed class GameManager : MonoBehaviour
         if (!tutorialIsPlaying)
         SoundManager.Instance.PlayMusic("BattleTheme");
 
-
-        //m_MessageText.text = string.Empty;
-
         //If there is no game winner, revive dead player and add win for the player alive.
         while (m_GameWinner == null)
-        {
-            
+        {   
             //Run when there are more than 1 ship left
             while (!OneShipLeft())
             {   
-
                 yield return null;
             }
 
@@ -271,11 +250,8 @@ public sealed class GameManager : MonoBehaviour
 
     private IEnumerator GameEnding()
     {
-        
-        Debug.Log("Gamewinner: " + m_GameWinner);
-
-
         gameOver_UI.winningPlayer = players.IndexOf(m_GameWinner);
+        SoundManager.Instance.PlayEffects("Victory");
         gameOver_UI.gameObject.SetActive(true);
 
         DisableShipControl();
@@ -285,8 +261,6 @@ public sealed class GameManager : MonoBehaviour
         DisableMerchanshipMovement();
 
         yield return new WaitForSeconds(timeToNewGame);
-        
-
         yield return null;
     }
 
@@ -301,22 +275,17 @@ public sealed class GameManager : MonoBehaviour
                 numShipsLeft++;
         }
 
-
         return numShipsLeft <= 1;
     }
 
 
     private ShipManager GetRoundWinner()
     {
-
         for (int i = 0; i < players.Count; i++)
         {
             if (!players[i].isDead)
                 return players[i];
-
-
         }
-
         return null;
     }
 
@@ -328,10 +297,8 @@ public sealed class GameManager : MonoBehaviour
             if (players[i].roundWins == m_NumRoundsToWin)
                 return players[i];
         }
-
         return null;
     }
-
 
     private void ResetAllShips()
     {
@@ -341,7 +308,6 @@ public sealed class GameManager : MonoBehaviour
         }
     }
 
-
     private void EnableShipControl()
     {
         for (int i = 0; i < players.Count; i++)
@@ -349,8 +315,6 @@ public sealed class GameManager : MonoBehaviour
             players[i].EnableScripts();
         }
     }
-
-
     private void DisableShipControl()
     {
         for (int i = 0; i < players.Count; i++)
@@ -359,8 +323,6 @@ public sealed class GameManager : MonoBehaviour
         }
     }
 
-
-
     private void EnableVolcanos()
     {
         for (int i = 0; i < volcanos.Count; i++)
@@ -368,7 +330,6 @@ public sealed class GameManager : MonoBehaviour
             volcanos[i].GetComponent<Volcano>().enabled = true;
         }
     }
-
     private void DisableVolcanos()
     {
         for (int i = 0; i < volcanos.Count; i++)
@@ -392,7 +353,6 @@ public sealed class GameManager : MonoBehaviour
         }
     }
 
-
     private void EnableWhirlpools()
     {
         for (int i = 0; i < whirlpools.Count; i++)
@@ -400,7 +360,6 @@ public sealed class GameManager : MonoBehaviour
             whirlpools[i].GetComponent<WhirlpoolMovement>().enabled = true;
         }
     }
-
     private void DisableWhirlpools()
     {
         for (int i = 0; i < whirlpools.Count; i++)
@@ -416,8 +375,6 @@ public sealed class GameManager : MonoBehaviour
             merchantShips[i].enabled = true;
         }
     }
-
-
     private void DisableMerchanshipMovement()
     {
         for (int i = 0; i < merchantShips.Count; i++)
